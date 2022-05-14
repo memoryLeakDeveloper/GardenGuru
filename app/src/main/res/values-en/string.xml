@@ -1,12 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Garden Guru</string>
-    <string name="onboarding_skip">Пропустить</string>
-    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
     <string name="onboarding1_head">Уход за растением</string>
     <string name="onboarding1_hint">Мы подскажем, как и когда правильно \nухаживать за Вашим растением</string>
     <string name="onboarding2_head">Распознавание по фото</string>
     <string name="onboarding2_hint">Если Вы не знаете, обладателем какого \nрастения Вы стали, то GardenGuru вам \nподскажет</string>
     <string name="onboarding3_head">Совместный Сад</string>
     <string name="onboarding3_hint">В Сад можно добавлять неограниченное \nколичество участников для совместного \nухода</string>
-
 </resources>
