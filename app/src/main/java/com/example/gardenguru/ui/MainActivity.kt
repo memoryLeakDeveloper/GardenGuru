@@ -7,7 +7,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -17,31 +19,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        navController = Navigation.findNavController(this, R.id.fragment_container)
-        navController.navigate(R.id.splashScreenFragment)
-
         setInsets()
+        navController = Navigation.findNavController(this, R.id.fragment_container).apply { navigate(R.id.splashScreenFragment) }
     }
 
     private fun setInsets() {
-        binding.root.setOnApplyWindowInsetsListener { view, insets ->
+        binding.root.setOnApplyWindowInsetsListener { _, insets ->
             insets.replaceSystemWindowInsets(
                 Rect(
                     insets.systemWindowInsetLeft,
-                    insets.systemWindowInsetTop,
+                    0,
                     insets.systemWindowInsetRight,
-                    0
+                    insets.systemWindowInsetBottom
                 )
             )
         }
     }
 
+
     override fun onBackPressed() {
-        when(navController.currentDestination?.id) {
+        when (navController.currentDestination?.id) {
             R.id.splashScreenFragment -> {}
-            else -> {
+            R.id.onboardingFragment -> {
                 super.onBackPressed()
+            }
+            else -> {
+                navController.navigateUp()
             }
         }
     }

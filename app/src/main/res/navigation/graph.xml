@@ -16,5 +16,28 @@
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.gardenguru.ui.onboarding.OnboardingFragment"
-        android:label="OnboardingFragment" />
+        android:label="OnboardingFragment" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.gardenguru.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_termOfUseFragment"
+            app:destination="@id/termOfUseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.example.gardenguru.ui.info.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
+    <fragment
+        android:id="@+id/termOfUseFragment"
+        android:name="com.example.gardenguru.ui.info.TermOfUseFragment"
+        android:label="TermOfUseFragment" />
 </navigation>

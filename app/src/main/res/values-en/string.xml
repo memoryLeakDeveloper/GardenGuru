@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Garden Guru</string>
+
+    //onboarding
     <string name="onboarding_skip">Skip</string>
     <string name="onboarding_next">Next</string>
     <string name="onboarding1_head">Уход за растением</string>
@@ -9,4 +11,16 @@
     <string name="onboarding2_hint">Если Вы не знаете, обладателем какого \nрастения Вы стали, то GardenGuru вам \nподскажет</string>
     <string name="onboarding3_head">Совместный Сад</string>
     <string name="onboarding3_hint">В Сад можно добавлять неограниченное \nколичество участников для совместного \nухода</string>
+
+    //login
+    <string name="login">Login</string>
+    <string name="login_text">Зарегистрировавшись, вы подтверждаете, что соглашаетесь с Условиями использования и Политикой конфиденциальности</string>
+    <string name="login_continue">Continue with Google</string>
+
+    //privacy police
+    <string name="privacy_policy">Privacy Policy</string>
+
+    //term of use
+    <string name="terms_of_use">Terms of use</string>
+
 </resources>

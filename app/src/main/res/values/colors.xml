@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#BBBBBB</color>
     <color name="dots_green">#97D082</color>
+    <color name="login_gray">#6C7080</color>
 </resources>

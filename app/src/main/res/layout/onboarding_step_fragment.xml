@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/onboarding_step_1_image"/>
+        tools:src="@drawable/onboarding1_image"/>
 
     <TextView
         android:id="@+id/text_head"

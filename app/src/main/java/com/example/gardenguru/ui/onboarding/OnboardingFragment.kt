@@ -10,9 +10,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.OnboardingFragmentBinding
 
-class OnboardingFragment: Fragment() {
+class OnboardingFragment : Fragment() {
 
-    private lateinit var binding: OnboardingFragmentBinding
+    lateinit var binding: OnboardingFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = OnboardingFragmentBinding.inflate(inflater, container, false)
@@ -21,36 +21,41 @@ class OnboardingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setAdapters()
+        setListeners()
+    }
+
+    private fun setAdapters() {
         binding.viewPager.adapter = PagerAdapter(this)
         binding.dotsIndicator.attachTo(binding.viewPager)
+    }
+
+    private fun setListeners() {
         binding.buttonNext.root.setOnClickListener {
-            when(binding.viewPager.currentItem) {
+            when (binding.viewPager.currentItem) {
                 0 -> binding.viewPager.currentItem = 1
                 1 -> binding.viewPager.currentItem = 2
                 2 -> {
-                    //TODO
+                    findNavController().navigate(R.id.loginFragment)
                 }
             }
         }
         binding.buttonSkip.setOnClickListener {
-            //TODO
-//            findNavController().navigate()
+            findNavController().navigate(R.id.loginFragment)
         }
     }
 
-    private inner class PagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+    private inner class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         override fun getItemCount() = 3
 
         override fun createFragment(position: Int) =
-            when(position) {
-                0 ->  OnboardingStepFragment(0)
-                1 ->  OnboardingStepFragment(1)
-                2 ->  OnboardingStepFragment(2)
+            when (position) {
+                0 -> OnboardingStepFragment(0)
+                1 -> OnboardingStepFragment(1)
+                2 -> OnboardingStepFragment(2)
                 else -> OnboardingStepFragment(0)
-        }
+            }
     }
-
-
 
 }
