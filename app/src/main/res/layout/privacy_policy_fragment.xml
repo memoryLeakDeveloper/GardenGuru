@@ -15,7 +15,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp"
+        android:overScrollMode="never">
 
         <TextView
             android:id="@+id/text"
@@ -23,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="TEXT"
+            android:paddingBottom="10dp"
+            android:text="TEXTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT"
             android:textColor="@color/gray"
             android:textSize="16sp" />
 

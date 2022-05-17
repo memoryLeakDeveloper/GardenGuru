@@ -29,6 +29,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initText()
         setListener()
+        binding.spinner.initView(
+            null, listOf("111111111111", "22222222", "333333333", "4", "5", "6", "7", "8", "7777")
+        )
     }
 
     private fun initText() {
