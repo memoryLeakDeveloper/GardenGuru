@@ -10,25 +10,24 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
-import com.example.gardenguru.ui.customview.SpinnerLinearLayout.SelectListener
+import com.example.gardenguru.ui.customview.ExpandableLayout.SelectListener
 import com.google.android.material.divider.MaterialDivider
 
-class SpinnerLinearLayout(context: Context, attrs: AttributeSet) : LinearLayoutCompat(context, attrs) {
+class ExpandableLayout(context: Context, attrs: AttributeSet) : LinearLayoutCompat(context, attrs) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var textView: TextView
     private lateinit var arrowView: ImageView
     private lateinit var dividerView: MaterialDivider
     private var isListExpanded = false
-
-    fun interface SelectListener {
-        fun onSelect(string: String)
-    }
-
     private val listener = SelectListener {
         background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
         textView.text = it
-        hideChild()
+        hideList()
+    }
+
+    fun interface SelectListener {
+        fun onSelect(string: String)
     }
 
     fun initView(defValue: String?, list: List<String>) {
@@ -38,38 +37,38 @@ class SpinnerLinearLayout(context: Context, attrs: AttributeSet) : LinearLayoutC
         )
         textView = findViewById(R.id.spinner_text)
         arrowView = findViewById(R.id.spinner_arrow)
-        recyclerView = findViewById(R.id.recycler)
         dividerView = findViewById(R.id.divider)
-        recyclerView.adapter = SpinnerAdapter(list, listener)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView = findViewById<RecyclerView>(R.id.recycler).apply {
+            adapter = ExpandableAdapter(list, listener)
+            layoutManager = LinearLayoutManager(context)
+        }
         setListener()
     }
 
     private fun setListener() {
         this.setOnClickListener {
-            if (!isListExpanded) {
-                showChild()
-            } else {
-                hideChild()
-            }
+            if (!isListExpanded)
+                showList()
+            else
+                hideList()
         }
     }
 
-    private fun hideChild() {
+    private fun hideList() {
         recyclerView.visibility = View.GONE
         dividerView.visibility = View.GONE
         isListExpanded = false
-        animateArrow(true)
+        setAnimation(true)
     }
 
-    private fun showChild() {
+    private fun showList() {
         recyclerView.visibility = View.VISIBLE
         dividerView.visibility = View.VISIBLE
         isListExpanded = true
-        animateArrow(false)
+        setAnimation(false)
     }
 
-    private fun animateArrow(isUp: Boolean) {
+    private fun setAnimation(isUp: Boolean) {
         arrowView.animate().apply {
             rotation(if (isUp) 0F else 180F)
             duration = 500

@@ -41,7 +41,7 @@
             android:textSize="16sp"
             tools:text="@string/login_text" />
 
-        <com.example.gardenguru.ui.customview.SpinnerLinearLayout
+        <com.example.gardenguru.ui.customview.ExpandableLayout
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                 android:overScrollMode="never"
                 android:visibility="gone" />
 
-        </com.example.gardenguru.ui.customview.SpinnerLinearLayout>
+        </com.example.gardenguru.ui.customview.ExpandableLayout>
 
     </LinearLayout>
 
