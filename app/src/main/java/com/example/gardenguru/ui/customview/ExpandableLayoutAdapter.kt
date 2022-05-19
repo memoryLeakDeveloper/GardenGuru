@@ -1,19 +1,21 @@
 package com.example.gardenguru.ui.customview
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.ItemSpinnerBinding
+import com.example.gardenguru.databinding.ItemExpandableListBinding
 
-class ExpandableAdapter(private val list: List<String>, private val listener: ExpandableLayout.SelectListener) :
-    RecyclerView.Adapter<ExpandableAdapter.ExpandableViewHolder>() {
+class ExpandableLayoutAdapter(private val listener: ExpandableLayout.SelectListener) :
+    RecyclerView.Adapter<ExpandableLayoutAdapter.ExpandableViewHolder>() {
 
     private var lastSelectedItem: ExpandableViewHolder? = null
+    var list: ArrayList<String> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpandableViewHolder {
-        return ExpandableViewHolder(ItemSpinnerBinding.inflate(LayoutInflater.from(parent.context)))
+        return ExpandableViewHolder(ItemExpandableListBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: ExpandableViewHolder, position: Int) {
@@ -26,7 +28,13 @@ class ExpandableAdapter(private val list: List<String>, private val listener: Ex
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun refreshAdapter(refreshList: ArrayList<String>) {
+        list = refreshList
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount() = list.size
 
-    class ExpandableViewHolder(val binding: ItemSpinnerBinding) : RecyclerView.ViewHolder(binding.root)
+    class ExpandableViewHolder(val binding: ItemExpandableListBinding) : RecyclerView.ViewHolder(binding.root)
 }

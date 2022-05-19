@@ -1,73 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/primary_background"
-    android:orientation="vertical">
+    android:background="@drawable/primary_background">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/pacifico"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
-
-        <include
-            android:id="@+id/button_login"
-            layout="@layout/button_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="25dp" />
-
-        <TextView
-            android:id="@+id/text_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:textColor="@color/login_gray"
-            android:textSize="16sp"
-            tools:text="@string/login_text" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <com.example.gardenguru.ui.customview.ExpandableLayout
             android:id="@+id/spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="25dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/spinner_background"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:translationZ="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:spinnerMode="dropdown"
                 android:weightSum="10">
 
                 <TextView
                     android:id="@+id/spinner_text"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="8"
                     android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"
                     android:paddingStart="15dp"
-                    tools:text="textetxtxtxttxtxtxtxtxttx"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="textetxtxtxttxtxtxtxtxttx" />
 
                 <ImageView
                     android:id="@+id/spinner_arrow"
@@ -83,19 +58,70 @@
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:dividerColor="@color/primary_green"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                app:dividerColor="@color/primary_green" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
                 android:overScrollMode="never"
                 android:visibility="gone" />
 
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="25dp"
+                android:hint="+Введите что-нибудь"
+                android:imeOptions="actionGo"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:ignore="RtlSymmetry" />
+
         </com.example.gardenguru.ui.customview.ExpandableLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pacifico"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+
+            <include
+                android:id="@+id/button_login"
+                layout="@layout/button_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="25dp" />
+
+            <TextView
+                android:id="@+id/text_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:textColor="@color/login_gray"
+                android:textSize="16sp"
+                tools:text="@string/login_text" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
