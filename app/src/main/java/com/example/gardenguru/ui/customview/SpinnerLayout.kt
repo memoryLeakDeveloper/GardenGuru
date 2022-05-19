@@ -46,6 +46,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : LinearLayoutCompat(
 
     init {
         inflate(context, R.layout.spinner_layout, this)
+        this.translationZ = 50F
     }
 
     fun initView(defValue: String?, list: ArrayList<String>, isEditText: Boolean) {

@@ -13,4 +13,5 @@
     <color name="white10">#33FFFFFF</color>
     <color name="primary_green">#88BC87</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="spinner_background">#55555C</color>
 </resources>
