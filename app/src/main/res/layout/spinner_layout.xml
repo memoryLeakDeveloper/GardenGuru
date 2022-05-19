@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<!--add next code in your xml file where you need. don't use in linear layout. don't attach to this view another one-->
-<com.example.gardenguru.ui.customview.SpinnerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/spinner"
-    android:layout_width="0dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="25dp"
-    android:layout_marginTop="50dp"
-    android:background="@drawable/spinner_background"
-    android:orientation="vertical"
-    android:translationZ="50dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:background="@drawable/primary_background">
 
     <LinearLayout
         android:id="@+id/linear"
@@ -76,4 +65,4 @@
         android:visibility="gone"
         tools:ignore="RtlSymmetry" />
 
-</com.example.gardenguru.ui.customview.SpinnerLayout>
+</merge>

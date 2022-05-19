@@ -44,6 +44,10 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : LinearLayoutCompat(
         fun onSelect(string: String)
     }
 
+    init {
+        inflate(context, R.layout.spinner_layout, this)
+    }
+
     fun initView(defValue: String?, list: ArrayList<String>, isEditText: Boolean) {
         textView = findViewById(R.id.spinner_text)
         arrowView = findViewById(R.id.spinner_arrow)
