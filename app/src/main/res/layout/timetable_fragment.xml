@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/primary_background"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toolbar_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/header"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timetable"
+        android:textSize="24sp"
+        android:fontFamily="@font/pacifico"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/leaf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_leaf"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/calendar_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_calendar_bg"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.example.gardenguru.ui.customview.CalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="1"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/oval_ring_green"
+        app:layout_constraintBottom_toBottomOf="@+id/calendar_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendar_view" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_month_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/junction_regular"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendar_bg"
+        tools:text="Октябрь" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/expanded_btn_background"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/expanded_bt_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
+        app:layout_constraintEnd_toEndOf="@+id/iv_plus"
+        app:layout_constraintTop_toTopOf="@+id/iv_plus" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_cam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
+        app:layout_constraintStart_toStartOf="@+id/expanded_btn_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_plus" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_input_plant_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:alpha="0"
+        android:textColor="@color/white"
+        android:hint="@string/enter_plant_name"
+        android:textColorHint="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/expanded_btn_background"
+        app:layout_constraintEnd_toStartOf="@+id/iv_plus"
+        app:layout_constraintStart_toEndOf="@+id/iv_cam"
+        app:layout_constraintTop_toTopOf="@+id/expanded_btn_background" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_plus"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="-35dp"
+        android:layout_marginEnd="20dp"
+        android:scaleType="center"
+        android:background="@color/primary_green"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toTopOf="@+id/calendar_bg"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

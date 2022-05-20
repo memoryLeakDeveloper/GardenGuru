@@ -35,13 +35,13 @@ class ExpandableLayout(context: Context, attrs: AttributeSet) : LinearLayoutComp
             context,
             if (defValue.isNullOrEmpty()) R.drawable.spinner_background_unselected else R.drawable.spinner_background
         )
-        textView = findViewById(R.id.spinner_text)
-        arrowView = findViewById(R.id.spinner_arrow)
-        dividerView = findViewById(R.id.divider)
-        recyclerView = findViewById<RecyclerView>(R.id.recycler).apply {
-            adapter = ExpandableAdapter(list, listener)
-            layoutManager = LinearLayoutManager(context)
-        }
+//        textView = findViewById(R.id.spinner_text)
+//        arrowView = findViewById(R.id.spinner_arrow)
+//        dividerView = findViewById(R.id.divider)
+//        recyclerView = findViewById<RecyclerView>(R.id.recycler).apply {
+//            adapter = ExpandableAdapter(list, listener)
+//            layoutManager = LinearLayoutManager(context)
+//        }
         setListener()
     }
 

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setInsets()
-        navController = Navigation.findNavController(this, R.id.fragment_container).apply { navigate(R.id.splashScreenFragment) }
+        navController = Navigation.findNavController(this, R.id.fragment_container)
     }
 
     private fun setInsets() {

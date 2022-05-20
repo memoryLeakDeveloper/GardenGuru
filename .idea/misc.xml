@@ -3,36 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/back.xml" value="0.317" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/background.xml" value="0.2065" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/background_1.xml" value="0.3165" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/button.xml" value="0.311" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/button_next.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/grou.xml" value="0.2325" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/header.xml" value="0.317" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_back.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_down.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_leaf.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_up.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/onboarding_step_1_image.xml" value="0.3165" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_expanded.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_expanded_unselected.xml" value="0.3165" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_unselected.xml" value="0.5475" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_with_padding.xml" value="0.317" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/splash_screen_image.xml" value="0.2325" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/black_circle_with_gray_stroke.xml" value="0.142" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_next.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_next_arrow.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/expanded_bt_bg.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/green_circle.xml" value="0.142" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/green_ring.xml" value="0.142" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/header.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_back.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_down.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_leaf.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_up.xml" value="0.1315" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/font/poppins_regular.xml" value="0.24351851851851852" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.1484375" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/header.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/login_fragment.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_calendar_item.xml" value="0.8" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/splash_screen_fragment.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/timetable_fragment.xml" value="0.268" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/button_login.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/button_next.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/header.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/item.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/login_fragment.xml" value="0.7556390977443609" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/onboarding_fragment.xml" value="0.31354166666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/onboarding_step_fragment.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/privacy_policy_fragment.xml" value="0.3140625" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/splash_screen_fragment.xml" value="0.22" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/term_of_use_fragment.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/term_of_use_layout.xml" value="0.3140625" />
       </map>
     </option>
   </component>

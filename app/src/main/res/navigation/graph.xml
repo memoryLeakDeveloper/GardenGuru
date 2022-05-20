@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/timetableFragment">
 
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_loginFragment_to_termOfUseFragment"
             app:destination="@id/termOfUseFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_timetableFragment"
+            app:destination="@id/timetableFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
@@ -40,4 +43,9 @@
         android:id="@+id/termOfUseFragment"
         android:name="com.example.gardenguru.ui.info.TermOfUseFragment"
         android:label="TermOfUseFragment" />
+    <fragment
+        android:id="@+id/timetableFragment"
+        android:name="com.example.gardenguru.ui.timetable.TimetableFragment"
+        android:label="TimetableFragment"
+        tools:layout="@layout/timetable_fragment"/>
 </navigation>
