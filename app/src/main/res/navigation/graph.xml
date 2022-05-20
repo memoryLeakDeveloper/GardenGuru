@@ -40,4 +40,8 @@
         android:id="@+id/termOfUseFragment"
         android:name="com.example.gardenguru.ui.info.TermOfUseFragment"
         android:label="TermOfUseFragment" />
+    <fragment
+        android:id="@+id/addingPlantFragment"
+        android:name="com.example.gardenguru.ui.add.plant.AddingPlantFragment"
+        android:label="AddingPlantFragment" />
 </navigation>

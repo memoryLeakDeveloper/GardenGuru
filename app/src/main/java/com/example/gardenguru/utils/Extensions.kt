@@ -2,9 +2,8 @@ package com.example.gardenguru.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 
 object Extensions {
@@ -13,10 +12,8 @@ object Extensions {
 
     fun ImageView.setDrawable(drawable: Int) = this.setImageDrawable(ContextCompat.getDrawable(context, drawable))
 
-    fun String.underLine(start: Int, end: Int): SpannableString {
-        val spanStr = SpannableString(this)
-        spanStr.setSpan(UnderlineSpan(), 0, spanStr.length, 0)
-        return spanStr
+    fun TextView.setString(stringRes: Int) {
+        this.text = context.getString(stringRes)
     }
 
 }

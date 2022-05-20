@@ -1,6 +1,5 @@
 package com.example.gardenguru.ui.customview
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -28,10 +27,8 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun refreshAdapter(refreshList: ArrayList<String>) {
+    fun setListAdapter(refreshList: ArrayList<String>) {
         list = refreshList
-        notifyDataSetChanged()
     }
 
     override fun getItemCount() = list.size

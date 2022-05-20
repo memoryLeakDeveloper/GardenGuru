@@ -67,7 +67,7 @@ class LoginFragment : Fragment() {
         }
 
         override fun onClick(widget: View) {
-            findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.privacyPolicyFragment)
+            findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.addingPlantFragment)
         }
     }
 
