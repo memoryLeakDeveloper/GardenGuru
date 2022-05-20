@@ -48,4 +48,9 @@
         android:name="com.example.gardenguru.ui.timetable.TimetableFragment"
         android:label="TimetableFragment"
         tools:layout="@layout/timetable_fragment"/>
+
+    <fragment
+        android:id="@+id/addingPlantFragment"
+        android:name="com.example.gardenguru.ui.add.plant.AddingPlantFragment"
+        android:label="AddingPlantFragment" />
 </navigation>

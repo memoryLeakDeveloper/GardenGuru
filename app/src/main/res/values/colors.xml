@@ -10,7 +10,9 @@
     <color name="gray">#BBBBBB</color>
     <color name="dots_green">#97D082</color>
     <color name="login_gray">#6C7080</color>
+    <color name="white5">#0DFFFFFF</color>
     <color name="white10">#1AFFFFFF</color>
+    <color name="white20">#33FFFFFF</color>
     <color name="primary_green">#88BC87</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="blue_light">#9BB1E8</color>

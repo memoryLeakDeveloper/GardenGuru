@@ -49,4 +49,20 @@
         <item>Декабрь</item>
     </array>
 
+    //adding a plant
+    <string name="adding">Добавление</string>
+    <string name="add_a_plant">Добавить растение</string>
+    
+    //care difficult
+    <string name="care_difficult">Сложность ухода</string>
+    <string name="care_difficult_1">За мной ухаживать очень легко!</string>
+    <string name="care_difficult_2">За мной ухаживать легко!</string>
+    <string name="care_difficult_3">За мной ухаживать непросто!</string>
+    <string name="care_difficult_4">За мной ухаживать сложно!</string>
+    
+    //wheather condition
+    <string name="temperature">Температура</string>
+    <string name="watering">Полив</string>
+    <string name="lighting">Освещение</string>
+
 </resources>
