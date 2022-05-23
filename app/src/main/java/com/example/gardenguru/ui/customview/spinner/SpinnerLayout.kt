@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.spinner
 
 import android.content.Context
 import android.util.AttributeSet
@@ -11,7 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.SpinnerLayoutBinding
-import com.example.gardenguru.ui.customview.SpinnerLayout.SelectListener
+import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.SelectListener
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 

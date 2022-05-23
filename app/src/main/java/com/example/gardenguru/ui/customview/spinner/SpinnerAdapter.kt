@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.spinner
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

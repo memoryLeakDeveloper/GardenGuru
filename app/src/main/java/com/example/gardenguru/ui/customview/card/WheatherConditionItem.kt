@@ -1,14 +1,11 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.card
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.WheatherConditionCardBinding
 import com.example.gardenguru.databinding.WheatherConditionItemBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 import com.example.gardenguru.utils.Extensions.setString

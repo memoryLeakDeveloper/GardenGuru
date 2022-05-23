@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:parentTag="android.widget.LinearLayout">
 
-    <com.example.gardenguru.ui.customview.WheatherConditionItem
+    <com.example.gardenguru.ui.customview.card.WheatherConditionItem
         android:id="@+id/item_temperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:dividerColor="@color/white5"
         android:layout_marginHorizontal="20dp"/>
 
-    <com.example.gardenguru.ui.customview.WheatherConditionItem
+    <com.example.gardenguru.ui.customview.card.WheatherConditionItem
         android:id="@+id/item_watering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:dividerColor="@color/white5"
         android:layout_marginHorizontal="20dp"/>
 
-    <com.example.gardenguru.ui.customview.WheatherConditionItem
+    <com.example.gardenguru.ui.customview.card.WheatherConditionItem
         android:id="@+id/item_lighting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

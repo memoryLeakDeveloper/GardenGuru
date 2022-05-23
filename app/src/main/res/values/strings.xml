@@ -38,4 +38,18 @@
     <string name="watering">Полив</string>
     <string name="lighting">Освещение</string>
 
+    //care description
+    <string name="care">Уход</string>
+    <string name="spraying">Опрыскивание</string>
+    <string name="nutrition">Подкормка</string>
+    <string name="planting_time">Время посадки</string>
+    <string name="reproduction">Размножение</string>
+    <string name="pruning">Обрезка</string>
+    <string name="in_summer">Летом</string>
+    <string name="in_winter">Зимой</string>
+    <string name="disease_and_pests">Болезни и  \nвредители</string>
+
+    //benefits
+    <string name="benefits">Польза</string>
+
 </resources>

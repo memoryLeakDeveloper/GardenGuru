@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.card
 
 import android.content.Context
 import android.util.AttributeSet
@@ -17,7 +17,7 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = WheatherConditionCardBinding.inflate(inflater, this)
         orientation = VERTICAL
-        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.care_difficult_background))
+        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
 }
