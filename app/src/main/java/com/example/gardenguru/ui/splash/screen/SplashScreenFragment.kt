@@ -26,13 +26,13 @@ class SplashScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startAnimation()
+        navigateNextPage()
     }
 
     private fun startAnimation() {
         ObjectAnimator.ofFloat(binding.imageView, View.ALPHA, 0F, 1F).apply {
-            startDelay = 1000
-            duration = 2000
+            startDelay = 500
+            duration = 1000
             addListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator?) {}
                 override fun onAnimationCancel(animation: Animator?) {}

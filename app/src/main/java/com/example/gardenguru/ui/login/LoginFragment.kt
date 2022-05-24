@@ -29,6 +29,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initText()
         setListener()
+        binding.buttonLogin.root.setOnClickListener {
+            findNavController().navigate(R.id.addingPlantFragment)
+        }
     }
 
     private fun initText() {
@@ -67,7 +70,7 @@ class LoginFragment : Fragment() {
         }
 
         override fun onClick(widget: View) {
-            findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.addingPlantFragment)
+            findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.privacyPolicyFragment)
         }
     }
 

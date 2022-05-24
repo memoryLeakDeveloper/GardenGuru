@@ -3,6 +3,7 @@ package com.example.gardenguru.ui.add.plant
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.AddingPlantFragmentBinding
 import com.example.gardenguru.ui.add.plant.AddingPlantFragment.ClickCallback
+import com.example.gardenguru.ui.add.plant.client.ClientPlantFragment
 import com.example.gardenguru.ui.add.plant.description.PlantDescriptionFragment
 import com.example.gardenguru.utils.Extensions.setString
 
@@ -122,7 +124,7 @@ class AddingPlantFragment : Fragment() {
                 8,
                 8
             )
-            return PlantDescriptionFragment(data, clickCallback)
+            return if(position != 4) PlantDescriptionFragment(data, clickCallback) else ClientPlantFragment(clickCallback)
         }
     }
 

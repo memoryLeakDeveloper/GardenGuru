@@ -42,7 +42,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : LinearLayout(contex
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = SpinnerLayoutBinding.inflate(inflater, this)
-        translationZ = 50F
+//        translationZ = 1F
         orientation = VERTICAL
         spinnerAdapter = SpinnerAdapter((selectListener))
         binding.editText.apply {
@@ -67,6 +67,11 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : LinearLayout(contex
                 setListAdapter(list)
             }
             layoutManager = LinearLayoutManager(context)
+        }
+        if (!isEditText) {
+            val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            params.bottomMargin = convertDpToPx(25F)
+            binding.recycler.layoutParams = params
         }
     }
 
@@ -108,5 +113,11 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : LinearLayout(contex
             start()
         }
     }
+
+    private fun setChosen() {
+        background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
+    }
+
+    private fun convertDpToPx(dp: Float) = (dp * context.resources.displayMetrics.density).toInt()
 
 }

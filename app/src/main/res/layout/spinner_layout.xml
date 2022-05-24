@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:parentTag="android.widget.LinearLayout">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,14 +16,20 @@
 
         <TextView
             android:id="@+id/spinner_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="8"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
             android:textColor="@color/white"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/spinner_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="textetxtxtxttxtxtxtxtxttx" />
 
         <ImageView
@@ -31,10 +37,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
-            android:src="@drawable/ic_down" />
+            android:padding="15dp"
+            android:src="@drawable/ic_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
@@ -48,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/edit_text"
@@ -63,6 +72,6 @@
         android:textColorHint="@color/white"
         android:textSize="16sp"
         android:visibility="gone"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry"/>
 
 </merge>
