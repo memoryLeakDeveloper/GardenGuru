@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/primary_background"
     android:orientation="vertical">
 
@@ -11,8 +11,8 @@
         android:id="@+id/toolbar_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/header"
         android:scaleType="fitXY"
+        android:src="@drawable/header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,10 +21,10 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/pacifico"
         android:text="@string/timetable"
         android:textSize="24sp"
-        android:fontFamily="@font/pacifico"
-        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,12 +50,23 @@
         app:layout_constraintTop_toTopOf="@+id/title" />
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_events"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-30dp"
+        app:layout_constraintBottom_toTopOf="@+id/calendar_bg"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_bg"
+        tools:itemCount="4"
+        tools:layout_editor_absoluteX="4dp"
+        tools:listitem="@layout/rv_timetable_item" />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/calendar_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_calendar_bg"
         android:scaleType="fitXY"
+        android:src="@drawable/ic_calendar_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -64,9 +75,10 @@
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:itemCount="1"
         android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:itemCount="1"
+        tools:listitem="@layout/rv_calendar_item" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
@@ -105,8 +117,8 @@
         android:id="@+id/iv_cam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0"
         android:layout_marginStart="10dp"
+        android:alpha="0"
         android:src="@drawable/ic_camera"
         app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
         app:layout_constraintStart_toStartOf="@+id/expanded_btn_background"
@@ -117,13 +129,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:fontFamily="@font/poppins_regular"
-        android:ellipsize="end"
-        android:maxLines="2"
+        android:background="@color/transparent"
         android:alpha="0"
+        android:fontFamily="@font/poppins_regular"
+        android:maxLines="2"
+        android:text="@string/enter_plant_name"
         android:textColor="@color/white"
-        android:hint="@string/enter_plant_name"
-        android:textColorHint="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/expanded_btn_background"
         app:layout_constraintEnd_toStartOf="@+id/iv_plus"
@@ -135,13 +146,13 @@
         android:id="@+id/iv_plus"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="-35dp"
         android:layout_marginEnd="20dp"
-        android:scaleType="center"
+        android:layout_marginBottom="-35dp"
         android:background="@color/primary_green"
-        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        android:scaleType="center"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toTopOf="@+id/calendar_bg"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

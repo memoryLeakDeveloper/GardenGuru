@@ -11,7 +11,7 @@ import com.example.gardenguru.ui.customview.CalendarView
 import java.util.*
 
 class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: Int) :
-    RecyclerView.Adapter<CalendarRecyclerAdapter.DesireExplanationViewHolder>(), CalendarView.BaseCalendarAdapter {
+    RecyclerView.Adapter<CalendarRecyclerAdapter.CalendarViewHolder>(), CalendarView.BaseCalendarAdapter {
 
     companion object {
         const val ITEM_COUNT = 48
@@ -21,8 +21,8 @@ class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: 
         add(Calendar.DAY_OF_YEAR, -(3 + 7)) //the calendar is built a week before today's date, +3 days for empty cells
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DesireExplanationViewHolder {
-        return DesireExplanationViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
+        return CalendarViewHolder(
             RvCalendarItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         ).apply {
             binding.root.layoutParams = binding.root.layoutParams.apply {
@@ -31,7 +31,7 @@ class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: 
         }
     }
 
-    override fun onBindViewHolder(holder: DesireExplanationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         with(holder.binding) {
             if (position < 3 || position + 3 >= ITEM_COUNT) {
                 dayNum.text = ""
@@ -44,8 +44,6 @@ class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: 
                 dayNum.text = today.get(Calendar.DAY_OF_MONTH).toString()
 
                 populateDay(today, dayHighlight)
-
-                Log.d("qqqqq", "item num: ${dayNum.text}, adapter pos: ${holder.layoutPosition}")
             }
         }
     }
@@ -72,6 +70,6 @@ class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: 
         return ITEM_COUNT
     }
 
-    class DesireExplanationViewHolder(val binding: RvCalendarItemBinding) :
+    class CalendarViewHolder(val binding: RvCalendarItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

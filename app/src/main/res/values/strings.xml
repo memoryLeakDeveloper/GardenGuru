@@ -24,6 +24,9 @@
     <string name="timetable">Расписание</string>
     <string name="enter_plant_name">Введите название растения</string>
 
+    //timetable
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
     <array name="day_of_week">
         <item>Пн</item>
         <item>Вт</item>
@@ -33,7 +36,6 @@
         <item>Сб</item>
         <item>Вс</item>
     </array>
-
     <array name="calendar_month">
         <item>Январь</item>
         <item>Февраль</item>
@@ -64,5 +66,11 @@
     <string name="temperature">Температура</string>
     <string name="watering">Полив</string>
     <string name="lighting">Освещение</string>
+    <string name="transfer">Пересадка</string>
+    <string name="spraying">Опрыскивание</string>
+    <string name="top_dressing">Подкормка</string>
+    <string name="no_events_text">Событий нет!\n Возвращайтесь завтра</string>
+    <string name="complete_all_events_text">Вы позаботились о всех Ваших растениях!</string>
+    <string name="congratulations">Поздравляем!</string>
 
 </resources>

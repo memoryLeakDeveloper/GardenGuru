@@ -40,7 +40,7 @@ class CalendarView: RecyclerView {
                     val calendarCenterItem = calendarAdapter?.getCalendarToPosition(firstVisiblePosition + 4)
 
                     if (calendarCenterItem != null){
-                        itemSelectedCallback?.call(calendarCenterItem)
+                        itemSelectedCallback?.call(calendarCenterItem, firstVisiblePosition)
                     }
                 }
             }
@@ -51,6 +51,6 @@ class CalendarView: RecyclerView {
         fun getCalendarToPosition(position: Int): Calendar
     }
     interface CalendarItemSelectedCallback{
-        fun call(calendar: Calendar)
+        fun call(calendar: Calendar, position: Int)
     }
 }

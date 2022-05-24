@@ -4,11 +4,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.WheatherConditionCardBinding
 import com.example.gardenguru.databinding.WheatherConditionItemBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 import com.example.gardenguru.utils.Extensions.setString
@@ -33,7 +30,7 @@ class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayou
                 binding.textView1.setString(R.string.temperature)
             }
             2 -> {
-                binding.image.setDrawable(R.drawable.ic_watering)
+                binding.image.setDrawable(R.drawable.ic_watering_2)
                 binding.textView1.setString(R.string.watering)
             }
             3 -> {
