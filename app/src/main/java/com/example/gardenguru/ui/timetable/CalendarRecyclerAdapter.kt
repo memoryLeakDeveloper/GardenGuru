@@ -21,6 +21,8 @@ class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: 
         add(Calendar.DAY_OF_YEAR, -(3 + 7)) //the calendar is built a week before today's date, +3 days for empty cells
     }
 
+    private val calendarToday = Calendar.getInstance()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         return CalendarViewHolder(
             RvCalendarItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -55,15 +57,19 @@ class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: 
     }
 
     private fun populateDay(calendar: Calendar, imageView: AppCompatImageView) {
-        when {
-            calendar[Calendar.DAY_OF_WEEK] % 3 == 0 -> {
-                imageView.setImageResource(R.drawable.green_ring)
-
-            }
-            calendar[Calendar.DAY_OF_WEEK] % 3 == 1 -> {
-                imageView.setImageResource(R.drawable.white_10_circle_with_stroke)
-            }
+        if (calendar[Calendar.DAY_OF_YEAR] == calendarToday[Calendar.DAY_OF_YEAR]){
+            imageView.setImageResource(R.drawable.green_circle)
+        }else{
+            val event = viewModel.getEventForDay(calendar)
+            if (event != null){
+                if (calendar[Calendar.DAY_OF_YEAR] > calendarToday[Calendar.DAY_OF_YEAR]){
+                    imageView.setImageResource(R.drawable.green_ring)
+                }else{
+                    imageView.setImageResource(R.drawable.white_10_circle_with_stroke)
+                }
+            }else imageView.setImageResource(R.color.transparent)
         }
+
     }
 
     override fun getItemCount(): Int {
