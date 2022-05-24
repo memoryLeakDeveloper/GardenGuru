@@ -3,24 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/timetableFragment">
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.example.gardenguru.ui.splash.screen.SplashScreenFragment"
-        android:label="SplashScreenFragment" >
-        <action
-            android:id="@+id/action_splashScreenFragment_to_onboardingFragment"
-            app:destination="@id/onboardingFragment" />
-    </fragment>
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.gardenguru.ui.onboarding.OnboardingFragment"
-        android:label="OnboardingFragment" >
-        <action
-            android:id="@+id/action_onboardingFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        android:label="OnboardingFragment" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.gardenguru.ui.login.LoginFragment"
@@ -30,10 +18,23 @@
             app:destination="@id/privacyPolicyFragment" />
         <action
             android:id="@+id/action_loginFragment_to_termOfUseFragment"
-            app:destination="@id/termOfUseFragment" />
+            app:destination="@id/termOfUseFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_loginFragment_to_timetableFragment"
-            app:destination="@id/timetableFragment" />
+            app:destination="@id/timetableFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_loginFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"

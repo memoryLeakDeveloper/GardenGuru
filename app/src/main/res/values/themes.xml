@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.GardenGuru" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -12,5 +12,11 @@
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="LauncherTheme" parent="Theme.GardenGuru">
+        <item name="android:statusBarColor">@color/login_gray</item>
+        <item name="android:windowBackground">@drawable/splash_screen_image</item>
+        <item name="android:colorPrimaryDark">@color/login_gray</item>
     </style>
 </resources>

@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when (navController.currentDestination?.id) {
-            R.id.splashScreenFragment -> {}
             R.id.onboardingFragment -> {
                 super.onBackPressed()
             }

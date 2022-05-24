@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -47,7 +48,7 @@ class TimetableFragment : Fragment() {
             rvEvents.adapter = eventsRecyclerAdapter
             val snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(rvEvents)
-            rvEvents.smoothScrollToPosition(3 + 7)
+            rvEvents.scrollToPosition(3 + 7)
 
             calendarRecyclerAdapter =
                 CalendarRecyclerAdapter(viewModel, requireContext().resources.displayMetrics.widthPixels / 7)
@@ -99,7 +100,11 @@ class TimetableFragment : Fragment() {
 
     private fun initAddButton() {
         with(binding) {
-            requireContext().resources.displayMetrics.widthPixels;
+            ivCam.setOnClickListener{
+                findNavController().navigate(R.id.addingPlantFragment)
+            }
+
+            requireContext().resources.displayMetrics.widthPixels
             val expandedBtnWidth = (requireContext().resources.displayMetrics.widthPixels
                     - 2 * resources.getDimension(R.dimen.xm_indent) - ivPlus.layoutParams.width / 2.0).toInt()
 

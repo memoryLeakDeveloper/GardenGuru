@@ -54,7 +54,7 @@
     //adding a plant
     <string name="adding">Добавление</string>
     <string name="add_a_plant">Добавить растение</string>
-    <string name="next">Далее...</string>
+    <string name="next">Далее…</string>
     <string name="hide">Скрыть</string>
 
     //care difficult
@@ -77,7 +77,6 @@
 
     //care description
     <string name="care">Уход</string>
-    <string name="spraying">Опрыскивание</string>
     <string name="nutrition">Подкормка</string>
     <string name="planting_time">Время посадки</string>
     <string name="reproduction">Размножение</string>
