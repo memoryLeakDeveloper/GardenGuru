@@ -6,34 +6,34 @@
     android:layout_height="match_parent"
     tools:parentTag="android.widget.LinearLayout">
 
-    <com.example.gardenguru.ui.customview.card.WheatherConditionItem
+    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/item_temperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:condition="value1"/>
+        app:condition="value1" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:dividerColor="@color/white5"
-        android:layout_marginHorizontal="20dp"/>
+        android:layout_marginHorizontal="20dp"
+        app:dividerColor="@color/white5" />
 
-    <com.example.gardenguru.ui.customview.card.WheatherConditionItem
+    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/item_watering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:condition="value2"/>
+        app:condition="value2" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:dividerColor="@color/white5"
-        android:layout_marginHorizontal="20dp"/>
+        android:layout_marginHorizontal="20dp"
+        app:dividerColor="@color/white5" />
 
-    <com.example.gardenguru.ui.customview.card.WheatherConditionItem
+    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/item_lighting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:condition="value3"/>
+        app:condition="value3" />
 
 </merge>

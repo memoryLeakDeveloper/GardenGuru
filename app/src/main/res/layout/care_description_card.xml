@@ -123,7 +123,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/nutrition"
+        android:id="@+id/feeding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -131,7 +131,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/nutrition_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -141,7 +140,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/nutrition_text1"
+            android:id="@+id/feeding_text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -152,7 +151,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/nutrition_text2"
+            android:id="@+id/feeding_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -249,8 +248,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:paddingBottom="15dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="15dp">
 
         <TextView
             android:id="@+id/pruning_title"

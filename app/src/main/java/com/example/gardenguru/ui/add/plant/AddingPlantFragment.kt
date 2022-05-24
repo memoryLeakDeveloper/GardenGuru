@@ -11,13 +11,32 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
+import com.example.gardenguru.data.benefit.BenefitData
+import com.example.gardenguru.data.pest.PestData
+import com.example.gardenguru.data.photo.PhotoData
+import com.example.gardenguru.data.plant.PlantData
+import com.example.gardenguru.data.reproduction.ReproductionData
+import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.AddingPlantFragmentBinding
+import com.example.gardenguru.ui.add.plant.AddingPlantFragment.ClickCallback
 import com.example.gardenguru.ui.add.plant.description.PlantDescriptionFragment
 import com.example.gardenguru.utils.Extensions.setString
 
 class AddingPlantFragment : Fragment() {
 
     private lateinit var binding: AddingPlantFragmentBinding
+    private val clickCallback = ClickCallback { updateViewPagerHeight() }
+    private val viewPagerListener = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            updateViewPagerHeight()
+            binding.scroll.smoothScrollTo(0, 0)
+        }
+    }
+
+    fun interface ClickCallback {
+        fun click()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = AddingPlantFragmentBinding.inflate(inflater, container, false)
@@ -28,19 +47,83 @@ class AddingPlantFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.header.title.setString(R.string.adding)
         binding.spinner.initView("DDDDDDDDDDDDDDDDDDDD", arrayListOf("11111111111", "2222222", "2222222", "2222222", "2222222"), true)
-        binding.viewPager.adapter = PagerAdapter(this@AddingPlantFragment, 3)
-        binding.viewPager.offscreenPageLimit = 1
-        val nextItemVisiblePx = convertDpToPx(20F)
-        val currentItemHorizontalMarginPx = convertDpToPx(30F)
-        val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
+        setViewPager()
+    }
+
+    private fun setViewPager() {
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
-            page.translationX = -pageTranslationX * position
+            page.translationX = -convertDpToPx(50F) * position
             page.scaleY = 1 - (0.01F * kotlin.math.abs(position))
         }
-        binding.viewPager.setPageTransformer(pageTransformer)
+        binding.viewPager.apply {
+            adapter = PagerAdapter(this@AddingPlantFragment, listOf())
+            offscreenPageLimit = 2
+            setPageTransformer(pageTransformer)
+            addItemDecoration(HorizontalMarginItemDecoration(requireContext()))
+        }
+        binding.viewPager.registerOnPageChangeCallback(viewPagerListener)
+    }
 
-        val itemDecoration = HorizontalMarginItemDecoration(requireContext())
-        binding.viewPager.addItemDecoration(itemDecoration)
+    fun updateViewPagerHeight() {
+        val position = binding.viewPager.currentItem
+        if (childFragmentManager.fragments.size > position) {
+            childFragmentManager.fragments[position].view?.let {
+                updatePagerHeightForChild(it, binding.viewPager)
+            }
+        }
+    }
+
+    private fun updatePagerHeightForChild(view: View, pager: ViewPager2) {
+        view.post {
+            val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY)
+            val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            view.measure(wMeasureSpec, hMeasureSpec)
+            if (pager.layoutParams.height != view.measuredHeight) {
+                pager.layoutParams = (pager.layoutParams)
+                    .also { lp ->
+                        lp.height = view.measuredHeight
+                    }
+            }
+        }
+    }
+
+    private fun convertDpToPx(dp: Float) = (dp * requireContext().resources.displayMetrics.density).toInt()
+
+    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) : FragmentStateAdapter(fragment) {
+
+        override fun getItemCount() = 5
+
+        override fun createFragment(position: Int): Fragment {
+            val data = PlantData(
+                "12121",
+                2,
+                "СУЧья НЕЗАБУДКА",
+                "УУУУУУУУ очень много букв УУУУУУУУь букв УУУУУУУУь много букв букв УУУУУУУУь много букв много букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверить",
+                arrayListOf(PhotoData("1", "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg")),
+                SunRelationData(1, "22222"),
+                arrayListOf(PestData("1", "EFKO"), PestData("2", "QA"), PestData("133", "YYYYY")),
+                arrayListOf(ReproductionData(1, "TTTTT")),
+                arrayListOf(
+                    BenefitData(
+                        1,
+                        "rrrrrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhr"
+                    )
+                ),
+                "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ПОЛИТЬ ОБЯЗАТЕЛЬНО",
+                "LFDFQ DMFMSDFSKMFSDMKFSDMKFSDFDSKMFSDMK",
+                2,
+                3,
+                4,
+                5,
+                6,
+                6,
+                7,
+                10,
+                8,
+                8
+            )
+            return PlantDescriptionFragment(data, clickCallback)
+        }
     }
 
     class HorizontalMarginItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
@@ -51,21 +134,6 @@ class AddingPlantFragment : Fragment() {
             outRect.right = horizontalMarginInPx
             outRect.left = horizontalMarginInPx
         }
-    }
-
-    private fun convertDpToPx(dp: Float) = (dp * requireContext().resources.displayMetrics.density).toInt()
-
-    private inner class PagerAdapter(fragment: Fragment, private val itemsCount: Int) : FragmentStateAdapter(fragment) {
-
-        override fun getItemCount() = 3
-
-        override fun createFragment(position: Int) =
-            when (position) {
-                0 -> PlantDescriptionFragment()
-                1 -> PlantDescriptionFragment()
-                2 -> PlantDescriptionFragment()
-                else -> PlantDescriptionFragment()
-            }
     }
 
 }
