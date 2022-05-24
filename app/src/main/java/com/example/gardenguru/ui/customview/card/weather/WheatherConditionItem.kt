@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.card.weather
 
 import android.content.Context
 import android.graphics.drawable.Drawable

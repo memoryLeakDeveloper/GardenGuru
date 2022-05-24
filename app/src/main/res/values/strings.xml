@@ -54,14 +54,16 @@
     //adding a plant
     <string name="adding">Добавление</string>
     <string name="add_a_plant">Добавить растение</string>
-    
+    <string name="next">Далее...</string>
+    <string name="hide">Скрыть</string>
+
     //care difficult
     <string name="care_difficult">Сложность ухода</string>
     <string name="care_difficult_1">За мной ухаживать очень легко!</string>
     <string name="care_difficult_2">За мной ухаживать легко!</string>
     <string name="care_difficult_3">За мной ухаживать непросто!</string>
     <string name="care_difficult_4">За мной ухаживать сложно!</string>
-    
+
     //wheather condition
     <string name="temperature">Температура</string>
     <string name="watering">Полив</string>
@@ -72,5 +74,25 @@
     <string name="no_events_text">Событий нет!\n Возвращайтесь завтра</string>
     <string name="complete_all_events_text">Вы позаботились о всех Ваших растениях!</string>
     <string name="congratulations">Поздравляем!</string>
+
+    //care description
+    <string name="care">Уход</string>
+    <string name="spraying">Опрыскивание</string>
+    <string name="nutrition">Подкормка</string>
+    <string name="planting_time">Время посадки</string>
+    <string name="reproduction">Размножение</string>
+    <string name="pruning">Обрезка</string>
+    <string name="in_summer">Летом</string>
+    <string name="in_winter">Зимой</string>
+    <string name="disease_and_pests">Болезни и  \nвредители</string>
+
+    //benefits
+    <string name="benefits">Польза</string>
+
+    //no matches
+    <string name="no_matches">Нет совпадений?</string>
+    <string name="try_again">Попробуй ещё раз</string>
+    <string name="create_plant">Создать свое растение</string>
+
 
 </resources>

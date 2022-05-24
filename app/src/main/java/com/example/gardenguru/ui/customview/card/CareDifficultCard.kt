@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.card
 
 import android.content.Context
 import android.util.AttributeSet
@@ -18,7 +18,8 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = CareDifficultLayoutBinding.inflate(inflater, this)
-        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.care_difficult_background))
+        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+        binding.edit.visibility = View.GONE
     }
 
     fun initView(difficult: Int, isEditing: Boolean) {
