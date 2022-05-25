@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.TimetableFragmentBinding
+import com.example.gardenguru.databinding.FragmentTimetableBinding
 import com.example.gardenguru.ui.customview.CalendarView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -23,19 +23,23 @@ import java.util.*
 @AndroidEntryPoint
 class TimetableFragment : Fragment() {
 
-    private lateinit var binding: TimetableFragmentBinding
-    private var viewModel = TimetableViewModel()//: TimetableViewModel by viewModels()
+    private lateinit var binding: FragmentTimetableBinding
+    private var viewModel = TimetableViewModel()//: TimetableViewModel by viewModels()  todo
     private lateinit var calendarRecyclerAdapter: CalendarRecyclerAdapter
     private lateinit var eventsRecyclerAdapter: TimetableRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = TimetableFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentTimetableBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.ivLeaf.setOnClickListener{
+            findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
+        }
+        
         initAddButton()
         initCalendar()
     }

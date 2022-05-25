@@ -92,6 +92,10 @@
     <string name="no_matches">Нет совпадений?</string>
     <string name="try_again">Попробуй ещё раз</string>
     <string name="create_plant">Создать свое растение</string>
+    <string name="here_we_will_show_your_plants">Здесь мы будем показывать Ваши растения</string>
+    <string name="look_for_a_plant">Искать растение</string>
+    <string name="my_plants">Мои растения</string>
+    <string name="garden_owner_name">Владелец Сада %1$s</string>
 
 
 </resources>

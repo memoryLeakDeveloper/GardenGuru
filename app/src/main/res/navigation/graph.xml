@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/myPlantsFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -15,7 +15,12 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_privacyPolicyFragment"
-            app:destination="@id/privacyPolicyFragment" />
+            app:destination="@id/privacyPolicyFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_loginFragment_to_termOfUseFragment"
             app:destination="@id/termOfUseFragment"
@@ -48,10 +53,24 @@
         android:id="@+id/timetableFragment"
         android:name="com.example.gardenguru.ui.timetable.TimetableFragment"
         android:label="TimetableFragment"
-        tools:layout="@layout/timetable_fragment"/>
+        tools:layout="@layout/fragment_timetable">
+        <action
+            android:id="@+id/action_timetableFragment_to_myPlantsFragment"
+            app:destination="@id/myPlantsFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/addingPlantFragment"
         android:name="com.example.gardenguru.ui.add.plant.AddingPlantFragment"
         android:label="AddingPlantFragment" />
+    <fragment
+        android:id="@+id/myPlantsFragment"
+        android:name="com.example.gardenguru.ui.my_plants.MyPlantsFragment"
+        tools:layout="@layout/fragment_my_plants"
+        android:label="MyPlantsFragment" />
 </navigation>

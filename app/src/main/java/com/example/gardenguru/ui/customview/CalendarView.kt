@@ -31,7 +31,7 @@ class CalendarView: RecyclerView {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(this)
 
-        scrollToPosition(3 + 7 + 3)
+        scrollToPosition(7)
 
         addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

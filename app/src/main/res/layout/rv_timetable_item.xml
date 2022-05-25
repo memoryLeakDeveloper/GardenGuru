@@ -26,7 +26,7 @@
         android:id="@+id/event_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_margin="16dp"
         android:background="@drawable/card_bg"
         app:layout_constraintTop_toBottomOf="@+id/tv_date"
@@ -114,7 +114,7 @@
         android:id="@+id/no_event_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_margin="16dp"
         android:background="@drawable/card_bg"
         app:layout_constraintTop_toBottomOf="@+id/tv_date">

@@ -3,50 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable-v24/check_box_selector.xml" value="0.1455" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2925" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/black_circle_with_gray_stroke.xml" value="0.142" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_next.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_next_arrow.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/card_bg.xml" value="0.247" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/expanded_bt_bg.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/green_circle.xml" value="0.142" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/green_ring.xml" value="0.142" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/header.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_all_events_complete.xml" value="0.2925" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_attension.xml" value="0.2925" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_back.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_calendar_bg.xml" value="0.247" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_care_difficult_1.xml" value="0.1455" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_down.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_leaf.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_no_event.xml" value="0.2925" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_up.xml" value="0.1315" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_watering.xml" value="0.1455" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/oval_ring_green.xml" value="0.2925" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/spinner_background.xml" value="0.247" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/spinner_background_unselected.xml" value="0.247" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/wheather_condition_background.xml" value="0.1455" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/white_10_circle_with_stroke.xml" value="0.247" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/white_btn_bg.xml" value="0.1455" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/font/poppins_regular.xml" value="0.24351851851851852" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.1484375" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/care_description_fragment.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/care_difficult_layout.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/header.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/item_expandable_list.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/login_fragment.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/onboarding_fragment.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/onboarding_step_fragment.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/privacy_policy_fragment.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_calendar_item.xml" value="0.8" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_event_item.xml" value="0.28854166666666664" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_timetable_item.xml" value="0.268" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/splash_screen_fragment.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/term_of_use_fragment.xml" value="0.28854166666666664" />
-        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/timetable_fragment.xml" value="0.268" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button.xml" value="0.158" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_background.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_next_arrow.xml" value="0.158" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/button_white_bg.xml" value="0.158" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/card_bg.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/edit_text_bg.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_calendar_bg.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_checked.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_delete.xml" value="0.2925" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_edit.xml" value="0.2925" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_lighting.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_pest.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/font/poppins_bold.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.13177083333333334" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_my_plants.xml" value="0.2" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_timetable.xml" value="0.22248995983935743" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/header.xml" value="0.28854166666666664" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/no_matches_card.xml" value="0.28854166666666664" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/plant_description_fragment.xml" value="0.28854166666666664" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/privacy_policy_fragment.xml" value="0.28854166666666664" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_garden_item.xml" value="0.3784860557768924" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_garden_plant_item.xml" value="0.4" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/rv_timetable_item.xml" value="0.1484375" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/timetable_fragment.xml" value="0.36" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>

@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onBackPressed() {
         when (navController.currentDestination?.id) {
             R.id.onboardingFragment -> {
