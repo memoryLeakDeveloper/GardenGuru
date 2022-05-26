@@ -97,5 +97,22 @@
     <string name="my_plants">Мои растения</string>
     <string name="garden_owner_name">Владелец Сада %1$s</string>
 
+    //my plants
+    <string name="attention">Внимание!</string>
+    <string name="dialog_want_to_leave_garden">Вы хотите покинуть сад “%1$s” владельца %2$s</string>
+    <string name="confirm_deletion">Подтвердить удаление?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    //garden management
+    <string name="editing">Редактирование</string>
+    <string name="delete_garden">Удалить сад</string>
+    <string name="save">Сохранить</string>
+    <string name="user_roles_text_description">Пользователь с ролью:\n\n<font fgcolor="#88BC87">Новичок</font> - может отмечать выполнение события в расписании\n\n<font fgcolor="#88BC87">Опытный</font> - может вносить изменения в растение из вашего сада\n\n<font fgcolor="#88BC87">Гуру</font> - может контролировать пользователей своего сада</string>
+    <string name="joint_care">Совместный уход</string>
+    <string name="copy_link">Копировать ссылку</string>
+    <string name="garden_management">Управление садом</string>
+    <string name="dialog_want_to_delete_garden">Вы хотите удалить Сад “%1$s”?</string>
+
 
 </resources>

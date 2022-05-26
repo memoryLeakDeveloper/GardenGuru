@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/primary_background"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-14dp"
+        >
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginTop="28dp"
+                app:fontFamily="@font/poppins_bold"
+                android:textAlignment="center"
+                android:text="@string/editing"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_garden_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="28dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/white"
+                tools:text="sdfsdf"
+                android:background="@drawable/button_green_stroke"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/spinner_season"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="28dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/white"
+                tools:text="Лето (июнь-август)"
+                android:background="@drawable/button_green_stroke"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bt_remove_garden"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/gray"
+                    android:text="@string/delete_garden"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bt_save_garden"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="6dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/primary_green"
+                    android:text="@string/save"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                app:fontFamily="@font/poppins_bold"
+                android:textAlignment="center"
+                android:text="@string/joint_care"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/users_roles_text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:text="@string/user_roles_text_description"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="55dp"
+                android:orientation="vertical"
+                android:background="@drawable/card_bg">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/white"
+                    tools:text="sdfsdf"
+                    android:background="@drawable/button_green_stroke"/>
+
+                <com.example.gardenguru.ui.customview.ClickableTextView
+                    android:id="@+id/tv_copy_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary_green"
+                    android:layout_marginHorizontal="26dp"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="26dp"
+                    android:drawableStart="@drawable/ic_link"
+                    android:text="@string/copy_link"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
