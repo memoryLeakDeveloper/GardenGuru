@@ -47,13 +47,16 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     0,
                     0
                 ),
-                Calendar.getInstance().apply {
-                    add(Calendar.DAY_OF_YEAR, -1)
-                }.toDmyString(),
                 arrayListOf(
-                    EventData(EventData.Event.Watering, true),
-                    EventData(EventData.Event.Spraying, false),
-                    EventData(EventData.Event.Transfer, false)
+                    EventData(EventData.Event.Watering, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -1)
+                    }.toDmyString(),true),
+                    EventData(EventData.Event.Spraying, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -1)
+                    }.toDmyString(),false),
+                    EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -1)
+                    }.toDmyString(),false)
                 )
             ),
             PlantEventsData(
@@ -84,13 +87,17 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     0,
                     0,
                     0
-                ), Calendar.getInstance().apply {
-                    add(Calendar.DAY_OF_YEAR, -2)
-                }.toDmyString(),
+                ),
                 arrayListOf(
-                    EventData(EventData.Event.Watering, true,),
-                    EventData(EventData.Event.TopDressing, true, ),
-                    EventData(EventData.Event.Transfer, true)
+                    EventData(EventData.Event.Watering, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -2)
+                    }.toDmyString(),true,),
+                    EventData(EventData.Event.TopDressing, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -2)
+                    }.toDmyString(),true, ),
+                    EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -2)
+                    }.toDmyString(),true)
                 )
             ),
             PlantEventsData(
@@ -116,13 +123,17 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     0,
                     0,
                     0
-                ), Calendar.getInstance().apply {
-                    add(Calendar.DAY_OF_YEAR, -4)
-                }.toDmyString(),
+                ),
                 arrayListOf(
-                    EventData(EventData.Event.Watering, false),
-                    EventData(EventData.Event.Spraying, false),
-                    EventData(EventData.Event.Transfer, false)
+                    EventData(EventData.Event.Watering, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -4)
+                    }.toDmyString(),false),
+                    EventData(EventData.Event.Spraying, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -4)
+                    }.toDmyString(),false),
+                    EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -4)
+                    }.toDmyString(),false)
                 )
             ),
         )
@@ -132,8 +143,8 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
 
     fun getEventForDay(calendar: Calendar): PlantEventsData? {
         val dateString = calendar.toDmyString()
-        return events.value?.find {
-            it.date == dateString
+        return events.value?.find { plantEventData ->
+            plantEventData.events.find { it.dateDMY == dateString } != null
         }
     }
 }

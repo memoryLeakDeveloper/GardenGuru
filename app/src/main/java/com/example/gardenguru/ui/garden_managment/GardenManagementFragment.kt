@@ -51,7 +51,7 @@ class GardenManagementFragment : Fragment() {
 
             btRemoveGarden.setOnClickListener{
                 val dialogHelper = DialogHelper()
-                val dialogBinding = DialogLeaveGardenBinding.inflate(LayoutInflater.from(root.context))
+                val dialogBinding = DialogRemoveGardenBinding.inflate(LayoutInflater.from(root.context))
                 with(dialogBinding){
 
                     tvDialogDescription.text = root.resources.getString(R.string.dialog_want_to_delete_garden, garden.name, garden.gardenOwner)
