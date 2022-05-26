@@ -11,17 +11,17 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.databinding.CareDescriptionCardBinding
+import com.example.gardenguru.databinding.CardCareDescriptionBinding
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
-    private var binding: CareDescriptionCardBinding
+    private var binding: CardCareDescriptionBinding
 
     init {
         //TODO
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = CareDescriptionCardBinding.inflate(inflater, this)
+        binding = CardCareDescriptionBinding.inflate(inflater, this)
         orientation = VERTICAL
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }

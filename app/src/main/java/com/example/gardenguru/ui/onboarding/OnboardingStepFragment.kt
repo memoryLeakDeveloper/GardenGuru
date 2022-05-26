@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.OnboardingStepFragmentBinding
+import com.example.gardenguru.databinding.FragmentOnboardingStepBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 
 class OnboardingStepFragment(private val position: Int) : Fragment() {
 
-    private lateinit var binding: OnboardingStepFragmentBinding
+    private lateinit var binding: FragmentOnboardingStepBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = OnboardingStepFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentOnboardingStepBinding.inflate(inflater, container, false)
         return binding.root
     }
 

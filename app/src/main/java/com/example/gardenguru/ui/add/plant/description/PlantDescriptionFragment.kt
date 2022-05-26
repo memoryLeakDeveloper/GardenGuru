@@ -15,17 +15,17 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.databinding.PlantDescriptionFragmentBinding
+import com.example.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.example.gardenguru.ui.add.plant.AddingPlantFragment
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class PlantDescriptionFragment(private val data: PlantData, private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
 
-    private lateinit var binding: PlantDescriptionFragmentBinding
+    private lateinit var binding: FragmentPlantDescriptionBinding
     private var isDescriptionShowed: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = PlantDescriptionFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentPlantDescriptionBinding.inflate(inflater, container, false)
         return binding.root
     }
 

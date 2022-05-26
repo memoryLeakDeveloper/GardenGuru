@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.OnboardingFragmentBinding
+import com.example.gardenguru.databinding.FragmentOnboardingBinding
 
 class OnboardingFragment : Fragment() {
 
-    lateinit var binding: OnboardingFragmentBinding
+    lateinit var binding: FragmentOnboardingBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = OnboardingFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         return binding.root
     }
 

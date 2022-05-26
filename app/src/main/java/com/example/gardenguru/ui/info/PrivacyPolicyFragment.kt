@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.PrivacyPolicyFragmentBinding
+import com.example.gardenguru.databinding.FragmentPrivacyPolicyBinding
 
 class PrivacyPolicyFragment : Fragment() {
 
-    private lateinit var binding: PrivacyPolicyFragmentBinding
+    private lateinit var binding: FragmentPrivacyPolicyBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = PrivacyPolicyFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentPrivacyPolicyBinding.inflate(inflater, container, false)
         return binding.root
     }
 

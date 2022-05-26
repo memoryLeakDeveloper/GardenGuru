@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/header"
-        layout="@layout/header"
+        layout="@layout/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top" />
@@ -25,7 +25,7 @@
             android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/poppins_regular"
             android:paddingBottom="10dp"
-            android:text="TEXTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT"
+            android:text="TEXT"
             android:textColor="@color/gray"
             android:textSize="16sp" />
 

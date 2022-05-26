@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.data.pest.PestData
-import com.example.gardenguru.databinding.PestsItemBinding
+import com.example.gardenguru.databinding.ItemPestsBinding
 
 class PestsCardAdapter(private val listPests: List<PestData>) : RecyclerView.Adapter<PestsCardAdapter.PestsCardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PestsCardViewHolder {
-        return PestsCardViewHolder(PestsItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return PestsCardViewHolder(ItemPestsBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: PestsCardViewHolder, position: Int) {
@@ -25,5 +25,5 @@ class PestsCardAdapter(private val listPests: List<PestData>) : RecyclerView.Ada
 
     override fun getItemCount() = listPests.size
 
-    class PestsCardViewHolder(val binding: PestsItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class PestsCardViewHolder(val binding: ItemPestsBinding) : RecyclerView.ViewHolder(binding.root)
 }
