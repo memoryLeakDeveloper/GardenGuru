@@ -3,7 +3,6 @@ package com.example.gardenguru.ui.add.plant
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class AddingPlantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.header.title.setString(R.string.adding)
-        binding.spinner.initView("DDDDDDDDDDDDDDDDDDDD", arrayListOf("11111111111", "2222222", "2222222", "2222222", "2222222"), true)
+        binding.spinner.initView("Введите сад", null, arrayListOf("11111111111", "2222222", "33333", "444444", "5555555"), true)
         setViewPager()
     }
 
@@ -124,7 +123,7 @@ class AddingPlantFragment : Fragment() {
                 8,
                 8
             )
-            return if(position != 4) PlantDescriptionFragment(data, clickCallback) else ClientPlantFragment(clickCallback)
+            return if (position != 4) PlantDescriptionFragment(data, clickCallback) else ClientPlantFragment(clickCallback)
         }
     }
 

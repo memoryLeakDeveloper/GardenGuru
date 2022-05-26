@@ -30,8 +30,8 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
             binding.ll2.visibility = View.GONE
             clickCallback.click()
         }
-        binding.spinnerCare.initView(getString(R.string.define_care_difficult), arrayListOf("1", "2", "3", "4", "5"), false)
-        binding.spinnerWatering.initView(getString(R.string.watering), arrayListOf("0000000", "2adsda", "3asdsa", "4", "5sadsadas"), false)
-        binding.spinnerPests.initView(getString(R.string.choose_pests), arrayListOf("EFKO", "NATASHA", "COCA-COLA", "333333"), false)
+        binding.spinnerCare.initView(getString(R.string.define_care_difficult), null, arrayListOf("1", "2", "3", "4", "5"), false)
+        binding.spinnerWatering.initView(getString(R.string.watering),null, arrayListOf("0000000", "2adsda", "3asdsa", "4", "5sadsadas"), false)
+        binding.spinnerPests.initView(getString(R.string.choose_pests), null, arrayListOf("EFKO", "NATASHA", "COCA-COLA", "333333"), false)
     }
 }
