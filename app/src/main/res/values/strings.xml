@@ -114,5 +114,19 @@
     <string name="garden_management">Управление садом</string>
     <string name="dialog_want_to_delete_garden">Вы хотите удалить Сад “%1$s”?</string>
 
+    //client plant
+    <string name="fill_info_about_plant">Заполните информацию о \nрастении</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="enter_plant_name">Введите имя растения</string>
+    <string name="more_info">Хотите указать больше \nподробностей?</string>
+    <string name="enter_plant_spicies">Введите вид растения</string>
+    <string name="define_care_difficult">Определите сложность ухода</string>
+    <string name="plant_info">Информация о растении</string>
+    <string name="description">Описание…</string>
+    <string name="pests_disease">Вредители (болезни)</string>
+    <string name="choose_pests">Выберите вредителя(болезни)</string>
+    <string name="add_pests">+ Добавить вредителя (болезнь)</string>
+    <string name="enter_benefits">Укажите, какую пользу приносит Ваше растение…</string>
+
 
 </resources>

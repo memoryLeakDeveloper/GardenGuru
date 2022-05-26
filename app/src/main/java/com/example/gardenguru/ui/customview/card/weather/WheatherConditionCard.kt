@@ -7,16 +7,16 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.databinding.WheatherConditionCardBinding
+import com.example.gardenguru.databinding.CardWheatherConditionBinding
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
-    private var binding: WheatherConditionCardBinding
+    private var binding: CardWheatherConditionBinding
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = WheatherConditionCardBinding.inflate(inflater, this)
+        binding = CardWheatherConditionBinding.inflate(inflater, this)
         orientation = VERTICAL
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }

@@ -6,18 +6,18 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.WheatherConditionItemBinding
+import com.example.gardenguru.databinding.ItemWheatherConditionBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 import com.example.gardenguru.utils.Extensions.setString
 
 
 class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
-    private var binding: WheatherConditionItemBinding
+    private var binding: ItemWheatherConditionBinding
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = WheatherConditionItemBinding.inflate(inflater, this)
+        binding = ItemWheatherConditionBinding.inflate(inflater, this)
         val a = context.obtainStyledAttributes(attrs, R.styleable.WheatherConditionItem, 0, 0)
         initView(a.getString(R.styleable.WheatherConditionItem_condition))
         a.recycle()

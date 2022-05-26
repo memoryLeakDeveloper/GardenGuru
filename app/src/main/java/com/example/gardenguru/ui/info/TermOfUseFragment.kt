@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.TermOfUseFragmentBinding
+import com.example.gardenguru.databinding.FragmentTermOfUseBinding
 
 class TermOfUseFragment : Fragment() {
 
-    private lateinit var binding: TermOfUseFragmentBinding
+    private lateinit var binding: FragmentTermOfUseBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = TermOfUseFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentTermOfUseBinding.inflate(inflater, container, false)
         return binding.root
     }
 

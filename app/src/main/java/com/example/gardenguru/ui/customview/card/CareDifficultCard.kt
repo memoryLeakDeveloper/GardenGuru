@@ -7,17 +7,17 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.CareDifficultLayoutBinding
+import com.example.gardenguru.databinding.CardCareDifficultBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private var binding: CareDifficultLayoutBinding
+    private var binding: CardCareDifficultBinding
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = CareDifficultLayoutBinding.inflate(inflater, this)
+        binding = CardCareDifficultBinding.inflate(inflater, this)
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         binding.edit.visibility = View.GONE
     }

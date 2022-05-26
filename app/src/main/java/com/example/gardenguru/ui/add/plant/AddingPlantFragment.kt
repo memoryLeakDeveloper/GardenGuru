@@ -17,14 +17,15 @@ import com.example.gardenguru.data.photo.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
-import com.example.gardenguru.databinding.AddingPlantFragmentBinding
+import com.example.gardenguru.databinding.FragmentAddingPlantBinding
 import com.example.gardenguru.ui.add.plant.AddingPlantFragment.ClickCallback
+import com.example.gardenguru.ui.add.plant.client.ClientPlantFragment
 import com.example.gardenguru.ui.add.plant.description.PlantDescriptionFragment
 import com.example.gardenguru.utils.Extensions.setString
 
 class AddingPlantFragment : Fragment() {
 
-    private lateinit var binding: AddingPlantFragmentBinding
+    private lateinit var binding: FragmentAddingPlantBinding
     private val clickCallback = ClickCallback { updateViewPagerHeight() }
     private val viewPagerListener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
@@ -39,14 +40,14 @@ class AddingPlantFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = AddingPlantFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentAddingPlantBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.header.title.setString(R.string.adding)
-        binding.spinner.initView("DDDDDDDDDDDDDDDDDDDD", arrayListOf("11111111111", "2222222", "2222222", "2222222", "2222222"), true)
+        binding.spinner.initView("Введите сад", null, arrayListOf("11111111111", "2222222", "33333", "444444", "5555555"), true)
         setViewPager()
     }
 
@@ -122,7 +123,7 @@ class AddingPlantFragment : Fragment() {
                 8,
                 8
             )
-            return PlantDescriptionFragment(data, clickCallback)
+            return if (position != 4) PlantDescriptionFragment(data, clickCallback) else ClientPlantFragment(clickCallback)
         }
     }
 

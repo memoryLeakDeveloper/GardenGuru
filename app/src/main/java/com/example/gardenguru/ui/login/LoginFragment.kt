@@ -13,22 +13,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.LoginFragmentBinding
 import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
+import com.example.gardenguru.databinding.FragmentLoginBinding
 import java.util.*
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding: LoginFragmentBinding
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = LoginFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
         if (firstLaunch){
@@ -39,6 +41,10 @@ class LoginFragment : Fragment() {
 
             initText()
             setListener()
+
+            binding.buttonLogin.root.setOnClickListener {
+                findNavController().navigate(R.id.addingPlantFragment)
+            }
         }
     }
 
@@ -84,7 +90,7 @@ class LoginFragment : Fragment() {
         }
 
         override fun onClick(widget: View) {
-            findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.addingPlantFragment)
+            findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.privacyPolicyFragment)
         }
     }
 

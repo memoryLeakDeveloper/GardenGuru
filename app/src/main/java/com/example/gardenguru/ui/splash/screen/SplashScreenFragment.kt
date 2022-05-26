@@ -10,29 +10,29 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.SplashScreenFragmentBinding
+import com.example.gardenguru.databinding.FragmentSplashScreenBinding
 import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
 
-    private lateinit var binding: SplashScreenFragmentBinding
+    private lateinit var binding: FragmentSplashScreenBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = SplashScreenFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startAnimation()
+        navigateNextPage()
     }
 
     private fun startAnimation() {
         ObjectAnimator.ofFloat(binding.imageView, View.ALPHA, 0F, 1F).apply {
-            startDelay = 1000
-            duration = 2000
+            startDelay = 500
+            duration = 1000
             addListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator?) {}
                 override fun onAnimationCancel(animation: Animator?) {}
