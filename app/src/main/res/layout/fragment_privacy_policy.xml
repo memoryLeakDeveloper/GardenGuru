@@ -26,7 +26,7 @@
             android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/poppins_regular"
             android:paddingBottom="10dp"
-            android:textColor="@color/grey"
+            android:textColor="@color/gray"
             tools:text="TEXTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT"
             android:textSize="16sp" />
 

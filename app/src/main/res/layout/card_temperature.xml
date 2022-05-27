@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Укажите комфортную \n температуру Летом"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_from"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/from"
+        android:inputType="number"
+        android:maxLength="2"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/celsium_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/celsium_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="@string/celsium"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text_from"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_from"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_from" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_to"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/to"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="2"
+        android:paddingStart="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/celsium_2"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/celsium_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="@string/celsium"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text_to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_to"
+        app:layout_constraintTop_toTopOf="@+id/edit_text_to" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="25dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/sf_ui_font"
+        android:text="@string/Ok"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_from" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</merge>

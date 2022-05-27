@@ -31,15 +31,13 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
             binding.fullForm.visibility = View.GONE
             clickCallback.click()
         }
-        binding.spinnerCare.initView(getString(R.string.define_care_difficult), null, arrayListOf("1", "2", "3", "4", "5"), false)
-        binding.spinnerWatering.initView(
-            getString(R.string.watering),
-            null,
-            arrayListOf("0000000", "2adsda", "3asdsa", "4", "5sadsadas"),
-            false
-        )
+        val listCareDifficult = ArrayList<String>(listOf(*resources.getStringArray(R.array.care_difficult)))
+        binding.spinnerCare.initView(getString(R.string.define_care_difficult), null, listCareDifficult, false)
+        val listCareType = ArrayList<String>(listOf(*resources.getStringArray(R.array.care_type)))
+        binding.spinnerWatering.initView(getString(R.string.watering), null, listCareType, false)
         binding.spinnerPests.initView(getString(R.string.choose_pests), null, arrayListOf("EFKO", "NATASHA", "COCA-COLA", "333333"), false)
         binding.calendarWinter.initView(Seasons.Winter)
         binding.calendarSummer.initView(Seasons.Summer)
+
     }
 }

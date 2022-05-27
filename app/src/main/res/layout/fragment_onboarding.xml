@@ -38,7 +38,7 @@
         android:fontFamily="@font/sf_ui_font"
         android:padding="18dp"
         android:text="@string/onboarding_skip"
-        android:textColor="@color/grey"
+        android:textColor="@color/gray"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

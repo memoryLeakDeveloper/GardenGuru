@@ -128,12 +128,35 @@
     <string name="enter_benefits">Укажите, какую пользу приносит Ваше растение…</string>
     <string name="Ok">Ok</string>
     <string name="set_watering_period">Установите полив для \nрастения</string>
+    <string name="choose">Выберите</string>
+    <array name="care_difficult">
+        <item>Очень легко</item>
+        <item>Легко</item>
+        <item>Непросто</item>
+        <item>Сложно</item>
+    </array>
+    <array name="care_type">
+        <item>Полив</item>
+        <item>Подкормка</item>
+        <item>Время посадки</item>
+        <item>Опрыскивание</item>
+        <item>Размножение</item>
+        <item>Обрезка</item>
+        <item>Отношение к солнцу</item>
+        <item>Температура</item>
+    </array>
 
     //calendar
     <string name="every">Каждые</string>
     <string name="days">Дня</string>
     <string name="weeks">Недели</string>
     <string name="month">Месяца</string>
+
+    //temperature card
+    <string name="define_comfort_temperature">Укажите комфортную температуру</string>
+    <string name="from">от</string>
+    <string name="to">до</string>
+    <string name="celsium">° С</string>
 
 
 </resources>

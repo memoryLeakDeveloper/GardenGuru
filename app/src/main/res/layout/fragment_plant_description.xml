@@ -42,7 +42,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Информация о растении"
-        android:textColor="@color/grey"
+        android:textColor="@color/gray"
         android:textSize="20sp" />
 
     <TextView
