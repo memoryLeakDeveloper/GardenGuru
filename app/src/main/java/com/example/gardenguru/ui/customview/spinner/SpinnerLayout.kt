@@ -20,6 +20,7 @@ import com.example.gardenguru.R
 import com.example.gardenguru.databinding.SpinnerLayoutBinding
 import com.example.gardenguru.databinding.SpinnerPopupBinding
 import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.SelectListener
+import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.ValueCallback
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
@@ -28,8 +29,9 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     private var popupBinding: SpinnerPopupBinding
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
-    private val selectListener = SelectListener { text: String, close: Boolean ->
+    private val selectListener = SelectListener { text: String, position: Int, close: Boolean ->
         binding.spinnerText.text = text
+        valueCallback.value(position, text)
         if (close) popupWindow?.dismiss()
     }
     private val dismissListener = PopupWindow.OnDismissListener {
@@ -37,10 +39,16 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         isListExpanded = false
         arrowAnimation(true)
     }
+    val valueCallback = ValueCallback { _, _ -> }
+
+    fun interface ValueCallback {
+        fun value(position: Int, name: String)
+    }
 
     fun interface SelectListener {
-        fun onSelect(string: String, onClose: Boolean)
+        fun onSelect(string: String, position: Int, onClose: Boolean)
     }
+
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

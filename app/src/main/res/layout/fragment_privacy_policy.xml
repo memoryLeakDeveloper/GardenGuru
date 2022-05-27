@@ -26,8 +26,8 @@
             android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/poppins_regular"
             android:paddingBottom="10dp"
-            tools:text="TEXTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT"
             android:textColor="@color/gray"
+            tools:text="TEXTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXTTEXT"
             android:textSize="16sp" />
 
     </ScrollView>

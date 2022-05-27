@@ -31,7 +31,7 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
         holder.binding.textView.visibility = View.VISIBLE
         holder.binding.textView.text = list[position]
         holder.binding.root.setOnClickListener { view ->
-            listener.onSelect(holder.binding.textView.text.toString(), true)
+            listener.onSelect(holder.binding.textView.text.toString(), position, true)
             notifyItemChanged(selectedPosition)
             selectedPosition = holder.bindingAdapterPosition
             view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.primary_green))
