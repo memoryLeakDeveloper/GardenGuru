@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview
+package com.example.gardenguru.ui.customview.card
 
 import android.content.Context
 import android.text.SpannableString
@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.CardCareDifficultBinding
 import com.example.gardenguru.databinding.CardTemperatureBinding
 import com.example.gardenguru.ui.customview.calendar.Seasons
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat

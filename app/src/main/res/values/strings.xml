@@ -157,6 +157,10 @@
     <string name="from">от</string>
     <string name="to">до</string>
     <string name="celsium">° С</string>
+    
+    //planting card
+    <string name="enter_planting_info">Введите инфо по наилучшему \nвремени для посадки/пересадки</string>
+    <string name="enter_text">Введите текст</string>
 
 
 </resources>
