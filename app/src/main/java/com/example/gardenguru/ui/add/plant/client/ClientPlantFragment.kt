@@ -38,6 +38,6 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
         binding.spinnerPests.initView(getString(R.string.choose_pests), null, arrayListOf("EFKO", "NATASHA", "COCA-COLA", "333333"), false)
         binding.calendarWinter.initView(Seasons.Winter)
         binding.calendarSummer.initView(Seasons.Summer)
-
+        binding.spinner.initView("ssdfdsfsd", null , arrayListOf("11111", "22222222", "333333333", "44444444444"))
     }
 }

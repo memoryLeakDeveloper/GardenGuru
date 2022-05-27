@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview.spinner
+package com.example.gardenguru.ui.customview.spinner.checkbox
 
 import android.content.Context
 import android.graphics.drawable.TransitionDrawable
@@ -6,71 +6,62 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.SpinnerLayoutBinding
-import com.example.gardenguru.databinding.SpinnerPopupBinding
-import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.SelectListener
-import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.ValueCallback
+import com.example.gardenguru.databinding.SpinnerCheckboxLayoutBinding
+import com.example.gardenguru.databinding.SpinnerCheckboxPopupBinding
+import com.example.gardenguru.ui.customview.spinner.checkbox.SpinnerCheckboxLayout.SelectListener
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
-class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
+class SpinnerCheckboxLayout : LinearLayoutCompat {
 
-    private lateinit var binding: SpinnerLayoutBinding
-    private lateinit var spinnerAdapter: SpinnerAdapter
-    private var popupBinding: SpinnerPopupBinding
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attr: AttributeSet) : super(context, attr)
+    constructor(context: Context, attr: AttributeSet, defStyleAttr: Int) : super(context, attr, defStyleAttr)
+
+    private lateinit var binding: SpinnerCheckboxLayoutBinding
+    private lateinit var popupBinding: SpinnerCheckboxPopupBinding
+    private lateinit var spinnerAdapter: SpinnerCheckboxAdapter
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
     private var defValue: String? = null
     private val selectListener = SelectListener { text: String, position: Int, close: Boolean ->
         binding.spinnerText.text = text
-        valueCallback.value(position, text)
         if (close) popupWindow?.dismiss()
     }
     private val dismissListener = PopupWindow.OnDismissListener {
-        binding.root.background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
+        binding.root.background = AppCompatResources.getDrawable(
+            context,
+            if (!isDefValue(binding.spinnerText)) R.drawable.spinner_background else R.drawable.spinner_background_unselected
+        )
         isListExpanded = false
         arrowAnimation(true)
-    }
-    val valueCallback = ValueCallback { _, _ -> }
-
-    fun interface ValueCallback {
-        fun value(position: Int, name: String)
     }
 
     fun interface SelectListener {
         fun onSelect(string: String, position: Int, onClose: Boolean)
     }
 
-
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = SpinnerLayoutBinding.inflate(inflater, this)
-        popupBinding = SpinnerPopupBinding.inflate(inflater)
+        binding = SpinnerCheckboxLayoutBinding.inflate(inflater, this)
+        popupBinding = SpinnerCheckboxPopupBinding.inflate(inflater)
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         setRootClickListener()
     }
 
-    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean) {
-        spinnerAdapter = SpinnerAdapter((selectListener)).apply { setListAdapter(list) }
-        popupBinding.spinnerRecycler.adapter = spinnerAdapter
-        popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
+    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>) {
+        spinnerAdapter = SpinnerCheckboxAdapter(list.toList(), selectListener)
+        popupBinding.recycler.adapter = spinnerAdapter
+        popupBinding.recycler.layoutManager = LinearLayoutManager(context)
         setSpinnerDefState(defValue, defPos, list)
-        if (!isEditText) {
-            setSpinnerBottomMargin()
-        } else {
-            initEditText()
-        }
+//        setSpinnerBottomMargin()
         this.defValue = defValue
     }
 
@@ -106,9 +97,9 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
 
 
     private fun setSpinnerBottomMargin() {
-        val params = LinearLayoutCompat.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val params = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         params.bottomMargin = (25F * context.resources.displayMetrics.density).toInt()
-        popupBinding.spinnerRecycler.layoutParams = params
+        popupBinding.recycler.layoutParams = params
     }
 
     private fun setSpinnerDefState(defString: String?, defPos: Int?, list: ArrayList<String>) {
@@ -123,34 +114,6 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         } else {
             background = AppCompatResources.getDrawable(context, R.drawable.spinner_background_unselected)
             binding.spinnerText.text = defString
-        }
-    }
-
-    private fun initEditText() {
-        popupBinding.editText.apply {
-            visibility = View.VISIBLE
-            background = null
-            setOnEditorActionListener { editText, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_GO && editText.text.isNotEmpty()) {
-                    editText.text.toString().let {
-                        popupBinding.editText.setText(it)
-                        spinnerAdapter.insertNewItem(it)
-                        binding.spinnerText.text = it
-                    }
-                    editText.text = ""
-                    hideKeyboard(editText as EditText)
-                }
-                false
-            }
-            setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    spinnerAdapter.clearItemFocus()
-                    setBackgroundColor(ContextCompat.getColor(context, R.color.primary_green))
-                } else {
-                    spinnerAdapter.setItemFocus()
-                    setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
-                }
-            }
         }
     }
 
@@ -177,11 +140,5 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
 
     private fun isDefValue(textView: TextView) = textView.text == defValue
-
-    private fun hideKeyboard(editText: EditText) {
-        editText.clearFocus()
-        val imm = editText.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(editText.windowToken, 0);
-    }
 
 }

@@ -20,6 +20,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_care_difficult_2.xml" value="0.312" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_care_difficult_3.xml" value="0.312" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_care_difficult_4.xml" value="0.312" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_checkbox_off.xml" value="0.3175" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_lighting.xml" value="0.5475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_temperature.xml" value="0.5475" />
@@ -30,6 +31,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_expanded.xml" value="0.285" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_unselected.xml" value="0.5475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_selected_background.xml" value="0.5465" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_unselected_background.xml" value="0.3165" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/wheather_condition_background.xml" value="0.5475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/adding_plant_description_fragment.xml" value="0.5541666666666667" />
@@ -61,8 +63,13 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/plant_description_fragment.xml" value="0.4444444444444444" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/privacy_policy_fragment.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner.xml" value="0.31302083333333336" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_layout.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_checkbox_item.xml" value="0.3654891304347826" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_checkbox_layout.xml" value="0.3654891304347826" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_checkbox_popus.xml" value="0.3654891304347826" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_item.xml" value="0.3654891304347826" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_layout.xml" value="0.24150943396226415" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_layout_new.xml" value="0.31145833333333334" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_popup.xml" value="0.3654891304347826" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_recycler.xml" value="0.553125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/splash_screen_fragment.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/term_of_use_fragment.xml" value="0.5541666666666667" />
