@@ -21,11 +21,39 @@
 
     //term of use
     <string name="terms_of_use">Условия использования</string>
+    <string name="timetable">Расписание</string>
+
+    //timetable
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+    <array name="day_of_week">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </array>
+    <array name="calendar_month">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </array>
 
     //adding a plant
     <string name="adding">Добавление</string>
     <string name="add_a_plant">Добавить растение</string>
-    <string name="next">Далее...</string>
+    <string name="next">Далее…</string>
     <string name="hide">Скрыть</string>
 
     //care difficult
@@ -39,10 +67,15 @@
     <string name="temperature">Температура</string>
     <string name="watering">Полив</string>
     <string name="lighting">Освещение</string>
+    <string name="transfer">Пересадка</string>
+    <string name="spraying">Опрыскивание</string>
+    <string name="top_dressing">Подкормка</string>
+    <string name="no_events_text">Событий нет!\n Возвращайтесь завтра</string>
+    <string name="complete_all_events_text">Вы позаботились о всех Ваших растениях!</string>
+    <string name="congratulations">Поздравляем!</string>
 
     //care description
     <string name="care">Уход</string>
-    <string name="spraying">Опрыскивание</string>
     <string name="nutrition">Подкормка</string>
     <string name="planting_time">Время посадки</string>
     <string name="reproduction">Размножение</string>
@@ -58,6 +91,27 @@
     <string name="no_matches">Нет совпадений?</string>
     <string name="try_again">Попробуй ещё раз</string>
     <string name="create_plant">Создать свое растение</string>
+    <string name="here_we_will_show_your_plants">Здесь мы будем показывать Ваши растения</string>
+    <string name="look_for_a_plant">Искать растение</string>
+    <string name="my_plants">Мои растения</string>
+    <string name="garden_owner_name">Владелец Сада %1$s</string>
+
+    //my plants
+    <string name="attention">Внимание!</string>
+    <string name="dialog_want_to_leave_garden">Вы хотите покинуть сад “%1$s” владельца %2$s</string>
+    <string name="confirm_deletion">Подтвердить удаление?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    //garden management
+    <string name="editing">Редактирование</string>
+    <string name="delete_garden">Удалить сад</string>
+    <string name="save">Сохранить</string>
+    <string name="user_roles_text_description">Пользователь с ролью:\n\n<font fgcolor="#88BC87">Новичок</font> - может отмечать выполнение события в расписании\n\n<font fgcolor="#88BC87">Опытный</font> - может вносить изменения в растение из вашего сада\n\n<font fgcolor="#88BC87">Гуру</font> - может контролировать пользователей своего сада</string>
+    <string name="joint_care">Совместный уход</string>
+    <string name="copy_link">Копировать ссылку</string>
+    <string name="garden_management">Управление садом</string>
+    <string name="dialog_want_to_delete_garden">Вы хотите удалить Сад “%1$s”?</string>
 
     //client plant
     <string name="fill_info_about_plant">Заполните информацию о \nрастении</string>

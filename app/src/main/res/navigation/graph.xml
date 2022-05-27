@@ -3,34 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.example.gardenguru.ui.splash.screen.SplashScreenFragment"
-        android:label="SplashScreenFragment" >
-        <action
-            android:id="@+id/action_splashScreenFragment_to_onboardingFragment"
-            app:destination="@id/onboardingFragment" />
-    </fragment>
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.gardenguru.ui.onboarding.OnboardingFragment"
-        android:label="OnboardingFragment" >
-        <action
-            android:id="@+id/action_onboardingFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        android:label="OnboardingFragment" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.gardenguru.ui.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_privacyPolicyFragment"
-            app:destination="@id/privacyPolicyFragment" />
+            app:destination="@id/privacyPolicyFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_loginFragment_to_termOfUseFragment"
-            app:destination="@id/termOfUseFragment" />
+            app:destination="@id/termOfUseFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_loginFragment_to_timetableFragment"
+            app:destination="@id/timetableFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_loginFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
@@ -41,7 +50,41 @@
         android:name="com.example.gardenguru.ui.info.TermOfUseFragment"
         android:label="TermOfUseFragment" />
     <fragment
+        android:id="@+id/timetableFragment"
+        android:name="com.example.gardenguru.ui.timetable.TimetableFragment"
+        android:label="TimetableFragment"
+        tools:layout="@layout/fragment_timetable">
+        <action
+            android:id="@+id/action_timetableFragment_to_myPlantsFragment"
+            app:destination="@id/myPlantsFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/addingPlantFragment"
         android:name="com.example.gardenguru.ui.add.plant.AddingPlantFragment"
         android:label="AddingPlantFragment" />
+    <fragment
+        android:id="@+id/myPlantsFragment"
+        android:name="com.example.gardenguru.ui.my_plants.MyPlantsFragment"
+        tools:layout="@layout/fragment_my_plants"
+        android:label="MyPlantsFragment" >
+        <action
+            android:id="@+id/action_myPlantsFragment_to_gardenManagementFragment"
+            app:destination="@id/gardenManagementFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gardenManagementFragment"
+        android:name="com.example.gardenguru.ui.garden_managment.GardenManagementFragment"
+        android:label="GardenManagementFragment"
+        tools:layout="@layout/fragment_garden_managment"/>
 </navigation>

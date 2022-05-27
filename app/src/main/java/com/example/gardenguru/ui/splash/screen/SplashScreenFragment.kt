@@ -45,8 +45,12 @@ class SplashScreenFragment : Fragment() {
     }
 
     private fun navigateNextPage() {
-        val flag = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, false)
-        if (!flag) findNavController().navigate(R.id.onboardingFragment) else {
+        val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
+        if (firstLaunch){
+            requireContext().getPrefs().edit().putBoolean(PrefsKeys.FIRST_APP_LAUNCH, false).apply()
+            findNavController().navigate(R.id.onboardingFragment)
+        }else{
+            findNavController().navigate(R.id.loginFragment)
         }
     }
 

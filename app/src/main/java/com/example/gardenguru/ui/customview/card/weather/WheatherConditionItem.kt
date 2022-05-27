@@ -30,7 +30,7 @@ class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayou
                 binding.textView1.setString(R.string.temperature)
             }
             2 -> {
-                binding.image.setDrawable(R.drawable.ic_watering)
+                binding.image.setDrawable(R.drawable.ic_watering_2)
                 binding.textView1.setString(R.string.watering)
             }
             3 -> {

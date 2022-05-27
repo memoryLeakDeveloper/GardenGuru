@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Extensions {
 
@@ -15,5 +17,9 @@ object Extensions {
     fun TextView.setString(stringRes: Int) {
         this.text = context.getString(stringRes)
     }
+
+    fun Calendar.toDmyString() =
+        SimpleDateFormat(Constance.dmyDatePattern, Locale.ENGLISH).format(this.time) ?: ""
+
 
 }

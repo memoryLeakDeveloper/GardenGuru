@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
+import com.example.gardenguru.utils.Extensions.getPrefs
+import com.example.gardenguru.utils.PrefsKeys
 import com.example.gardenguru.databinding.FragmentLoginBinding
 import java.util.*
 
@@ -27,11 +29,29 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initText()
-        setListener()
-        binding.buttonLogin.root.setOnClickListener {
-            findNavController().navigate(R.id.addingPlantFragment)
+
+
+
+        val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
+        if (firstLaunch){
+            requireContext().getPrefs().edit().putBoolean(PrefsKeys.FIRST_APP_LAUNCH, false).apply()
+            findNavController().navigate(R.id.action_loginFragment_to_onboardingFragment)
+        }else{
+            checkLogin()
+
+            initText()
+            setListener()
+
+            binding.buttonLogin.root.setOnClickListener {
+                findNavController().navigate(R.id.addingPlantFragment)
+            }
         }
+    }
+
+    private fun checkLogin() {
+        //todo check if login
+
+        findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
     }
 
     private fun initText() {
