@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.plantCard.info
+package com.example.gardenguru.ui.plant_card.info
 
 import android.os.Bundle
 import android.view.LayoutInflater

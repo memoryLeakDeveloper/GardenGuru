@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/timetableFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -81,10 +81,23 @@
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_myPlantsFragment_to_plantCardFragment"
+            app:destination="@id/plantCardFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
     <fragment
         android:id="@+id/gardenManagementFragment"
         android:name="com.example.gardenguru.ui.garden_managment.GardenManagementFragment"
         android:label="GardenManagementFragment"
         tools:layout="@layout/fragment_garden_managment"/>
+    <fragment
+        android:id="@+id/plantCardFragment"
+        android:name="com.example.gardenguru.ui.plant_card.PlantCardFragment"
+        android:label="PlantCardFragment"
+        tools:layout="@layout/fragment_plant_card"/>
 </navigation>

@@ -1,11 +1,10 @@
-package com.example.gardenguru.ui.plantCard.notifications
+package com.example.gardenguru.ui.plant_card.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.gardenguru.databinding.FragmentPlantCardInfoBinding
 import com.example.gardenguru.databinding.FragmentPlantCardNotificationsBinding
 import dagger.hilt.android.AndroidEntryPoint
 

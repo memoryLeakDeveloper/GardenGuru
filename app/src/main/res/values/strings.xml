@@ -126,6 +126,10 @@
     <string name="choose_pests">Выберите вредителя(болезни)</string>
     <string name="add_pests">+ Добавить вредителя (болезнь)</string>
     <string name="enter_benefits">Укажите, какую пользу приносит Ваше растение…</string>
+    <string name="info">Инфо</string>
+    <string name="history">История</string>
+    <string name="notification">Уведомления</string>
+    <string name="performed_email">Выполнено: %1$s</string>
 
 
 </resources>

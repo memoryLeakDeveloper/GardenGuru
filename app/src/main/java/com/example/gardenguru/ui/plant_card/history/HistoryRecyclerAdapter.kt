@@ -1,9 +1,11 @@
-package com.example.gardenguru.ui.plantCard.history
+package com.example.gardenguru.ui.plant_card.history
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginTop
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.RvItemHistoryBinding
@@ -36,15 +38,28 @@ class HistoryRecyclerAdapter(private val viewModel: PlantCardHistoryViewModel) :
                 }
             }
 
+
             val plantEvent = viewModel.plantEvents.value!!.events[position]
 
-            tvEventName.setText(plantEvent.event.eventNameRes)
-            ivEventImage.setImageResource(plantEvent.event.eventImageRes)
+            tvEventName.setText(plantEvent.event.nameRes)
             tvEventTime.text = plantEvent.dateDMY + if (plantEvent.isComplete) "-${plantEvent.dateDMY}" else ""
+
+            if (plantEvent.executor.isEmpty()){
+                tvExecutor.visibility = View.GONE
+            }else{
+                tvExecutor.visibility = View.VISIBLE
+                tvExecutor.text = root.resources.getString(R.string.performed_email, plantEvent.executor)
+            }
 
             if (plantEvent.isComplete){
                 ivDoneImage.setImageResource(R.drawable.ic_done)
-            }else ivDoneImage.setImageResource(R.drawable.ic_not_done)
+                ivEventImage.setImageResource(plantEvent.event.imageRes)
+                tvEventName.setTextColor(root.resources.getColor(R.color.white, null))
+            }else {
+                ivDoneImage.setImageResource(R.drawable.ic_not_done)
+                ivEventImage.setImageResource(plantEvent.event.inactiveImageRes)
+                tvEventName.setTextColor(root.resources.getColor(R.color.gray, null))
+            }
 
         }
     }

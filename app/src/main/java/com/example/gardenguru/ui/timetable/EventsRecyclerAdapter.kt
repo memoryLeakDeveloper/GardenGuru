@@ -5,8 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.data.event.EventData
 import com.example.gardenguru.databinding.RvEventItemBinding
-import com.example.gardenguru.databinding.RvTimetableItemBinding
-import java.util.*
 import kotlin.collections.ArrayList
 
 class EventsRecyclerAdapter(val events: ArrayList<EventData>) :
@@ -27,8 +25,8 @@ class EventsRecyclerAdapter(val events: ArrayList<EventData>) :
         with(holder.binding) {
             val item = events[position]
 
-            ivEventImage.setImageResource(item.event.eventImageRes)
-            tvEventName.setText(item.event.eventNameRes)
+            ivEventImage.setImageResource(item.event.imageRes)
+            tvEventName.setText(item.event.nameRes)
             cbEvent.isChecked = item.isComplete
         }
     }

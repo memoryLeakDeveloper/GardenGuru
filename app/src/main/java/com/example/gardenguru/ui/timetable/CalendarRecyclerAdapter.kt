@@ -1,6 +1,5 @@
 package com.example.gardenguru.ui.timetable
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
@@ -10,7 +9,7 @@ import com.example.gardenguru.databinding.RvCalendarItemBinding
 import com.example.gardenguru.ui.customview.CalendarView
 import java.util.*
 
-class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, val itemWidth: Int) :
+class CalendarRecyclerAdapter(val viewModel: TimetableViewModel, private val itemWidth: Int) :
     RecyclerView.Adapter<CalendarRecyclerAdapter.CalendarViewHolder>(), CalendarView.BaseCalendarAdapter {
 
     companion object {

@@ -3,16 +3,12 @@ package com.example.gardenguru.ui.my_plants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
-import com.example.gardenguru.data.event.EventData
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.databinding.RvEventItemBinding
 import com.example.gardenguru.databinding.RvGardenPlantItemBinding
-import com.example.gardenguru.databinding.RvTimetableItemBinding
-import java.util.*
-import kotlin.collections.ArrayList
 
 class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
     RecyclerView.Adapter<PlantsRecyclerAdapter.EventsViewHolder>(){
@@ -45,7 +41,7 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
                 ivLine.visibility = View.GONE
             }else ivLine.visibility = View.VISIBLE
             root.setOnClickListener{
-
+                root.findNavController().navigate(R.id.action_myPlantsFragment_to_plantCardFragment) //add plant
             }
         }
     }

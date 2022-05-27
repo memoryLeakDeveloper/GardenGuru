@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.plantCard.history
+package com.example.gardenguru.ui.plant_card.history
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -60,7 +60,7 @@ class PlantCardHistoryViewModel @Inject constructor() : ViewModel() {
                     EventData(
                         EventData.Event.Spraying, Calendar.getInstance().apply {
                             add(Calendar.DAY_OF_YEAR, -4)
-                        }.toDmyString(), true, timeOfCompletionHHMM = "14:30"
+                        }.toDmyString(), false, timeOfCompletionHHMM = "14:30"
                     ),
                     EventData(
                         EventData.Event.Watering, Calendar.getInstance().apply {
