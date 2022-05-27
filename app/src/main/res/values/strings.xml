@@ -72,6 +72,14 @@
     <string name="choose_pests">Выберите вредителя(болезни)</string>
     <string name="add_pests">+ Добавить вредителя (болезнь)</string>
     <string name="enter_benefits">Укажите, какую пользу приносит Ваше растение…</string>
+    <string name="Ok">Ok</string>
+    <string name="set_watering_period">Установите полив для \nрастения</string>
+
+    //calendar
+    <string name="every">Каждые</string>
+    <string name="days">Дня</string>
+    <string name="weeks">Недели</string>
+    <string name="month">Месяца</string>
 
 
 </resources>

@@ -16,80 +16,71 @@
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/primary_card_background"
+        android:orientation="vertical"
         android:padding="20dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/plant_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/plant_placeholder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/plant_placeholder" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/plant_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/add_photo"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plant_photo" />
+            android:textSize="18sp" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/editText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/edit_text_background"
-            android:cursorVisible="false"
-            android:textSize="16sp"
             android:fontFamily="@font/poppins_regular"
             android:hint="@string/enter_plant_name"
             android:paddingStart="15dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plant_name" />
+            android:textColorHint="@color/grey"
+            android:textSize="16sp" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
-            app:dividerColor="@color/white5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:dividerColor="@color/white5" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll"
-            android:layout_width="0dp"
+            android:id="@+id/short_form"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_plant" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -97,13 +88,13 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:text="@string/more_info"
-                android:textColor="@color/gray"
+                android:textColor="@color/grey"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/plant" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/arrow_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,9 +104,9 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ll2"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/full_form"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone"
@@ -125,7 +116,7 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_spicies"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_background"
@@ -133,63 +124,59 @@
                 android:hint="@string/enter_plant_spicies"
                 android:paddingStart="15dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColorHint="@color/grey"
+                android:textSize="16sp" />
 
             <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_care"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:translationZ="3dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_spicies" />
+                android:layout_marginTop="20dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_care"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="80dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/poppins_bold"
-                android:gravity="center"
                 android:text="@string/care"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_spicies" />
+                android:textSize="20sp" />
 
             <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_watering"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:translationZ="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_care" />
+                android:layout_marginTop="10dp" />
 
-            <TextView
+            <com.example.gardenguru.ui.customview.card.CalendarCard
+                android:id="@+id/calendar_summer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+            <com.example.gardenguru.ui.customview.card.CalendarCard
+                android:id="@+id/calendar_winter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="80dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
                 android:text="@string/plant_info"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_care" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_info"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/primary_card_background"
@@ -200,66 +187,53 @@
                 android:padding="12dp"
                 android:paddingStart="15dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_info" />
+                android:textColorHint="@color/grey"
+                android:textSize="16sp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_pests"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="45dp"
                 android:gravity="center"
                 android:text="@string/pests_disease"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_info" />
+                android:textSize="20sp" />
 
             <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_pests"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:translationZ="1dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_pests" />
+                android:layout_marginTop="10dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_add_pests"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="70dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="14dp"
                 android:fontFamily="@font/sf_ui_font"
                 android:gravity="center"
                 android:text="@string/add_pests"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_pests" />
+                android:textSize="18sp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_benefit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
                 android:text="@string/benefits"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_add_pests" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text_benefit"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/primary_card_background"
@@ -270,24 +244,19 @@
                 android:padding="12dp"
                 android:paddingStart="15dp"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_benefit" />
+                android:textColorHint="@color/grey"
+                android:textSize="16sp" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/arrow_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_arrow_up"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_benefit" />
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:src="@drawable/ic_arrow_up" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
