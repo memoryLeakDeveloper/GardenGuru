@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
+import com.example.gardenguru.data.enums.DaysMode
 import com.example.gardenguru.databinding.CalendarPeriodItemBinding
 
 class CalendarPeriodAdapter(private val callback: CalendarLayout.PeriodCallback) :

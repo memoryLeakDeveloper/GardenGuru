@@ -3,12 +3,11 @@ package com.example.gardenguru.ui.customview.calendar
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gardenguru.R
+import com.example.gardenguru.data.enums.DaysMode
 import com.example.gardenguru.databinding.CalendarLayoutBinding
 import com.example.gardenguru.ui.customview.calendar.CalendarLayout.PeriodCallback
 

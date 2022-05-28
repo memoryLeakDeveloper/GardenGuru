@@ -57,11 +57,6 @@
             android:textColorHint="@color/gray"
             android:textSize="16sp" />
 
-        <com.example.gardenguru.ui.customview.spinner.checkbox.SpinnerCheckboxLayout
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider"
             android:layout_width="match_parent"

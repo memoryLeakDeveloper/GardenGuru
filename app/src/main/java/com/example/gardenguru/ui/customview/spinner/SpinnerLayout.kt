@@ -38,7 +38,10 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         if (close) popupWindow?.dismiss()
     }
     private val dismissListener = PopupWindow.OnDismissListener {
-        binding.root.background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
+        binding.root.background = AppCompatResources.getDrawable(
+            context,
+            if (!isDefValue(binding.spinnerText)) R.drawable.spinner_background else R.drawable.spinner_background_unselected
+        )
         isListExpanded = false
         arrowAnimation(true)
     }
