@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.add.plant.client
+package com.example.gardenguru.ui.add_plant.client
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentClientPlantBinding
-import com.example.gardenguru.ui.add.plant.AddingPlantFragment
+import com.example.gardenguru.ui.add_plant.AddingPlantFragment
 
 class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
 
