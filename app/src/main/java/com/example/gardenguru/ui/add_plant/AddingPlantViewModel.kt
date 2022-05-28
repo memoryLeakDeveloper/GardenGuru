@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.add.plant
+package com.example.gardenguru.ui.add_plant
 
 import androidx.lifecycle.ViewModel
 import com.example.gardenguru.domain.FetchPlantUseCase

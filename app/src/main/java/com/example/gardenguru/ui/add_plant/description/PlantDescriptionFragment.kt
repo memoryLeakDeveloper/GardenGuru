@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.add.plant.description
+package com.example.gardenguru.ui.add_plant.description
 
 import android.os.Bundle
 import android.text.SpannableString
@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.databinding.FragmentPlantDescriptionBinding
-import com.example.gardenguru.ui.add.plant.AddingPlantFragment
+import com.example.gardenguru.ui.add_plant.AddingPlantFragment
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class PlantDescriptionFragment(private val data: PlantData, private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
