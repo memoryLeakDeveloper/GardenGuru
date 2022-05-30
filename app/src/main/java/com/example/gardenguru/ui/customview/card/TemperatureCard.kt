@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.CardTemperatureBinding
-import com.example.gardenguru.ui.customview.calendar.Seasons
+import com.example.gardenguru.data.enums.Seasons
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class TemperatureCard(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {

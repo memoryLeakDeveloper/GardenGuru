@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.customview.calendar
+package com.example.gardenguru.data.enums
 
 enum class Seasons {
     Winter,

@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.add.plant.client
+package com.example.gardenguru.ui.add_plant.client
 
 import androidx.lifecycle.ViewModel
 

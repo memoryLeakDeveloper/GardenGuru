@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gardenguru.data.enums.DaysMode
 import com.example.gardenguru.databinding.CalendarDaysItemBinding
 
 class CalendarDaysAdapter : RecyclerView.Adapter<CalendarDaysAdapter.ViewHolder>() {
