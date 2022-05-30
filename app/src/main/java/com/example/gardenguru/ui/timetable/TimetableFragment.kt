@@ -36,9 +36,18 @@ class TimetableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ivLeaf.setOnClickListener{
-            findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
+        with(binding){
+            ivLeaf.setOnClickListener{
+                findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
+            }
+
+            ivSettings.setOnClickListener{
+                findNavController().navigate(R.id.action_timetableFragment_to_settingsFragment)
+            }
         }
+
+
+
         
         initAddButton()
         initCalendar()

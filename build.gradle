@@ -3,9 +3,10 @@
 buildscript {
     ext.kotlin_version = '1.5.31'
     repositories {
-        jcenter()
         google()
         mavenCentral()
+
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         def nav_version = "2.4.2"

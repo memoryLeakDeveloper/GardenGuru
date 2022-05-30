@@ -80,7 +80,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         }
     }
 
-    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean) {
+    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean = false) {
         spinnerAdapter.setListAdapter(list)
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
@@ -186,8 +186,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         val backgrounds = listOf(
             ContextCompat.getDrawable(context, if (!bool) R.drawable.spinner_background else R.drawable.spinner_background_unselected),
             ContextCompat.getDrawable(
-                context,
-                if (!bool) R.drawable.spinner_selected_background else R.drawable.spinner_unselected_background
+                context, R.drawable.spinner_selected_background
             )
         )
         val transitionDrawable = TransitionDrawable(backgrounds.toTypedArray())

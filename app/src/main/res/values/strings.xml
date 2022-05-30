@@ -126,7 +126,7 @@
     <string name="choose_pests">Выберите вредителя(болезни)</string>
     <string name="add_pests">+ Добавить вредителя (болезнь)</string>
     <string name="enter_benefits">Укажите, какую пользу приносит Ваше растение…</string>
-    <string name="Ok">Ok</string>
+    <string name="Ok">Ок</string>
     <string name="set_watering_period">Установите полив для \nрастения</string>
     <string name="choose">Выберите</string>
     <array name="care_difficult">
@@ -162,10 +162,40 @@
     <string name="enter_planting_info">Введите инфо по наилучшему \nвремени для посадки/пересадки</string>
     <string name="enter_text">Введите текст</string>
 
+
+    //settings
+    <string name="subscription_active">Подписка активна</string>
+    <string name="paid_up_to_date">Оплачено до %1$s</string>
+    <string name="developer_contact">Связь с разработчиком</string>
+    <string name="log_out">Выйти</string>
+    <string name="settings">Настройки</string>
+    <string name="support_description_text">Введите данные своего запроса. Сотрудник нашей службы поддержки ответит вам в ближайшее время.</string>
+    <string name="submit_an_inquiry">Отправить запрос</string>
+    <string name="enter_email">Введите E-mail*</string>
+    <array name="languages">
+        <item>Русский</item>
+        <item>English</item>
+    </array>
+    <string name="description_required">Описание…*</string>
+    <string name="attach_a_file">Прикрепить файл (необязательно)</string>
+    <string name="send">Отправить</string>
+    <string name="max_attached_files">Максимальное количество документов во вложении: 10</string>
+    <string name="file_size_warning">Объем файлов не может превышать 100МБ</string>
+    <string name="hooray">Ура!</string>
+    <string name="support">Поддержка</string>
+    <string name="your_request_send">Ваш запрос отправлен</string>
+    <string name="request_subject">Тема запроса</string>
+    <array name="support_themes">
+        <item>Предложения по улучшению</item>
+        <item>Ошибка в приложении</item>
+        <item>Жалоба</item>
+        <item>Другое</item>
+    </array>
+
     <string name="info">Инфо</string>
     <string name="history">История</string>
     <string name="notification">Уведомления</string>
     <string name="performed_email">Выполнено: %1$s</string>
-
+    <string name="something_is_wrong">Что-то не так, попробуйте позже</string>
 
 </resources>

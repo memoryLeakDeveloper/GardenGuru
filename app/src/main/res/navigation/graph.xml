@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/timetableFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -62,6 +62,9 @@
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_timetableFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -100,4 +103,45 @@
         android:name="com.example.gardenguru.ui.plant_card.PlantCardFragment"
         android:label="PlantCardFragment"
         tools:layout="@layout/fragment_plant_card"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.gardenguru.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_termOfUseFragment"
+            app:destination="@id/termOfUseFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_supportFragment"
+            app:destination="@id/supportFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/supportFragment"
+        android:name="com.example.gardenguru.ui.settings.support.SupportFragment"
+        android:label="SupportFragment"
+        tools:layout="@layout/fragment_support"/>
 </navigation>
