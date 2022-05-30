@@ -62,17 +62,26 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         fun onSelect(string: String, position: Int, onClose: Boolean)
     }
 
-
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = SpinnerLayoutBinding.inflate(inflater, this)
         popupBinding = SpinnerPopupBinding.inflate(inflater)
+        spinnerAdapter = SpinnerAdapter((selectListener))
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         setRootClickListener()
+        context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
+            getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
+            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let {
+                spinnerAdapter.textColor = it
+                popupBinding.editText.setHintTextColor(it)
+                popupBinding.editText.setTextColor(it)
+            }
+            recycle()
+        }
     }
 
     fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean) {
-        spinnerAdapter = SpinnerAdapter((selectListener)).apply { setListAdapter(list) }
+        spinnerAdapter.setListAdapter(list)
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
         setSpinnerDefState(defValue, defPos, list)
@@ -113,7 +122,6 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
             contentView = popupBinding.root
         }
     }
-
 
     private fun setSpinnerBottomMargin() {
         val params = LinearLayoutCompat.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)

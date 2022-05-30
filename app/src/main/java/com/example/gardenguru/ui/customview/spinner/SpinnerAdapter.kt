@@ -1,5 +1,6 @@
 package com.example.gardenguru.ui.customview.spinner
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
     private var selectedPosition: Int = -1
     var isUpdating = false
     var list: ArrayList<String> = ArrayList()
+    var textColor: ColorStateList? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpinnerAdapterViewHolder {
         val binding = SpinnerItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -23,18 +25,21 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
     }
 
     override fun onBindViewHolder(holder: SpinnerAdapterViewHolder, position: Int) {
-        if (position == selectedPosition) {
-            holder.binding.root.setBackgroundColor(ContextCompat.getColor(holder.binding.root.context, R.color.primary_green))
-        } else {
-            holder.binding.root.setBackgroundColor(ContextCompat.getColor(holder.binding.root.context, R.color.transparent))
-        }
-        holder.binding.textView.visibility = View.VISIBLE
-        holder.binding.textView.text = list[position]
-        holder.binding.root.setOnClickListener { view ->
-            listener.onSelect(holder.binding.textView.text.toString(), position, true)
-            notifyItemChanged(selectedPosition)
-            selectedPosition = holder.bindingAdapterPosition
-            view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.primary_green))
+        with(holder.binding) {
+            if (position == selectedPosition) {
+                root.setBackgroundColor(ContextCompat.getColor(holder.binding.root.context, R.color.primary_green))
+            } else {
+                root.setBackgroundColor(ContextCompat.getColor(holder.binding.root.context, R.color.transparent))
+            }
+            textView.visibility = View.VISIBLE
+            textView.text = list[position]
+            textColor?.let { holder.binding.textView.setTextColor(it) }
+            root.setOnClickListener { view ->
+                listener.onSelect(holder.binding.textView.text.toString(), position, true)
+                notifyItemChanged(selectedPosition)
+                selectedPosition = holder.bindingAdapterPosition
+                view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.primary_green))
+            }
         }
     }
 
