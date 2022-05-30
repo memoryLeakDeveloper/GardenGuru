@@ -21,7 +21,6 @@ import com.example.gardenguru.R
 import com.example.gardenguru.databinding.SpinnerLayoutBinding
 import com.example.gardenguru.databinding.SpinnerPopupBinding
 import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.SelectListener
-import com.example.gardenguru.ui.customview.spinner.SpinnerLayout.ValueCallback
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
@@ -34,7 +33,8 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     private var defValue: String? = null
     private val selectListener = SelectListener { text: String, position: Int, close: Boolean ->
         binding.spinnerText.text = text
-        valueCallback.value(position, text)
+        valueCallback?.value(position, text)
+        spinnerValue = text
         if (close) popupWindow?.dismiss()
     }
     private val dismissListener = PopupWindow.OnDismissListener {
@@ -45,7 +45,14 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         isListExpanded = false
         arrowAnimation(true)
     }
-    val valueCallback = ValueCallback { _, _ -> }
+    private var valueCallback: ValueCallback? = null
+
+    fun setValueListener(callback: ValueCallback) {
+        valueCallback = callback
+    }
+
+    var spinnerValue: String? = null
+        private set
 
     fun interface ValueCallback {
         fun value(position: Int, name: String)
@@ -118,6 +125,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         if (defString.isNullOrEmpty()) {
             if ((defPos != null) && (defPos >= 0)) {
                 binding.spinnerText.text = list[defPos]
+                spinnerValue = list[defPos]
                 background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
             } else {
                 binding.spinnerText.text = "Введите"
