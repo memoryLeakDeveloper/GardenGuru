@@ -1,14 +1,18 @@
 package com.example.gardenguru.ui.customview.spinner.checkbox
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gardenguru.R
 import com.example.gardenguru.databinding.SpinnerCheckboxItemBinding
+import com.example.gardenguru.utils.Extensions.setDrawable
 
-class SpinnerCheckboxAdapter(private val list: List<String>, private val listener: SpinnerCheckboxLayout.SelectListener) :
-    RecyclerView.Adapter<SpinnerCheckboxAdapter.SpinnerAdapterViewHolder>() {
+class SpinnerCheckboxAdapter : RecyclerView.Adapter<SpinnerCheckboxAdapter.SpinnerAdapterViewHolder>() {
 
+    var list: List<String> = emptyList()
+    var selectedItems: ArrayList<String> = arrayListOf()
+    var textColor: ColorStateList? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpinnerAdapterViewHolder {
         val binding = SpinnerCheckboxItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -17,7 +21,19 @@ class SpinnerCheckboxAdapter(private val list: List<String>, private val listene
     }
 
     override fun onBindViewHolder(holder: SpinnerAdapterViewHolder, position: Int) {
-        holder.binding.textView.text = list[position]
+        with(holder.binding) {
+            textView.text = list[position]
+            textColor?.let { textView.setTextColor(it) }
+            root.setOnClickListener {
+                if (selectedItems.contains(textView.text)) {
+                    checkbox.setDrawable(R.drawable.ic_checkbox_off)
+                    selectedItems.remove(textView.text)
+                } else {
+                    checkbox.setDrawable(R.drawable.ic_checkbox_on)
+                    selectedItems.add(textView.text.toString())
+                }
+            }
+        }
     }
 
     override fun getItemCount() = list.size

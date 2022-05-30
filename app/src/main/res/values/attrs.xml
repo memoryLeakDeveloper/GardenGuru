@@ -7,4 +7,14 @@
             <enum name="value3" value="3" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="SpinnerLayout">
+        <attr name="hint_color" format="color" />
+        <attr name="text_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SpinnerCheckboxLayout">
+        <attr name="hint_color_check" format="color" />
+        <attr name="text_color_check" format="color" />
+    </declare-styleable>
 </resources>

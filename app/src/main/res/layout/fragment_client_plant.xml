@@ -131,7 +131,8 @@
                 android:id="@+id/spinner_care"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                app:hint_color="@color/gray"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_care"
@@ -148,7 +149,8 @@
                 android:id="@+id/spinner_watering"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                app:hint_color="@color/gray"/>
 
             <com.example.gardenguru.ui.customview.card.CalendarCard
                 android:id="@+id/calendar_summer"
@@ -201,11 +203,12 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
+            <com.example.gardenguru.ui.customview.spinner.checkbox.SpinnerCheckboxLayout
                 android:id="@+id/spinner_pests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                app:hint_color_check="@color/black"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_add_pests"
