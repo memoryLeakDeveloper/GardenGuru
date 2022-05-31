@@ -13,11 +13,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
+import com.example.gardenguru.databinding.FragmentLoginBinding
 import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
-import com.example.gardenguru.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
@@ -31,12 +33,11 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
-        if (firstLaunch){
+        if (firstLaunch) {
             requireContext().getPrefs().edit().putBoolean(PrefsKeys.FIRST_APP_LAUNCH, false).apply()
             findNavController().navigate(R.id.action_loginFragment_to_onboardingFragment)
-        }else{
+        } else {
             checkLogin()
 
             initText()

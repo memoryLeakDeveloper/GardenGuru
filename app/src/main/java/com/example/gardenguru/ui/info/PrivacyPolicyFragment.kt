@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentPrivacyPolicyBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PrivacyPolicyFragment : Fragment() {
 
     private lateinit var binding: FragmentPrivacyPolicyBinding

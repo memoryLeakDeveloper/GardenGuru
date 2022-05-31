@@ -9,7 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentOnboardingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardingFragment : Fragment() {
 
     lateinit var binding: FragmentOnboardingBinding

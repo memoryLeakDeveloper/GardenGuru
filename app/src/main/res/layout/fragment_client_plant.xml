@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:hint_color="@color/gray"/>
+                app:hint_color="@color/gray" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_care"
@@ -150,19 +150,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:hint_color="@color/gray"/>
+                app:hint_color="@color/gray" />
 
             <com.example.gardenguru.ui.customview.card.CalendarCard
                 android:id="@+id/calendar_summer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:visibility="gone" />
 
             <com.example.gardenguru.ui.customview.card.CalendarCard
                 android:id="@+id/calendar_winter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp" />
+                android:layout_marginTop="18dp"
+                android:visibility="gone" />
+
+            <com.example.gardenguru.ui.customview.card.PlantingCard
+                android:id="@+id/planting_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:visibility="gone" />
+
+            <com.example.gardenguru.ui.customview.card.TemperatureCard
+                android:id="@+id/temperature_card_summer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:visibility="gone" />
+
+            <com.example.gardenguru.ui.customview.card.TemperatureCard
+                android:id="@+id/temperature_card_winter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_info"
@@ -208,7 +231,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:hint_color_check="@color/black"/>
+                app:hint_color_check="@color/gray" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/cards_pests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_add_pests"
@@ -234,21 +263,40 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text_benefit"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/primary_card_background"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="start|top"
-                android:hint="@string/enter_benefits"
-                android:minHeight="130dp"
-                android:padding="12dp"
-                android:paddingStart="15dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/gray"
-                android:textSize="16sp" />
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="2dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edit_text_benefit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/primary_card_background"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start|top"
+                    android:hint="@string/enter_benefits"
+                    android:maxLength="1000"
+                    android:minHeight="130dp"
+                    android:padding="12dp"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/edit_text_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="0/1000"
+                    android:textSize="12sp" />
+
+            </FrameLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/arrow_up"

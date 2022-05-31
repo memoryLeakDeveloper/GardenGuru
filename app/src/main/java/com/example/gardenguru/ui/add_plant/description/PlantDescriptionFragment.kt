@@ -18,7 +18,9 @@ import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlantDescriptionFragment(private val data: PlantData, private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
 
     private lateinit var binding: FragmentPlantDescriptionBinding

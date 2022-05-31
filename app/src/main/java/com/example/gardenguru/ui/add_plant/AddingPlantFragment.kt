@@ -18,11 +18,13 @@ import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.FragmentAddingPlantBinding
+import com.example.gardenguru.ui.add_plant.AddingPlantFragment.ClickCallback
 import com.example.gardenguru.ui.add_plant.client.ClientPlantFragment
 import com.example.gardenguru.ui.add_plant.description.PlantDescriptionFragment
-import com.example.gardenguru.ui.add_plant.AddingPlantFragment.ClickCallback
 import com.example.gardenguru.utils.Extensions.setString
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddingPlantFragment : Fragment() {
 
     private lateinit var binding: FragmentAddingPlantBinding

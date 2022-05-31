@@ -185,10 +185,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         val bool = isDefValue(binding.spinnerText)
         val backgrounds = listOf(
             ContextCompat.getDrawable(context, if (!bool) R.drawable.spinner_background else R.drawable.spinner_background_unselected),
-            ContextCompat.getDrawable(
-                context,
-                if (!bool) R.drawable.spinner_selected_background else R.drawable.spinner_unselected_background
-            )
+            ContextCompat.getDrawable(context, R.drawable.spinner_selected_background)
         )
         val transitionDrawable = TransitionDrawable(backgrounds.toTypedArray())
         background = transitionDrawable
