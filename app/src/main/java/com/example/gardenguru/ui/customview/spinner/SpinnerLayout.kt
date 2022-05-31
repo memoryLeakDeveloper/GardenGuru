@@ -69,15 +69,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         spinnerAdapter = SpinnerAdapter((selectListener))
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         setRootClickListener()
-        context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
-            getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
-            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let {
-                spinnerAdapter.textColor = it
-                popupBinding.editText.setHintTextColor(it)
-                popupBinding.editText.setTextColor(it)
-            }
-            recycle()
-        }
+        setCustomAttributes(attrs)
     }
 
     fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean) {
@@ -91,6 +83,18 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
             initEditText()
         }
         this.defValue = defValue
+    }
+
+    private fun setCustomAttributes(attrs: AttributeSet) {
+        context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
+            getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
+            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let {
+                spinnerAdapter.textColor = it
+                popupBinding.editText.setHintTextColor(it)
+                popupBinding.editText.setTextColor(it)
+            }
+            recycle()
+        }
     }
 
     private fun setRootClickListener() {
