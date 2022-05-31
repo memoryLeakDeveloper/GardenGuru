@@ -1,9 +1,13 @@
 package com.example.gardenguru.ui.add_plant.client
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -17,6 +21,7 @@ import com.example.gardenguru.databinding.FragmentClientPlantBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+@SuppressLint("ClickableViewAccessibility")
 @AndroidEntryPoint
 class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
 
@@ -25,6 +30,12 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
         if (imageView != null)
             Glide.with(requireContext()).load(it).centerCrop().into(imageView!!)
         imageView = null
+    }
+    private val touchListener = View.OnTouchListener { v, event ->
+        v.onTouchEvent(event)
+        binding.root.requestFocus()
+        hideKeyboard(binding.editText)
+        return@OnTouchListener true
     }
     var imageView: ImageView? = null
 
@@ -61,6 +72,10 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
 
     private fun setListeners() {
         with(binding) {
+            root.setOnTouchListener(touchListener)
+            spinnerWatering.setOnTouchListener(touchListener)
+            spinnerPests.setOnTouchListener(touchListener)
+            spinnerCare.setOnTouchListener(touchListener)
             arrowDown.setOnClickListener {
                 shortForm.visibility = View.GONE
                 fullForm.visibility = View.VISIBLE
@@ -128,6 +143,11 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
             }
         }
         return bindingCard.root
+    }
+
+    private fun hideKeyboard(editText: EditText) {
+        val imm = editText.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
 }
