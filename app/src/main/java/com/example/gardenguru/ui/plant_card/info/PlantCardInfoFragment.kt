@@ -16,7 +16,6 @@ class PlantCardInfoFragment : Fragment() {
     private var viewModel = PlantCardInfoViewModel()//: PlantCardViewModel by viewModels()  todo
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
         binding = FragmentPlantCardInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -24,7 +23,6 @@ class PlantCardInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
-
 
         }
     }

@@ -204,4 +204,8 @@
     <string name="performed_email">Выполнено: %1$s</string>
     <string name="something_is_wrong">Что-то не так, попробуйте позже</string>
 
+    //event calendar
+    <string name="event_calendar">Календарь событий</string>
+    <string name="no_events">Cобытий нет! \nВозвращайтесь завтра</string>
+
 </resources>

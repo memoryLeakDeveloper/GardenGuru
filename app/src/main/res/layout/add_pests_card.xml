@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/bg_edit_text"
         android:ellipsize="end"
         android:fontFamily="@font/poppins_regular"
         android:hint="@string/enter_pest_name"
