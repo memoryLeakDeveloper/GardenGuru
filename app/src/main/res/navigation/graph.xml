@@ -12,7 +12,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.gardenguru.ui.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment"
@@ -44,11 +45,13 @@
     <fragment
         android:id="@+id/privacyPolicyFragment"
         android:name="com.example.gardenguru.ui.info.PrivacyPolicyFragment"
-        android:label="PrivacyPolicyFragment" />
+        android:label="PrivacyPolicyFragment"
+        tools:layout="@layout/fragment_privacy_policy"/>
     <fragment
         android:id="@+id/termOfUseFragment"
         android:name="com.example.gardenguru.ui.info.TermOfUseFragment"
-        android:label="TermOfUseFragment" />
+        android:label="TermOfUseFragment"
+        tools:layout="@layout/fragment_term_of_use"/>
     <fragment
         android:id="@+id/timetableFragment"
         android:name="com.example.gardenguru.ui.timetable.TimetableFragment"
@@ -64,13 +67,26 @@
             app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_timetableFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_timetableFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
 
     <fragment
         android:id="@+id/addingPlantFragment"
         android:name="com.example.gardenguru.ui.add_plant.AddingPlantFragment"
-        android:label="AddingPlantFragment" />
+        android:label="AddingPlantFragment"
+        tools:layout="@layout/fragment_adding_plant"/>
     <fragment
         android:id="@+id/myPlantsFragment"
         android:name="com.example.gardenguru.ui.my_plants.MyPlantsFragment"
@@ -144,4 +160,32 @@
         android:name="com.example.gardenguru.ui.settings.support.SupportFragment"
         android:label="SupportFragment"
         tools:layout="@layout/fragment_support"/>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.gardenguru.ui.camera.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_cameraResultFragment"
+            app:destination="@id/cameraResultFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/cameraResultFragment"
+        android:name="com.example.gardenguru.ui.camera.camera_result.CameraResultFragment"
+        android:label="CameraResultFragment"
+        tools:layout="@layout/fragment_camera_result">
+        <action
+            android:id="@+id/action_cameraResultFragment_to_addingPlantFragment"
+            app:destination="@id/addingPlantFragment"
+
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
 </navigation>

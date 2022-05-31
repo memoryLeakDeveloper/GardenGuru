@@ -57,8 +57,27 @@ object Extensions {
         return true
     }
 
+    fun Activity.checkAndVerifyCameraPermissions(): Boolean {
+        val permission = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        )
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.CAMERA
+                ),
+                Constance.GALLERY_PERMISSION_REQUEST_KODE
+            )
+            return false
+        }
+        return true
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
-    fun Uri.getRealPath(context: Context): File {
+    fun Uri.copyToFile(context: Context): File {
         var fileName = ""
 
         this.let { returnUri ->

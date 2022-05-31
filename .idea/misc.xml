@@ -20,20 +20,25 @@
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/edit_text_bg.xml" value="0.256" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/edit_text_bg_large.xml" value="0.298" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/edit_text_bg_small_corners.xml" value="0.323" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/header.xml" value="0.298" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_attension.xml" value="0.298" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_calendar_bg.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_camera.xml" value="0.2325" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_checked.xml" value="0.256" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_delete.xml" value="0.2925" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_edit.xml" value="0.2925" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.298" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_lighting.xml" value="0.256" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_pest.xml" value="0.256" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_rotate.xml" value="0.2325" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/drawable/ic_watering.xml" value="0.2795" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/font/poppins_bold.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/font/poppins_regular.xml" value="0.24351851851851852" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout-v26/header_layout.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/activity_main.xml" value="0.13177083333333334" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/adding_plant_fragment.xml" value="0.21875" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/button_login.xml" value="0.3885416666666667" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/button_next.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/card_planting.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/card_temperature.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/care_difficult_layout.xml" value="0.28854166666666664" />
@@ -42,6 +47,8 @@
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/dialog_support_success.xml" value="0.4161458333333333" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/disease_pest_card.xml" value="0.28854166666666664" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_adding_plant.xml" value="0.2171875" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_camera.xml" value="0.2" />
+        <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_camera_result.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_client_plant.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_garden_managment.xml" value="0.3885416666666667" />
         <entry key="..\:/Users/Mi Book/Desktop/work/GardenGuru/app/src/main/res/layout/fragment_my_plants.xml" value="0.2" />

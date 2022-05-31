@@ -47,6 +47,9 @@ class AddingPlantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.header.title.setString(R.string.adding)
+        binding.header.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         binding.spinner.initView("Введите сад", null, arrayListOf("11111111111", "2222222", "33333", "444444", "5555555"), true)
         setViewPager()
     }
