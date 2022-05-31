@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/primary_background"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/card_bg"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_app_name_logo" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_subscription_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subscription_active"
+                    android:textSize="18sp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_subscription_paid_up_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/paid_up_to_date"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
+                android:id="@+id/spinner_languages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="18dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:src="@color/white5"/>
+
+            <com.example.gardenguru.ui.customview.ClickableTextView
+                android:id="@+id/bt_privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:background="@drawable/button_green_stroke"
+                android:text="@string/privacy_policy"/>
+
+            <com.example.gardenguru.ui.customview.ClickableTextView
+                android:id="@+id/bt_term_of_use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:background="@drawable/button_green_stroke"
+                android:text="@string/terms_of_use"/>
+
+            <com.example.gardenguru.ui.customview.ClickableTextView
+                android:id="@+id/bt_developer_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:background="@drawable/button_green_stroke"
+                android:text="@string/developer_contact"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="29dp"
+                android:layout_marginHorizontal="16dp">
+
+                <com.example.gardenguru.ui.customview.ClickableTextView
+                    android:id="@+id/bt_exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="bottom|center"
+                    android:paddingVertical="12dp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:background="@drawable/button_green_stroke"
+                    android:text="@string/log_out"/>
+
+            </FrameLayout>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

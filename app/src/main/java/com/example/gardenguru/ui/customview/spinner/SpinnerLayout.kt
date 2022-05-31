@@ -72,7 +72,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         setCustomAttributes(attrs)
     }
 
-    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean) {
+    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean = false) {
         spinnerAdapter.setListAdapter(list)
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)

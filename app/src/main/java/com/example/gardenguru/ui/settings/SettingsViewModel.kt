@@ -1,4 +1,4 @@
-package com.example.gardenguru.ui.plantCard.info
+package com.example.gardenguru.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PlantCardInfoViewModel @Inject constructor() : ViewModel() {
+class SettingsViewModel @Inject constructor() : ViewModel() {
 
 }

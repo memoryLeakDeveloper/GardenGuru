@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView6"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="188dp"
         android:scaleType="fitXY"
         android:src="@drawable/header"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="38dp"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="@+id/back"
         tools:text="SSSSSSSSSSSSSS" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.example.gardenguru.ui.customview.ClickableImageView
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,11 +56,52 @@
 
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back"/>
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tab_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="27dp"
+        android:text="@string/info"
+        android:textColor="@color/primary_green"
+        android:textSize="17sp"
+        app:fontFamily="@font/poppins_regular"
+        android:drawablePadding="4dp"
+        android:drawableBottom="@drawable/ic_green_dot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tab_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:text="@string/notification"
+        android:textColor="@color/gray"
+        android:textSize="17sp"
+        app:fontFamily="@font/poppins_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_tab_info" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tab_history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="27dp"
+        android:drawablePadding="4dp"
+        android:text="@string/history"
+        android:textColor="@color/gray"
+        android:textSize="17sp"
+        app:fontFamily="@font/poppins_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_tab_info" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

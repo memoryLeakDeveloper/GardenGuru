@@ -34,5 +34,6 @@ class DialogHelper {
 
     fun hideDialog() {
         dialog?.dismiss()
+        dialog = null
     }
 }
