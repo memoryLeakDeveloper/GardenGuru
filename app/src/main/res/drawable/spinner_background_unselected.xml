@@ -4,10 +4,8 @@
 
     <solid android:color="@color/spinner_background"/>
 
-    <size
-        android:width="378dp"/>
 
     <corners
-        android:radius="25dp"/>
+        android:radius="100dp"/>
 
 </shape>

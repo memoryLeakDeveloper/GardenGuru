@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gardenguru.data.event.EventData
 import com.example.gardenguru.data.event.PlantEventsData
-import com.example.gardenguru.data.photo.PhotoData
+import com.example.gardenguru.data.plant.PhotoData
+import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.utils.Extensions.toDmyString
@@ -24,10 +25,11 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     0,
                     "Иван",
                     "",
-                    arrayListOf(
+                    (
                         PhotoData(
                             "0",
-                            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
+                            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
+                            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
                         )
                     ),
                     SunRelationData(0, ""),
@@ -50,13 +52,13 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                 arrayListOf(
                     EventData(EventData.Event.Watering, Calendar.getInstance().apply {
                         add(Calendar.DAY_OF_YEAR, -1)
-                    }.toDmyString(),true),
+                    }.toDmyString(), true),
                     EventData(EventData.Event.Spraying, Calendar.getInstance().apply {
                         add(Calendar.DAY_OF_YEAR, -1)
-                    }.toDmyString(),false),
+                    }.toDmyString(), false),
                     EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
                         add(Calendar.DAY_OF_YEAR, -1)
-                    }.toDmyString(),false)
+                    }.toDmyString(), false)
                 )
             ),
             PlantEventsData(
@@ -65,10 +67,61 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     0,
                     "Игорь",
                     "",
-                    arrayListOf(
+                    (
                         PhotoData(
                             "0",
-                            "https://images.deal.by/268832257_tantsuyuschij-kaktus-povtoryashka.jpg"
+                            "https://images.deal.by/268832257_tantsuyuschij-kaktus-povtoryashka.jpg",
+                            "https://images.deal.by/268832257_tantsuyuschij-kaktus-povtoryashka.jpg",
+                        )
+                    ),
+                    SunRelationData(0, ""),
+                    arrayListOf(),
+                    arrayListOf(),
+                    arrayListOf(),
+                    "",
+                    "",
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ),
+                arrayListOf(
+                    EventData(
+                        EventData.Event.Watering,
+                        Calendar.getInstance().apply {
+                            add(Calendar.DAY_OF_YEAR, -2)
+                        }.toDmyString(),
+                        true,
+                    ),
+                    EventData(
+                        EventData.Event.TopDressing,
+                        Calendar.getInstance().apply {
+                            add(Calendar.DAY_OF_YEAR, -2)
+                        }.toDmyString(),
+                        true,
+                    ),
+                    EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
+                        add(Calendar.DAY_OF_YEAR, -2)
+                    }.toDmyString(), true)
+                )
+            ),
+            PlantEventsData(
+                PlantData(
+                    "0",
+                    0,
+                    "Степан",
+                    "",
+                    (
+                            PhotoData(
+                            "0",
+                            "https://rastenievod.com/wp-content/uploads/2016/09/2-51.jpg",
+                            "https://rastenievod.com/wp-content/uploads/2016/09/2-51.jpg"
                         )
                     ),
                     SunRelationData(0, ""),
@@ -90,50 +143,14 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                 ),
                 arrayListOf(
                     EventData(EventData.Event.Watering, Calendar.getInstance().apply {
-                        add(Calendar.DAY_OF_YEAR, -2)
-                    }.toDmyString(),true,),
-                    EventData(EventData.Event.TopDressing, Calendar.getInstance().apply {
-                        add(Calendar.DAY_OF_YEAR, -2)
-                    }.toDmyString(),true, ),
-                    EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
-                        add(Calendar.DAY_OF_YEAR, -2)
-                    }.toDmyString(),true)
-                )
-            ),
-            PlantEventsData(
-                PlantData(
-                    "0",
-                    0,
-                    "Степан",
-                    "",
-                    arrayListOf(PhotoData("0", "https://rastenievod.com/wp-content/uploads/2016/09/2-51.jpg")),
-                    SunRelationData(0, ""),
-                    arrayListOf(),
-                    arrayListOf(),
-                    arrayListOf(),
-                    "",
-                    "",
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ),
-                arrayListOf(
-                    EventData(EventData.Event.Watering, Calendar.getInstance().apply {
                         add(Calendar.DAY_OF_YEAR, -4)
-                    }.toDmyString(),false),
+                    }.toDmyString(), false),
                     EventData(EventData.Event.Spraying, Calendar.getInstance().apply {
                         add(Calendar.DAY_OF_YEAR, -4)
-                    }.toDmyString(),false),
+                    }.toDmyString(), false),
                     EventData(EventData.Event.Transfer, Calendar.getInstance().apply {
                         add(Calendar.DAY_OF_YEAR, -4)
-                    }.toDmyString(),false)
+                    }.toDmyString(), false)
                 )
             ),
         )

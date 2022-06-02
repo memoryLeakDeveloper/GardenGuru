@@ -7,15 +7,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
-import com.example.gardenguru.data.plant.PlantData
+import com.example.gardenguru.data.garden.models.GardenPlantData
 import com.example.gardenguru.databinding.RvGardenPlantItemBinding
 
-class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
-    RecyclerView.Adapter<PlantsRecyclerAdapter.EventsViewHolder>(){
+class PlantsRecyclerAdapter(private val plants: ArrayList<GardenPlantData>) :
+    RecyclerView.Adapter<PlantsRecyclerAdapter.ViewHolder>(){
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
-        return EventsViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
             RvGardenPlantItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -24,18 +24,18 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
         )
     }
 
-    override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.binding) {
             val item = plants[position]
 
             Glide.with(root.context)
-                .load(item.photo.first())
+                .load(item.photo)
                 .centerCrop()
-                .placeholder(R.color.teal_700)
+                .placeholder(R.drawable.image_plasholder)
                 .into(ivPlantImage)
 
             tvPlantName.text = item.name
-            tvPlantKind.text = item.description
+            tvPlantKind.text = item.plant
 
             if (position == itemCount - 1){
                 ivLine.visibility = View.GONE
@@ -46,7 +46,7 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
         }
     }
 
-    class EventsViewHolder(val binding: RvGardenPlantItemBinding) :
+    class ViewHolder(val binding: RvGardenPlantItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount(): Int {

@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/gardenManagementFragment"
-        android:name="com.example.gardenguru.ui.garden_managment.GardenManagementFragment"
+        android:name="com.example.gardenguru.ui.my_plants.garden_managment.GardenManagementFragment"
         android:label="GardenManagementFragment"
         tools:layout="@layout/fragment_garden_managment"/>
     <fragment

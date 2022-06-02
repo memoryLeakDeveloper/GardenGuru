@@ -13,7 +13,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
 import com.example.gardenguru.data.benefit.BenefitData
 import com.example.gardenguru.data.pest.PestData
-import com.example.gardenguru.data.photo.PhotoData
+import com.example.gardenguru.data.plant.PhotoData
+import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
@@ -103,7 +104,7 @@ class AddingPlantFragment : Fragment() {
                 2,
                 "СУЧья НЕЗАБУДКА",
                 "УУУУУУУУ очень много букв УУУУУУУУь букв УУУУУУУУь много букв букв УУУУУУУУь много букв много букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверить",
-                arrayListOf(PhotoData("1", "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg")),
+                PhotoData("1", "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg", ""),
                 SunRelationData(1, "22222"),
                 arrayListOf(PestData("1", "EFKO"), PestData("2", "QA"), PestData("133", "YYYYY")),
                 arrayListOf(ReproductionData(1, "TTTTT")),

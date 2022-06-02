@@ -38,7 +38,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val clickCal
     private fun initView(data: PlantData) {
         with(binding) {
             Glide.with(requireContext())
-                .load(data.photo.first().photo)
+                .load(data.photo.file)
                 .circleCrop()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .into(plantPhoto)

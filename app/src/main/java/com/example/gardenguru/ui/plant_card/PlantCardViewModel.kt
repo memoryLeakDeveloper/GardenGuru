@@ -3,11 +3,8 @@ package com.example.gardenguru.ui.plant_card
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.gardenguru.data.garden.GardenData
-import com.example.gardenguru.data.photo.PhotoData
-import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.data.sun.relation.SunRelationData
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.gardenguru.data.garden.models.GardenData
+import com.example.gardenguru.data.garden.models.GardenPlantData
 import javax.inject.Inject
 
 class PlantCardViewModel @Inject constructor() : ViewModel() {
@@ -17,180 +14,48 @@ class PlantCardViewModel @Inject constructor() : ViewModel() {
             GardenData(
                 "Сад 1",
                 "",
+                "",
                 arrayListOf(
-                    PlantData(
+                    GardenPlantData(
                         "0",
-                        0,
                         "Иван",
                         "Кактус",
-                        arrayListOf(
-                            PhotoData(
-                                "0",
-                                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                            )
-                        ),
-                        SunRelationData(0, ""),
-                        arrayListOf(),
-                        arrayListOf(),
-                        arrayListOf(),
-                        "",
-                        "",
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
                     ),
-                    PlantData(
+                    GardenPlantData(
                         "0",
-                        0,
-                        "Федя",
-                        "Бегония",
-                        arrayListOf(
-                            PhotoData(
-                                "0",
-                                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                            )
-                        ),
-                        SunRelationData(0, ""),
-                        arrayListOf(),
-                        arrayListOf(),
-                        arrayListOf(),
-                        "",
-                        "",
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ),
-                    PlantData(
-                        "0",
-                        0,
-                        "Ихорь",
+                        "Степан",
                         "Фикус",
-                        arrayListOf(
-                            PhotoData(
-                                "0",
-                                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                            )
-                        ),
-                        SunRelationData(0, ""),
-                        arrayListOf(),
-                        arrayListOf(),
-                        arrayListOf(),
-                        "",
-                        "",
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
+                    ), GardenPlantData(
+                        "0",
+                        "Женя",
+                        "Кактус",
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
                     )
                 )
             ),
             GardenData(
                 "Дом",
                 "ecat@gmail.com",
+                "Дом",
                 arrayListOf(
-                    PlantData(
+                    GardenPlantData(
                         "0",
-                        0,
-                        "Вася",
+                        "Василий",
                         "Кактус",
-                        arrayListOf(
-                            PhotoData(
-                                "0",
-                                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                            )
-                        ),
-                        SunRelationData(0, ""),
-                        arrayListOf(),
-                        arrayListOf(),
-                        arrayListOf(),
-                        "",
-                        "",
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
                     ),
-                    PlantData(
+                    GardenPlantData(
                         "0",
-                        0,
-                        "Леонид",
-                        "Бегония",
-                        arrayListOf(
-                            PhotoData(
-                                "0",
-                                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                            )
-                        ),
-                        SunRelationData(0, ""),
-                        arrayListOf(),
-                        arrayListOf(),
-                        arrayListOf(),
-                        "",
-                        "",
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ),
-                    PlantData(
-                        "0",
-                        0,
-                        "Иван",
+                        "Степан",
                         "Фикус",
-                        arrayListOf(
-                            PhotoData(
-                                "0",
-                                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                            )
-                        ),
-                        SunRelationData(0, ""),
-                        arrayListOf(),
-                        arrayListOf(),
-                        arrayListOf(),
-                        "",
-                        "",
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
+                    ), GardenPlantData(
+                        "0",
+                        "Павел",
+                        "Кактус",
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
                     )
                 )
             )
