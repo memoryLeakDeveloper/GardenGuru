@@ -53,7 +53,8 @@
     //adding a plant
     <string name="adding">Добавление</string>
     <string name="add_a_plant">Добавить растение</string>
-    <string name="next">Далее…</string>
+    <string name="next_dots">Далее…</string>
+    <string name="next">Далee</string>
     <string name="hide">Скрыть</string>
 
     //care difficult

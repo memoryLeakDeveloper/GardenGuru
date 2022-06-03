@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("ClickableViewAccessibility")
 @AndroidEntryPoint
-class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
+class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment() {
 
     lateinit var binding: FragmentClientPlantBinding
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {
@@ -60,7 +60,7 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
                 initView(getString(R.string.choose), null, listCareType, false)
                 setValueListener { position, name ->
                     updateForm(position)
-                    clickCallback.click()
+                    callback.update()
                 }
             }
             temperatureCardSummer.initView(Seasons.Summer)
@@ -86,16 +86,16 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
             arrowDown.setOnClickListener {
                 shortForm.visibility = View.GONE
                 fullForm.visibility = View.VISIBLE
-                clickCallback.click()
+                callback.update()
             }
             arrowUp.setOnClickListener {
                 shortForm.visibility = View.VISIBLE
                 fullForm.visibility = View.GONE
-                clickCallback.click()
+                callback.update()
             }
             textAddPests.setOnClickListener {
                 cardsPests.addView(initPestCard())
-                clickCallback.click()
+                callback.update()
             }
             editTextBenefit.addTextChangedListener {
                 editTextCount.text = "${it.toString().length}/1000"
@@ -151,7 +151,7 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
                 }
             buttonDelete.setOnClickListener {
                 binding.cardsPests.removeView(root)
-                clickCallback.click()
+                callback.update()
             }
             buttonAddPhoto.setOnClickListener {
                 imageView = imagePest

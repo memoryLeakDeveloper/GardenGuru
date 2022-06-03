@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/dialog_background.xml" value="0.2975" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_arrow_next_gray.xml" value="0.2975" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_care_difficult_1.xml" value="0.5475" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_next.xml" value="0.2975" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_next_arrow.xml" value="0.2975" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/primary_card_background.xml" value="0.5475" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/selected_card_background.xml" value="0.5465" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/card_care_difficult.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/custom_button_next.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_care_difficult.xml" value="0.553125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_leave_garden.xml" value="0.30027173913043476" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_remove_garden.xml" value="0.5541666666666667" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

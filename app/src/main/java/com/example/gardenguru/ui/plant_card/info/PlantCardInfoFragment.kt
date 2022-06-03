@@ -94,17 +94,17 @@ class PlantCardInfoFragment : Fragment() {
 
     private fun getSpannableNextString(): SpannableString {
         val text = data.description.substringBefore(".")
-        val span = SpannableString(text + ". " + getString(R.string.next))
+        val span = SpannableString(text + ". " + getString(R.string.next_dots))
         span.setSpan(
             getClickableSpan(),
             0,
-            text.length + getString(R.string.next).length + 2,
+            text.length + getString(R.string.next_dots).length + 2,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         span.setSpan(
             ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
             text.length + 2,
-            text.length + getString(R.string.next).length + 2,
+            text.length + getString(R.string.next_dots).length + 2,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         return span

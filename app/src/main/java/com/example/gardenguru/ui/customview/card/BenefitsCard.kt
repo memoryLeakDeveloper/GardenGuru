@@ -12,11 +12,9 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class BenefitsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private var binding: CardBenefitsBinding
+    private var binding = CardBenefitsBinding.inflate(LayoutInflater.from(context), this)
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = CardBenefitsBinding.inflate(inflater, this)
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 

@@ -21,7 +21,7 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlantDescriptionFragment(private val data: PlantData, private val clickCallback: AddingPlantFragment.ClickCallback) : Fragment() {
+class PlantDescriptionFragment(private val data: PlantData, private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment() {
 
     private lateinit var binding: FragmentPlantDescriptionBinding
     private var isDescriptionShowed: Boolean = false
@@ -68,17 +68,17 @@ class PlantDescriptionFragment(private val data: PlantData, private val clickCal
 
     private fun getSpannableNextString(): SpannableString {
         val text = data.description.substringBefore(".")
-        val span = SpannableString(text + ". " + getString(R.string.next))
+        val span = SpannableString(text + ". " + getString(R.string.next_dots))
         span.setSpan(
             getClickableSpan(),
             0,
-            text.length + getString(R.string.next).length + 2,
+            text.length + getString(R.string.next_dots).length + 2,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         span.setSpan(
             ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
             text.length + 2,
-            text.length + getString(R.string.next).length + 2,
+            text.length + getString(R.string.next_dots).length + 2,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         return span
@@ -109,7 +109,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val clickCal
 
         override fun onClick(widget: View) {
             if (isDescriptionShowed) hidePlantDescription() else showPlantDescription()
-            clickCallback.click()
+            callback.update()
         }
     }
 
