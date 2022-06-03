@@ -40,8 +40,10 @@
         android:background="@drawable/button_background"
         android:fontFamily="@font/sf_ui_font"
         android:text="@string/Ok"
+        android:clickable="true"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:focusable="true" />
 
 </merge>

@@ -21,6 +21,6 @@ class BenefitsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(con
     }
 
     fun initView(data: PlantData) {
-        binding.benefits.text = data.benefits.first().type
+        if (data.benefits.isNotEmpty()) binding.benefits.text = data.benefits.first().type
     }
 }

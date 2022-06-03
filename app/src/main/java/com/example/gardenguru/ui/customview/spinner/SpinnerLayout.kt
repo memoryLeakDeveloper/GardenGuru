@@ -3,6 +3,7 @@ package com.example.gardenguru.ui.customview.spinner
 import android.content.Context
 import android.graphics.drawable.TransitionDrawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,9 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: SpinnerLayoutBinding
-    private lateinit var spinnerAdapter: SpinnerAdapter
-    private var popupBinding: SpinnerPopupBinding
+    private var binding = SpinnerLayoutBinding.inflate(LayoutInflater.from(context), this)
+    private var popupBinding = SpinnerPopupBinding.inflate(LayoutInflater.from(context))
+    private var spinnerAdapter: SpinnerAdapter
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
     private var defValue: String? = null
@@ -63,9 +64,6 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = SpinnerLayoutBinding.inflate(inflater, this)
-        popupBinding = SpinnerPopupBinding.inflate(inflater)
         spinnerAdapter = SpinnerAdapter((selectListener))
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         setRootClickListener()
@@ -201,7 +199,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     private fun hideKeyboard(editText: EditText) {
         editText.clearFocus()
         val imm = editText.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(editText.windowToken, 0);
+        imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
 }

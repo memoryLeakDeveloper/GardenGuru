@@ -3,6 +3,7 @@ package com.example.gardenguru.ui.add_plant.client
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +67,13 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
             temperatureCardWinter.initView(Seasons.Winter)
             spinnerPests.initView(getString(R.string.choose_pests), arrayListOf("EFKO", "NATASHA", "COCA-COLA", "333333"))
             calendarWinter.initView(Seasons.Winter)
+            calendarWinter.setValueListener({
+                Log.d("bugger", it.toString())
+            })
             calendarSummer.initView(Seasons.Summer)
+            calendarSummer.setValueListener({
+                Log.d("bugger", it.toString())
+            })
         }
     }
 
@@ -112,13 +119,22 @@ class ClientPlantFragment(private val clickCallback: AddingPlantFragment.ClickCa
                     calendarWinter.let { if (it.visibility != View.GONE) it.visibility = View.GONE }
                     calendarSummer.let { if (it.visibility != View.GONE) it.visibility = View.GONE }
                     plantingCard.visibility = View.VISIBLE
+                    plantingCard.setValueListener {
+                        Log.d("bugger", it)
+                    }
                 }
                 7 -> {
                     plantingCard.let { if (it.visibility != View.GONE) it.visibility = View.GONE }
                     calendarWinter.let { if (it.visibility != View.GONE) it.visibility = View.GONE }
                     calendarSummer.let { if (it.visibility != View.GONE) it.visibility = View.GONE }
                     temperatureCardSummer.visibility = View.VISIBLE
+                    temperatureCardSummer.setValueListener({
+                        Log.d("bugger", "$it")
+                    })
                     temperatureCardWinter.visibility = View.VISIBLE
+                    temperatureCardWinter.setValueListener {
+                        Log.d("bugger", "$it")
+                    }
                 }
                 6 -> {
                     //TODO

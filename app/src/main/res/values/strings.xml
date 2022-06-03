@@ -208,4 +208,7 @@
     <string name="event_calendar">Календарь событий</string>
     <string name="no_events">Cобытий нет! \nВозвращайтесь завтра</string>
 
+    //информация о растении
+    <string name="move">Переместить</string>
+
 </resources>

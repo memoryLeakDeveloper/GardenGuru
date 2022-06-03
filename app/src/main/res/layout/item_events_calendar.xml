@@ -6,6 +6,7 @@
     android:layout_marginHorizontal="5dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="@drawable/spinner_background"
     android:padding="5dp">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -31,11 +32,19 @@
         android:visibility="invisible"
         tools:src="@drawable/ic_three_dots" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_event"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_watering" />
+        android:src="@drawable/white_10_circle_with_stroke">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_watering" />
+
+    </FrameLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

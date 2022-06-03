@@ -34,7 +34,9 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
         binding.feedingText1.text = getString(1, data.summerFeeding)
         binding.feedingText2.text = getString(2, data.winterFeeding)
         binding.plantingText1.text = data.plantingTime
-        binding.reproductionText1.text = data.reproduction.first().type //TODO
+        if(data.reproduction.isNotEmpty()) {
+            binding.reproductionText1.text = data.reproduction.first().type //TODO
+        }
         binding.pruningText1.text = data.pruning
     }
 

@@ -6,21 +6,69 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.CardTemperatureBinding
 import com.example.gardenguru.data.enums.Seasons
+import com.example.gardenguru.databinding.CardTemperatureBinding
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class TemperatureCard(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: CardTemperatureBinding
+    private var binding = CardTemperatureBinding.inflate(LayoutInflater.from(context), this)
+    private var valueCallback: ValueCallback? = null
+
+    fun interface ValueCallback {
+        fun value(value: Pair<Int, Int>)
+    }
+
+    fun setValueListener(callback: ValueCallback) {
+        valueCallback = callback
+    }
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = CardTemperatureBinding.inflate(inflater, this)
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+        binding.button.setOnClickListener {
+            checkValidInput()
+        }
+    }
+
+    private fun checkValidInput() {
+        with(binding) {
+            val textFrom = editTextFrom.text.toString()
+            val textTo = editTextTo.text.toString()
+            if (textFrom.isBlank()) {
+                editTextFrom.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.error_card_background))
+                return
+            }
+            if (textTo.isBlank()) {
+                editTextTo.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.error_card_background))
+                return
+            }
+            if (textFrom.isNotBlank() && textTo.isNotBlank()) {
+                if (textFrom.toInt() > textTo.toInt()) {
+                    editTextFrom.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.error_card_background))
+                    editTextTo.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.error_card_background))
+                    return
+                }
+                editTextFrom.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+                editTextTo.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+                button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
+                button.isEnabled = false
+                disableEditText(editTextFrom)
+                disableEditText(editTextTo)
+                valueCallback?.value(Pair(textFrom.toInt(), textTo.toInt()))
+
+            }
+
+        }
+    }
+
+    private fun disableEditText(editText: EditText) {
+        editText.isEnabled = false
+        editText.isActivated = false
+        editText.isClickable = false
     }
 
     fun initView(seasons: Seasons) {
