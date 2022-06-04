@@ -20,14 +20,13 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_edit_text"
         android:fontFamily="@font/poppins_regular"
         android:hint="@string/enter_text"
-        android:maxLines="1"
-        android:paddingStart="15dp"
+        android:padding="15dp"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
         android:textSize="16sp" />
@@ -41,8 +40,10 @@
         android:background="@drawable/button_background"
         android:fontFamily="@font/sf_ui_font"
         android:text="@string/Ok"
+        android:clickable="true"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:focusable="true" />
 
 </merge>

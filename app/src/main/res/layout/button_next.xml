@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:layout_marginRight="25dp"
-        android:src="@drawable/button_next_arrow" />
+        android:src="@drawable/ic_next_arrow" />
 
 </FrameLayout>

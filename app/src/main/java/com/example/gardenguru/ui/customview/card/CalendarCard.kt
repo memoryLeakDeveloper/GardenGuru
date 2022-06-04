@@ -9,19 +9,38 @@ import android.view.LayoutInflater
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.CardCalendarBinding
+import com.example.gardenguru.data.enums.DaysMode
 import com.example.gardenguru.data.enums.Seasons
+import com.example.gardenguru.databinding.CardCalendarBinding
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class CalendarCard(context: Context, attrs: AttributeSet) : LinearLayoutCompat(context, attrs) {
 
-    private lateinit var binding: CardCalendarBinding
+    private var binding = CardCalendarBinding.inflate(LayoutInflater.from(context), this)
+    private var valueCallback: ValueCallback? = null
+
+    fun interface ValueCallback {
+        fun value(days: Int)
+    }
+
+    fun setValueListener(callback: ValueCallback) {
+        valueCallback = callback
+    }
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = CardCalendarBinding.inflate(inflater, this)
         orientation = VERTICAL
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+        binding.button.setOnClickListener { it ->
+            val(number: Int, period: DaysMode) = binding.calendar.getValue()
+            val value = when(period) {
+                DaysMode.Days -> number * DaysMode.Days.days
+                DaysMode.Weeks -> number * DaysMode.Weeks.days
+                DaysMode.Months -> number * DaysMode.Months.days
+            }
+            valueCallback?.value(value)
+            setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
+            isEnabled = false
+        }
     }
 
     fun initView(seasons: Seasons) {

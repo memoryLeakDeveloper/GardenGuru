@@ -13,9 +13,9 @@ import com.example.gardenguru.ui.customview.calendar.CalendarLayout.PeriodCallba
 
 class CalendarLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: CalendarLayoutBinding
+    private var binding = CalendarLayoutBinding.inflate(LayoutInflater.from(context), this)
     private lateinit var adapterDays: CalendarDaysAdapter
-    private var adapterPeriod: CalendarPeriodAdapter
+    private lateinit var adapterPeriod: CalendarPeriodAdapter
     private val periodCallback = PeriodCallback { mode ->
         binding.recyclerDays.adapter = adapterDays.apply { currentDaysMode = mode }
     }
@@ -34,15 +34,21 @@ class CalendarLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     }
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        initDaysRv()
+        initPeriodRv()
+    }
+
+    private fun initDaysRv() {
         adapterDays = CalendarDaysAdapter()
-        adapterPeriod = CalendarPeriodAdapter(periodCallback)
-        binding = CalendarLayoutBinding.inflate(inflater, this)
         binding.recyclerDays.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = adapterDays
             LinearSnapHelper().attachToRecyclerView(this)
         }
+    }
+
+    private fun initPeriodRv() {
+        adapterPeriod = CalendarPeriodAdapter(periodCallback)
         binding.recyclerPeriod.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = adapterPeriod
@@ -51,6 +57,11 @@ class CalendarLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             LinearSnapHelper().attachToRecyclerView(this)
         }
     }
+
+    fun getValue(): Pair<Int, DaysMode> = Pair(getDaysRecyclerValue(), adapterDays.currentDaysMode)
+
+    private fun getDaysRecyclerValue() =
+        (binding.recyclerDays.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() - 1
 
     private fun getCurrentRecyclerPosition(recycler: RecyclerView) =
         (recycler.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() + 2

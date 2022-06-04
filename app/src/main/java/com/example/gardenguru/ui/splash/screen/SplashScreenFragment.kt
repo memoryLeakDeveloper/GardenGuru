@@ -13,7 +13,9 @@ import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentSplashScreenBinding
 import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
 
@@ -46,10 +48,10 @@ class SplashScreenFragment : Fragment() {
 
     private fun navigateNextPage() {
         val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
-        if (firstLaunch){
+        if (firstLaunch) {
             requireContext().getPrefs().edit().putBoolean(PrefsKeys.FIRST_APP_LAUNCH, false).apply()
             findNavController().navigate(R.id.onboardingFragment)
-        }else{
+        } else {
             findNavController().navigate(R.id.loginFragment)
         }
     }

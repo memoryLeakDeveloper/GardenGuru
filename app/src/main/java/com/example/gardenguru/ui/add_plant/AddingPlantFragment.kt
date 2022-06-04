@@ -2,6 +2,7 @@ package com.example.gardenguru.ui.add_plant
 
 import android.content.Context
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,15 +20,17 @@ import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.FragmentAddingPlantBinding
+import com.example.gardenguru.ui.add_plant.AddingPlantFragment.UpdateLayoutHeightCallback
 import com.example.gardenguru.ui.add_plant.client.ClientPlantFragment
 import com.example.gardenguru.ui.add_plant.description.PlantDescriptionFragment
-import com.example.gardenguru.ui.add_plant.AddingPlantFragment.ClickCallback
 import com.example.gardenguru.utils.Extensions.setString
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddingPlantFragment : Fragment() {
 
     private lateinit var binding: FragmentAddingPlantBinding
-    private val clickCallback = ClickCallback { updateViewPagerHeight() }
+    private val updateLayoutHeightCallback = UpdateLayoutHeightCallback { updateViewPagerHeight() }
     private val viewPagerListener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
@@ -36,8 +39,8 @@ class AddingPlantFragment : Fragment() {
         }
     }
 
-    fun interface ClickCallback {
-        fun click()
+    fun interface UpdateLayoutHeightCallback {
+        fun update()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -106,7 +109,7 @@ class AddingPlantFragment : Fragment() {
                 "УУУУУУУУ очень много букв УУУУУУУУь букв УУУУУУУУь много букв букв УУУУУУУУь много букв много букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверить",
                 PhotoData("1", "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg", ""),
                 SunRelationData(1, "22222"),
-                arrayListOf(PestData("1", "EFKO"), PestData("2", "QA"), PestData("133", "YYYYY")),
+                arrayListOf(PestData("1", "EFKO", Uri.EMPTY), PestData("2", "QA", Uri.EMPTY), PestData("133", "YYYYY", Uri.EMPTY)),
                 arrayListOf(ReproductionData(1, "TTTTT")),
                 arrayListOf(
                     BenefitData(
@@ -127,7 +130,9 @@ class AddingPlantFragment : Fragment() {
                 8,
                 8
             )
-            return if (position != 4) PlantDescriptionFragment(data, clickCallback) else ClientPlantFragment(clickCallback)
+            return if (position != 4) PlantDescriptionFragment(data, updateLayoutHeightCallback) else ClientPlantFragment(
+                updateLayoutHeightCallback
+            )
         }
     }
 

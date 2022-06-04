@@ -1,6 +1,7 @@
 package com.example.gardenguru.ui.customview.card.pests
 
 import android.content.Context
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +25,7 @@ class PestsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(contex
 
     fun initView(data: PlantData) {
         binding.recycler.apply {
-            adapter = PestsCardAdapter(listOf(PestData("1", "EFKO"), PestData("2", "QA"), PestData("133", "YYYYY")))
+            adapter = PestsCardAdapter(listOf(PestData("1", "EFKO", Uri.EMPTY), PestData("2", "QA", Uri.EMPTY), PestData("133", "YYYYY", Uri.EMPTY)))
             layoutManager = LinearLayoutManager(context)
         }
     }

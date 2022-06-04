@@ -3,6 +3,7 @@ package com.example.gardenguru.ui.customview.spinner
 import android.content.Context
 import android.graphics.drawable.TransitionDrawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,9 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private lateinit var binding: SpinnerLayoutBinding
-    private lateinit var spinnerAdapter: SpinnerAdapter
-    private var popupBinding: SpinnerPopupBinding
+    private var binding = SpinnerLayoutBinding.inflate(LayoutInflater.from(context), this)
+    private var popupBinding = SpinnerPopupBinding.inflate(LayoutInflater.from(context))
+    private var spinnerAdapter: SpinnerAdapter
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
     private var defValue: String? = null
@@ -63,21 +64,10 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = SpinnerLayoutBinding.inflate(inflater, this)
-        popupBinding = SpinnerPopupBinding.inflate(inflater)
         spinnerAdapter = SpinnerAdapter((selectListener))
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         setRootClickListener()
-        context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
-            getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
-            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let {
-                spinnerAdapter.textColor = it
-                popupBinding.editText.setHintTextColor(it)
-                popupBinding.editText.setTextColor(it)
-            }
-            recycle()
-        }
+        setCustomAttributes(attrs)
     }
 
     fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean = false) {
@@ -91,6 +81,18 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
             initEditText()
         }
         this.defValue = defValue
+    }
+
+    private fun setCustomAttributes(attrs: AttributeSet) {
+        context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
+            getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
+            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let {
+                spinnerAdapter.textColor = it
+                popupBinding.editText.setHintTextColor(it)
+                popupBinding.editText.setTextColor(it)
+            }
+            recycle()
+        }
     }
 
     private fun setRootClickListener() {
@@ -185,9 +187,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         val bool = isDefValue(binding.spinnerText)
         val backgrounds = listOf(
             ContextCompat.getDrawable(context, if (!bool) R.drawable.spinner_background else R.drawable.spinner_background_unselected),
-            ContextCompat.getDrawable(
-                context, R.drawable.spinner_selected_background
-            )
+            ContextCompat.getDrawable(context, R.drawable.spinner_selected_background)
         )
         val transitionDrawable = TransitionDrawable(backgrounds.toTypedArray())
         background = transitionDrawable
@@ -199,7 +199,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     private fun hideKeyboard(editText: EditText) {
         editText.clearFocus()
         val imm = editText.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(editText.windowToken, 0);
+        imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
 }
