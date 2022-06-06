@@ -2,6 +2,7 @@ package com.example.gardenguru.data.garden.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.gardenguru.R
 import com.example.gardenguru.core.Base
 
 data class Participant(
@@ -17,10 +18,10 @@ data class Participant(
     ) {
     }
 
-    enum class RoleInGarden(val value: String){
-        Newbie("newbie"),
-        Experienced("experienced"),
-        Guru("guru")
+    enum class RoleInGarden(val value: String, val nameStringRes: Int){
+        Beginner("beginner", R.string.beginner),
+        Experienced("experienced", R.string.experienced),
+        Guru("guru", R.string.guru)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -43,7 +44,7 @@ data class Participant(
         }
 
 
-        fun getRoleByValue(role: String): RoleInGarden{
+        fun getRoleByValue(role: String): RoleInGarden {
             return when(role){
                 RoleInGarden.Guru.value -> RoleInGarden.Guru
                 RoleInGarden.Experienced.value -> RoleInGarden.Experienced

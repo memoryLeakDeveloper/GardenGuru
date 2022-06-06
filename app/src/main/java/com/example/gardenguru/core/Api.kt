@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 class Api(context: Context) {
 
-    private val baseUrl = "http://192.168.31.122:8000"
+    private val baseUrl = "https://gardenguru.entexy.com/"
     private val cacheDir = context.cacheDir
 
     private fun isInternetAvailable(context: Context): Boolean {
@@ -64,7 +64,16 @@ class Api(context: Context) {
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClientCached())
+            .client(okHttpClient())
+//            .client(okHttpClientCached())
+            .build()
+            .create(clazz)
+
+    fun <T> makeService(clazz: Class<T>): T =
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient())
             .build()
             .create(clazz)
 

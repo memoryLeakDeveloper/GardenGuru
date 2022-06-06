@@ -1,4 +1,4 @@
-package com.example.gardenguru.data.plant
+package com.example.gardenguru.data.media
 
 import com.example.gardenguru.core.Base
 

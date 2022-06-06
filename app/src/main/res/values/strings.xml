@@ -203,7 +203,12 @@
     <string name="history">История</string>
     <string name="notification">Уведомления</string>
     <string name="performed_email">Выполнено: %1$s</string>
-    <string name="something_is_wrong">Что-то не так, попробуйте позже</string>
+    <string name="beginner">Новичок</string>
+    <string name="experienced">Опытный</string>
+    <string name="guru">Гуру</string>
+
+    <string name="june_august_summer">Лето (июнь-август)</string>
+    <string name="december_february_summer">Лето (декабрь-февраль)</string>
 
     //event calendar
     <string name="event_calendar">Календарь событий</string>
@@ -211,5 +216,10 @@
 
     //информация о растении
     <string name="move">Переместить</string>
+
+    //errors
+    <string name="something_is_wrong">Что-то не так, попробуйте позже</string>
+    <string name="error_when_upload_image">Ошибка при загрузке изображения, попробуйте позже</string>
+    <string name="error_when_create_garden">Ошибка при создании сада, попробуйте позже</string>
 
 </resources>

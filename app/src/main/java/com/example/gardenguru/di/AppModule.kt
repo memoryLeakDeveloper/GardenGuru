@@ -6,6 +6,7 @@ import com.example.gardenguru.core.Api
 import com.example.gardenguru.core.App
 import com.example.gardenguru.data.auth.TokenHelper
 import com.example.gardenguru.data.auth.UserEmailHelper
+import com.example.gardenguru.data.language.LanguageHelper
 import com.example.gardenguru.domain.app.UserEmailUseCase
 import com.example.gardenguru.utils.Extensions.getPrefs
 import dagger.Module
@@ -26,6 +27,11 @@ class AppModule {
     @Provides
     @Singleton
     fun provideTokenHelper(@ApplicationContext context: Context) = TokenHelper.Base(context.getPrefs())
+
+    @Provides
+    @Singleton
+    fun provideLanguageHelper(@ApplicationContext context: Context) = LanguageHelper.Base(context.getPrefs())
+
 
     @Provides
     @Singleton

@@ -9,8 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
-import com.example.gardenguru.data.plant.PhotoData
-import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.FragmentPlantCardBinding

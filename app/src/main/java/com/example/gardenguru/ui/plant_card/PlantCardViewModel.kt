@@ -14,7 +14,7 @@ class PlantCardViewModel @Inject constructor() : ViewModel() {
             GardenData(
                 "Сад 1",
                 "",
-                "",
+                GardenData.SummerClimateSeason.JuneAugust,
                 arrayListOf(
                     GardenPlantData(
                         "0",
@@ -37,8 +37,8 @@ class PlantCardViewModel @Inject constructor() : ViewModel() {
             ),
             GardenData(
                 "Дом",
-                "ecat@gmail.com",
                 "Дом",
+                GardenData.SummerClimateSeason.JuneAugust,
                 arrayListOf(
                     GardenPlantData(
                         "0",

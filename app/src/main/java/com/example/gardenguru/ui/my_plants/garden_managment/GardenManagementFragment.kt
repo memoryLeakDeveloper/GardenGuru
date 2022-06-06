@@ -1,21 +1,25 @@
 package com.example.gardenguru.ui.my_plants.garden_managment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gardenguru.R
 import com.example.gardenguru.data.garden.models.GardenData
-import com.example.gardenguru.data.garden.models.GardenPlantData
-import com.example.gardenguru.data.garden.models.Participant
 import com.example.gardenguru.databinding.DialogRemoveGardenBinding
 import com.example.gardenguru.databinding.FragmentGardenManagmentBinding
 import com.example.gardenguru.ui.customview.DialogHelper
+import com.example.gardenguru.ui.my_plants.MyPlantsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -23,6 +27,9 @@ class GardenManagementFragment : Fragment() {
 
     private lateinit var binding: FragmentGardenManagmentBinding
     private lateinit var viewModel: GardenManagementViewModel
+
+    @Inject
+    lateinit var viewModelFactory: GardenManagementViewModel.Factory
 
     private lateinit var garden: GardenData
 
@@ -32,38 +39,9 @@ class GardenManagementFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        garden = GardenData(
-            "",
-            "",
-            "Сад 1",
-            arrayListOf(
-                GardenPlantData(
-                    "0",
-                    "Иван",
-                    "Кактус",
-                    "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                ),
-                GardenPlantData(
-                    "0",
-                    "Степан",
-                    "Фикус",
-                    "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                ), GardenPlantData(
-                    "0",
-                    "Женя",
-                    "Кактус",
-                    "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                )
-            ),
-            arrayListOf(
-                Participant("qqq", "email1@q.q", Participant.RoleInGarden.Newbie),
-                Participant("qqq", "email2@q.q", Participant.RoleInGarden.Experienced),
-                Participant("qqq", "email3@q.q", Participant.RoleInGarden.Experienced),
-                Participant("qqq", "email4@q.q", Participant.RoleInGarden.Guru),
-            )
-        )
+        garden = requireArguments().getParcelable(GARDEN_EXTRA)!!
 
-        viewModel = ViewModelProvider(this)[GardenManagementViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[GardenManagementViewModel::class.java]
         binding = FragmentGardenManagmentBinding.inflate(
             inflater, container, false
         )
@@ -90,7 +68,7 @@ class GardenManagementFragment : Fragment() {
                 with(dialogBinding) {
 
                     tvDialogDescription.text =
-                        root.resources.getString(R.string.dialog_want_to_delete_garden, garden.name, garden.guru)
+                        root.resources.getString(R.string.dialog_want_to_delete_garden, garden.name, garden.getGuruEmail())
 
                     btNo.setOnClickListener {
                         dialogHelper.hideDialog()
@@ -102,13 +80,50 @@ class GardenManagementFragment : Fragment() {
                 }
                 dialogHelper.showDialog(dialogBinding.root)
             }
+
+            val seasons = arrayListOf(
+                resources.getString(GardenData.SummerClimateSeason.JuneAugust.stringNameRes),
+                resources.getString(GardenData.SummerClimateSeason.DecemberFebruary.stringNameRes)
+            )
+            val defPosition = when (garden.summerClimateSeason) {
+                GardenData.SummerClimateSeason.JuneAugust -> 0
+                GardenData.SummerClimateSeason.DecemberFebruary -> 1
+                else -> 0
+            }
+            spinnerSeason.initView(null, defPosition, seasons)
+
+            btSaveGarden.setOnClickListener {
+                btSaveGarden.isEnabled = false
+
+                val dialogHelper = DialogHelper()
+
+                val progressView = ProgressBar(requireContext())
+                dialogHelper.showDialog(progressView, false)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    val season = GardenData.getSummerSeasonByStringValue(resources, spinnerSeason.spinnerValue!!)
+                    val isSuccess =
+                        viewModel.editGarden(garden.id, etGardenName.text.toString(), season.value)
+
+                    launch(Dispatchers.Main) {
+                        if (!isSuccess){
+                            Toast.makeText(requireContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
+                        }
+
+                        dialogHelper.hideDialog()
+                        btSaveGarden.isEnabled = true
+                    }
+                }
+            }
+
+            initParticipantList()
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun initParticipantList() {
         with(binding) {
             rvUsers.layoutManager = LinearLayoutManager(requireContext())
+            rvUsers.adapter = ParticipantRecyclerAdapter(resources, garden.participants, viewModel)
         }
     }
 }

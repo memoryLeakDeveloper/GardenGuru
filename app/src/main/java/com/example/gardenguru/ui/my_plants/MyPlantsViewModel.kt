@@ -20,20 +20,11 @@ class MyPlantsViewModel constructor(
 
     val userEmail = userEmailUseCase.getEmail()
 
-    class Factory @Inject constructor(
-        private val getGardensUseCase: GetGardensUseCase,
-        private val userEmailUseCase: UserEmailUseCase
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MyPlantsViewModel(getGardensUseCase, userEmailUseCase) as T
-        }
-    }
-
     private suspend fun loadGardens(): ArrayList<GardenData> {
         return getGardensUseCase.getGardens()
     }
 
-    init {
+    fun initGardens(){
         CoroutineScope(Dispatchers.IO).launch {
             _gardens.postValue(loadGardens())
         }
@@ -43,4 +34,13 @@ class MyPlantsViewModel constructor(
         value = arrayListOf()
     }
     val gardens: LiveData<ArrayList<GardenData>> = _gardens
+
+    class Factory @Inject constructor(
+        private val getGardensUseCase: GetGardensUseCase,
+        private val userEmailUseCase: UserEmailUseCase
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return MyPlantsViewModel(getGardensUseCase, userEmailUseCase) as T
+        }
+    }
 }

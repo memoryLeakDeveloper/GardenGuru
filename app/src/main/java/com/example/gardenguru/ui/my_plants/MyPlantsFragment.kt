@@ -48,11 +48,18 @@ class MyPlantsFragment : Fragment() {
                     noPlantsContainer.visibility = View.VISIBLE
                     //search logic
                 }else{
+                    rvAdapter.notifyDataSetChanged()
                     rvGardens.visibility = View.VISIBLE
                     noPlantsContainer.visibility = View.GONE
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.initGardens()
     }
 
     @SuppressLint("ClickableViewAccessibility")

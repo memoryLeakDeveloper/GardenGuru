@@ -124,8 +124,10 @@ class TimetableFragment : Fragment() {
             val expandedBtnWidth = (requireContext().resources.displayMetrics.widthPixels
                     - 2 * resources.getDimension(R.dimen.xm_indent) - ivPlus.layoutParams.width / 2.0).toInt()
 
+            ivCam.isEnabled = false
             ivPlus.setOnClickListener {
                 if (ivCam.alpha == 1f) {
+                    ivCam.isEnabled = false
                     etInputPlantName.animate().alpha(0.0f).apply {
                         duration = 80
                     }.start()
@@ -155,6 +157,7 @@ class TimetableFragment : Fragment() {
                         addUpdateListener { animator -> ivPlus.setBackgroundColor(animator.animatedValue as Int) }
                     }.start()
                 } else {
+                    ivCam.isEnabled = true
                     etInputPlantName.animate().alpha(1f).apply {
                         duration = 100
                         startDelay = 200

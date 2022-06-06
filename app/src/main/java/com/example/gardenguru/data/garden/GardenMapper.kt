@@ -11,7 +11,7 @@ class GardenMapper: Base.Mapper<GardenCloud, GardenData> {
         return GardenData(
             id = cloud.id,
             name = cloud.name,
-            guru = cloud.guru,
+            summerClimateSeason = GardenData.getSummerSeasonByValue(cloud.summerClimateType),
             plants = ArrayList(cloud.plants.map {
                 GardenPlantData(it.id, it.name, it.plant, it.photos.first().file)
             }),

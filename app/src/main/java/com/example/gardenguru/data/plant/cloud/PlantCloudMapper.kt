@@ -1,6 +1,6 @@
 package com.example.gardenguru.data.plant.cloud
 
-import com.example.gardenguru.data.plant.PhotoData
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 
 interface PlantCloudMapper {
@@ -35,7 +35,7 @@ interface PlantCloudMapper {
 
         override fun mapDataToCloud(data: PlantData) = PlantCloud(
             data.id,
-            data.care_complexity,
+            data.careComplexity,
             data.name,
             data.description,
             arrayListOf(PhotoDataCloud(data.photo.id, data.photo.thumbnail, data.photo.file)),

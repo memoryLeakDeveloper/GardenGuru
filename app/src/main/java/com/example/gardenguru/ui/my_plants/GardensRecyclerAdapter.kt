@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
-import com.example.gardenguru.data.garden.models.GardenSimple
 import com.example.gardenguru.databinding.DialogRemoveGardenBinding
 import com.example.gardenguru.databinding.RvGardenItemBinding
 import com.example.gardenguru.ui.customview.DialogHelper
@@ -38,18 +37,19 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
             val adapter = PlantsRecyclerAdapter(garden.plants)
             rvPlants.adapter = adapter
 
-            if (garden.guru == viewModel.userEmail) { //this so this is the user's garden
+            val guruEmail = garden.getGuruEmail()
+            if (guruEmail == viewModel.userEmail) { //this so this is the user's garden
                 tvGardenOwner.visibility = View.GONE
                 ivEditDelete.setImageResource(R.drawable.ic_edit)
                 ivEditDelete.setOnClickListener {
                     root.findNavController().navigate(
                         R.id.action_myPlantsFragment_to_gardenManagementFragment,
-                        bundleOf(GardenManagementFragment.GARDEN_EXTRA to GardenSimple(garden.name, garden.guru))
+                        bundleOf(GardenManagementFragment.GARDEN_EXTRA to garden)
                     )
                 }
             } else {
                 tvGardenOwner.visibility = View.VISIBLE
-                tvGardenOwner.text = root.resources.getString(R.string.garden_owner_name, garden.guru)
+                tvGardenOwner.text = root.resources.getString(R.string.garden_owner_name, guruEmail)
                 ivEditDelete.setImageResource(R.drawable.ic_delete)
                 ivEditDelete.setOnClickListener {
                     //delete
@@ -61,7 +61,7 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
                         tvDialogDescription.text = root.resources.getString(
                             R.string.dialog_want_to_leave_garden,
                             garden.name,
-                            garden.guru
+                            guruEmail
                         )
 
                         btNo.setOnClickListener {
