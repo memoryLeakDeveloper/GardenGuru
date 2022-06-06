@@ -11,11 +11,21 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_next_arrow.xml" value="0.2975" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/primary_card_background.xml" value="0.5475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/selected_card_background.xml" value="0.5465" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/spinner_background_unselected.xml" value="0.5475" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/calendar_layout.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/card_calendar.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/card_care_difficult.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/card_temperature.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/custom_button_next.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_care_difficult.xml" value="0.553125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_leave_garden.xml" value="0.30027173913043476" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_plant_moving.xml" value="0.553125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_remove_garden.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/fragment_adding_plant.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/fragment_client_plant.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/fragment_my_plants.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/fragment_plant_card.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/fragment_plant_card_info.xml" value="0.2737329560072035" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_layout.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_popup.xml" value="0.5541666666666667" />
       </map>

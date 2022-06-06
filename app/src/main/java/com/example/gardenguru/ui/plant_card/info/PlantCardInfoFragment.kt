@@ -17,7 +17,9 @@ import com.example.gardenguru.R
 import com.example.gardenguru.data.photo.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
+import com.example.gardenguru.databinding.DialogPlantMovingBinding
 import com.example.gardenguru.databinding.FragmentPlantCardInfoBinding
+import com.example.gardenguru.ui.customview.DialogHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -25,6 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class PlantCardInfoFragment : Fragment() {
 
     private var isDescriptionShowed: Boolean = false
+    private val dialog = DialogHelper()
+    private val bindingDialog by lazy { DialogPlantMovingBinding.inflate(LayoutInflater.from(requireContext())) }
     val data = PlantData(
         "0",
         0,
@@ -64,6 +68,10 @@ class PlantCardInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        iniView()
+    }
+
+    private fun iniView() {
         with(binding) {
             Glide.with(requireContext())
                 .load(data.photo.first().photo)
@@ -79,6 +87,10 @@ class PlantCardInfoFragment : Fragment() {
             careDescription.initView(data)
             pests.initView(data)
             benefits.initView(data)
+            buttonMove.setOnClickListener {
+//                bindingDialog.spinner.initView("Введите сад", null, arrayListOf("11111111111", "2222222", "33333", "444444", "5555555"), true)
+                dialog.showDialog(bindingDialog.root)
+            }
         }
     }
 
