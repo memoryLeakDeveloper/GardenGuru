@@ -38,6 +38,11 @@ class CalendarLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         initPeriodRv()
     }
 
+    fun disableScrolling() {
+        binding.recyclerDays.isNestedScrollingEnabled = false
+        binding.recyclerPeriod.isNestedScrollingEnabled = false
+    }
+
     private fun initDaysRv() {
         adapterDays = CalendarDaysAdapter()
         binding.recyclerDays.apply {

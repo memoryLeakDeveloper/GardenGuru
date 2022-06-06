@@ -3,18 +3,15 @@ package com.example.gardenguru.ui.customview.spinner
 import android.content.Context
 import android.graphics.drawable.TransitionDrawable
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,8 +45,14 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
     private var valueCallback: ValueCallback? = null
 
+    private var newItemCallback: NewItemCallback? = null
+
     fun setValueListener(callback: ValueCallback) {
         valueCallback = callback
+    }
+
+    fun setNewItemListener(callback: NewItemCallback) {
+        newItemCallback = callback
     }
 
     var spinnerValue: String? = null
@@ -57,6 +60,10 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
 
     fun interface ValueCallback {
         fun value(position: Int, name: String)
+    }
+
+    fun interface NewItemCallback {
+        fun newItemAdded(position: Int, text: String)
     }
 
     fun interface SelectListener {
@@ -75,12 +82,15 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
         setSpinnerDefState(defValue, defPos, list)
-        if (!isEditText) {
-            setSpinnerBottomMargin()
-        } else {
+        if (isEditText) {
             initEditText()
         }
         this.defValue = defValue
+    }
+
+    fun deleteLastItem() {
+        spinnerAdapter.deleteLastItem()
+        selectListener.onSelect(this.defValue!!, 0, true)
     }
 
     private fun setCustomAttributes(attrs: AttributeSet) {
@@ -125,12 +135,6 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         }
     }
 
-    private fun setSpinnerBottomMargin() {
-        val params = LinearLayoutCompat.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        params.bottomMargin = (25F * context.resources.displayMetrics.density).toInt()
-        popupBinding.spinnerRecycler.layoutParams = params
-    }
-
     private fun setSpinnerDefState(defString: String?, defPos: Int?, list: ArrayList<String>) {
         if (defString.isNullOrEmpty()) {
             if ((defPos != null) && (defPos >= 0)) {
@@ -157,6 +161,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
                         popupBinding.editText.setText(it)
                         spinnerAdapter.insertNewItem(it)
                         binding.spinnerText.text = it
+                        newItemCallback?.newItemAdded(spinnerAdapter.itemCount, it)
                     }
                     editText.text = ""
                     hideKeyboard(editText as EditText)
