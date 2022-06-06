@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
-import com.example.gardenguru.data.photo.PhotoData
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.FragmentPlantCardBinding
@@ -36,9 +36,10 @@ class PlantCardFragment : Fragment() {
             0,
             "Иван",
             "Кактус",
-            arrayListOf(
+            (
                 PhotoData(
                     "0",
+                    "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
                     "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
                 )
             ),

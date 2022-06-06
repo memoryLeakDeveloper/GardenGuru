@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gardenguru.data.event.EventData
 import com.example.gardenguru.data.event.PlantEventsData
-import com.example.gardenguru.data.photo.PhotoData
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.utils.Extensions.toDmyString
@@ -23,10 +23,10 @@ class PlantCardHistoryViewModel @Inject constructor() : ViewModel() {
                     0,
                     "Иван",
                     "Кактус",
-                    arrayListOf(
-                        PhotoData(
+                    (PhotoData(
                             "0",
-                            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
+                            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
+                            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
                         )
                     ),
                     SunRelationData(0, ""),

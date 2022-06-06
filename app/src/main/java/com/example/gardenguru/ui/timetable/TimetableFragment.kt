@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentTimetableBinding
 import com.example.gardenguru.ui.customview.CalendarView
+import com.example.gardenguru.utils.Extensions.checkAndVerifyCameraPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -24,11 +26,12 @@ import java.util.*
 class TimetableFragment : Fragment() {
 
     private lateinit var binding: FragmentTimetableBinding
-    private var viewModel = TimetableViewModel()//: TimetableViewModel by viewModels()  todo
+    private lateinit var viewModel: TimetableViewModel
     private lateinit var calendarRecyclerAdapter: CalendarRecyclerAdapter
     private lateinit var eventsRecyclerAdapter: TimetableRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        viewModel = ViewModelProvider(this)[TimetableViewModel::class.java]
         binding = FragmentTimetableBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,8 +50,6 @@ class TimetableFragment : Fragment() {
         }
 
 
-
-        
         initAddButton()
         initCalendar()
     }
@@ -114,15 +115,19 @@ class TimetableFragment : Fragment() {
     private fun initAddButton() {
         with(binding) {
             ivCam.setOnClickListener{
-                findNavController().navigate(R.id.addingPlantFragment)
+                if (requireActivity().checkAndVerifyCameraPermissions() && requireActivity().checkAndVerifyCameraPermissions()){
+                    findNavController().navigate(R.id.action_timetableFragment_to_cameraFragment)
+                }
             }
 
             requireContext().resources.displayMetrics.widthPixels
             val expandedBtnWidth = (requireContext().resources.displayMetrics.widthPixels
                     - 2 * resources.getDimension(R.dimen.xm_indent) - ivPlus.layoutParams.width / 2.0).toInt()
 
+            ivCam.isEnabled = false
             ivPlus.setOnClickListener {
                 if (ivCam.alpha == 1f) {
+                    ivCam.isEnabled = false
                     etInputPlantName.animate().alpha(0.0f).apply {
                         duration = 80
                     }.start()
@@ -152,6 +157,7 @@ class TimetableFragment : Fragment() {
                         addUpdateListener { animator -> ivPlus.setBackgroundColor(animator.animatedValue as Int) }
                     }.start()
                 } else {
+                    ivCam.isEnabled = true
                     etInputPlantName.animate().alpha(1f).apply {
                         duration = 100
                         startDelay = 200

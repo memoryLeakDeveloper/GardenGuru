@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
-import com.example.gardenguru.data.photo.PhotoData
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.DialogPlantMovingBinding
@@ -34,11 +34,11 @@ class PlantCardInfoFragment : Fragment() {
         0,
         "Иван",
         "КактусКактусКактусКактусКактус.КактусКактусКактусКактусКактусКактусКактусКактусКактусКактус",
-        arrayListOf(
-            PhotoData(
-                "0",
-                "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-            )
+
+        PhotoData(
+            "0",
+            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
+            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
         ),
         SunRelationData(0, ""),
         arrayListOf(),
@@ -74,7 +74,7 @@ class PlantCardInfoFragment : Fragment() {
     private fun iniView() {
         with(binding) {
             Glide.with(requireContext())
-                .load(data.photo.first().photo)
+                .load(data.photo.file)
                 .circleCrop()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .into(plantPhoto)
@@ -82,7 +82,7 @@ class PlantCardInfoFragment : Fragment() {
             plantName1.text = data.name
             plantInfo.movementMethod = LinkMovementMethod.getInstance()
             plantInfo.text = getSpannableNextString()
-            careDifficult.initView(data.care_complexity, true)
+            careDifficult.initView(data.careComplexity, true)
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data)

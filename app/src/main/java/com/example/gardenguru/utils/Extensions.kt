@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -57,36 +58,61 @@ object Extensions {
         return true
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun Uri.getRealPath(context: Context): File {
-        var fileName = ""
-
-        this.let { returnUri ->
-            context.contentResolver.query(returnUri, null, null, null)
-        }?.use { cursor ->
-            val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            cursor.moveToFirst()
-            fileName = cursor.getString(nameIndex)
+    fun Activity.checkAndVerifyCameraPermissions(): Boolean {
+        val permission = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        )
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.CAMERA
+                ),
+                Constance.GALLERY_PERMISSION_REQUEST_KODE
+            )
+            return false
         }
+        return true
+    }
 
-        val iStream: InputStream = context.contentResolver.openInputStream(this)!!
-        val outputDir: File = context.cacheDir!!
-        val outputFile = File(outputDir, fileName)
+    fun Uri.copyToFile(context: Context): File {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            var fileName = ""
 
-        iStream.use { input ->
-            val outputStream = FileOutputStream(outputFile)
-            outputStream.use { output ->
-                val buffer = ByteArray(4 * 1024) // buffer size
-                while (true) {
-                    val byteCount = input.read(buffer)
-                    if (byteCount < 0) break
-                    output.write(buffer, 0, byteCount)
-                }
-                output.flush()
+            this.let { returnUri ->
+                context.contentResolver.query(returnUri, null, null, null)
+            }?.use { cursor ->
+                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                cursor.moveToFirst()
+                fileName = cursor.getString(nameIndex)
             }
-        }
 
-        iStream.close()
-        return outputFile
+            val iStream: InputStream = context.contentResolver.openInputStream(this)!!
+            val outputDir: File = context.cacheDir!!
+            val outputFile = File(outputDir, fileName)
+
+            iStream.use { input ->
+                val outputStream = FileOutputStream(outputFile)
+                outputStream.use { output ->
+                    val buffer = ByteArray(4 * 1024) // buffer size
+                    while (true) {
+                        val byteCount = input.read(buffer)
+                        if (byteCount < 0) break
+                        output.write(buffer, 0, byteCount)
+                    }
+                    output.flush()
+                }
+            }
+
+            iStream.close()
+            return outputFile
+        } else { //todo test
+            val file = this.toFile()
+            val outputFile = File(context.cacheDir, Date().toString())
+            file.copyTo(outputFile, true)
+            return file
+        }
     }
 }

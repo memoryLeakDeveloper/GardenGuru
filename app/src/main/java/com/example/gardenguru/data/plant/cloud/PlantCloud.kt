@@ -3,7 +3,6 @@ package com.example.gardenguru.data.plant.cloud
 import com.example.gardenguru.core.Base
 import com.example.gardenguru.data.benefit.BenefitData
 import com.example.gardenguru.data.pest.PestData
-import com.example.gardenguru.data.photo.PhotoData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.google.gson.annotations.SerializedName
@@ -13,7 +12,7 @@ data class PlantCloud(
     @SerializedName("care_complexity") val care_complexity: Int,
     @SerializedName("name") val name: String,
     @SerializedName("description") val description: String,
-    @SerializedName("photo") val photo: ArrayList<PhotoData>,
+    @SerializedName("photo") val photo: ArrayList<PhotoDataCloud>,
     @SerializedName("sunRelation") val sunRelation: SunRelationData,
     @SerializedName("pests") val pests: ArrayList<PestData>,
     @SerializedName("reproduction") val reproduction: ArrayList<ReproductionData>,

@@ -18,7 +18,7 @@ import com.example.gardenguru.databinding.DialogSupportSuccessBinding
 import com.example.gardenguru.databinding.FragmentSupportBinding
 import com.example.gardenguru.ui.customview.DialogHelper
 import com.example.gardenguru.utils.Extensions.checkAndVerifyStoragePermissions
-import com.example.gardenguru.utils.Extensions.getRealPath
+import com.example.gardenguru.utils.Extensions.copyToFile
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -37,7 +37,7 @@ class SupportFragment : Fragment() {
                 if (result.data != null) {
                     val fileUri = result.data!!.data ?: return@registerForActivityResult
 
-                    val file = fileUri.getRealPath(requireContext())
+                    val file = fileUri.copyToFile(requireContext())
                     val fileSizeInMB = file.length() / (1024 * 1024)
 
                     if (viewModel.files.value!!.size > 10) {

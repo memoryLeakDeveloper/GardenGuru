@@ -17,11 +17,12 @@ import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
+import com.example.gardenguru.ui.add_plant.GetPlantInfo
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlantDescriptionFragment(private val data: PlantData, private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment() {
+class PlantDescriptionFragment(private val data: PlantData, private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment(), GetPlantInfo {
 
     private lateinit var binding: FragmentPlantDescriptionBinding
     private var isDescriptionShowed: Boolean = false
@@ -40,7 +41,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
     private fun initView(data: PlantData) {
         with(binding) {
             Glide.with(requireContext())
-                .load(data.photo.first().photo)
+                .load(data.photo.file)
                 .circleCrop()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .into(plantPhoto)
@@ -48,7 +49,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
             plantName1.text = data.name
             plantInfo.movementMethod = LinkMovementMethod.getInstance()
             plantInfo.text = getSpannableNextString()
-            careDifficult.initView(data.care_complexity, false)
+            careDifficult.initView(data.careComplexity, false)
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data)
@@ -111,6 +112,10 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
             if (isDescriptionShowed) hidePlantDescription() else showPlantDescription()
             callback.update()
         }
+    }
+
+    override fun getPlantInfo(): PlantData {
+        return data
     }
 
 }

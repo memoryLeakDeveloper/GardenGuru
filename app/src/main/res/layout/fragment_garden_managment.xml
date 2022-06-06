@@ -45,17 +45,14 @@
                 tools:text="sdfsdf"
                 android:background="@drawable/button_green_stroke"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="28dp"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="12dp"
                 android:textColor="@color/white"
-                tools:text="Лето (июнь-август)"
-                android:background="@drawable/button_green_stroke"/>
+                tools:text="Лето (июнь-август)"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -63,7 +60,7 @@
                 android:layout_marginHorizontal="28dp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.example.gardenguru.ui.customview.ClickableTextView
                     android:id="@+id/bt_remove_garden"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,7 +70,7 @@
                     android:textColor="@color/gray"
                     android:text="@string/delete_garden"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.example.gardenguru.ui.customview.ClickableTextView
                     android:id="@+id/bt_save_garden"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,24 +110,62 @@
                 android:orientation="vertical"
                 android:background="@drawable/card_bg">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginHorizontal="12dp"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="12dp"
-                    android:textColor="@color/white"
-                    tools:text="sdfsdf"
-                    android:background="@drawable/button_green_stroke"/>
+                    android:paddingHorizontal="16dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/button_green_stroke">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_all_with_links"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingVertical="12dp"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/white"
+                        android:singleLine="true"
+                        tools:text="sdfsdsassasaassrrrerasasadasdf"
+                        android:background="@color/transparent"
+                        android:drawablePadding="9dp"
+                        android:drawableStart="@drawable/ic_link_white"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_all_with_links"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/gray"
+                        tools:text="Новичок"
+                        android:textSize="14sp"
+                        android:layout_marginStart="16dp"
+                        android:background="@color/transparent"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_users"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/rv_participant_item"/>
+
+
 
                 <com.example.gardenguru.ui.customview.ClickableTextView
                     android:id="@+id/tv_copy_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/primary_green"
+                    android:layout_marginTop="20dp"
                     android:layout_marginHorizontal="26dp"
+                    android:drawablePadding="9dp"
                     android:textSize="16sp"
                     android:layout_marginBottom="26dp"
                     android:drawableStart="@drawable/ic_link"

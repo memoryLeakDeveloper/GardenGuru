@@ -11,20 +11,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.FragmentLoginBinding
+import com.example.gardenguru.data.auth.UserEmailHelper
 import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
+import com.example.gardenguru.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -51,6 +57,7 @@ class LoginFragment : Fragment() {
 
     private fun checkLogin() {
         //todo check if login
+        UserEmailHelper.Base(requireContext().getPrefs()).setEmail("kostya@planx.one")
 
         findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
     }

@@ -34,8 +34,8 @@
             android:layout_marginTop="25dp"
             android:src="@drawable/plant_placeholder" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/plant_name"
+        <com.example.gardenguru.ui.customview.ClickableTextView
+            android:id="@+id/add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
