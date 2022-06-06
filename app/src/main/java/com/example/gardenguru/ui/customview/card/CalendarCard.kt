@@ -30,15 +30,16 @@ class CalendarCard(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
     init {
         orientation = VERTICAL
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
-        binding.button.setOnClickListener { it ->
-            val(number: Int, period: DaysMode) = binding.calendar.getValue()
-            val value = when(period) {
+        binding.button.setOnClickListener {
+            val (number: Int, period: DaysMode) = binding.calendar.getValue()
+            val value = when (period) {
                 DaysMode.Days -> number * DaysMode.Days.days
                 DaysMode.Weeks -> number * DaysMode.Weeks.days
                 DaysMode.Months -> number * DaysMode.Months.days
             }
             valueCallback?.value(value)
-            setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
+            it.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
+            binding.calendar.disableScrolling()
             isEnabled = false
         }
     }

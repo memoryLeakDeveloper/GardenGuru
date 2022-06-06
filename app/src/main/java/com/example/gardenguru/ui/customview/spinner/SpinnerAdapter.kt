@@ -65,6 +65,12 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
         notifyItemInserted(selectedPosition)
     }
 
+    fun deleteLastItem() {
+        list.removeLast()
+        selectedPosition = 0
+        notifyItemRemoved(list.lastIndex + 1)
+    }
+
     fun setListAdapter(list: ArrayList<String>) {
         this.list = list
     }

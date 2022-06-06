@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/button_unactive_background.xml" value="0.5475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/dialog_background.xml" value="0.2975" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_arrow_next_gray.xml" value="0.2975" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/drawable/ic_care_difficult_1.xml" value="0.5475" />
@@ -15,6 +16,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_care_difficult.xml" value="0.553125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_leave_garden.xml" value="0.30027173913043476" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/dialog_remove_garden.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_layout.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GardenGuru/app/src/main/res/layout/spinner_popup.xml" value="0.5541666666666667" />
       </map>
     </option>
   </component>
