@@ -17,12 +17,15 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
 
     private val binding = CardCareDifficultBinding.inflate(LayoutInflater.from(context), this)
     private val bindingDialog = DialogCareDifficultBinding.inflate(LayoutInflater.from(context))
+    private val dialog = DialogHelper()
+    private var careDifficult = 0
 
     init {
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
     fun initView(difficult: Int, isEditing: Boolean) {
+        this.careDifficult = difficult
         with(binding) {
             if (!isEditing) edit.visibility = View.GONE
             else edit.setOnClickListener {
@@ -46,19 +49,15 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
                     textDescription.setText(R.string.care_difficult_4)
                 }
             }
-
-
         }
-
     }
+
+    fun getDifficult() = this.careDifficult
 
     private fun showDialog() {
         var selectedItem = 0
         val listCare = ArrayList<String>(listOf(*resources.getStringArray(R.array.care_difficult)))
         with(bindingDialog) {
-            button.setOnClickListener {
-                DialogHelper().hideDialog()
-            }
             card1.apply {
                 val position = 1
                 text1.text = listCare[position - 1]
@@ -73,7 +72,7 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
             card2.apply {
                 val position = 2
                 text2.text = listCare[position - 1]
-                image1.setDrawable(R.drawable.ic_care_difficult_2)
+                image2.setDrawable(R.drawable.ic_care_difficult_2)
                 setOnClickListener {
                     if (selectedItem == position) return@setOnClickListener
                     setItemSelected(position)
@@ -104,7 +103,7 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
                 }
             }
         }
-        DialogHelper().showDialog(bindingDialog.root)
+        dialog.showDialog(bindingDialog.root, false)
     }
 
     private fun setItemSelected(position: Int) {
@@ -127,9 +126,17 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
                     text4.setTextColor(ContextCompat.getColor(context, R.color.gray3))
                 }
             }
-            button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_background))
-            button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_next_arrow, 0)
-            button.setTextColor(ContextCompat.getColor(context, R.color.white))
+            button.apply {
+                setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_background))
+                setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_next_arrow, 0)
+                setTextColor(ContextCompat.getColor(context, R.color.white))
+                setOnClickListener {
+                    dialog.hideDialog()
+                    initView(position, true)
+                    setItemUnselected(position)
+                    setButtonInactive()
+                }
+            }
         }
     }
 
@@ -153,6 +160,15 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
                     text4.setTextColor(ContextCompat.getColor(context, R.color.gray))
                 }
             }
+        }
+    }
+
+    private fun setButtonInactive() {
+        with(bindingDialog.button) {
+            setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_white10_with_stroke))
+            setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_next_gray, 0)
+            setTextColor(ContextCompat.getColor(context, R.color.gray))
+            setOnClickListener(null)
         }
     }
 
