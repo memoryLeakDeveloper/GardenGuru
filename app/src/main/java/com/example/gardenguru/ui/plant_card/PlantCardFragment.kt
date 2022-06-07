@@ -37,12 +37,12 @@ class PlantCardFragment : Fragment() {
             "Иван",
             "Кактус",
             (
-                PhotoData(
-                    "0",
-                    "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
-                    "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                )
-            ),
+                    PhotoData(
+                        "0",
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
+                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
+                    )
+                    ),
             SunRelationData(0, ""),
             arrayListOf(),
             arrayListOf(),
@@ -68,6 +68,8 @@ class PlantCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val idPlant = requireArguments().getString("PLANT_ID")
+
         with(binding) {
             back.setOnClickListener {
                 requireActivity().onBackPressed()
@@ -78,13 +80,13 @@ class PlantCardFragment : Fragment() {
                 findNavController().popBackStack(R.id.timetableFragment, false)
             }
 
-            initPager()
+            initPager(idPlant)
         }
     }
 
-    private fun initPager() {
+    private fun initPager(idPlant: String?) {
         with(binding) {
-            adapter = PlantCardPagerAdapter(requireActivity())
+            adapter = PlantCardPagerAdapter(requireActivity(), idPlant)
             viewPager.adapter = adapter
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -117,8 +119,8 @@ class PlantCardFragment : Fragment() {
         }
     }
 
-    private fun selectInfoTab(){
-        with(binding){
+    private fun selectInfoTab() {
+        with(binding) {
             tvTabInfo.setTextColor(resources.getColor(R.color.primary_green, null))
             tvTabInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_green_dot)
 
@@ -133,8 +135,8 @@ class PlantCardFragment : Fragment() {
         }
     }
 
-    private fun selectNotificationTab(){
-        with(binding){
+    private fun selectNotificationTab() {
+        with(binding) {
             tvTabInfo.setTextColor(resources.getColor(R.color.gray, requireContext().theme))
             tvTabInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
 
@@ -148,8 +150,8 @@ class PlantCardFragment : Fragment() {
         }
     }
 
-    private fun selectHistoryTab(){
-        with(binding){
+    private fun selectHistoryTab() {
+        with(binding) {
             tvTabInfo.setTextColor(resources.getColor(R.color.gray, requireContext().theme))
             tvTabInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
 

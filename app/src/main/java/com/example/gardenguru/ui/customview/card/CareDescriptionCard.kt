@@ -6,7 +6,9 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
@@ -19,21 +21,31 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
     private var binding = CardCareDescriptionBinding.inflate(LayoutInflater.from(context), this)
 
     init {
-        //TODO
         orientation = VERTICAL
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
     fun initView(data: PlantData) {
-        binding.wateringText1.text = getString(1, data.summerWatering)
-        binding.wateringText2.text = getString(2, data.winterWatering)
-        binding.sprayingText1.text = getString(1, data.summerSpraying)
-        binding.sprayingText2.text = getString(2, data.winterSpraying)
-        binding.feedingText1.text = getString(1, data.summerFeeding)
-        binding.feedingText2.text = getString(2, data.winterFeeding)
+        Log.d("bugger", data.toString())
+        if (data.summerWatering == null &&
+            data.winterWatering == null &&
+            data.summerSpraying == null &&
+            data.winterSpraying == null &&
+            data.summerFeeding == null &&
+            data.winterFeeding == null &&
+            data.plantingTime == null &&
+            data.reproduction == null &&
+            data.pruning == null
+        ) this.visibility = View.GONE
+        binding.wateringText1.text = data.summerWatering?.let { getString(1, it) }
+        binding.wateringText2.text = data.winterWatering?.let { getString(2, it) }
+        binding.sprayingText1.text = data.summerSpraying?.let { getString(1, it) }
+        binding.sprayingText2.text = data.winterSpraying?.let { getString(2, it) }
+        binding.feedingText1.text = data.summerFeeding?.let { getString(1, it) }
+        binding.feedingText2.text = data.winterFeeding?.let { getString(2, it) }
         binding.plantingText1.text = data.plantingTime
-        if (data.reproduction.isNotEmpty()) {
-            binding.reproductionText1.text = data.reproduction.first().type //TODO
+        if (data.reproduction?.isNotEmpty() == true) {
+            binding.reproductionText1.text = data.reproduction?.first()?.type //TODO
         }
         binding.pruningText1.text = data.pruning
     }

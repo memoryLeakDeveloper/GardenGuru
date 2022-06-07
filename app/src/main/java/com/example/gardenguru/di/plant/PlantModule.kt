@@ -2,7 +2,11 @@ package com.example.gardenguru.di.plant
 
 import com.example.gardenguru.core.Api
 import com.example.gardenguru.data.auth.TokenHelper
+import com.example.gardenguru.data.language.LanguageHelper
 import com.example.gardenguru.data.plant.PlantRepository
+import com.example.gardenguru.data.plant.cloud.PlantCloudDataSource
+import com.example.gardenguru.data.plant.cloud.PlantCloudMapper
+import com.example.gardenguru.data.plant.cloud.PlantService
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantService
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantSource
 import com.example.gardenguru.domain.plant.CreatePlantUseCase
@@ -14,16 +18,26 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PlantModule {
+class PlantModule {
 
     @Provides
     fun providePlantRepository(
         tokenHelper: TokenHelper.Base,
-        createPlantService: CreatePlantService
+        languageHelper: LanguageHelper.Base,
+        createPlantService: CreatePlantService,
+        plantService: PlantService,
+        cloudMapper: PlantCloudMapper.Base
     ): PlantRepository = PlantRepository.Base(
         tokenHelper,
-        CreatePlantSource.Base(createPlantService)
+        CreatePlantSource.Base(createPlantService),
+        PlantCloudDataSource.Base(plantService),
+        cloudMapper,
+        languageHelper
     )
+
+    @Provides
+    @Singleton
+    fun providePlantService(api: Api): PlantService = api.makeService(PlantService::class.java)
 
     @Provides
     @Singleton
@@ -32,4 +46,7 @@ object PlantModule {
     @Provides
     fun provideCreatePlantUseCase(plantRepository: PlantRepository): CreatePlantUseCase =
         CreatePlantUseCase(plantRepository)
+
+    @Provides
+    fun providePlantCloudMapper() = PlantCloudMapper.Base()
 }

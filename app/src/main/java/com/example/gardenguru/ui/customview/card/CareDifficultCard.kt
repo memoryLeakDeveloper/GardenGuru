@@ -24,7 +24,7 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
-    fun initView(difficult: Int, isEditing: Boolean) {
+    fun initView(difficult: Int = 1, isEditing: Boolean) {
         this.careDifficult = difficult
         with(binding) {
             if (!isEditing) edit.visibility = View.GONE
