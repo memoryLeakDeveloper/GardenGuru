@@ -71,7 +71,7 @@ class PlantCardInfoFragment : Fragment() {
                 aboutPlant.visibility = View.GONE
                 plantName1.visibility = View.GONE
             }
-            careDifficult.initView(data.careComplexity, true)
+            careDifficult.initView(data.careComplexity!!, true) //TODO
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data.pests)

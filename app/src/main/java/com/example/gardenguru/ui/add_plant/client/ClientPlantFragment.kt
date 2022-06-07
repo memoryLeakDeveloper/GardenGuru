@@ -22,9 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
 import com.example.gardenguru.data.enums.Seasons
-import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudObj
 import com.example.gardenguru.databinding.AddPestsCardBinding
 import com.example.gardenguru.databinding.FragmentClientPlantBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
@@ -71,7 +69,7 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
                     CoroutineScope(Dispatchers.IO).launch {
                         val image = viewModel.uploadImage(imageUri, "plant", requireContext())
 
-                        if(image == null){
+                        if (image == null) {
                             launch(Dispatchers.Main) {
                                 binding.plantPhoto.setImageResource(R.drawable.plant_placeholder)
                                 Toast.makeText(requireContext(), R.string.error_when_upload_image, Toast.LENGTH_SHORT).show()
@@ -247,9 +245,9 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     }
 
     override fun getPlantInfo(): PlantData? {
-        return if (!binding.etPlantName.text.isNullOrBlank() && viewModel.plantImage != null){
+        return if (!binding.etPlantName.text.isNullOrBlank() && viewModel.plantImage != null) {
             PlantData("", name = binding.etPlantName.text.toString(), photo = viewModel.plantImage!!)
-        }else null
+        } else null
     }
 
 }

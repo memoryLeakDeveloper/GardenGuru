@@ -2,7 +2,12 @@ package com.example.gardenguru.di.plant
 
 import com.example.gardenguru.core.Api
 import com.example.gardenguru.data.auth.TokenHelper
+import com.example.gardenguru.data.language.LanguageHelper
 import com.example.gardenguru.data.plant.PlantRepository
+import com.example.gardenguru.data.plant.cloud.PlantCloudDataSource
+import com.example.gardenguru.data.plant.cloud.PlantCloudMapper
+import com.example.gardenguru.data.plant.cloud.PlantService
+import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudMapper
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantService
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantSource
 import com.example.gardenguru.domain.plant.CreatePlantUseCase
@@ -25,8 +30,11 @@ class PlantModule {
         cloudMapper: PlantCloudMapper.Base
     ): PlantRepository = PlantRepository.Base(
         tokenHelper,
+        CreatePlantSource.Base(createPlantService),
+        PlantCloudDataSource.Base(plantService),
+        cloudMapper,
         CreatePlantCloudMapper(),
-        CreatePlantSource.Base(createPlantService)
+        languageHelper
     )
 
     @Provides
