@@ -7,12 +7,9 @@ import retrofit2.http.*
 
 interface CreatePlantService {
 
-    @Multipart
     @POST("${Api.apiVersion}/plants/create/")
     suspend fun createPlant(
         @Header("Authorization") auth: String,
-        @Part name: MultipartBody.Part,
-        @Part garden: MultipartBody.Part,
         @Body plant: CreatePlantBody
     ): Call<Unit>
 }

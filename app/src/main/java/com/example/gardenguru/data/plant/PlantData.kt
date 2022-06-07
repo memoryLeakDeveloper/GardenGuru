@@ -6,28 +6,29 @@ import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.pest.PestData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
-import com.google.gson.annotations.SerializedName
 
 data class PlantData(
-    var id: String,
-    @SerializedName("") var careComplexity: Int,
+    var id: String? = null,
+    var careComplexity: Int? = null,
     var name: String,
-    var description: String,
+//    var plantType: String? = null,
+    var code: String? = null,
+    var description: String? = null,
     var photo: PhotoData,
-    @SerializedName("") var sunRelation: SunRelationData,
-    var pests: ArrayList<PestData>,
-    var reproduction: ArrayList<ReproductionData>,
-    var benefits: ArrayList<BenefitData>,
-    var pruning: String,
-    var plantingTime: String,
-    @SerializedName("") var summerWatering: Int,
-    @SerializedName("") var summerSpraying: Int,
-    @SerializedName("") var summerFeeding: Int,
-    @SerializedName("") var summerMinTemp: Int,
-    @SerializedName("") var summerMaxTemp: Int,
-    @SerializedName("") var winterWatering: Int,
-    @SerializedName("") var winterSpraying: Int,
-    @SerializedName("") var winterFeeding: Int,
-    @SerializedName("") var winterMinTemp: Int,
-    @SerializedName("") var winterMaxTemp: Int
+    var sunRelation: SunRelationData? = null,
+    var pests: ArrayList<PestData>? = null,
+    var reproduction: ArrayList<ReproductionData>? = null,
+    var benefits: ArrayList<BenefitData>? = null,
+    var pruning: String? = null,
+    var plantingTime: String ? = null,
+    var summerWatering: Int ? = null,
+    var summerSpraying: Int? = null,
+    var summerFeeding: Int? = null,
+    var summerMinTemp: Int? = null,
+    var summerMaxTemp: Int? = null,
+    var winterWatering: Int? = null,
+    var winterSpraying: Int? = null,
+    var winterFeeding: Int? = null,
+    var winterMinTemp: Int? = null,
+    var winterMaxTemp: Int? = null
 ) : Base.DataObject

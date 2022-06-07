@@ -1,6 +1,7 @@
 package com.example.gardenguru.data.media.cloud
 
 import com.example.gardenguru.core.Api
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
 import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
@@ -15,5 +16,5 @@ interface UploadImageService {
         @Header("Authorization") auth: String,
         @Part type: MultipartBody.Part,
         @Part file: MultipartBody.Part
-    ): Call<PhotoDataCloud>
+    ): Call<PhotoData>
 }

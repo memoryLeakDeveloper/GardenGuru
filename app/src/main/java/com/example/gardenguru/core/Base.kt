@@ -10,7 +10,11 @@ abstract class Base {
 
     interface UiObject
 
-    interface Mapper<C: CloudObject, D: DataObject>{
+    interface CloudMapper<C: CloudObject, D: DataObject>{
         fun map(cloud: C): D
+    }
+
+    interface DataMapper<C: CloudObject, D: DataObject>{
+        fun map(data: D): C
     }
 }

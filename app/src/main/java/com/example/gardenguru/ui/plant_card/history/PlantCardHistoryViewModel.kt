@@ -22,6 +22,7 @@ class PlantCardHistoryViewModel @Inject constructor() : ViewModel() {
                     "0",
                     0,
                     "Иван",
+                    null,
                     "Кактус",
                     (PhotoData(
                             "0",

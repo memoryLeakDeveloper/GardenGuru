@@ -6,7 +6,7 @@ import com.example.gardenguru.data.garden.models.GardenData
 import com.example.gardenguru.data.garden.models.GardenPlantData
 import com.example.gardenguru.data.garden.models.Participant
 
-class GardenMapper: Base.Mapper<GardenCloud, GardenData> {
+class GardenMapper: Base.CloudMapper<GardenCloud, GardenData> {
     override fun map(cloud: GardenCloud): GardenData {
         return GardenData(
             id = cloud.id,

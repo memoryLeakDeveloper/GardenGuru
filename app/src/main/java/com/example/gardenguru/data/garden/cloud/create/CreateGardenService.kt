@@ -8,10 +8,11 @@ import retrofit2.http.*
 
 interface CreateGardenService {
 
+    @Multipart
     @POST("${Api.apiVersion}/gardens/")
-    suspend fun createGarden(
+    fun createGarden(
         @Header("Authorization") auth: String,
         @Header("Accept-Language") lang: String,
-        @Body name: String
+        @Part name: MultipartBody.Part
     ): Call<GardenName>
 }

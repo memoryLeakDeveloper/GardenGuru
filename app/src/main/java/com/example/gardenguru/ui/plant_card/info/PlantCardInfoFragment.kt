@@ -30,7 +30,7 @@ class PlantCardInfoFragment : Fragment() {
         0,
         "Иван",
         "КактусКактусКактусКактусКактус.КактусКактусКактусКактусКактусКактусКактусКактусКактусКактус",
-
+        null,
         PhotoData(
             "0",
             "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
@@ -74,7 +74,7 @@ class PlantCardInfoFragment : Fragment() {
             plantName1.text = data.name
             plantInfo.movementMethod = LinkMovementMethod.getInstance()
             plantInfo.text = getSpannableNextString()
-            careDifficult.initView(data.careComplexity, true)
+            careDifficult.initView(data.careComplexity!!, true)
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data)
@@ -93,7 +93,7 @@ class PlantCardInfoFragment : Fragment() {
     }
 
     private fun getSpannableNextString(): SpannableString {
-        val text = data.description.substringBefore(".")
+        val text = data.description!!.substringBefore(".")
         val span = SpannableString(text + ". " + getString(R.string.next_dots))
         span.setSpan(
             getClickableSpan(),
@@ -116,7 +116,7 @@ class PlantCardInfoFragment : Fragment() {
         span.setSpan(
             getClickableSpan(),
             0,
-            text.length + getString(R.string.hide).length + 1,
+            text!!.length + getString(R.string.hide).length + 1,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         span.setSpan(

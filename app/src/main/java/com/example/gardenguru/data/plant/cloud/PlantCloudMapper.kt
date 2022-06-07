@@ -11,8 +11,9 @@ interface PlantCloudMapper {
     class Base : PlantCloudMapper {
         override fun mapCloudToData(cloud: PlantCloud) = PlantData(
             cloud.id,
-            cloud.care_complexity,
+            cloud.careComplexity,
             cloud.name,
+            cloud.code,
             cloud.description,
             PhotoData(cloud.photo.first().id, cloud.photo.first().thumbnail, cloud.photo.first().file),
             cloud.sunRelation,
@@ -37,6 +38,7 @@ interface PlantCloudMapper {
             data.id,
             data.careComplexity,
             data.name,
+            data.code,
             data.description,
             arrayListOf(PhotoDataCloud(data.photo.id, data.photo.thumbnail, data.photo.file)),
             data.sunRelation,

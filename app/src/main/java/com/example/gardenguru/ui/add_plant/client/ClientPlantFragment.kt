@@ -22,7 +22,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
 import com.example.gardenguru.data.enums.Seasons
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
+import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudObj
 import com.example.gardenguru.databinding.AddPestsCardBinding
 import com.example.gardenguru.databinding.FragmentClientPlantBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
@@ -84,7 +86,7 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     private val touchListener = View.OnTouchListener { v, event ->
         v.onTouchEvent(event)
         binding.root.requestFocus()
-        hideKeyboard(binding.editText)
+        hideKeyboard(binding.etPlantName)
         return@OnTouchListener true
     }
     var imageView: ImageView? = null
@@ -245,8 +247,9 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     }
 
     override fun getPlantInfo(): PlantData? {
-//        PlantData(-1, -1, )
-        return null
+        return if (!binding.etPlantName.text.isNullOrBlank() && viewModel.plantImage != null){
+            PlantData("", name = binding.etPlantName.text.toString(), photo = viewModel.plantImage!!)
+        }else null
     }
 
 }

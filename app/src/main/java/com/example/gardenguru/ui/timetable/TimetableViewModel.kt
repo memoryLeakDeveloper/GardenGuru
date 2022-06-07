@@ -23,6 +23,7 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     "0",
                     0,
                     "Иван",
+                    null,
                     "",
                     (
                         PhotoData(
@@ -65,6 +66,7 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     "0",
                     0,
                     "Игорь",
+                    null,
                     "",
                     (
                         PhotoData(
@@ -115,6 +117,7 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
                     "0",
                     0,
                     "Степан",
+                    null,
                     "",
                     (
                             PhotoData(

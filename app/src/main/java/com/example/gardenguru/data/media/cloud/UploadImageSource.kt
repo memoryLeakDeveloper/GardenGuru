@@ -1,6 +1,7 @@
 package com.example.gardenguru.data.media.cloud
 
 import com.example.gardenguru.core.exception.ErrorResponseCodeException
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -14,14 +15,14 @@ interface UploadImageSource {
         token: String,
         type: String,
         file: File
-    ): PhotoDataCloud
+    ): PhotoData
 
     class Base @Inject constructor(private val service: UploadImageService) : UploadImageSource {
         override suspend fun upload(
             token: String,
             type: String,
             file: File
-        ): PhotoDataCloud {
+        ): PhotoData {
             val typePart = MultipartBody.Part.createFormData("type", type)
             val filePart = MultipartBody.Part.createFormData(
                 "file", file.name,

@@ -25,15 +25,15 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
     }
 
     fun initView(data: PlantData) {
-        binding.wateringText1.text = getString(1, data.summerWatering)
-        binding.wateringText2.text = getString(2, data.winterWatering)
-        binding.sprayingText1.text = getString(1, data.summerSpraying)
-        binding.sprayingText2.text = getString(2, data.winterSpraying)
-        binding.feedingText1.text = getString(1, data.summerFeeding)
-        binding.feedingText2.text = getString(2, data.winterFeeding)
+        binding.wateringText1.text = getString(1, data.summerWatering!!)
+        binding.wateringText2.text = getString(2, data.winterWatering!!)
+        binding.sprayingText1.text = getString(1, data.summerSpraying!!)
+        binding.sprayingText2.text = getString(2, data.winterSpraying!!)
+        binding.feedingText1.text = getString(1, data.summerFeeding!!)
+        binding.feedingText2.text = getString(2, data.winterFeeding!!)
         binding.plantingText1.text = data.plantingTime
-        if (data.reproduction.isNotEmpty()) {
-            binding.reproductionText1.text = data.reproduction.first().type //TODO
+        if (data.reproduction?.isNotEmpty() == true) {
+            binding.reproductionText1.text = data.reproduction!!.first().type //TODO
         }
         binding.pruningText1.text = data.pruning
     }

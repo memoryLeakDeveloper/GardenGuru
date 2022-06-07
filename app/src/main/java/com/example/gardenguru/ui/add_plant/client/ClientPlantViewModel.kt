@@ -4,15 +4,16 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
 import com.example.gardenguru.domain.media.UploadImageUseCase
 import javax.inject.Inject
 
 class ClientPlantViewModel(private val uploadImageUseCase: UploadImageUseCase) : ViewModel() {
 
-    private var plantImage: PhotoDataCloud? = null
+    var plantImage: PhotoData? = null
 
-    suspend fun uploadImage(uri: Uri, imageType: String, context: Context): PhotoDataCloud? {
+    suspend fun uploadImage(uri: Uri, imageType: String, context: Context): PhotoData? {
         plantImage = uploadImageUseCase.uploadImage(uri, imageType, context)
         return plantImage
     }

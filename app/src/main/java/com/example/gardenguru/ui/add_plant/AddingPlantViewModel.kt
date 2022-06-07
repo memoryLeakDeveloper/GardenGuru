@@ -1,11 +1,10 @@
 package com.example.gardenguru.ui.add_plant
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.gardenguru.data.garden.models.GardenData
 import com.example.gardenguru.data.garden.models.GardenName
+import com.example.gardenguru.data.plant.PlantData
+import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudObj
 import com.example.gardenguru.domain.garden.CreateGardenUseCase
 import com.example.gardenguru.domain.garden.GetGardenNamesUseCase
 import com.example.gardenguru.domain.plant.CreatePlantUseCase
@@ -16,11 +15,6 @@ class AddingPlantViewModel constructor(
     private val createGardenUseCase: CreateGardenUseCase,
     private val getGardenNamesUseCase: GetGardenNamesUseCase
 ) : ViewModel() {
-
-    private val _gardens = MutableLiveData<ArrayList<GardenData>>().apply {
-        value = arrayListOf()
-    }
-    val gardens: LiveData<ArrayList<GardenData>> = _gardens
 
     private lateinit var gardenNames: ArrayList<GardenName>
 
@@ -36,6 +30,10 @@ class AddingPlantViewModel constructor(
             gardenNames.add(garden)
         }
         return garden
+    }
+
+    suspend fun createPlant(plantData: PlantData): Boolean{
+        return createPlantUseCase.createPlant(gardenNames[selectedGarden].id, plantData)
     }
 
     class Factory @Inject constructor(

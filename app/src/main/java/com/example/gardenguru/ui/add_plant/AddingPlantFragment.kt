@@ -2,7 +2,6 @@ package com.example.gardenguru.ui.add_plant
 
 import android.content.Context
 import android.graphics.Rect
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
 import com.example.gardenguru.data.benefit.BenefitData
-import com.example.gardenguru.data.pest.PestData
 import com.example.gardenguru.data.media.PhotoData
+import com.example.gardenguru.data.pest.PestData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.FragmentAddingPlantBinding
+import com.example.gardenguru.ui.add_plant.AddingPlantFragment.UpdateLayoutHeightCallback
 import com.example.gardenguru.ui.add_plant.client.ClientPlantFragment
 import com.example.gardenguru.ui.add_plant.description.PlantDescriptionFragment
 import com.example.gardenguru.utils.Extensions.setString
@@ -37,6 +39,8 @@ class AddingPlantFragment : Fragment() {
 
     private lateinit var viewModel: AddingPlantViewModel
 
+    private lateinit var pagerAdapter: PagerAdapter
+
     @Inject
     lateinit var viewModelFactory: AddingPlantViewModel.Factory
 
@@ -52,14 +56,33 @@ class AddingPlantFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
             header.title.setString(R.string.adding)
             header.back.setOnClickListener {
                 requireActivity().onBackPressed()
             }
 
-            buttonAdd.setOnClickListener{
-//                viewPager.adapter!!.item
+            buttonAdd.setOnClickListener {
+                val plantData = pagerAdapter.getCurrentPlantNameAndData(viewPager.currentItem)
+
+                if (plantData != null && viewModel.selectedGarden != -1) {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val isSuccess = viewModel.createPlant(plantData)
+
+                        launch(Dispatchers.Main) {
+                            if (isSuccess) {
+                                findNavController().navigate(R.id.timetableFragment)//todo
+                            } else {
+                                Toast.makeText(requireContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                } else {
+                    if (viewModel.selectedGarden != -1)
+                        Toast.makeText(requireContext(), R.string.error_garden_not_selected, Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(requireContext(), R.string.error_not_all_data_populated, Toast.LENGTH_SHORT).show()
+
+                }
             }
         }
 
@@ -76,25 +99,32 @@ class AddingPlantFragment : Fragment() {
         setViewPager()
     }
 
-    private fun initSpinner(gardens: List<String>){
+    private fun initSpinner(gardens: List<String>) {
 
-        with(binding){
+        with(binding) {
             spinner.initView("Введите сад", null, ArrayList(gardens), true)
 
-            spinner.setValueListener{ pos, _ ->
+            spinner.setValueListener { pos, _ ->
                 viewModel.selectedGarden = pos
             }
 
-            CoroutineScope(Dispatchers.IO).launch {
-                val garden = viewModel.createGarden("fff")
+            spinner.setNewItemListener { pos: Int, text: String ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    val garden = viewModel.createGarden(text)
 
-                if (garden == null){
-                    launch(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), R.string.error_when_create_garden, Toast.LENGTH_SHORT)
-                        spinner
+                    if (garden == null) {
+                        launch(Dispatchers.Main) {
+                            Toast.makeText(requireContext(), R.string.error_when_create_garden, Toast.LENGTH_SHORT)
+                                .show()
+                            spinner.deleteLastItem()
+                        }
+                        viewModel.selectedGarden = -1
+                    } else {
+                        viewModel.selectedGarden = pos
                     }
                 }
             }
+
         }
     }
 
@@ -104,7 +134,8 @@ class AddingPlantFragment : Fragment() {
             page.scaleY = 1 - (0.01F * kotlin.math.abs(position))
         }
         binding.viewPager.apply {
-            adapter = PagerAdapter(this@AddingPlantFragment, listOf())
+            pagerAdapter = PagerAdapter(this@AddingPlantFragment, listOf())
+            adapter = pagerAdapter
             offscreenPageLimit = 2
             setPageTransformer(pageTransformer)
             addItemDecoration(HorizontalMarginItemDecoration(requireContext()))
@@ -146,19 +177,21 @@ class AddingPlantFragment : Fragment() {
 
     private fun convertDpToPx(dp: Float) = (dp * requireContext().resources.displayMetrics.density).toInt()
 
-    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) : FragmentStateAdapter(fragment) {
+    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) :
+        FragmentStateAdapter(fragment) {
 
-        override fun getItemCount() = 5
+        private val fragments = hashMapOf<Int, Fragment>()
 
-        override fun createFragment(position: Int): Fragment {
+        init {
             val data = PlantData(
                 "12121",
                 2,
                 "НЕЗАБУДКА",
+                null,
                 "УУУУУУУУ очень много букв УУУУУУУУь букв УУУУУУУУь много букв букв УУУУУУУУь много букв много букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверить",
                 PhotoData("1", "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg", ""),
                 SunRelationData(1, "22222"),
-                arrayListOf(PestData("1", "EFKO", Uri.EMPTY), PestData("2", "QA", Uri.EMPTY), PestData("133", "YYYYY", Uri.EMPTY)),
+                arrayListOf(PestData("1", "EFKO"), PestData("2", "QA"), PestData("133", "YYYYY")),
                 arrayListOf(ReproductionData(1, "TTTTT")),
                 arrayListOf(
                     BenefitData(
@@ -177,26 +210,34 @@ class AddingPlantFragment : Fragment() {
                 7,
                 10,
                 8,
-                8
+                8,
             )
-            return if (position != 4) PlantDescriptionFragment(data, updateLayoutHeightCallback) else ClientPlantFragment(
-                updateLayoutHeightCallback
-            )
+            for (i in 0 until itemCount - 1)
+            {
+                fragments[i] = PlantDescriptionFragment(data, updateLayoutHeightCallback)
+            }
+            fragments[itemCount - 1] = ClientPlantFragment(updateLayoutHeightCallback)
         }
-    }
 
-    fun getCurrentPlantData(){
-
-    }
-
-    class HorizontalMarginItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
-
-        private val horizontalMarginInPx: Int = (30F * context.resources.displayMetrics.density).toInt()
-
-        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-            outRect.right = horizontalMarginInPx
-            outRect.left = horizontalMarginInPx
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]!!
         }
-    }
 
+        fun getCurrentPlantNameAndData(position: Int): PlantData? {
+            return (fragments[position] as GetPlantInfo).getPlantInfo()
+        }
+
+        override fun getItemCount() = 5
+    }
+}
+
+
+class HorizontalMarginItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
+
+    private val horizontalMarginInPx: Int = (30F * context.resources.displayMetrics.density).toInt()
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        outRect.right = horizontalMarginInPx
+        outRect.left = horizontalMarginInPx
+    }
 }

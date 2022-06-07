@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
+import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudObj
 import com.example.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
 import com.example.gardenguru.ui.add_plant.GetPlantInfo
@@ -49,7 +50,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
             plantName1.text = data.name
             plantInfo.movementMethod = LinkMovementMethod.getInstance()
             plantInfo.text = getSpannableNextString()
-            careDifficult.initView(data.careComplexity, false)
+            careDifficult.initView(data.careComplexity!!, false)
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data)
@@ -68,7 +69,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
     }
 
     private fun getSpannableNextString(): SpannableString {
-        val text = data.description.substringBefore(".")
+        val text = data.description!!.substringBefore(".")
         val span = SpannableString(text + ". " + getString(R.string.next_dots))
         span.setSpan(
             getClickableSpan(),
@@ -91,7 +92,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
         span.setSpan(
             getClickableSpan(),
             0,
-            text.length + getString(R.string.hide).length + 1,
+            text!!.length + getString(R.string.hide).length + 1,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         span.setSpan(

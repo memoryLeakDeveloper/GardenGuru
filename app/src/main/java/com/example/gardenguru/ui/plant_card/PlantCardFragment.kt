@@ -35,8 +35,9 @@ class PlantCardFragment : Fragment() {
             "0",
             0,
             "Иван",
+            null,
             "Кактус",
-            (
+                        (
                 PhotoData(
                     "0",
                     "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",

@@ -59,9 +59,7 @@ interface GardenRepository {
         override suspend fun getGardenNames(): ArrayList<GardenName> {
             try {
                 return getGardenNamesDataSource.fetch(tokenHelper.getToken())
-            } catch (e: ErrorResponseCodeException) {
-                e.printStackTrace()
-            } catch (e: ConnectException) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
             return arrayListOf()
