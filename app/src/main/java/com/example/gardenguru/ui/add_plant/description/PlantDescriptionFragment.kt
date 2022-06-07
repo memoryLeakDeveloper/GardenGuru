@@ -53,8 +53,8 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
             careDifficult.initView(data.careComplexity!!, false)
             wheather.initView(data)
             careDescription.initView(data)
-            pests.initView(data)
-            benefits.initView(data)
+            pests.initView(data.pests)
+            benefits.initView(data.benefits)
         }
     }
 
@@ -69,7 +69,9 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
     }
 
     private fun getSpannableNextString(): SpannableString {
-        val text = data.description!!.substringBefore(".")
+        //TODO
+        val description = data.description ?: ""
+        val text = description.substringBefore(".")
         val span = SpannableString(text + ". " + getString(R.string.next_dots))
         span.setSpan(
             getClickableSpan(),
@@ -87,7 +89,9 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
     }
 
     private fun getSpannableHideString(): SpannableString {
-        val text = data.description
+        //TODO
+        val description = data.description ?: ""
+        val text = description.substringBefore(".")
         val span = SpannableString(text + " " + getString(R.string.hide))
         span.setSpan(
             getClickableSpan(),

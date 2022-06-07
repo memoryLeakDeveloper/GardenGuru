@@ -214,8 +214,10 @@
     <string name="event_calendar">Календарь событий</string>
     <string name="no_events">Cобытий нет! \nВозвращайтесь завтра</string>
 
-    //информация о растении
+    //plant info
     <string name="move">Переместить</string>
+    <string name="moving">Переезд!</string>
+    <string name="choose_garden">Выберите Сад для перемещения</string>
 
     //errors
     <string name="something_is_wrong">Что-то не так, попробуйте позже</string>

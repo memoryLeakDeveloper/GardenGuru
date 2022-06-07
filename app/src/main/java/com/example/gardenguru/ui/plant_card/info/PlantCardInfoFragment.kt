@@ -7,55 +7,34 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
-import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.data.sun.relation.SunRelationData
+import com.example.gardenguru.databinding.DialogPlantMovingBinding
 import com.example.gardenguru.databinding.FragmentPlantCardInfoBinding
+import com.example.gardenguru.ui.customview.DialogHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
 class PlantCardInfoFragment : Fragment() {
 
-    private var isDescriptionShowed: Boolean = false
-    val data = PlantData(
-        "0",
-        0,
-        "Иван",
-        "КактусКактусКактусКактусКактус.КактусКактусКактусКактусКактусКактусКактусКактусКактусКактус",
-        null,
-        PhotoData(
-            "0",
-            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
-            "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-        ),
-        SunRelationData(0, ""),
-        arrayListOf(),
-        arrayListOf(),
-        arrayListOf(),
-        "",
-        "",
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    )
-
     private lateinit var binding: FragmentPlantCardInfoBinding
-    private var viewModel = PlantCardInfoViewModel()//: PlantCardViewModel by viewModels()  todo
+    private val viewModel: PlantCardInfoViewModel by viewModels()
+    private val bindingDialog by lazy { DialogPlantMovingBinding.inflate(LayoutInflater.from(requireContext())) }
+    private val dialog by lazy { DialogHelper() }
+    private var isDescriptionShowed: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentPlantCardInfoBinding.inflate(inflater, container, false)
@@ -64,6 +43,18 @@ class PlantCardInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val idPlant = requireArguments().getString("PLANT_ID")
+        lifecycleScope.launch(Dispatchers.IO) {
+            val data = viewModel.fetchPlant(idPlant!!)
+            withContext(Dispatchers.Main) {
+                iniView(data)
+            }
+        }
+    }
+
+    private fun iniView(data: PlantData?) {
+        Log.d("bugger", data.toString())
+        if (data == null) return
         with(binding) {
             Glide.with(requireContext())
                 .load(data.photo.file)
@@ -71,70 +62,80 @@ class PlantCardInfoFragment : Fragment() {
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .into(plantPhoto)
             plantName.text = data.name
-            plantName1.text = data.name
-            plantInfo.movementMethod = LinkMovementMethod.getInstance()
-            plantInfo.text = getSpannableNextString()
-            careDifficult.initView(data.careComplexity!!, true)
+
+            data.description?.let {
+                plantInfo.text = getSpannableNextString(it)
+                plantInfo.movementMethod = LinkMovementMethod.getInstance()
+            } ?: run {
+                plantInfo.visibility = View.GONE
+                aboutPlant.visibility = View.GONE
+                plantName1.visibility = View.GONE
+            }
+            careDifficult.initView(data.careComplexity, true)
             wheather.initView(data)
             careDescription.initView(data)
-            pests.initView(data)
-            benefits.initView(data)
+            pests.initView(data.pests)
+            benefits.initView(data.benefits)
+            buttonMove.setOnClickListener {
+                bindingDialog.spinner.initView(
+                    "Введите сад",
+                    null,
+                    arrayListOf("11111111111", "2222222", "33333", "444444", "5555555"),
+                    true
+                )
+                dialog.showDialog(bindingDialog.root)
+            }
         }
     }
 
-    private fun showPlantDescription() {
+    private fun showPlantDescription(description: String) {
         isDescriptionShowed = true
-        binding.plantInfo.text = getSpannableHideString()
+        binding.plantInfo.text = getSpannableHideString(description)
     }
 
-    private fun hidePlantDescription() {
+    private fun hidePlantDescription(description: String) {
         isDescriptionShowed = false
-        binding.plantInfo.text = getSpannableNextString()
+        binding.plantInfo.text = getSpannableNextString(description)
     }
 
-    private fun getSpannableNextString(): SpannableString {
-        val text = data.description!!.substringBefore(".")
-        val span = SpannableString(text + ". " + getString(R.string.next_dots))
-        span.setSpan(
-            getClickableSpan(),
-            0,
-            text.length + getString(R.string.next_dots).length + 2,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        span.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
-            text.length + 2,
-            text.length + getString(R.string.next_dots).length + 2,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        return span
+    private fun getSpannableNextString(description: String): SpannableString {
+        val text = description.substringBefore(".")
+        return SpannableString(text + ". " + getString(R.string.next_dots)).apply {
+            setSpan(
+                getClickableSpan(description),
+                0,
+                text.length + getString(R.string.next_dots).length + 2,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
+                text.length + 2,
+                text.length + getString(R.string.next_dots).length + 2,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
     }
 
-    private fun getSpannableHideString(): SpannableString {
-        val text = data.description
-        val span = SpannableString(text + " " + getString(R.string.hide))
-        span.setSpan(
-            getClickableSpan(),
-            0,
-            text!!.length + getString(R.string.hide).length + 1,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        span.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
-            text.length + 1,
-            text.length + getString(R.string.hide).length + 1,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        return span
+    private fun getSpannableHideString(description: String): SpannableString {
+        val text = description.substringBefore(".")
+        return SpannableString(text + " " + getString(R.string.hide)).apply {
+            setSpan(getClickableSpan(description), 0, text.length + getString(R.string.hide).length + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
+                text.length + 1,
+                text.length + getString(R.string.hide).length + 1,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
     }
 
-    private fun getClickableSpan() = object : ClickableSpan() {
+    private fun getClickableSpan(description: String) = object : ClickableSpan() {
         override fun updateDrawState(ds: TextPaint) {
             ds.isUnderlineText = false
         }
 
         override fun onClick(widget: View) {
-            if (isDescriptionShowed) hidePlantDescription() else showPlantDescription()
+            if (isDescriptionShowed) hidePlantDescription(description) else showPlantDescription(description)
         }
     }
 }

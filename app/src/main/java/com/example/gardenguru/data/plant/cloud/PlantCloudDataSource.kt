@@ -4,14 +4,14 @@ import com.example.gardenguru.core.exception.ErrorResponseCodeException
 
 interface PlantCloudDataSource {
 
-    suspend fun fetchPlant(idPlant: String): PlantCloud
+    suspend fun fetchPlant(token: String, lang: String, idPlant: String): PlantCloud
 
     class Base(private val service: PlantService) : PlantCloudDataSource {
-        override suspend fun fetchPlant(idPlant: String): PlantCloud {
-            val response = service.fetchPlant(idPlant).execute()
-            if (response.code() == 201)
+        override suspend fun fetchPlant(token: String, lang: String, idPlant: String): PlantCloud {
+            val response = service.fetchPlant(token, lang, idPlant).execute()
+            if (response.code() == 200)
                 return response.body()!!
-            throw ErrorResponseCodeException(response.code(), 201)
+            throw ErrorResponseCodeException(response.code(), 200)
         }
     }
 }

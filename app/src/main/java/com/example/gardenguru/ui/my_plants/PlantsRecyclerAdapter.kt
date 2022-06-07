@@ -1,5 +1,6 @@
 package com.example.gardenguru.ui.my_plants
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.example.gardenguru.data.garden.models.GardenPlantData
 import com.example.gardenguru.databinding.RvGardenPlantItemBinding
 
 class PlantsRecyclerAdapter(private val plants: ArrayList<GardenPlantData>) :
-    RecyclerView.Adapter<PlantsRecyclerAdapter.ViewHolder>(){
+    RecyclerView.Adapter<PlantsRecyclerAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,11 +38,16 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<GardenPlantData>) :
             tvPlantName.text = item.name
             tvPlantKind.text = item.plant
 
-            if (position == itemCount - 1){
+            if (position == itemCount - 1) {
                 ivLine.visibility = View.GONE
-            }else ivLine.visibility = View.VISIBLE
-            root.setOnClickListener{
-                root.findNavController().navigate(R.id.action_myPlantsFragment_to_plantCardFragment) //add plant
+            } else ivLine.visibility = View.VISIBLE
+            root.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("PLANT_ID", plants[position].id)
+                root.findNavController().navigate(
+                    R.id.action_myPlantsFragment_to_plantCardFragment,
+                    bundle
+                )
             }
         }
     }
