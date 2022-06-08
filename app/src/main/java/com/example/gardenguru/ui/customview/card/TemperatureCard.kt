@@ -6,7 +6,6 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
@@ -17,6 +16,7 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 class TemperatureCard(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var binding = CardTemperatureBinding.inflate(LayoutInflater.from(context), this)
+    private var isActive = true
     private var valueCallback: ValueCallback? = null
 
     fun interface ValueCallback {
@@ -30,7 +30,26 @@ class TemperatureCard(context: Context, attrs: AttributeSet) : ConstraintLayout(
     init {
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         binding.button.setOnClickListener {
-            checkValidInput()
+            binding.button.setOnClickListener {
+                if (isActive) {
+                    checkValidInput()
+                } else {
+                    setViewActive()
+                    isActive = true
+                }
+            }
+        }
+    }
+
+    fun initView(seasons: Seasons) {
+        when (seasons) {
+            Seasons.Winter -> {
+                binding.textView.text = getSpannableText(resources.getString(R.string.in_winter))
+            }
+            Seasons.Summer -> {
+                binding.textView.text = getSpannableText(resources.getString(R.string.in_summer))
+            }
+            else -> {}
         }
     }
 
@@ -52,34 +71,47 @@ class TemperatureCard(context: Context, attrs: AttributeSet) : ConstraintLayout(
                     editTextTo.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.error_card_background))
                     return
                 }
-                editTextFrom.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
-                editTextTo.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
-                button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
-                button.isEnabled = false
-                disableEditText(editTextFrom)
-                disableEditText(editTextTo)
-                valueCallback?.value(Pair(textFrom.toInt(), textTo.toInt()))
-
+                setViewInactive()
             }
-
         }
     }
 
-    private fun disableEditText(editText: EditText) {
-        editText.isEnabled = false
-        editText.isActivated = false
-        editText.isClickable = false
+    private fun setViewActive() {
+        with(binding) {
+            button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_background))
+            button.setText(R.string.Ok)
+            button.isEnabled = true
+            editTextFrom.text?.clear()
+            editTextTo.text?.clear()
+            disableEditText(true)
+            valueCallback?.value(Pair(0, 0))
+        }
     }
 
-    fun initView(seasons: Seasons) {
-        when (seasons) {
-            Seasons.Winter -> {
-                binding.textView.text = getSpannableText(resources.getString(R.string.in_winter))
+    private fun setViewInactive() {
+        with(binding) {
+            editTextFrom.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+            editTextTo.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
+            button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
+            button.setText(R.string.change)
+            button.isEnabled = false
+            disableEditText(false)
+            valueCallback?.value(Pair(editTextFrom.toString().toInt(), editTextTo.toString().toInt()))
+        }
+    }
+
+    private fun disableEditText(isEnabled: Boolean) {
+        with(binding) {
+            editTextFrom.apply {
+                this.isEnabled = isEnabled
+                isActivated = isEnabled
+                isClickable = isEnabled
             }
-            Seasons.Summer -> {
-                binding.textView.text = getSpannableText(resources.getString(R.string.in_summer))
+            editTextTo.apply {
+                this.isEnabled = isEnabled
+                isActivated = isEnabled
+                isClickable = isEnabled
             }
-            else -> {}
         }
     }
 

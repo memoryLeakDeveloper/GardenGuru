@@ -43,6 +43,13 @@ class CalendarLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         binding.recyclerPeriod.isNestedScrollingEnabled = false
     }
 
+    fun enableScrolling() {
+        binding.recyclerDays.isNestedScrollingEnabled = true
+        binding.recyclerPeriod.isNestedScrollingEnabled = true
+    }
+
+    fun getValue(): Pair<Int, DaysMode> = Pair(getDaysRecyclerValue(), adapterDays.currentDaysMode)
+
     private fun initDaysRv() {
         adapterDays = CalendarDaysAdapter()
         binding.recyclerDays.apply {
@@ -62,8 +69,6 @@ class CalendarLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             LinearSnapHelper().attachToRecyclerView(this)
         }
     }
-
-    fun getValue(): Pair<Int, DaysMode> = Pair(getDaysRecyclerValue(), adapterDays.currentDaysMode)
 
     private fun getDaysRecyclerValue() =
         (binding.recyclerDays.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() - 1

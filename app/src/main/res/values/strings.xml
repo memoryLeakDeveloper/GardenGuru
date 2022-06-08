@@ -50,6 +50,9 @@
         <item>Декабрь</item>
     </array>
 
+    //custom cards
+    <string name="change">Изменить</string>
+
     //adding a plant
     <string name="adding">Добавление</string>
     <string name="add_a_plant">Добавить растение</string>

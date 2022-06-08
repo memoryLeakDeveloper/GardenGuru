@@ -17,6 +17,7 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 class CalendarCard(context: Context, attrs: AttributeSet) : LinearLayoutCompat(context, attrs) {
 
     private var binding = CardCalendarBinding.inflate(LayoutInflater.from(context), this)
+    private var isActive = true
     private var valueCallback: ValueCallback? = null
 
     fun interface ValueCallback {
@@ -31,17 +32,36 @@ class CalendarCard(context: Context, attrs: AttributeSet) : LinearLayoutCompat(c
         orientation = VERTICAL
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         binding.button.setOnClickListener {
-            val (number: Int, period: DaysMode) = binding.calendar.getValue()
-            val value = when (period) {
-                DaysMode.Days -> number * DaysMode.Days.days
-                DaysMode.Weeks -> number * DaysMode.Weeks.days
-                DaysMode.Months -> number * DaysMode.Months.days
+            if (isActive) {
+                setViewInactive()
+                isActive = false
+            } else {
+                setViewActive()
+                isActive = true
             }
-            valueCallback?.value(value)
-            it.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
-            binding.calendar.disableScrolling()
-            isEnabled = false
         }
+    }
+
+    private fun setViewInactive() {
+        val (number: Int, period: DaysMode) = binding.calendar.getValue()
+        val value = when (period) {
+            DaysMode.Days -> number * DaysMode.Days.days
+            DaysMode.Weeks -> number * DaysMode.Weeks.days
+            DaysMode.Months -> number * DaysMode.Months.days
+        }
+        valueCallback?.value(value)
+        binding.button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_unactive_background))
+        binding.button.setText(R.string.change)
+        binding.calendar.disableScrolling()
+        isEnabled = false
+    }
+
+    private fun setViewActive() {
+        valueCallback?.value(0)
+        binding.button.setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.button_background))
+        binding.calendar.enableScrolling()
+        binding.button.setText(R.string.Ok)
+        isEnabled = true
     }
 
     fun initView(seasons: Seasons) {

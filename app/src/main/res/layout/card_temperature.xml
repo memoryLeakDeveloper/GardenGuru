@@ -14,11 +14,11 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
-        tools:text="Укажите комфортную \n температуру Летом"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Укажите комфортную \n температуру Летом" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_text_from"
@@ -67,8 +67,8 @@
         android:fontFamily="@font/poppins_regular"
         android:hint="@string/to"
         android:inputType="number"
-        android:maxLines="1"
         android:maxLength="2"
+        android:maxLines="1"
         android:paddingStart="15dp"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
@@ -92,7 +92,7 @@
         app:layout_constraintStart_toEndOf="@+id/edit_text_to"
         app:layout_constraintTop_toTopOf="@+id/edit_text_to" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,6 +100,7 @@
         android:layout_marginVertical="25dp"
         android:background="@drawable/button_background"
         android:fontFamily="@font/sf_ui_font"
+        android:paddingHorizontal="10dp"
         android:text="@string/Ok"
         android:textAllCaps="false"
         android:textColor="@color/white"
