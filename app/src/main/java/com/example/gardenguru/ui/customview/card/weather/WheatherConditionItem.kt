@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.gardenguru.R
+import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.ItemWheatherConditionBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 import com.example.gardenguru.utils.Extensions.setString
@@ -37,6 +38,12 @@ class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayou
                 binding.image.setDrawable(R.drawable.ic_lighting)
                 binding.textView1.setString(R.string.lighting)
             }
+        }
+    }
+
+    fun setSunRelation(data: SunRelationData) {
+        when(data.type) {
+
         }
     }
 

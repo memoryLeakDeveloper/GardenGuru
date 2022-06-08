@@ -1,16 +1,14 @@
 package com.example.gardenguru.data.plant
 
+import android.util.Log
 import com.example.gardenguru.data.auth.TokenHelper
 import com.example.gardenguru.data.language.LanguageHelper
 import com.example.gardenguru.data.plant.cloud.PlantCloudDataSource
 import com.example.gardenguru.data.plant.cloud.PlantCloudMapper
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantBody
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudMapper
-import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudObj
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantSource
-import java.net.ConnectException
 import javax.inject.Inject
-import javax.inject.Singleton
 
 interface PlantRepository {
 
@@ -28,6 +26,7 @@ interface PlantRepository {
     ) : PlantRepository {
 
         override suspend fun fetchPlant(idPlant: String): PlantData? {
+            Log.d("bugger", "${plantSource.fetchPlant(tokenHelper.getToken(), languageHelper.getLanguage(), idPlant)}")
             return try {
                 cloudMapper.mapCloudToData(plantSource.fetchPlant(tokenHelper.getToken(), languageHelper.getLanguage(), idPlant))
             } catch (e: Exception) {
@@ -39,7 +38,10 @@ interface PlantRepository {
         override suspend fun createPlant(gardenId: String, plantData: PlantData): Boolean {
             try {
                 val plantCloudObj = createPlantCloudMapper.map(plantData)
-                return createPlantSource.createPlant(tokenHelper.getToken(), CreatePlantBody(plantData.name, gardenId, plantCloudObj)) //todo
+                return createPlantSource.createPlant(
+                    tokenHelper.getToken(),
+                    CreatePlantBody(plantData.name, gardenId, plantCloudObj)
+                ) //todo
             } catch (e: Exception) {
                 e.printStackTrace()
             }

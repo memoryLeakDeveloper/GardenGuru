@@ -13,7 +13,7 @@ data class PlantCloud(
     @SerializedName("name") val name: String,
     @SerializedName("code") val code: String? = null,
     @SerializedName("description") val description: String? = null,
-    @SerializedName("photo") val photo: ArrayList<PhotoDataCloud>,
+    @SerializedName("photos") val photo: ArrayList<PhotoDataCloud>,
     @SerializedName("sunRelation") val sunRelation: SunRelationData? = null,
     @SerializedName("pests") val pests: ArrayList<PestData>? = null,
     @SerializedName("reproduction") val reproduction: ArrayList<ReproductionData>? = null,

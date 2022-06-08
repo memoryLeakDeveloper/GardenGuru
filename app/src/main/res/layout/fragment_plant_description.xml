@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/plant_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/plant_placeholder" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/plant_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,37 +35,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/about_plant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Информация о растении"
         android:textColor="@color/gray"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        tools:text="Информация о растении" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/plant_name_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Информация о растении"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="Информация о растении" />
 
-    <TextView
+    <com.example.gardenguru.ui.customview.ExpandableTextView
         android:id="@+id/plant_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Информация о растении"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="Информация о растении" />
 
     <com.example.gardenguru.ui.customview.card.CareDescriptionCard
         android:id="@+id/care_description"

@@ -13,7 +13,7 @@ interface TokenHelper {
     class Base constructor(private val sharedPreferences: SharedPreferences) : TokenHelper {
         private val prefKey = "ActiveTokenPrefs"
 
-        override fun getToken() = "Token 8f826acb5eb0dc77fdd0a0075cf59648ee723888"//sharedPreferences.getString(prefKey, "")!!
+        override fun getToken() = "Token dfeeaff4c6674554945e043b62b1fc4006e4913e"//sharedPreferences.getString(prefKey, "")!!
 
         override fun setToken(value: String) = sharedPreferences.edit { putString(prefKey, value) }
     }

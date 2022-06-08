@@ -47,7 +47,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/watering_text1"
+            android:id="@+id/watering_summer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -58,7 +58,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/watering_text2"
+            android:id="@+id/watering_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -68,6 +68,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/watering_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
@@ -94,7 +95,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/spraying_text1"
+            android:id="@+id/spraying_summer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -105,7 +106,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/spraying_text2"
+            android:id="@+id/spraying_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -115,6 +116,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/spraying_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
@@ -140,7 +142,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/feeding_text1"
+            android:id="@+id/feeding_summer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -151,7 +153,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/feeding_text2"
+            android:id="@+id/feeding_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -161,6 +163,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/feeding_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
@@ -187,7 +190,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/planting_text1"
+            android:id="@+id/planting_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -198,6 +201,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/planting_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
@@ -224,7 +228,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/reproduction_text1"
+            android:id="@+id/reproduction_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -235,6 +239,7 @@
             android:textSize="16sp" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/reproduction_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
@@ -262,7 +267,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/pruning_text1"
+            android:id="@+id/pruning_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

@@ -81,9 +81,9 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_bold"
+                android:text="@string/plant_info"
                 android:textColor="@color/gray"
-                android:textSize="20sp"
-                android:text="@string/plant_info" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/plant_name_1"
@@ -96,7 +96,7 @@
                 android:textSize="18sp"
                 tools:text="Информация о растении" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.example.gardenguru.ui.customview.ExpandableTextView
                 android:id="@+id/plant_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,10 +130,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:textAllCaps="false"
                 android:background="@drawable/spinner_background"
                 android:fontFamily="@font/sf_ui_font"
                 android:text="@string/move"
+                android:textAllCaps="false"
                 android:textSize="19sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -146,7 +146,7 @@
                 android:padding="10dp"
                 android:text="@string/delete"
                 android:textColor="@color/gray"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -9,14 +9,15 @@ import com.example.gardenguru.data.garden.cloud.names.GetGardenNamesDataSource
 import com.example.gardenguru.data.garden.models.GardenData
 import com.example.gardenguru.data.garden.models.GardenName
 import com.example.gardenguru.data.language.LanguageHelper
-import java.lang.Exception
 import java.net.ConnectException
 import javax.inject.Inject
 
 interface GardenRepository {
 
     suspend fun getGardens(): ArrayList<GardenData>
+
     suspend fun deleteGarden()
+
     suspend fun createGarden(gardenName: String): GardenName?
 
     suspend fun getGardenNames(): ArrayList<GardenName>
@@ -28,7 +29,6 @@ interface GardenRepository {
         name: String,
         summerClimateType: String,
     ): Boolean
-
 
     class Base @Inject constructor(
         private val tokenHelper: TokenHelper.Base,

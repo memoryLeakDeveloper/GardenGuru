@@ -30,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -68,8 +69,7 @@ class AddingPlantFragment : Fragment() {
                 if (plantData != null && viewModel.selectedGarden != -1) {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val isSuccess = viewModel.createPlant(plantData)
-
-                        launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
                             if (isSuccess) {
                                 findNavController().navigate(R.id.timetableFragment)//todo
                             } else {
@@ -78,7 +78,7 @@ class AddingPlantFragment : Fragment() {
                         }
                     }
                 } else {
-                    if (viewModel.selectedGarden != -1)
+                    if (viewModel.selectedGarden == -1)
                         Toast.makeText(requireContext(), R.string.error_garden_not_selected, Toast.LENGTH_SHORT).show()
                     else Toast.makeText(requireContext(), R.string.error_not_all_data_populated, Toast.LENGTH_SHORT).show()
 
@@ -89,8 +89,7 @@ class AddingPlantFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val gardenNames = viewModel.loadGardensNames().map { it.name }
-
-            launch(Dispatchers.Main) {
+            withContext(Dispatchers.Main) {
                 initSpinner(gardenNames)
             }
         }
@@ -113,7 +112,7 @@ class AddingPlantFragment : Fragment() {
                     val garden = viewModel.createGarden(text)
 
                     if (garden == null) {
-                        launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
                             Toast.makeText(requireContext(), R.string.error_when_create_garden, Toast.LENGTH_SHORT)
                                 .show()
                             spinner.deleteLastItem()
@@ -212,8 +211,7 @@ class AddingPlantFragment : Fragment() {
                 8,
                 8,
             )
-            for (i in 0 until itemCount - 1)
-            {
+            for (i in 0 until itemCount - 1) {
                 fragments[i] = PlantDescriptionFragment(data, updateLayoutHeightCallback)
             }
             fragments[itemCount - 1] = ClientPlantFragment(updateLayoutHeightCallback)

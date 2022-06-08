@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
-import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
 import com.example.gardenguru.data.plant.PlantData
-import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudObj
 import com.example.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.example.gardenguru.ui.add_plant.AddingPlantFragment
 import com.example.gardenguru.ui.add_plant.GetPlantInfo
@@ -23,10 +21,10 @@ import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlantDescriptionFragment(private val data: PlantData, private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment(), GetPlantInfo {
+class PlantDescriptionFragment(private val data: PlantData, private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) :
+    Fragment(), GetPlantInfo {
 
     private lateinit var binding: FragmentPlantDescriptionBinding
-    private var isDescriptionShowed: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentPlantDescriptionBinding.inflate(inflater, container, false)
@@ -48,74 +46,18 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
                 .into(plantPhoto)
             plantName.text = data.name
             plantName1.text = data.name
-            plantInfo.movementMethod = LinkMovementMethod.getInstance()
-            plantInfo.text = getSpannableNextString()
+            data.description?.let {
+                plantInfo.initView(it, callback)
+            } ?: run {
+                plantInfo.visibility = View.GONE
+                aboutPlant.visibility = View.GONE
+                plantName1.visibility = View.GONE
+            }
             careDifficult.initView(data.careComplexity!!, false)
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data.pests)
             benefits.initView(data.benefits)
-        }
-    }
-
-    private fun showPlantDescription() {
-        isDescriptionShowed = true
-        binding.plantInfo.text = getSpannableHideString()
-    }
-
-    private fun hidePlantDescription() {
-        isDescriptionShowed = false
-        binding.plantInfo.text = getSpannableNextString()
-    }
-
-    private fun getSpannableNextString(): SpannableString {
-        //TODO
-        val description = data.description ?: ""
-        val text = description.substringBefore(".")
-        val span = SpannableString(text + ". " + getString(R.string.next_dots))
-        span.setSpan(
-            getClickableSpan(),
-            0,
-            text.length + getString(R.string.next_dots).length + 2,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        span.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
-            text.length + 2,
-            text.length + getString(R.string.next_dots).length + 2,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        return span
-    }
-
-    private fun getSpannableHideString(): SpannableString {
-        //TODO
-        val description = data.description ?: ""
-        val text = description.substringBefore(".")
-        val span = SpannableString(text + " " + getString(R.string.hide))
-        span.setSpan(
-            getClickableSpan(),
-            0,
-            text!!.length + getString(R.string.hide).length + 1,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        span.setSpan(
-            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary_green)),
-            text.length + 1,
-            text.length + getString(R.string.hide).length + 1,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        return span
-    }
-
-    private fun getClickableSpan() = object : ClickableSpan() {
-        override fun updateDrawState(ds: TextPaint) {
-            ds.isUnderlineText = false
-        }
-
-        override fun onClick(widget: View) {
-            if (isDescriptionShowed) hidePlantDescription() else showPlantDescription()
-            callback.update()
         }
     }
 

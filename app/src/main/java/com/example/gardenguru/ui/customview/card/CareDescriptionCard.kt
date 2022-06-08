@@ -6,7 +6,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -26,8 +25,17 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
     }
 
     fun initView(data: PlantData) {
-        Log.d("bugger", data.toString())
-        if (data.summerWatering == null &&
+        if (isDataIsEmpty(data)) return
+        setWatering(data)
+        setSpraying(data)
+        setFeeding(data)
+        setPlanting(data)
+        setReproduction(data)
+        setPruning(data)
+    }
+
+    private fun isDataIsEmpty(data: PlantData): Boolean {
+        return if (data.summerWatering == null &&
             data.winterWatering == null &&
             data.summerSpraying == null &&
             data.winterSpraying == null &&
@@ -36,18 +44,60 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
             data.plantingTime == null &&
             data.reproduction == null &&
             data.pruning == null
-        ) this.visibility = View.GONE
-        binding.wateringText1.text = data.summerWatering?.let { getString(1, it) }
-        binding.wateringText2.text = data.winterWatering?.let { getString(2, it) }
-        binding.sprayingText1.text = data.summerSpraying?.let { getString(1, it) }
-        binding.sprayingText2.text = data.winterSpraying?.let { getString(2, it) }
-        binding.feedingText1.text = data.summerFeeding?.let { getString(1, it) }
-        binding.feedingText2.text = data.winterFeeding?.let { getString(2, it) }
-        binding.plantingText1.text = data.plantingTime
-        if (data.reproduction?.isNotEmpty() == true) {
-            binding.reproductionText1.text = data.reproduction?.first()?.type //TODO
+        ) {
+            this.visibility = View.GONE
+            true
+        } else false
+    }
+
+    private fun setWatering(data: PlantData) {
+        with(binding) {
+            if (data.summerWatering == null && data.winterWatering == null) {
+                watering.visibility = View.GONE
+            } else {
+                data.summerWatering?.let { wateringSummer.text = getString(1, it) } ?: run { wateringSummer.visibility = View.GONE }
+                data.winterWatering?.let { wateringWinter.text = getString(2, it) } ?: run { wateringWinter.visibility = View.GONE }
+            }
         }
-        binding.pruningText1.text = data.pruning
+    }
+
+    private fun setSpraying(data: PlantData) {
+        with(binding) {
+            if (data.summerSpraying == null && data.winterSpraying == null) {
+                spraying.visibility = View.GONE
+
+            } else {
+                data.summerSpraying?.let { sprayingSummer.text = getString(1, it) } ?: run { sprayingSummer.visibility = View.GONE }
+                data.winterSpraying?.let { sprayingWinter.text = getString(2, it) } ?: run { sprayingWinter.visibility = View.GONE }
+            }
+        }
+    }
+
+    private fun setFeeding(data: PlantData) {
+        with(binding) {
+            if (data.summerFeeding == null && data.winterFeeding == null) {
+                feeding.visibility = View.GONE
+            } else {
+                data.summerFeeding?.let { feedingSummer.text = getString(1, it) } ?: run { feedingSummer.visibility = View.GONE }
+                data.winterFeeding?.let { feedingWinter.text = getString(2, it) } ?: run { feedingWinter.visibility = View.GONE }
+            }
+        }
+    }
+
+    private fun setPlanting(data: PlantData) {
+        data.plantingTime?.let { binding.plantingText.text = it } ?: run { binding.planting.visibility = View.GONE }
+    }
+
+    private fun setReproduction(data: PlantData) {
+        data.reproduction?.let {
+            val listString = it.map { item -> item.type }
+            val string = listString.joinToString(", ")
+            binding.plantingText.text = string
+        } ?: run { binding.reproduction.visibility = View.GONE }
+    }
+
+    private fun setPruning(data: PlantData) {
+        data.pruning?.let { binding.pruningText.text = it } ?: run { binding.pruning.visibility = View.GONE }
     }
 
     private fun getString(season: Int, days: Int): SpannableString {
