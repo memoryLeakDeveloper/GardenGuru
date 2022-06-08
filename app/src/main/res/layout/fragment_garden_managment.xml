@@ -111,6 +111,7 @@
                 android:background="@drawable/card_bg">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/add_participant_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
@@ -120,7 +121,7 @@
                     android:background="@drawable/button_green_stroke">
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_all_with_links"
+                        android:id="@+id/et_new_participant_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -129,23 +130,21 @@
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/white"
                         android:singleLine="true"
-                        tools:text="sdfsdsassasaassrrrerasasadasdf"
-                        android:background="@color/transparent"
-                        android:drawablePadding="9dp"
-                        android:drawableStart="@drawable/ic_link_white"/>
+                        android:hint="@string/enter_email"
+                        android:background="@color/transparent"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_all_with_links"
+                    <com.example.gardenguru.ui.customview.ClickableTextView
+                        android:id="@+id/bt_add_participant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/gray"
-                        tools:text="Новичок"
+                        android:textColor="@color/primary_green"
+                        android:text="@string/send"
                         android:textSize="14sp"
                         android:layout_marginStart="16dp"
                         android:background="@color/transparent"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -155,7 +154,6 @@
                     android:layout_marginTop="18dp"
                     tools:itemCount="3"
                     tools:listitem="@layout/rv_participant_item"/>
-
 
 
                 <com.example.gardenguru.ui.customview.ClickableTextView
@@ -174,7 +172,5 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
-
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>

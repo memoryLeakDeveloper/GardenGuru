@@ -4,14 +4,20 @@ import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gardenguru.R
 import com.example.gardenguru.data.garden.models.Participant
 import com.example.gardenguru.databinding.RvParticipantItemBinding
+import com.example.gardenguru.ui.customview.DialogHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ParticipantRecyclerAdapter(
     resources: Resources,
-    private val participants: ArrayList<Participant>,
+    private val participants: MutableList<Participant>,
     private val viewModel: GardenManagementViewModel
 ) :
     RecyclerView.Adapter<ParticipantRecyclerAdapter.ViewHolder>() {
@@ -19,7 +25,8 @@ class ParticipantRecyclerAdapter(
     private val spinnerValues = arrayListOf(
         resources.getString(Participant.RoleInGarden.Beginner.nameStringRes),
         resources.getString(Participant.RoleInGarden.Experienced.nameStringRes),
-        resources.getString(Participant.RoleInGarden.Guru.nameStringRes)
+        resources.getString(Participant.RoleInGarden.Guru.nameStringRes),
+        resources.getString(R.string.delete)
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,11 +40,11 @@ class ParticipantRecyclerAdapter(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, holderPosition: Int) {
         with(holder.binding) {
-            val participant = participants[position]
+            val participant = participants[holderPosition]
 
-            val defPosition = when(participant.role){
+            val defPosition = when (participant.role) {
                 Participant.RoleInGarden.Beginner -> 0
                 Participant.RoleInGarden.Experienced -> 1
                 Participant.RoleInGarden.Guru -> 2
@@ -45,12 +52,47 @@ class ParticipantRecyclerAdapter(
             }
 
             spinner.initView(participant.email, defPosition, spinnerValues)
-            spinner.setValueListener{ position: Int, name: String ->
-                Toast.makeText(root.context, "role selected: $name", Toast.LENGTH_SHORT).show()
+            spinner.setValueListener { position: Int, name: String ->
+
+                spinner.isEnabled = false
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    if (position == 3) {
+
+                        val dialogHelper = DialogHelper()
+
+                        val progressView = ProgressBar(root.context)
+                        dialogHelper.showDialog(progressView, false)
+
+                        val isSuccess = viewModel.deleteParticipant(participant.id)
+
+                        dialogHelper.hideDialog()
+
+                        if (!isSuccess){
+                            spinner.setItemSelected(defPosition)
+                            Toast.makeText(root.context, R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
+                        }else{
+                            participants.removeAt(holderPosition)
+                            notifyItemRemoved(holderPosition)
+                        }
+
+                    } else {
+                        val isSuccess = viewModel.editParticipantRole(
+                            participant.id,
+                            Participant.getRoleByStringValue(name, root.resources).value
+                        )
+                        if (!isSuccess) {
+                            Toast.makeText(root.context, R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
+
+                            spinner.setItemSelected(defPosition)
+                        }
+
+                        spinner.isEnabled = true
+                    }
+                }
             }
         }
     }
-
 
     override fun getItemCount(): Int {
         return participants.size

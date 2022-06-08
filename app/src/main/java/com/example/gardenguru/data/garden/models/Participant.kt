@@ -1,5 +1,6 @@
 package com.example.gardenguru.data.garden.models
 
+import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
 import com.example.gardenguru.R
@@ -49,6 +50,14 @@ data class Participant(
                 RoleInGarden.Guru.value -> RoleInGarden.Guru
                 RoleInGarden.Experienced.value -> RoleInGarden.Experienced
                 else -> RoleInGarden.Guru
+            }
+        }
+
+        fun getRoleByStringValue(role: String, resources: Resources): RoleInGarden {
+            return when(role){
+                resources.getString(RoleInGarden.Guru.nameStringRes) -> RoleInGarden.Guru
+                resources.getString(RoleInGarden.Experienced.nameStringRes) -> RoleInGarden.Experienced
+                else -> RoleInGarden.Beginner
             }
         }
     }

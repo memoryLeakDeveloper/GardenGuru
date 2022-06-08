@@ -247,7 +247,10 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     override fun getPlantInfo(): PlantData? {
         return if (!binding.etPlantName.text.isNullOrBlank() && viewModel.plantImage != null) {
             PlantData("", name = binding.etPlantName.text.toString(), photo = viewModel.plantImage!!)
-        } else null
+        }else {
+            Toast.makeText(requireContext(), R.string.error_garden_not_selected, Toast.LENGTH_SHORT).show()
+            null
+        }
     }
 
 }

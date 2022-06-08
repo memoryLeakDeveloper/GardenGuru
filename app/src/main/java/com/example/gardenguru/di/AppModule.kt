@@ -1,9 +1,7 @@
 package com.example.gardenguru.di
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.example.gardenguru.core.Api
-import com.example.gardenguru.core.App
 import com.example.gardenguru.data.auth.TokenHelper
 import com.example.gardenguru.data.auth.UserEmailHelper
 import com.example.gardenguru.data.language.LanguageHelper
@@ -22,7 +20,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideApi(@ApplicationContext context: Context) = Api(context)
+    fun provideApi() = Api()
 
     @Provides
     @Singleton

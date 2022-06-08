@@ -6,17 +6,22 @@ import com.example.gardenguru.data.garden.GardenMapper
 import com.example.gardenguru.data.garden.GardenRepository
 import com.example.gardenguru.data.garden.cloud.create.CreateGardenService
 import com.example.gardenguru.data.garden.cloud.create.CreateGardenSource
+import com.example.gardenguru.data.garden.cloud.delete.DeleteGardenService
+import com.example.gardenguru.data.garden.cloud.delete.DeleteGardenSource
 import com.example.gardenguru.data.garden.cloud.edit.EditGardenService
 import com.example.gardenguru.data.garden.cloud.edit.EditGardenSource
 import com.example.gardenguru.data.garden.cloud.get.GardensDataSource
 import com.example.gardenguru.data.garden.cloud.get.GetGardensService
 import com.example.gardenguru.data.garden.cloud.names.GetGardenNamesDataSource
 import com.example.gardenguru.data.garden.cloud.names.GetGardenNamesService
+import com.example.gardenguru.data.garden.cloud.participants.add.AddParticipantService
+import com.example.gardenguru.data.garden.cloud.participants.add.AddParticipantSource
+import com.example.gardenguru.data.garden.cloud.participants.delete.DeleteParticipantService
+import com.example.gardenguru.data.garden.cloud.participants.delete.DeleteParticipantSource
+import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleService
+import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleSource
 import com.example.gardenguru.data.language.LanguageHelper
-import com.example.gardenguru.domain.garden.CreateGardenUseCase
-import com.example.gardenguru.domain.garden.EditGardensUseCase
-import com.example.gardenguru.domain.garden.GetGardenNamesUseCase
-import com.example.gardenguru.domain.garden.GetGardensUseCase
+import com.example.gardenguru.domain.garden.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +30,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object GardenModule {
+class GardenModule {
 
     @Provides
     fun provideGardenRepository(
@@ -33,15 +38,23 @@ object GardenModule {
         languageHelper: LanguageHelper.Base,
         getGardenService: GetGardensService,
         editGardenService: EditGardenService,
+        editParticipantRoleService: EditParticipantRoleService,
+        addParticipantService: AddParticipantService,
+        deleteParticipantService: DeleteParticipantService,
         getGardenNamesService: GetGardenNamesService,
         createGardenService: CreateGardenService,
+        deleteGardenService: DeleteGardenService,
         gardenMapper: GardenMapper
     ): GardenRepository = GardenRepository.Base(
         tokenHelper,
         languageHelper,
         GardensDataSource.Base(getGardenService),
         EditGardenSource.Base(editGardenService),
+        EditParticipantRoleSource.Base(editParticipantRoleService),
+        AddParticipantSource.Base(addParticipantService),
+        DeleteParticipantSource.Base(deleteParticipantService),
         CreateGardenSource.Base(createGardenService),
+        DeleteGardenSource.Base(deleteGardenService),
         GetGardenNamesDataSource.Base(getGardenNamesService),
         gardenMapper
     )
@@ -52,11 +65,27 @@ object GardenModule {
 
     @Provides
     @Singleton
-    fun provideGardenService(api: Api): GetGardensService = api.makeServiceWithCashing(GetGardensService::class.java)
+    fun provideGardenService(api: Api): GetGardensService = api.makeService(GetGardensService::class.java)
 
     @Provides
     @Singleton
     fun provideEditGardenService(api: Api): EditGardenService = api.makeService(EditGardenService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideEditParticipantRoleService(api: Api): EditParticipantRoleService = api.makeService(EditParticipantRoleService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAddParticipantService(api: Api): AddParticipantService = api.makeService(AddParticipantService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDeleteParticipantService(api: Api): DeleteParticipantService = api.makeService(DeleteParticipantService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDeleteGardenService(api: Api): DeleteGardenService = api.makeService(DeleteGardenService::class.java)
 
     @Provides
     @Singleton
@@ -74,6 +103,10 @@ object GardenModule {
     @Provides
     fun provideEditGardensUseCase(gardenRepository: GardenRepository): EditGardensUseCase =
         EditGardensUseCase(gardenRepository)
+
+    @Provides
+    fun provideEditParticipantRoleUseCase(gardenRepository: GardenRepository): EditParticipantRoleUseCase =
+        EditParticipantRoleUseCase(gardenRepository)
 
     @Provides
     fun provideGetGardenNamesUseCase(gardenRepository: GardenRepository): GetGardenNamesUseCase =

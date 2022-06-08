@@ -6,15 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.gardenguru.data.garden.models.GardenData
 import com.example.gardenguru.domain.app.UserEmailUseCase
+import com.example.gardenguru.domain.garden.DeleteGardenUseCase
 import com.example.gardenguru.domain.garden.GetGardensUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
-class MyPlantsViewModel constructor(
+@HiltViewModel
+class MyPlantsViewModel @Inject constructor(
     private val getGardensUseCase: GetGardensUseCase,
+    private val deleteGardenUseCase: DeleteGardenUseCase,
     userEmailUseCase: UserEmailUseCase,
     ) : ViewModel() {
 
@@ -25,22 +28,18 @@ class MyPlantsViewModel constructor(
     }
 
     fun initGardens(){
+        _gardens.value = null
         CoroutineScope(Dispatchers.IO).launch {
             _gardens.postValue(loadGardens())
         }
     }
 
+    suspend fun leaveGarden(gardenId: String): Boolean{
+        return deleteGardenUseCase.perform(gardenId)
+    }
+
     private val _gardens = MutableLiveData<ArrayList<GardenData>>().apply {
-        value = arrayListOf()
+        value = null
     }
     val gardens: LiveData<ArrayList<GardenData>> = _gardens
-
-    class Factory @Inject constructor(
-        private val getGardensUseCase: GetGardensUseCase,
-        private val userEmailUseCase: UserEmailUseCase
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MyPlantsViewModel(getGardensUseCase, userEmailUseCase) as T
-        }
-    }
 }

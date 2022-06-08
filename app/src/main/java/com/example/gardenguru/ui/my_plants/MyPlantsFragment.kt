@@ -6,26 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentMyPlantsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyPlantsFragment : Fragment() {
 
     private lateinit var binding: FragmentMyPlantsBinding
-    private lateinit var viewModel: MyPlantsViewModel
-
-    @Inject lateinit var viewModelFactory: MyPlantsViewModel.Factory
+    private val viewModel: MyPlantsViewModel by viewModels()
 
     private lateinit var rvAdapter: GardensRecyclerAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this, viewModelFactory)[MyPlantsViewModel::class.java]
         binding = FragmentMyPlantsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,15 +39,21 @@ class MyPlantsFragment : Fragment() {
 
             initGardenList()
             viewModel.gardens.observe(viewLifecycleOwner){
-                if (viewModel.gardens.value?.isEmpty() == true){
-                    rvGardens.visibility = View.GONE
-                    noPlantsContainer.visibility = View.VISIBLE
-                    //search logic
+                if (it != null){
+                    binding.progressBar.visibility = View.GONE
+                    if (viewModel.gardens.value?.isEmpty() == true){
+                        rvGardens.visibility = View.GONE
+                        noPlantsContainer.visibility = View.VISIBLE
+                        //search logic
+                    }else{
+                        rvAdapter.notifyDataSetChanged()
+                        rvGardens.visibility = View.VISIBLE
+                        noPlantsContainer.visibility = View.GONE
+                    }
                 }else{
-                    rvAdapter.notifyDataSetChanged()
-                    rvGardens.visibility = View.VISIBLE
-                    noPlantsContainer.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
+
             }
         }
     }

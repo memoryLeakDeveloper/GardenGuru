@@ -30,6 +30,7 @@ class SpinnerLabelLayout(context: Context, attrs: AttributeSet) : ConstraintLayo
     private var popupBinding: SpinnerPopupBinding
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
+    private var list: ArrayList<String> = arrayListOf()
     private val selectListener = SpinnerLayout.SelectListener { text: String, position: Int, close: Boolean ->
         binding.spinnerText.text = text
         valueCallback?.value(position, text)
@@ -86,6 +87,18 @@ class SpinnerLabelLayout(context: Context, attrs: AttributeSet) : ConstraintLayo
         } else {
             initEditText()
         }
+
+        this.list = list
+    }
+
+    fun setItemSelected(position: Int): Boolean {
+        if (position !in 0 until list.size) return false
+        binding.spinnerText.text = list[position]
+        spinnerValue = list[position]
+        background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
+        spinnerAdapter.setItemSelected(position)
+        popupWindow?.dismiss()
+        return true
     }
 
     private fun setRootClickListener() {

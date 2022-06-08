@@ -13,6 +13,9 @@ import com.example.gardenguru.databinding.DialogRemoveGardenBinding
 import com.example.gardenguru.databinding.RvGardenItemBinding
 import com.example.gardenguru.ui.customview.DialogHelper
 import com.example.gardenguru.ui.my_plants.garden_managment.GardenManagementFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
     RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
@@ -68,8 +71,12 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
                             dialogHelper.hideDialog()
                         }
                         btYes.setOnClickListener {
-                            dialogHelper.hideDialog()
-                            //delete
+                            //todo
+                            CoroutineScope(Dispatchers.Main).launch {
+                                viewModel.leaveGarden(garden.id)
+
+                                dialogHelper.hideDialog()
+                            }
                         }
                     }
                     dialogHelper.showDialog(dialogBinding.root)
