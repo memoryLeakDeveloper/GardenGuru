@@ -75,6 +75,11 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
         this.list = list
     }
 
+    fun setItemSelected(position: Int) {
+        notifyItemChanged(selectedPosition)
+        selectedPosition = position
+    }
+
     override fun getItemCount() = list.size
 
     class SpinnerAdapterViewHolder(val binding: SpinnerItemBinding) : RecyclerView.ViewHolder(binding.root)
