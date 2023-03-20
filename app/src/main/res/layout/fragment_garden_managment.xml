@@ -45,7 +45,7 @@
                 tools:text="sdfsdf"
                 android:background="@drawable/button_green_stroke"/>
 
-            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
+            <com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_season"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:layout_marginHorizontal="28dp"
                 android:orientation="horizontal">
 
-                <com.example.gardenguru.ui.customview.ClickableTextView
+                <com.entexy.gardenguru.ui.customview.ClickableTextView
                     android:id="@+id/bt_remove_garden"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:textColor="@color/gray"
                     android:text="@string/delete_garden"/>
 
-                <com.example.gardenguru.ui.customview.ClickableTextView
+                <com.entexy.gardenguru.ui.customview.ClickableTextView
                     android:id="@+id/bt_save_garden"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                         android:hint="@string/enter_email"
                         android:background="@color/transparent"/>
 
-                    <com.example.gardenguru.ui.customview.ClickableTextView
+                    <com.entexy.gardenguru.ui.customview.ClickableTextView
                         android:id="@+id/bt_add_participant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                     tools:listitem="@layout/rv_participant_item"/>
 
 
-                <com.example.gardenguru.ui.customview.ClickableTextView
+                <com.entexy.gardenguru.ui.customview.ClickableTextView
                     android:id="@+id/tv_copy_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

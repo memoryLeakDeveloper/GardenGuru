@@ -23,13 +23,13 @@
         android:textSize="18sp"
         tools:text="Кактус колючий" />
 
-    <com.example.gardenguru.ui.customview.card.CareDifficultCard
+    <com.entexy.gardenguru.ui.customview.card.CareDifficultCard
         android:id="@+id/care_difficult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
-    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionCard
+    <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionCard
         android:id="@+id/wheather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         android:textSize="18sp"
         tools:text="Информация о растении" />
 
-    <com.example.gardenguru.ui.customview.ExpandableTextView
+    <com.entexy.gardenguru.ui.customview.ExpandableTextView
         android:id="@+id/plant_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,19 +68,19 @@
         android:textSize="16sp"
         tools:text="Информация о растении" />
 
-    <com.example.gardenguru.ui.customview.card.CareDescriptionCard
+    <com.entexy.gardenguru.ui.customview.card.CareDescriptionCard
         android:id="@+id/care_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
-    <com.example.gardenguru.ui.customview.card.pests.PestsCard
+    <com.entexy.gardenguru.ui.customview.card.pests.PestsCard
         android:id="@+id/pests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 
-    <com.example.gardenguru.ui.customview.card.BenefitsCard
+    <com.entexy.gardenguru.ui.customview.card.BenefitsCard
         android:id="@+id/benefits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

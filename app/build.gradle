@@ -24,7 +24,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.gardenguru"
+        applicationId "com.entexy.gardenguru"
         minSdk 23
         targetSdk 33
         versionCode 1
@@ -63,7 +63,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    namespace 'com.example.gardenguru'
+    namespace 'com.entexy.gardenguru'
 }
 
 dependencies {
