@@ -12,7 +12,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
-import com.example.gardenguru.ui.add_plant.AddingPlantFragment
+import com.example.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 
 class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 

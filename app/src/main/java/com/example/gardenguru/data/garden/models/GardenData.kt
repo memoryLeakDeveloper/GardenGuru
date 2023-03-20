@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
 import com.example.gardenguru.R
-import com.example.gardenguru.core.Base
 
 data class GardenData(
     val id: String,
@@ -12,7 +11,7 @@ data class GardenData(
     val summerClimateSeason: SummerClimateSeason,
     val plants: ArrayList<GardenPlantData>,
     val participants: ArrayList<Participant> = arrayListOf(),
-) : Base.DataObject, Parcelable {
+): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,

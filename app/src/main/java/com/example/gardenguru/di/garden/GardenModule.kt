@@ -22,6 +22,7 @@ import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipan
 import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleSource
 import com.example.gardenguru.data.language.LanguageHelper
 import com.example.gardenguru.domain.garden.*
+import com.example.gardenguru.domain.usecases.garden.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

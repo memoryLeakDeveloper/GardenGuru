@@ -4,13 +4,12 @@ import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
 import com.example.gardenguru.R
-import com.example.gardenguru.core.Base
 
 data class Participant(
     val id: String,
     val email: String,
     val role: RoleInGarden
-): Base.CloudObject, Parcelable {
+): Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,

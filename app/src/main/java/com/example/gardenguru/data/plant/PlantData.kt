@@ -1,6 +1,5 @@
 package com.example.gardenguru.data.plant
 
-import com.example.gardenguru.core.Base
 import com.example.gardenguru.data.benefit.BenefitData
 import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.pest.PestData
@@ -31,4 +30,4 @@ data class PlantData(
     var winterFeeding: Int? = null,
     var winterMinTemp: Int? = null,
     var winterMaxTemp: Int? = null
-) : Base.DataObject
+)

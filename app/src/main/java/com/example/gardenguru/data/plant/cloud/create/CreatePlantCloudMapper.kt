@@ -1,11 +1,10 @@
 package com.example.gardenguru.data.plant.cloud.create
 
-import com.example.gardenguru.core.Base
 import com.example.gardenguru.data.plant.PlantData
 
-class CreatePlantCloudMapper: Base.DataMapper<CreatePlantCloudObj, PlantData> {
+class CreatePlantCloudMapper{
 
-    override fun map(data: PlantData): CreatePlantCloudObj {
+    fun map(data: PlantData): CreatePlantCloudObj {
         return CreatePlantCloudObj(
             name = data.name,
             photosIds = arrayListOf(data.photo.id),

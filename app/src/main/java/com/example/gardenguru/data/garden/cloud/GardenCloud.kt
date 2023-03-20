@@ -1,6 +1,5 @@
 package com.example.gardenguru.data.garden.cloud
 
-import com.example.gardenguru.core.Base
 import com.google.gson.annotations.SerializedName
 
 data class GardenCloud(
@@ -10,5 +9,4 @@ data class GardenCloud(
     val guru: String,
     val plants: ArrayList<GardenPlantCloud>,
     val participants: ArrayList<ParticipantsCloud>
-) : Base.CloudObject{
-}
+)

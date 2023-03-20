@@ -1,6 +1,5 @@
 package com.example.gardenguru.data.plant.cloud
 
-import com.example.gardenguru.core.Base
 import com.example.gardenguru.data.benefit.BenefitData
 import com.example.gardenguru.data.pest.PestData
 import com.example.gardenguru.data.reproduction.ReproductionData
@@ -30,4 +29,4 @@ data class PlantCloud(
     @SerializedName("winterFeeding") val winterFeeding: Int? = null,
     @SerializedName("winterMinTemp") val winterMinTemp: Int? = null,
     @SerializedName("winterMaxTemp") val winterMaxTemp: Int? = null
-) : Base.CloudObject
+)

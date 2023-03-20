@@ -5,7 +5,7 @@ import com.example.gardenguru.data.auth.TokenHelper
 import com.example.gardenguru.data.media.MediaRepository
 import com.example.gardenguru.data.media.cloud.UploadImageService
 import com.example.gardenguru.data.media.cloud.UploadImageSource
-import com.example.gardenguru.domain.media.UploadImageUseCase
+import com.example.gardenguru.domain.usecases.media.UploadImageUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

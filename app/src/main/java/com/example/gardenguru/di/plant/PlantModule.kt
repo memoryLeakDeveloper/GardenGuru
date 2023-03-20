@@ -10,7 +10,7 @@ import com.example.gardenguru.data.plant.cloud.PlantService
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantCloudMapper
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantService
 import com.example.gardenguru.data.plant.cloud.create.CreatePlantSource
-import com.example.gardenguru.domain.plant.CreatePlantUseCase
+import com.example.gardenguru.domain.usecases.plant.CreatePlantUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

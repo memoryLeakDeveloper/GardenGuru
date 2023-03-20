@@ -33,7 +33,7 @@ class CalendarView: RecyclerView {
 
         scrollToPosition(7)
 
-        addOnScrollListener(object: RecyclerView.OnScrollListener() {
+        addOnScrollListener(object: OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if(newState == SCROLL_STATE_IDLE) {
                     val firstVisiblePosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()

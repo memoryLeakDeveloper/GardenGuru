@@ -7,11 +7,11 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.example.gardenguru.ui.onboarding.OnboardingFragment"
+        android:name="com.example.gardenguru.ui.fragments.onboarding.OnboardingFragment"
         android:label="OnboardingFragment" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.gardenguru.ui.login.LoginFragment"
+        android:name="com.example.gardenguru.ui.fragments.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -44,17 +44,17 @@
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.example.gardenguru.ui.info.PrivacyPolicyFragment"
+        android:name="com.example.gardenguru.ui.fragments.info.PrivacyPolicyFragment"
         android:label="PrivacyPolicyFragment"
         tools:layout="@layout/fragment_privacy_policy"/>
     <fragment
         android:id="@+id/termOfUseFragment"
-        android:name="com.example.gardenguru.ui.info.TermOfUseFragment"
+        android:name="com.example.gardenguru.ui.fragments.info.TermOfUseFragment"
         android:label="TermOfUseFragment"
         tools:layout="@layout/fragment_term_of_use"/>
     <fragment
         android:id="@+id/timetableFragment"
-        android:name="com.example.gardenguru.ui.timetable.TimetableFragment"
+        android:name="com.example.gardenguru.ui.fragments.timetable.TimetableFragment"
         android:label="TimetableFragment"
         tools:layout="@layout/fragment_timetable">
         <action
@@ -84,12 +84,12 @@
 
     <fragment
         android:id="@+id/addingPlantFragment"
-        android:name="com.example.gardenguru.ui.add_plant.AddingPlantFragment"
+        android:name="com.example.gardenguru.ui.fragments.add_plant.AddingPlantFragment"
         android:label="AddingPlantFragment"
         tools:layout="@layout/fragment_adding_plant"/>
     <fragment
         android:id="@+id/myPlantsFragment"
-        android:name="com.example.gardenguru.ui.my_plants.MyPlantsFragment"
+        android:name="com.example.gardenguru.ui.fragments.my_plants.MyPlantsFragment"
         tools:layout="@layout/fragment_my_plants"
         android:label="MyPlantsFragment" >
         <action
@@ -111,17 +111,17 @@
     </fragment>
     <fragment
         android:id="@+id/gardenManagementFragment"
-        android:name="com.example.gardenguru.ui.my_plants.garden_managment.GardenManagementFragment"
+        android:name="com.example.gardenguru.ui.fragments.my_plants.garden_managment.GardenManagementFragment"
         android:label="GardenManagementFragment"
         tools:layout="@layout/fragment_garden_managment"/>
     <fragment
         android:id="@+id/plantCardFragment"
-        android:name="com.example.gardenguru.ui.plant_card.PlantCardFragment"
+        android:name="com.example.gardenguru.ui.fragments.plant_card.PlantCardFragment"
         android:label="PlantCardFragment"
         tools:layout="@layout/fragment_plant_card"/>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.gardenguru.ui.settings.SettingsFragment"
+        android:name="com.example.gardenguru.ui.fragments.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
@@ -157,12 +157,12 @@
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
-        android:name="com.example.gardenguru.ui.settings.support.SupportFragment"
+        android:name="com.example.gardenguru.ui.fragments.settings.support.SupportFragment"
         android:label="SupportFragment"
         tools:layout="@layout/fragment_support"/>
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.example.gardenguru.ui.camera.CameraFragment"
+        android:name="com.example.gardenguru.ui.fragments.camera.CameraFragment"
         android:label="CameraFragment"
         tools:layout="@layout/fragment_camera">
         <action
@@ -176,7 +176,7 @@
     </fragment>
     <fragment
         android:id="@+id/cameraResultFragment"
-        android:name="com.example.gardenguru.ui.camera.camera_result.CameraResultFragment"
+        android:name="com.example.gardenguru.ui.fragments.camera.camera_result.CameraResultFragment"
         android:label="CameraResultFragment"
         tools:layout="@layout/fragment_camera_result">
         <action

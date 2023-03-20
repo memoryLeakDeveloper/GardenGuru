@@ -5,7 +5,7 @@ import com.example.gardenguru.core.Api
 import com.example.gardenguru.data.auth.TokenHelper
 import com.example.gardenguru.data.auth.UserEmailHelper
 import com.example.gardenguru.data.language.LanguageHelper
-import com.example.gardenguru.domain.app.UserEmailUseCase
+import com.example.gardenguru.domain.usecases.app.UserEmailUseCase
 import com.example.gardenguru.utils.Extensions.getPrefs
 import dagger.Module
 import dagger.Provides
