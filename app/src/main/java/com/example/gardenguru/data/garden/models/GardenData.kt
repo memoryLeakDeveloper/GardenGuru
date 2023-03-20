@@ -1,10 +1,11 @@
 package com.example.gardenguru.data.garden.models
 
 import android.content.res.Resources
-import android.os.Parcel
 import android.os.Parcelable
 import com.example.gardenguru.R
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class GardenData(
     val id: String,
     val name: String,
@@ -12,43 +13,11 @@ data class GardenData(
     val plants: ArrayList<GardenPlantData>,
     val participants: ArrayList<Participant> = arrayListOf(),
 ): Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!,
-        SummerClimateSeason.valueOf(parcel.readString()!!),
-        arrayListOf<GardenPlantData>().apply {
-            parcel.readList(this, GardenPlantData::class.java.classLoader)
-        },
-        arrayListOf<Participant>().apply {
-            parcel.readList(this, Participant::class.java.classLoader)
-        }
-    )
-
     fun getGuruEmail():String{
         return participants.find { it.role == Participant.RoleInGarden.Guru}!!.email
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeString(name)
-        parcel.writeString(summerClimateSeason.name)
-        parcel.writeList(plants.toList())
-        parcel.writeList(participants.toList())
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<GardenData> {
-        override fun createFromParcel(parcel: Parcel): GardenData {
-            return GardenData(parcel)
-        }
-
-        override fun newArray(size: Int): Array<GardenData?> {
-            return arrayOfNulls(size)
-        }
-
+    companion object {
         fun getSummerSeasonByValue(value: String): SummerClimateSeason {
             return when(value){
                 SummerClimateSeason.JuneAugust.value -> SummerClimateSeason.JuneAugust

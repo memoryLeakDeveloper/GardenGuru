@@ -20,8 +20,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.data.enums.Seasons
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.databinding.AddPestsCardBinding
@@ -36,9 +38,8 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("ClickableViewAccessibility")
 @AndroidEntryPoint
-class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment(), GetPlantInfo {
+class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : BaseFragment<FragmentClientPlantBinding>(), GetPlantInfo {
 
-    lateinit var binding: FragmentClientPlantBinding
     private val viewModel: ClientPlantViewModel by viewModels()
     var imageView: ImageView? = null
 
@@ -83,11 +84,6 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
         binding.root.requestFocus()
         hideKeyboard(binding.etPlantName)
         return@OnTouchListener true
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentClientPlantBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,49 +1,37 @@
 package com.example.gardenguru.ui
 
-import android.graphics.Rect
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.example.gardenguru.R
-import com.example.gardenguru.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setInsets()
-        navController = Navigation.findNavController(this, R.id.fragment_container)
-    }
-
-    private fun setInsets() {
-        binding.root.setOnApplyWindowInsetsListener { _, insets ->
-            insets.replaceSystemWindowInsets(
-                Rect(
-                    insets.systemWindowInsetLeft,
-                    0,
-                    insets.systemWindowInsetRight,
-                    insets.systemWindowInsetBottom
-                )
-            )
-        }
+        setContentView(R.layout.activity_main)
+        navController = (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
     }
 
     override fun onBackPressed() {
-        when (navController.currentDestination?.id) {
+        when (navController?.currentDestination?.id) {
             R.id.onboardingFragment, R.id.timetableFragment, R.id.loginFragment -> {
                 super.onBackPressed()
             }
             else -> {
-                navController.popBackStack()
+                navController?.popBackStack()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        navController = null
     }
 }

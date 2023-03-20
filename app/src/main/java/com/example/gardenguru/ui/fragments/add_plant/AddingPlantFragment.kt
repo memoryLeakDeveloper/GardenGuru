@@ -3,9 +3,7 @@ package com.example.gardenguru.ui.fragments.add_plant
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.data.benefit.BenefitData
 import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.pest.PestData
@@ -33,19 +32,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class AddingPlantFragment : Fragment() {
+class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
-    private lateinit var binding: FragmentAddingPlantBinding
     private lateinit var pagerAdapter: AddingPlantFragment.PagerAdapter
     private val viewModel: AddingPlantViewModel by viewModels()
 
     fun interface UpdateLayoutHeightCallback {
         fun update()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentAddingPlantBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

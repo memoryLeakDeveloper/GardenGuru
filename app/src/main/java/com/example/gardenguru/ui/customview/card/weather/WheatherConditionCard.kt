@@ -3,7 +3,6 @@ package com.example.gardenguru.ui.customview.card.weather
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.gardenguru.R
@@ -61,6 +60,7 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
                         temperature.setTextInfo("${data.winterMinTemp} ${R.string.celsium} / ${data.winterMaxTemp} ${R.string.celsium}")
                     }
                 }
+                else -> {} //todo
             }
         }
     }
@@ -84,6 +84,7 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
                         watering.setTextInfo("${R.string.every} ${data.winterWatering} ${R.string.days}")
                     }
                 }
+                else -> {} //todo
             }
         }
     }

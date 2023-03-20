@@ -1,24 +1,15 @@
 package com.example.gardenguru.ui.fragments.pest
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.databinding.FragmentPestInfoBinding
 import com.example.gardenguru.utils.setDrawable
 import com.example.gardenguru.utils.toVisible
 
-class PestInfoFragment : Fragment() {
-
-    private lateinit var binding: FragmentPestInfoBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentPestInfoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class PestInfoFragment : BaseFragment<FragmentPestInfoBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

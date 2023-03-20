@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gardenguru.data.garden.models.GardenData
 import com.example.gardenguru.data.garden.models.GardenPlantData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class PlantCardViewModel @Inject constructor() : ViewModel() {
 
     private val _gardens = MutableLiveData<ArrayList<GardenData>>().apply {
