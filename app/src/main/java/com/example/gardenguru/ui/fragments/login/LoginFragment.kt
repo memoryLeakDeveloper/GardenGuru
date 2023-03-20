@@ -16,8 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
 import com.example.gardenguru.data.auth.UserEmailHelper
 import com.example.gardenguru.databinding.FragmentLoginBinding
-import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
+import com.example.gardenguru.utils.getPrefs
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 

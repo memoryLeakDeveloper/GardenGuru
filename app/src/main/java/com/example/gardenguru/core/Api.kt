@@ -8,9 +8,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-@Module
-@InstallIn(SingletonComponent::class)
 class Api {
 
     private val baseUrl = "https://gardenguru.entexy.com/"
@@ -23,7 +20,7 @@ class Api {
             .build()
             .create(clazz)
 
-    private fun okHttpClient(): OkHttpClient{
+    private fun okHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)

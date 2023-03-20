@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentSettingsBinding
-import com.example.gardenguru.utils.Extensions.toDmyString
+import com.example.gardenguru.utils.toDmyString
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.collections.ArrayList

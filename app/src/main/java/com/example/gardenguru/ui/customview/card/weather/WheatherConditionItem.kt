@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import com.example.gardenguru.R
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.example.gardenguru.databinding.ItemWheatherConditionBinding
-import com.example.gardenguru.utils.Extensions.setDrawable
-import com.example.gardenguru.utils.Extensions.setString
+import com.example.gardenguru.utils.setDrawable
+import com.example.gardenguru.utils.setString
 
 
 class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {

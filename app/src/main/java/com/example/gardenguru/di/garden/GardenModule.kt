@@ -2,8 +2,7 @@ package com.example.gardenguru.di.garden
 
 import com.example.gardenguru.core.Api
 import com.example.gardenguru.data.auth.TokenHelper
-import com.example.gardenguru.data.garden.GardenMapper
-import com.example.gardenguru.data.garden.GardenRepository
+import com.example.gardenguru.data.garden.GardenRepositoryImpl
 import com.example.gardenguru.data.garden.cloud.create.CreateGardenService
 import com.example.gardenguru.data.garden.cloud.create.CreateGardenSource
 import com.example.gardenguru.data.garden.cloud.delete.DeleteGardenService
@@ -21,7 +20,7 @@ import com.example.gardenguru.data.garden.cloud.participants.delete.DeletePartic
 import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleService
 import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleSource
 import com.example.gardenguru.data.language.LanguageHelper
-import com.example.gardenguru.domain.garden.*
+import com.example.gardenguru.domain.repository.GardenRepository
 import com.example.gardenguru.domain.usecases.garden.*
 import dagger.Module
 import dagger.Provides
@@ -34,7 +33,7 @@ import javax.inject.Singleton
 class GardenModule {
 
     @Provides
-    fun provideGardenRepository(
+    fun provideGardenRepositoryImpl(
         tokenHelper: TokenHelper.Base,
         languageHelper: LanguageHelper.Base,
         getGardenService: GetGardensService,
@@ -45,8 +44,7 @@ class GardenModule {
         getGardenNamesService: GetGardenNamesService,
         createGardenService: CreateGardenService,
         deleteGardenService: DeleteGardenService,
-        gardenMapper: GardenMapper
-    ): GardenRepository = GardenRepository.Base(
+    ): GardenRepositoryImpl = GardenRepositoryImpl(
         tokenHelper,
         languageHelper,
         GardensDataSource.Base(getGardenService),
@@ -57,12 +55,7 @@ class GardenModule {
         CreateGardenSource.Base(createGardenService),
         DeleteGardenSource.Base(deleteGardenService),
         GetGardenNamesDataSource.Base(getGardenNamesService),
-        gardenMapper
     )
-
-    @Provides
-    @Singleton
-    fun provideMapper(): GardenMapper = GardenMapper()
 
     @Provides
     @Singleton
@@ -97,23 +90,19 @@ class GardenModule {
     fun provideCreateGardenService(api: Api): CreateGardenService = api.makeService(CreateGardenService::class.java)
 
     @Provides
-    fun provideGetGardensUseCase(gardenRepository: GardenRepository): GetGardensUseCase =
-        GetGardensUseCase(gardenRepository)
+    fun provideGetGardensUseCase(gardenRepository: GardenRepositoryImpl): GetGardensUseCase = GetGardensUseCase(gardenRepository)
 
 
     @Provides
-    fun provideEditGardensUseCase(gardenRepository: GardenRepository): EditGardensUseCase =
-        EditGardensUseCase(gardenRepository)
+    fun provideEditGardensUseCase(gardenRepository: GardenRepositoryImpl): EditGardensUseCase = EditGardensUseCase(gardenRepository)
 
     @Provides
-    fun provideEditParticipantRoleUseCase(gardenRepository: GardenRepository): EditParticipantRoleUseCase =
+    fun provideEditParticipantRoleUseCase(gardenRepository: GardenRepositoryImpl): EditParticipantRoleUseCase =
         EditParticipantRoleUseCase(gardenRepository)
 
     @Provides
-    fun provideGetGardenNamesUseCase(gardenRepository: GardenRepository): GetGardenNamesUseCase =
-        GetGardenNamesUseCase(gardenRepository)
+    fun provideGetGardenNamesUseCase(gardenRepository: GardenRepositoryImpl): GetGardenNamesUseCase = GetGardenNamesUseCase(gardenRepository)
 
     @Provides
-    fun provideCreateGardenUseCase(gardenRepository: GardenRepository): CreateGardenUseCase =
-        CreateGardenUseCase(gardenRepository)
+    fun provideCreateGardenUseCase(gardenRepository: GardenRepositoryImpl): CreateGardenUseCase = CreateGardenUseCase(gardenRepository)
 }

@@ -10,7 +10,7 @@ import com.example.gardenguru.R
 import com.example.gardenguru.databinding.CardCareDifficultBinding
 import com.example.gardenguru.databinding.DialogCareDifficultBinding
 import com.example.gardenguru.ui.customview.DialogHelper
-import com.example.gardenguru.utils.Extensions.setDrawable
+import com.example.gardenguru.utils.setDrawable
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {

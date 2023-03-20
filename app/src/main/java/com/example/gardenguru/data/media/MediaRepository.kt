@@ -4,27 +4,18 @@ import android.content.Context
 import android.net.Uri
 import com.example.gardenguru.data.auth.TokenHelper
 import com.example.gardenguru.data.media.cloud.UploadImageSource
-import com.example.gardenguru.data.plant.cloud.PhotoDataCloud
-import com.example.gardenguru.utils.Extensions.copyToFile
-import java.lang.Exception
+import com.example.gardenguru.domain.repository.MediaRepository
+import com.example.gardenguru.utils.copyToFile
 import javax.inject.Inject
 
-interface MediaRepository {
+class MediaRepositoryImpl @Inject constructor(
+    private val tokenHelper: TokenHelper.Base,
+    private val createPlantSource: UploadImageSource
+) : MediaRepository {
 
-    suspend fun uploadPhoto(uri: Uri, type: String, context: Context): PhotoData?
+    override suspend fun uploadPhoto(uri: Uri, type: String, context: Context) = runCatching {
+        createPlantSource.upload(tokenHelper.getToken(), type, uri.copyToFile(context))
+    }.getOrNull()
 
-    class Base @Inject constructor(
-        private val tokenHelper: TokenHelper.Base,
-        private val createPlantSource: UploadImageSource
-    ): MediaRepository{
-
-        override suspend fun uploadPhoto(uri: Uri, type: String, context: Context): PhotoData? {
-            val tempFile = uri.copyToFile(context)
-            return try {
-                createPlantSource.upload(tokenHelper.getToken(), type, tempFile)
-            }catch (e: Exception){
-                null
-            }
-        }
-    }
 }
+

@@ -2,7 +2,7 @@ package com.example.gardenguru.data.plant.cloud.create
 
 import com.google.gson.annotations.SerializedName
 
-data class CreatePlantCloudObj(
+data class CreatePlantCloud(
     @SerializedName("name") val name: String? = null,
     @SerializedName("photos_ids") val photosIds: List<String>,
     @SerializedName("care_complexity") val careComplexity: Int? = null,

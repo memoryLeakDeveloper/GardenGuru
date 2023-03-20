@@ -1,5 +1,8 @@
 package com.example.gardenguru.data.garden.cloud
 
+import com.example.gardenguru.data.garden.models.GardenData
+import com.example.gardenguru.data.garden.models.GardenPlantData
+import com.example.gardenguru.data.garden.models.Participant
 import com.google.gson.annotations.SerializedName
 
 data class GardenCloud(
@@ -9,4 +12,16 @@ data class GardenCloud(
     val guru: String,
     val plants: ArrayList<GardenPlantCloud>,
     val participants: ArrayList<ParticipantsCloud>
+)
+
+fun GardenCloud.mapToData() = GardenData(
+    id,
+    name,
+    GardenData.getSummerSeasonByValue(summerClimateType),
+    ArrayList(plants.map {
+        GardenPlantData(it.id, it.name, it.plant, it.photos.first().file)
+    }),
+    ArrayList(participants.map {
+        Participant(it.id, it.user, Participant.getRoleByValue(it.role))
+    })
 )

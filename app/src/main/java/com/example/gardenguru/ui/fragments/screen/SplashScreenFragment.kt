@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentSplashScreenBinding
-import com.example.gardenguru.utils.Extensions.getPrefs
 import com.example.gardenguru.utils.PrefsKeys
+import com.example.gardenguru.utils.getPrefs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

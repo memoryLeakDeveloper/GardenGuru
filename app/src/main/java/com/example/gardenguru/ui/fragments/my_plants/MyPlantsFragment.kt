@@ -28,7 +28,6 @@ class MyPlantsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         with(binding){
             header.apply {
                 back.setOnClickListener{
@@ -38,10 +37,10 @@ class MyPlantsFragment : Fragment() {
             }
 
             initGardenList()
-            viewModel.gardens.observe(viewLifecycleOwner){
+            viewModel.gardensLiveData.observe(viewLifecycleOwner){
                 if (it != null){
                     binding.progressBar.visibility = View.GONE
-                    if (viewModel.gardens.value?.isEmpty() == true){
+                    if (viewModel.gardensLiveData.value?.isEmpty() == true){
                         rvGardens.visibility = View.GONE
                         noPlantsContainer.visibility = View.VISIBLE
                         //search logic
@@ -60,7 +59,6 @@ class MyPlantsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         viewModel.initGardens()
     }
 

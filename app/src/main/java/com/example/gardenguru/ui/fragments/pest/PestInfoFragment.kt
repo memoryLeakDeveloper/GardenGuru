@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentPestInfoBinding
-import com.example.gardenguru.utils.Extensions.setDrawable
+import com.example.gardenguru.utils.setDrawable
+import com.example.gardenguru.utils.toVisible
 
 class PestInfoFragment : Fragment() {
 
@@ -28,7 +29,7 @@ class PestInfoFragment : Fragment() {
         with(binding) {
             header.title.setText(R.string.disease_and_pests)
             header.menu.apply {
-                visibility = View.VISIBLE
+                toVisible()
                 setDrawable(R.drawable.ic_calendar)
             }
             header.back.setOnClickListener {

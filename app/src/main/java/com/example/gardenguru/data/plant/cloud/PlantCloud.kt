@@ -1,7 +1,9 @@
 package com.example.gardenguru.data.plant.cloud
 
 import com.example.gardenguru.data.benefit.BenefitData
+import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.pest.PestData
+import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.reproduction.ReproductionData
 import com.example.gardenguru.data.sun.relation.SunRelationData
 import com.google.gson.annotations.SerializedName
@@ -29,4 +31,29 @@ data class PlantCloud(
     @SerializedName("winterFeeding") val winterFeeding: Int? = null,
     @SerializedName("winterMinTemp") val winterMinTemp: Int? = null,
     @SerializedName("winterMaxTemp") val winterMaxTemp: Int? = null
+)
+
+fun PlantCloud.mapToData() = PlantData(
+    id,
+    careComplexity,
+    name,
+    code,
+    description,
+    PhotoData(photo.first().id, photo.first().thumbnail, photo.first().file),
+    sunRelation,
+    pests,
+    reproduction,
+    benefits,
+    pruning,
+    plantingTime,
+    summerWatering,
+    summerSpraying,
+    summerFeeding,
+    summerMinTemp,
+    summerMaxTemp,
+    winterWatering,
+    winterSpraying,
+    winterFeeding,
+    winterMinTemp,
+    winterMaxTemp
 )

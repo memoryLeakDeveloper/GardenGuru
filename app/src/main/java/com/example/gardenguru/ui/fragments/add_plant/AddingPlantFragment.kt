@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -25,32 +25,25 @@ import com.example.gardenguru.databinding.FragmentAddingPlantBinding
 import com.example.gardenguru.ui.fragments.add_plant.AddingPlantFragment.UpdateLayoutHeightCallback
 import com.example.gardenguru.ui.fragments.add_plant.client.ClientPlantFragment
 import com.example.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment
-import com.example.gardenguru.utils.Extensions.setString
+import com.example.gardenguru.utils.setString
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddingPlantFragment : Fragment() {
 
     private lateinit var binding: FragmentAddingPlantBinding
-
-    private lateinit var viewModel: AddingPlantViewModel
-
     private lateinit var pagerAdapter: AddingPlantFragment.PagerAdapter
-
-    @Inject
-    lateinit var viewModelFactory: AddingPlantViewModel.Factory
+    private val viewModel: AddingPlantViewModel by viewModels()
 
     fun interface UpdateLayoutHeightCallback {
         fun update()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this, viewModelFactory)[AddingPlantViewModel::class.java]
         binding = FragmentAddingPlantBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,10 +55,8 @@ class AddingPlantFragment : Fragment() {
             header.back.setOnClickListener {
                 requireActivity().onBackPressed()
             }
-
             buttonAdd.setOnClickListener {
                 val plantData = pagerAdapter.getCurrentPlantNameAndData(viewPager.currentItem)
-
                 if (plantData != null && viewModel.selectedGarden != -1) {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val isSuccess = viewModel.createPlant(plantData)
@@ -81,20 +72,12 @@ class AddingPlantFragment : Fragment() {
                     if (viewModel.selectedGarden == -1)
                         Toast.makeText(requireContext(), R.string.error_garden_not_selected, Toast.LENGTH_SHORT).show()
                     else Toast.makeText(requireContext(), R.string.error_not_all_data_populated, Toast.LENGTH_SHORT).show()
-
                 }
             }
         }
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val gardenNames = viewModel.loadGardensNames().map { it.name }
-            withContext(Dispatchers.Main) {
-                initSpinner(gardenNames)
-            }
+        lifecycleScope.launch(Dispatchers.IO) {
+            initSpinner(viewModel.loadGardensNames().map { it.name })
         }
-
-
         setViewPager()
     }
 
@@ -137,7 +120,7 @@ class AddingPlantFragment : Fragment() {
             adapter = pagerAdapter
             offscreenPageLimit = 2
             setPageTransformer(pageTransformer)
-            addItemDecoration(_root_ide_package_.com.example.gardenguru.ui.fragments.add_plant.HorizontalMarginItemDecoration(requireContext()))
+            addItemDecoration(HorizontalMarginItemDecoration(requireContext()))
         }
         binding.viewPager.registerOnPageChangeCallback(viewPagerListener)
     }
@@ -176,8 +159,7 @@ class AddingPlantFragment : Fragment() {
 
     private fun convertDpToPx(dp: Float) = (dp * requireContext().resources.displayMetrics.density).toInt()
 
-    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) :
-        FragmentStateAdapter(fragment) {
+    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) : FragmentStateAdapter(fragment) {
 
         private val fragments = hashMapOf<Int, Fragment>()
 

@@ -8,7 +8,7 @@ import com.example.gardenguru.data.event.PlantEventsData
 import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.data.sun.relation.SunRelationData
-import com.example.gardenguru.utils.Extensions.toDmyString
+import com.example.gardenguru.utils.toDmyString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject

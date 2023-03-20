@@ -1,14 +1,9 @@
 package com.example.gardenguru.data.event
 
-interface EventRepository {
+import com.example.gardenguru.domain.repository.EventRepository
 
-    fun completeEvent()
+interface EventRepositoryImpl : EventRepository {
 
-    class Base: EventRepository{
-        override fun completeEvent() {
-            TODO("Not yet implemented")
-        }
-
-    }
+    override fun completeEvent()
 
 }

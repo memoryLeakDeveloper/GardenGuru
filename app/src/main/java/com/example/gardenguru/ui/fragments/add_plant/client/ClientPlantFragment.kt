@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
@@ -27,22 +28,19 @@ import com.example.gardenguru.databinding.AddPestsCardBinding
 import com.example.gardenguru.databinding.FragmentClientPlantBinding
 import com.example.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.example.gardenguru.ui.fragments.add_plant.GetPlantInfo
+import com.example.gardenguru.utils.toGone
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @SuppressLint("ClickableViewAccessibility")
 @AndroidEntryPoint
 class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayoutHeightCallback) : Fragment(), GetPlantInfo {
 
     lateinit var binding: FragmentClientPlantBinding
-
-    private lateinit var viewModel: ClientPlantViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ClientPlantViewModel.Factory
+    private val viewModel: ClientPlantViewModel by viewModels()
+    var imageView: ImageView? = null
 
     private val getPestImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -56,7 +54,6 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
                 }
             }
         }
-
 
     private val getPlantImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -87,10 +84,8 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
         hideKeyboard(binding.etPlantName)
         return@OnTouchListener true
     }
-    var imageView: ImageView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this, viewModelFactory)[ClientPlantViewModel::class.java]
         binding = FragmentClientPlantBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -153,7 +148,7 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
             spinnerPests.setOnTouchListener(touchListener)
             spinnerCare.setOnTouchListener(touchListener)
             arrowDown.setOnClickListener {
-                shortForm.visibility = View.GONE
+                shortForm.toGone()
                 fullForm.visibility = View.VISIBLE
                 callback.update()
             }
@@ -247,7 +242,7 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     override fun getPlantInfo(): PlantData? {
         return if (!binding.etPlantName.text.isNullOrBlank() && viewModel.plantImage != null) {
             PlantData("", name = binding.etPlantName.text.toString(), photo = viewModel.plantImage!!)
-        }else {
+        } else {
             Toast.makeText(requireContext(), R.string.error_garden_not_selected, Toast.LENGTH_SHORT).show()
             null
         }

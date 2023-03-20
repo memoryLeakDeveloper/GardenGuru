@@ -17,10 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentTimetableBinding
 import com.example.gardenguru.ui.customview.CalendarView
-import com.example.gardenguru.utils.Extensions.checkAndVerifyCameraPermissions
+import com.example.gardenguru.utils.checkAndVerifyCameraPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
 
 @AndroidEntryPoint
 class TimetableFragment : Fragment() {

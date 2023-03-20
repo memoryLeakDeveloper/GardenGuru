@@ -1,15 +1,16 @@
 package com.example.gardenguru.ui.fragments.add_plant
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.gardenguru.data.garden.models.GardenName
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.domain.usecases.garden.CreateGardenUseCase
 import com.example.gardenguru.domain.usecases.garden.GetGardenNamesUseCase
 import com.example.gardenguru.domain.usecases.plant.CreatePlantUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class AddingPlantViewModel constructor(
+@HiltViewModel
+class AddingPlantViewModel @Inject constructor(
     private val createPlantUseCase: CreatePlantUseCase,
     private val createGardenUseCase: CreateGardenUseCase,
     private val getGardenNamesUseCase: GetGardenNamesUseCase
@@ -18,10 +19,7 @@ class AddingPlantViewModel constructor(
     private lateinit var gardenNames: ArrayList<GardenName>
 
     var selectedGarden = -1
-    suspend fun loadGardensNames(): ArrayList<GardenName> {
-        gardenNames = getGardenNamesUseCase.getNames()
-        return gardenNames
-    }
+    suspend fun loadGardensNames() = getGardenNamesUseCase.getNames()
 
     suspend fun createGarden(gardenName: String): GardenName? {
         val garden = createGardenUseCase.perform(gardenName)
@@ -35,13 +33,4 @@ class AddingPlantViewModel constructor(
         return createPlantUseCase.createPlant(gardenNames[selectedGarden].id, plantData)
     }
 
-    class Factory @Inject constructor(
-        private val createPlantUseCase: CreatePlantUseCase,
-        private val createGardenUseCase: CreateGardenUseCase,
-        private val getGardenNamesUseCase: GetGardenNamesUseCase
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return AddingPlantViewModel(createPlantUseCase, createGardenUseCase, getGardenNamesUseCase) as T
-        }
-    }
 }

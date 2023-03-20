@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.gardenguru.R
 import com.example.gardenguru.databinding.FragmentOnboardingStepBinding
-import com.example.gardenguru.utils.Extensions.setDrawable
+import com.example.gardenguru.utils.setDrawable
 
 class OnboardingStepFragment(private val position: Int) : Fragment() {
 

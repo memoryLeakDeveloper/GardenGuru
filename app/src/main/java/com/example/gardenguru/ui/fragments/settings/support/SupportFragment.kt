@@ -17,8 +17,8 @@ import com.example.gardenguru.R
 import com.example.gardenguru.databinding.DialogSupportSuccessBinding
 import com.example.gardenguru.databinding.FragmentSupportBinding
 import com.example.gardenguru.ui.customview.DialogHelper
-import com.example.gardenguru.utils.Extensions.checkAndVerifyStoragePermissions
-import com.example.gardenguru.utils.Extensions.copyToFile
+import com.example.gardenguru.utils.checkAndVerifyStoragePermissions
+import com.example.gardenguru.utils.copyToFile
 import dagger.hilt.android.AndroidEntryPoint
 
 
