@@ -1,22 +1,13 @@
 package com.example.gardenguru.ui.fragments.onboarding
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.databinding.FragmentOnboardingStepBinding
 import com.example.gardenguru.utils.Extensions.setDrawable
 
-class OnboardingStepFragment(private val position: Int) : Fragment() {
-
-    private lateinit var binding: FragmentOnboardingStepBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentOnboardingStepBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class OnboardingStepFragment(private val position: Int) : BaseFragment<FragmentOnboardingStepBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

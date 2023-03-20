@@ -3,15 +3,14 @@ package com.example.gardenguru.ui.fragments.my_plants.garden_managment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.data.garden.models.GardenData
 import com.example.gardenguru.databinding.DialogRemoveGardenBinding
 import com.example.gardenguru.databinding.FragmentGardenManagmentBinding
@@ -22,9 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GardenManagementFragment : Fragment() {
+class GardenManagementFragment : BaseFragment<FragmentGardenManagmentBinding>() {
 
-    private lateinit var binding: FragmentGardenManagmentBinding
     private val viewModel: GardenManagementViewModel by viewModels()
 
     private lateinit var garden: GardenData
@@ -34,18 +32,9 @@ class GardenManagementFragment : Fragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        garden = requireArguments().getParcelable(GARDEN_EXTRA)!!
-
-        binding = FragmentGardenManagmentBinding.inflate(
-            inflater, container, false
-        )
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        garden = requireArguments().getParcelable(GARDEN_EXTRA)!!
 
         with(binding) {
             header.apply {
@@ -66,7 +55,6 @@ class GardenManagementFragment : Fragment() {
                         root.resources.getString(
                             R.string.dialog_want_to_delete_garden,
                             garden.name,
-                            garden.getGuruEmail()
                         )
 
                     btNo.setOnClickListener {
@@ -141,9 +129,9 @@ class GardenManagementFragment : Fragment() {
                             dialogHelper.hideDialog()
 
                             btRemoveGarden.isEnabled = true
-                            if (isSuccess){
+                            if (isSuccess) {
                                 requireActivity().onBackPressed()
-                            }else Toast.makeText(requireContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
+                            } else Toast.makeText(requireContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

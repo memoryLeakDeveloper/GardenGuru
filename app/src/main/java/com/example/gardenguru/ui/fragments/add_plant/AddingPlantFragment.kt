@@ -3,18 +3,17 @@ package com.example.gardenguru.ui.fragments.add_plant
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.data.benefit.BenefitData
 import com.example.gardenguru.data.media.PhotoData
 import com.example.gardenguru.data.pest.PestData
@@ -34,25 +33,14 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddingPlantFragment : Fragment() {
+class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
-    private lateinit var binding: FragmentAddingPlantBinding
-
-    private lateinit var viewModel: AddingPlantViewModel
+    private val viewModel: AddingPlantViewModel by viewModels()
 
     private lateinit var pagerAdapter: AddingPlantFragment.PagerAdapter
 
-    @Inject
-    lateinit var viewModelFactory: AddingPlantViewModel.Factory
-
     fun interface UpdateLayoutHeightCallback {
         fun update()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this, viewModelFactory)[AddingPlantViewModel::class.java]
-        binding = FragmentAddingPlantBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -137,7 +125,7 @@ class AddingPlantFragment : Fragment() {
             adapter = pagerAdapter
             offscreenPageLimit = 2
             setPageTransformer(pageTransformer)
-            addItemDecoration(_root_ide_package_.com.example.gardenguru.ui.fragments.add_plant.HorizontalMarginItemDecoration(requireContext()))
+            addItemDecoration(HorizontalMarginItemDecoration(requireContext()))
         }
         binding.viewPager.registerOnPageChangeCallback(viewPagerListener)
     }

@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.data.plant.PlantData
 import com.example.gardenguru.databinding.DialogPlantMovingBinding
 import com.example.gardenguru.databinding.FragmentPlantCardInfoBinding
@@ -22,18 +21,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PlantCardInfoFragment : Fragment() {
+class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
-    private lateinit var binding: FragmentPlantCardInfoBinding
     private val viewModel: PlantCardInfoViewModel by viewModels()
     private val bindingDialog by lazy { DialogPlantMovingBinding.inflate(LayoutInflater.from(requireContext())) }
     private val dialog by lazy { DialogHelper() }
     private val keyIdPlant = "PLANT_ID"
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentPlantCardInfoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

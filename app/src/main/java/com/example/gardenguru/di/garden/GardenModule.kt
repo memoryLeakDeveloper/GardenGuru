@@ -21,7 +21,6 @@ import com.example.gardenguru.data.garden.cloud.participants.delete.DeletePartic
 import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleService
 import com.example.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleSource
 import com.example.gardenguru.data.language.LanguageHelper
-import com.example.gardenguru.domain.garden.*
 import com.example.gardenguru.domain.usecases.garden.*
 import dagger.Module
 import dagger.Provides

@@ -1,41 +1,30 @@
 package com.example.gardenguru.ui.fragments.settings
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.databinding.FragmentSettingsBinding
 import com.example.gardenguru.utils.Extensions.toDmyString
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
-    private lateinit var binding: FragmentSettingsBinding
-    private lateinit var viewModel: SettingsViewModel
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val viewModel: SettingsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initSubscription()
 
-        with(binding){
+        with(binding) {
             header.apply {
-                back.setOnClickListener{
+                back.setOnClickListener {
                     requireActivity().onBackPressed()
                 }
                 title.setText(R.string.settings)
@@ -63,7 +52,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initSubscription() {
-        with(binding){
+        with(binding) {
             tvSubscriptionPaidUpTo.text = resources.getString(R.string.paid_up_to_date, Calendar.getInstance().toDmyString())
         }
     }

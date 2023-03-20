@@ -1,24 +1,15 @@
 package com.example.gardenguru.ui.fragments.info
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.databinding.FragmentTermOfUseBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TermOfUseFragment : Fragment() {
-
-    private lateinit var binding: FragmentTermOfUseBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentTermOfUseBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class TermOfUseFragment : BaseFragment<FragmentTermOfUseBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -6,14 +6,12 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.data.auth.UserEmailHelper
 import com.example.gardenguru.databinding.FragmentLoginBinding
 import com.example.gardenguru.utils.Extensions.getPrefs
@@ -22,21 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
-    private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
         if (firstLaunch) {
@@ -58,7 +47,7 @@ class LoginFragment : Fragment() {
         //todo check if login
         UserEmailHelper.Base(requireContext().getPrefs()).setEmail("kostya@planx.one")
 
-        findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+//        findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
     }
 
     private fun initText() {
@@ -73,7 +62,6 @@ class LoginFragment : Fragment() {
                 binding.textLogin.text = span
             }
             "en" -> {
-                //TODO ENGLISH
                 span.apply {
                     setSpan(getClickableSpan(1), 58, 81, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                     setSpan(getClickableSpan(2), 84, 112, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

@@ -6,9 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.nedim.maildroidx.MaildroidX
 import co.nedim.maildroidx.MaildroidXType
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
+import javax.inject.Inject
 
-class SupportViewModel : ViewModel() {
+@HiltViewModel
+class SupportViewModel @Inject constructor() : ViewModel() {
 
     private val _files = MutableLiveData<ArrayList<File>>().apply { value = arrayListOf() }
     val files: LiveData<ArrayList<File>> = _files

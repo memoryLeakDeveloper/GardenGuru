@@ -5,16 +5,14 @@ import android.animation.IntEvaluator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gardenguru.R
+import com.example.gardenguru.core.BaseFragment
 import com.example.gardenguru.databinding.FragmentTimetableBinding
 import com.example.gardenguru.ui.customview.CalendarView
 import com.example.gardenguru.utils.Extensions.checkAndVerifyCameraPermissions
@@ -23,18 +21,11 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class TimetableFragment : Fragment() {
+class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
 
-    private lateinit var binding: FragmentTimetableBinding
-    private lateinit var viewModel: TimetableViewModel
+    private val viewModel: TimetableViewModel by viewModels()
     private lateinit var calendarRecyclerAdapter: CalendarRecyclerAdapter
     private lateinit var eventsRecyclerAdapter: TimetableRecyclerAdapter
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this)[TimetableViewModel::class.java]
-        binding = FragmentTimetableBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
