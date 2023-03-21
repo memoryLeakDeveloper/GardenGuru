@@ -1,6 +1,6 @@
-package com.example.gardenguru.domain.repository
+package com.entexy.gardenguru.domain.repository
 
-import com.example.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.PlantData
 
 interface PlantRepository {
 

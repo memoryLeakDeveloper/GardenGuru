@@ -1,4 +1,4 @@
-package com.example.gardenguru.domain.repository
+package com.entexy.gardenguru.domain.repository
 
 interface EventRepository {
 

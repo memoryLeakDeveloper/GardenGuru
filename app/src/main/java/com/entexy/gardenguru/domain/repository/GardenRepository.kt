@@ -1,7 +1,7 @@
-package com.example.gardenguru.domain.repository
+package com.entexy.gardenguru.domain.repository
 
-import com.example.gardenguru.data.garden.models.GardenData
-import com.example.gardenguru.data.garden.models.GardenName
+import com.entexy.gardenguru.data.garden.models.GardenData
+import com.entexy.gardenguru.data.garden.models.GardenName
 
 interface GardenRepository {
 
