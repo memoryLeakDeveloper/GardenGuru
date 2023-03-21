@@ -6,6 +6,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 repositories {
@@ -119,11 +121,18 @@ dependencies {
     //maildroid
     implementation 'com.github.nedimf:maildroid:v0.1.0-release'
 
-//    camera
+    //camera
     implementation "androidx.camera:camera-core:1.2.1"
     implementation "androidx.camera:camera-camera2:1.2.1"
     implementation "androidx.camera:camera-lifecycle:1.2.1"
     implementation "androidx.camera:camera-video:1.2.1"
     implementation "androidx.camera:camera-view:1.2.1"
     implementation "androidx.camera:camera-extensions:1.2.1"
+
+    //firebase
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.5'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
+    implementation 'com.google.firebase:firebase-firestore:24.4.4'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+
 }

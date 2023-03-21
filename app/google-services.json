@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "173536080304",
+    "project_id": "garden-guru-7f907",
+    "storage_bucket": "garden-guru-7f907.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173536080304:android:778b853e8034b4ab932675",
+        "android_client_info": {
+          "package_name": "com.entexy.gardenguru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173536080304-1mo7bd5smgi78iv1arv5kbfb1r0449ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY6-gzlUIOEuJyD9qaome8ULsH2laVJ2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173536080304-1mo7bd5smgi78iv1arv5kbfb1r0449ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

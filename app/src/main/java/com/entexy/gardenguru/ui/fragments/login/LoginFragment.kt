@@ -47,7 +47,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         //todo check if login
         UserEmailHelper.Base(requireContext().getPrefs()).setEmail("kostya@planx.one")
 
-//        findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+        findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
     }
 
     private fun initText() {
