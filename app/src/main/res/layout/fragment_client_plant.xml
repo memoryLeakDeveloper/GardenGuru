@@ -34,7 +34,7 @@
             android:layout_marginTop="25dp"
             android:src="@drawable/plant_placeholder" />
 
-        <com.example.gardenguru.ui.customview.ClickableTextView
+        <com.entexy.gardenguru.ui.customview.ClickableTextView
             android:id="@+id/add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                 android:textColorHint="@color/gray"
                 android:textSize="16sp" />
 
-            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
+            <com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_care"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,42 +151,42 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
+            <com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner_watering"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:hint_color="@color/gray" />
 
-            <com.example.gardenguru.ui.customview.card.CalendarCard
+            <com.entexy.gardenguru.ui.customview.card.CalendarCard
                 android:id="@+id/calendar_summer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:visibility="gone" />
 
-            <com.example.gardenguru.ui.customview.card.CalendarCard
+            <com.entexy.gardenguru.ui.customview.card.CalendarCard
                 android:id="@+id/calendar_winter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:visibility="gone" />
 
-            <com.example.gardenguru.ui.customview.card.PlantingCard
+            <com.entexy.gardenguru.ui.customview.card.PlantingCard
                 android:id="@+id/planting_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:visibility="gone" />
 
-            <com.example.gardenguru.ui.customview.card.TemperatureCard
+            <com.entexy.gardenguru.ui.customview.card.TemperatureCard
                 android:id="@+id/temperature_card_summer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:visibility="gone" />
 
-            <com.example.gardenguru.ui.customview.card.TemperatureCard
+            <com.entexy.gardenguru.ui.customview.card.TemperatureCard
                 android:id="@+id/temperature_card_winter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <com.example.gardenguru.ui.customview.spinner.checkbox.SpinnerCheckboxLayout
+            <com.entexy.gardenguru.ui.customview.spinner.checkbox.SpinnerCheckboxLayout
                 android:id="@+id/spinner_pests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

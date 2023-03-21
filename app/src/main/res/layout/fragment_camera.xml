@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_camera_btn" />
 
-    <com.example.gardenguru.ui.customview.ClickableImageView
+    <com.entexy.gardenguru.ui.customview.ClickableImageView
         android:id="@+id/iv_change_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_camera_btn" />
 
-    <com.example.gardenguru.ui.customview.ClickableImageView
+    <com.entexy.gardenguru.ui.customview.ClickableImageView
         android:id="@+id/iv_camera_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
 
 
 
-    <com.example.gardenguru.ui.customview.ClickableImageView
+    <com.entexy.gardenguru.ui.customview.ClickableImageView
         android:id="@+id/iv_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

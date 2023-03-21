@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.gardenguru.ui.customview.spinner.SpinnerLayout
+            <com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

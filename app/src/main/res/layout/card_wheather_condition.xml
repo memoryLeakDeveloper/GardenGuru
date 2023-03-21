@@ -7,7 +7,7 @@
     tools:orientation="vertical"
     tools:parentTag="android.widget.LinearLayout">
 
-    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionItem
+    <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/temperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_marginHorizontal="20dp"
         app:dividerColor="@color/white5" />
 
-    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionItem
+    <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/watering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_marginHorizontal="20dp"
         app:dividerColor="@color/white5" />
 
-    <com.example.gardenguru.ui.customview.card.weather.WheatherConditionItem
+    <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/lighting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
