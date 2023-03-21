@@ -6,6 +6,7 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingStepBinding
 import com.entexy.gardenguru.utils.setDrawable
+import com.entexy.gardenguru.utils.setString
 
 class OnboardingStepFragment(private val position: Int) : BaseFragment<FragmentOnboardingStepBinding>() {
 
@@ -14,22 +15,22 @@ class OnboardingStepFragment(private val position: Int) : BaseFragment<FragmentO
         initView()
     }
 
-    private fun initView() {
+    private fun initView() = binding.apply {
         when (position) {
             0 -> {
-                binding.imageView.setDrawable(R.drawable.onboarding1_image)
-                binding.textHead.text = getString(R.string.onboarding1_head)
-                binding.textHint.text = getString(R.string.onboarding1_hint)
+                imageView.setDrawable(R.drawable.onboarding1_image)
+                textHead.setString(R.string.onboarding1_head)
+                textHint.setString(R.string.onboarding1_hint)
             }
             1 -> {
-                binding.imageView.setDrawable(R.drawable.onboarding2_image)
-                binding.textHead.text = getString(R.string.onboarding2_head)
-                binding.textHint.text = getString(R.string.onboarding2_hint)
+                imageView.setDrawable(R.drawable.onboarding2_image)
+                textHead.setString(R.string.onboarding2_head)
+                textHint.setString(R.string.onboarding2_hint)
             }
             2 -> {
-                binding.imageView.setDrawable(R.drawable.onboarding3_image)
-                binding.textHead.text = getString(R.string.onboarding3_head)
-                binding.textHint.text = getString(R.string.onboarding3_hint)
+                imageView.setDrawable(R.drawable.onboarding3_image)
+                textHead.setString(R.string.onboarding3_head)
+                textHint.setString(R.string.onboarding3_hint)
             }
         }
     }

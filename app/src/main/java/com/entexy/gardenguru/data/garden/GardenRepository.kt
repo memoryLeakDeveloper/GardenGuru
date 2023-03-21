@@ -1,6 +1,5 @@
 package com.entexy.gardenguru.data.garden
 
-import com.entexy.gardenguru.core.exception.ErrorResponseCodeException
 import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.garden.cloud.create.CreateGardenSource
 import com.entexy.gardenguru.data.garden.cloud.delete.DeleteGardenSource
@@ -11,12 +10,8 @@ import com.entexy.gardenguru.data.garden.cloud.names.GetGardenNamesDataSource
 import com.entexy.gardenguru.data.garden.cloud.participants.add.AddParticipantSource
 import com.entexy.gardenguru.data.garden.cloud.participants.delete.DeleteParticipantSource
 import com.entexy.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleSource
-import com.entexy.gardenguru.data.garden.models.GardenData
-import com.entexy.gardenguru.data.garden.models.GardenName
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.domain.repository.GardenRepository
-import java.lang.Exception
-import java.net.ConnectException
 import javax.inject.Inject
 
 class GardenRepositoryImpl @Inject constructor(

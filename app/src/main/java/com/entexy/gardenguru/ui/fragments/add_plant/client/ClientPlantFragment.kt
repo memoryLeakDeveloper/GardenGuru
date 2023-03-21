@@ -27,7 +27,7 @@ import com.entexy.gardenguru.databinding.AddPestsCardBinding
 import com.entexy.gardenguru.databinding.FragmentClientPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.entexy.gardenguru.ui.fragments.add_plant.GetPlantInfo
-import com.example.gardenguru.utils.toGone
+import com.entexy.gardenguru.utils.toGone
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

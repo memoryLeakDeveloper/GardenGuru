@@ -7,15 +7,14 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
-import com.entexy.gardenguru.data.auth.UserEmailHelper
+import com.entexy.gardenguru.data.auth.GoogleAuthContract
 import com.entexy.gardenguru.databinding.FragmentLoginBinding
-import com.entexy.gardenguru.utils.PrefsKeys
-import com.entexy.gardenguru.utils.getPrefs
+import com.entexy.gardenguru.utils.ifNotNull
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -23,59 +22,49 @@ import java.util.*
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val viewModel: LoginViewModel by viewModels()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val firstLaunch = requireContext().getPrefs().getBoolean(PrefsKeys.FIRST_APP_LAUNCH, true)
-        if (firstLaunch) {
-            requireContext().getPrefs().edit().putBoolean(PrefsKeys.FIRST_APP_LAUNCH, false).apply()
-            findNavController().navigate(R.id.action_loginFragment_to_onboardingFragment)
-        } else {
-            checkLogin()
-
-            initText()
-            setListener()
-
-            binding.buttonLogin.root.setOnClickListener {
-                findNavController().navigate(R.id.addingPlantFragment)
-            }
+    private val googleAuth = registerForActivityResult(GoogleAuthContract()) { result ->
+        result?.let {
+            viewModel.saveNewToken(it)
+            findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+        } ?: run {
+            //todo
         }
     }
 
-    private fun checkLogin() {
-        //todo check if login
-        UserEmailHelper.Base(requireContext().getPrefs()).setEmail("kostya@planx.one")
-
-//        findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        checkLogin()
+        initText()
+        setListener()
     }
 
-    private fun initText() {
+    private fun checkLogin() {
+        GoogleSignIn.getLastSignedInAccount(requireContext())?.account.ifNotNull {
+            findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+        }
+    }
+
+    private fun initText() = binding.apply {
         val span = SpannableString(getString(R.string.login_text))
         when (Locale.getDefault().language.toString()) {
             "ru" -> {
-                span.apply {
-                    setSpan(getClickableSpan(1), 58, 81, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(getClickableSpan(2), 84, 112, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                binding.textLogin.movementMethod = LinkMovementMethod.getInstance()
-                binding.textLogin.text = span
+                span.setSpan(getClickableSpan(1), 58, 81, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                span.setSpan(getClickableSpan(2), 84, 112, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                textLogin.movementMethod = LinkMovementMethod.getInstance()
+                textLogin.text = span
             }
             "en" -> {
-                span.apply {
-                    setSpan(getClickableSpan(1), 58, 81, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(getClickableSpan(2), 84, 112, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                binding.textLogin.movementMethod = LinkMovementMethod.getInstance()
-                binding.textLogin.text = span
+                span.setSpan(getClickableSpan(1), 58, 81, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                span.setSpan(getClickableSpan(2), 84, 112, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                textLogin.movementMethod = LinkMovementMethod.getInstance()
+                textLogin.text = span
             }
         }
     }
 
     private fun setListener() {
         binding.buttonLogin.root.setOnClickListener {
-            //TODO
-            Toast.makeText(requireContext(), "TODO ME", Toast.LENGTH_SHORT).show()
+            googleAuth.launch("")
         }
     }
 
@@ -88,6 +77,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             findNavController().navigate(if (pos == 1) R.id.termOfUseFragment else R.id.privacyPolicyFragment)
         }
     }
-
 
 }

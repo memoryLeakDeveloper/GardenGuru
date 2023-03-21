@@ -17,8 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
-    RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
+class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) : RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(RvGardenItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))

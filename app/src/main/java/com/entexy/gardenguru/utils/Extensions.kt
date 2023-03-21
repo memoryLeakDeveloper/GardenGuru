@@ -115,3 +115,17 @@ fun Context.showToastShort(text: String) = Toast.makeText(this, text, Toast.LENG
 fun Context.showToastLong(@StringRes id: Int) = Toast.makeText(this, getString(id), Toast.LENGTH_LONG).show()
 
 fun Context.showToastShort(@StringRes id: Int) = Toast.makeText(this, getString(id), Toast.LENGTH_SHORT).show()
+
+fun Any?.ifNull(block: () -> Unit) = run {
+    if (this == null) {
+        block()
+    }
+}
+
+fun Any?.ifNotNull(block: () -> Unit) = run {
+    if (this != null) {
+        block()
+    }
+}
+
+fun Context.convertPxToDp(px: Float) = (px * resources.displayMetrics.density).toInt()

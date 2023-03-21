@@ -1,12 +1,14 @@
 package com.entexy.gardenguru.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.entexy.gardenguru.core.Api
 import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.auth.UserEmailHelper
 import com.entexy.gardenguru.data.language.LanguageHelper
+import com.entexy.gardenguru.data.prefs.FirstLaunchPref
 import com.entexy.gardenguru.domain.usecases.app.UserEmailUseCase
-import com.entexy.gardenguru.utils.getPrefs
+import com.entexy.gardenguru.utils.PrefsKeys
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,15 +26,25 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideTokenHelper(@ApplicationContext context: Context) = TokenHelper.Base(context.getPrefs())
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences(PrefsKeys.PREFS, Context.MODE_PRIVATE)
 
     @Provides
     @Singleton
-    fun provideLanguageHelper(@ApplicationContext context: Context) = LanguageHelper.Base(context.getPrefs())
+    fun provideTokenHelper(sharedPreferences: SharedPreferences) = TokenHelper.Base(sharedPreferences)
+
+    @Provides
+    @Singleton
+    fun provideLanguageHelper(sharedPreferences: SharedPreferences) = LanguageHelper.Base(sharedPreferences)
 
 
     @Provides
     @Singleton
-    fun provideEmailUseCase(@ApplicationContext context: Context) = UserEmailUseCase(UserEmailHelper.Base(context.getPrefs()))
+    fun provideEmailUseCase(sharedPreferences: SharedPreferences) = UserEmailUseCase(UserEmailHelper.Base(sharedPreferences))
+
+    @Provides
+    @Singleton
+    fun provideFirstLaunchPref(sharedPreferences: SharedPreferences) = FirstLaunchPref.Base(sharedPreferences)
+
 
 }

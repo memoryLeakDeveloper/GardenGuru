@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingBinding
+import com.entexy.gardenguru.utils.toVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,29 +18,54 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setAdapters()
         setListeners()
+        setVideoPlayer()
     }
 
-    private fun setAdapters() {
-        binding.viewPager.adapter = PagerAdapter(this)
-        binding.dotsIndicator.attachTo(binding.viewPager)
+    private fun setAdapters() = binding.apply {
+        viewPager.adapter = PagerAdapter(this@OnboardingFragment)
+        dotsIndicator.attachTo(viewPager)
     }
 
-    private fun setListeners() {
-        binding.buttonNext.root.setOnClickListener {
-            when (binding.viewPager.currentItem) {
-                0 -> binding.viewPager.currentItem = 1
-                1 -> binding.viewPager.currentItem = 2
+    private fun setListeners() = binding.apply {
+        buttonNext.root.setOnClickListener {
+            when (viewPager.currentItem) {
+                0 -> viewPager.currentItem = 1
+                1 -> viewPager.currentItem = 2
                 2 -> {
                     findNavController().navigate(R.id.loginFragment)
                 }
             }
         }
-        binding.buttonSkip.setOnClickListener {
+        buttonSkip.setOnClickListener {
             findNavController().navigate(R.id.loginFragment)
         }
     }
 
-    private inner class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+    private fun setVideoPlayer() = binding.apply {
+        videoView.setVideoPath("android.resource://" + requireContext().packageName + "/" + R.raw.onboarding_video)
+        videoView.setOnPreparedListener { player ->
+            val screenWidth = resources.displayMetrics.widthPixels
+            val videoWidth = player.videoWidth
+            val videoHeight = player.videoHeight
+            val videoProportion = videoWidth.toFloat() / videoHeight.toFloat()
+            val newHeight = (screenWidth.toFloat() / videoProportion).toInt()
+            videoView.layoutParams = videoView.layoutParams.apply {
+                width = screenWidth
+                height = newHeight
+            }
+        }
+        videoView.start()
+        videoView.setOnCompletionListener {
+            onboarding.apply {
+                alpha = 0f
+                toVisible()
+                animate().alpha(1f).duration = 1000L
+            }
+//            videoView.toGone()
+        }
+    }
+
+    private class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         override fun getItemCount() = 3
 
@@ -47,8 +73,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             when (position) {
                 0 -> OnboardingStepFragment(0)
                 1 -> OnboardingStepFragment(1)
-                2 -> OnboardingStepFragment(2)
-                else -> OnboardingStepFragment(0)
+                else -> OnboardingStepFragment(2)
             }
     }
 

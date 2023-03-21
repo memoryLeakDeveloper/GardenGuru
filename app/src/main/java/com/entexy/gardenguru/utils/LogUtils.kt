@@ -1,4 +1,4 @@
-package com.example.gardenguru.utils
+package com.entexy.gardenguru.utils
 
 import android.util.Log
 
