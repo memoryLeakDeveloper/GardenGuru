@@ -24,11 +24,11 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideTokenHelper(@ApplicationContext context: Context) = TokenHelper.Base(context.getPrefs())
+    fun provideTokenHelper(@ApplicationContext context: Context): TokenHelper = TokenHelper.Base(context.getPrefs())
 
     @Provides
     @Singleton
-    fun provideLanguageHelper(@ApplicationContext context: Context) = LanguageHelper.Base(context.getPrefs())
+    fun provideLanguageHelper(@ApplicationContext context: Context): LanguageHelper = LanguageHelper.Base(context.getPrefs())
 
 
     @Provides

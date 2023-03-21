@@ -10,7 +10,7 @@ import com.entexy.gardenguru.domain.repository.PlantRepository
 import javax.inject.Inject
 
 class PlantRepositoryImpl @Inject constructor(
-    private val tokenHelper: TokenHelper.Base,
+    private val tokenHelper: TokenHelper,
     private val createPlantSource: CreatePlantSource,
     private val plantSource: PlantCloudDataSource,
     private val languageHelper: LanguageHelper

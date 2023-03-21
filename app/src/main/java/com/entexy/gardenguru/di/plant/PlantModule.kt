@@ -21,8 +21,8 @@ class PlantModule {
 
     @Provides
     fun providePlantRepositoryImpl(
-        tokenHelper: TokenHelper.Base,
-        languageHelper: LanguageHelper.Base,
+        tokenHelper: TokenHelper,
+        languageHelper: LanguageHelper,
         createPlantService: CreatePlantService,
         plantService: PlantService,
     ) = PlantRepositoryImpl(

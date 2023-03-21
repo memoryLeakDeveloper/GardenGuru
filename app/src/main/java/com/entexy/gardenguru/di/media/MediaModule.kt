@@ -17,7 +17,7 @@ import javax.inject.Singleton
 object MediaModule {
 
     @Provides
-    fun provideMediaRepository(tokenHelper: TokenHelper.Base, uploadImageService: UploadImageService): MediaRepositoryImpl =
+    fun provideMediaRepository(tokenHelper: TokenHelper, uploadImageService: UploadImageService): MediaRepositoryImpl =
         MediaRepositoryImpl(tokenHelper, UploadImageSource.Base(uploadImageService))
 
     @Provides

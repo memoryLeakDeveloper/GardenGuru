@@ -20,6 +20,7 @@ import com.entexy.gardenguru.data.garden.cloud.participants.delete.DeletePartici
 import com.entexy.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleService
 import com.entexy.gardenguru.data.garden.cloud.participants.edit.EditParticipantRoleSource
 import com.entexy.gardenguru.data.language.LanguageHelper
+import com.entexy.gardenguru.domain.repository.GardenRepository
 import com.entexy.gardenguru.domain.usecases.garden.*
 import dagger.Module
 import dagger.Provides
@@ -32,9 +33,9 @@ import javax.inject.Singleton
 class GardenModule {
 
     @Provides
-    fun provideGardenRepositoryImpl(
-        tokenHelper: TokenHelper.Base,
-        languageHelper: LanguageHelper.Base,
+    fun provideGardenRepository(
+        tokenHelper: TokenHelper,
+        languageHelper: LanguageHelper,
         getGardenService: GetGardensService,
         editGardenService: EditGardenService,
         editParticipantRoleService: EditParticipantRoleService,
@@ -43,7 +44,7 @@ class GardenModule {
         getGardenNamesService: GetGardenNamesService,
         createGardenService: CreateGardenService,
         deleteGardenService: DeleteGardenService,
-    ): GardenRepositoryImpl = GardenRepositoryImpl(
+    ): GardenRepository = GardenRepositoryImpl(
         tokenHelper,
         languageHelper,
         GardensDataSource.Base(getGardenService),
@@ -89,20 +90,20 @@ class GardenModule {
     fun provideCreateGardenService(api: Api): CreateGardenService = api.makeService(CreateGardenService::class.java)
 
     @Provides
-    fun provideGetGardensUseCase(gardenRepository: GardenRepositoryImpl): GetGardensUseCase = GetGardensUseCase(gardenRepository)
+    fun provideGetGardensUseCase(gardenRepository: GardenRepository): GetGardensUseCase = GetGardensUseCase(gardenRepository)
 
 
     @Provides
-    fun provideEditGardensUseCase(gardenRepository: GardenRepositoryImpl): EditGardensUseCase = EditGardensUseCase(gardenRepository)
+    fun provideEditGardensUseCase(gardenRepository: GardenRepository): EditGardensUseCase = EditGardensUseCase(gardenRepository)
 
     @Provides
-    fun provideEditParticipantRoleUseCase(gardenRepository: GardenRepositoryImpl): EditParticipantRoleUseCase =
+    fun provideEditParticipantRoleUseCase(gardenRepository: GardenRepository): EditParticipantRoleUseCase =
         EditParticipantRoleUseCase(gardenRepository)
 
     @Provides
-    fun provideGetGardenNamesUseCase(gardenRepository: GardenRepositoryImpl): GetGardenNamesUseCase =
+    fun provideGetGardenNamesUseCase(gardenRepository: GardenRepository): GetGardenNamesUseCase =
         GetGardenNamesUseCase(gardenRepository)
 
     @Provides
-    fun provideCreateGardenUseCase(gardenRepository: GardenRepositoryImpl): CreateGardenUseCase = CreateGardenUseCase(gardenRepository)
+    fun provideCreateGardenUseCase(gardenRepository: GardenRepository): CreateGardenUseCase = CreateGardenUseCase(gardenRepository)
 }
