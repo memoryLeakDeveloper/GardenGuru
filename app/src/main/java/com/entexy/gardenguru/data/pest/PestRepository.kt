@@ -1,16 +1,14 @@
 package com.entexy.gardenguru.data.pest
 
 import com.entexy.gardenguru.data.pest.cloud.PestCloud
+import com.entexy.gardenguru.domain.repository.PestRepository
 import javax.inject.Inject
 
-interface PestRepository {
+class PestRepositoryImpl @Inject constructor() : PestRepository {
 
-    suspend fun fetchPest(idPest: String) : PestCloud
-
-    class Base @Inject constructor(): PestRepository {
-
-        override suspend fun fetchPest(idPest: String): PestCloud {
-            TODO("Not yet implemented")
-        }
+    override suspend fun fetchPest(idPest: String): PestCloud {
+        //TODO
+        return PestCloud("3423", "23423")
     }
+
 }

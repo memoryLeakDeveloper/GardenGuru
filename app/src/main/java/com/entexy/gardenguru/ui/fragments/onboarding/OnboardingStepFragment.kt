@@ -5,7 +5,7 @@ import android.view.View
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingStepBinding
-import com.entexy.gardenguru.utils.Extensions.setDrawable
+import com.entexy.gardenguru.utils.setDrawable
 
 class OnboardingStepFragment(private val position: Int) : BaseFragment<FragmentOnboardingStepBinding>() {
 

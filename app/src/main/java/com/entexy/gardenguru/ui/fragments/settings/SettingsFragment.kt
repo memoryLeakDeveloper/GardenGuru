@@ -7,10 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentSettingsBinding
-import com.entexy.gardenguru.utils.Extensions.toDmyString
+import com.entexy.gardenguru.utils.toDmyString
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {

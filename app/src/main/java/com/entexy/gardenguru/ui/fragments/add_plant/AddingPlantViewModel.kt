@@ -19,10 +19,7 @@ class AddingPlantViewModel @Inject constructor(
     private lateinit var gardenNames: ArrayList<GardenName>
 
     var selectedGarden = -1
-    suspend fun loadGardensNames(): ArrayList<GardenName> {
-        gardenNames = getGardenNamesUseCase.getNames()
-        return gardenNames
-    }
+    suspend fun loadGardensNames() = getGardenNamesUseCase.getNames()
 
     suspend fun createGarden(gardenName: String): GardenName? {
         val garden = createGardenUseCase.perform(gardenName)
@@ -35,4 +32,5 @@ class AddingPlantViewModel @Inject constructor(
     suspend fun createPlant(plantData: PlantData): Boolean {
         return createPlantUseCase.createPlant(gardenNames[selectedGarden].id, plantData)
     }
+
 }

@@ -3,7 +3,6 @@ package com.entexy.gardenguru.data.auth
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-
 interface TokenHelper {
 
     fun getToken(): String

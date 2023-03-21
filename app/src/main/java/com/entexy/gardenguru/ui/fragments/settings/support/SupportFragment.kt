@@ -16,8 +16,8 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.DialogSupportSuccessBinding
 import com.entexy.gardenguru.databinding.FragmentSupportBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
-import com.entexy.gardenguru.utils.Extensions.checkAndVerifyStoragePermissions
-import com.entexy.gardenguru.utils.Extensions.copyToFile
+import com.entexy.gardenguru.utils.checkAndVerifyStoragePermissions
+import com.entexy.gardenguru.utils.copyToFile
 import dagger.hilt.android.AndroidEntryPoint
 
 

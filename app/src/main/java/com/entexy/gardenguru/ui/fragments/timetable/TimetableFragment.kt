@@ -15,10 +15,9 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentTimetableBinding
 import com.entexy.gardenguru.ui.customview.CalendarView
-import com.entexy.gardenguru.utils.Extensions.checkAndVerifyCameraPermissions
+import com.entexy.gardenguru.utils.checkAndVerifyCameraPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
 
 @AndroidEntryPoint
 class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {

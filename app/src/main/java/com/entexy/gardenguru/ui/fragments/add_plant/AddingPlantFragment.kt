@@ -24,7 +24,7 @@ import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment.UpdateLayoutHeightCallback
 import com.entexy.gardenguru.ui.fragments.add_plant.client.ClientPlantFragment
 import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment
-import com.entexy.gardenguru.utils.Extensions.setString
+import com.entexy.gardenguru.utils.setString
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,9 +34,8 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
+    private lateinit var pagerAdapter: PagerAdapter
     private val viewModel: AddingPlantViewModel by viewModels()
-
-    private lateinit var pagerAdapter: AddingPlantFragment.PagerAdapter
 
     fun interface UpdateLayoutHeightCallback {
         fun update()
@@ -49,10 +48,8 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
             header.back.setOnClickListener {
                 requireActivity().onBackPressed()
             }
-
             buttonAdd.setOnClickListener {
                 val plantData = pagerAdapter.getCurrentPlantNameAndData(viewPager.currentItem)
-
                 if (plantData != null && viewModel.selectedGarden != -1) {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val isSuccess = viewModel.createPlant(plantData)
@@ -68,20 +65,12 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
                     if (viewModel.selectedGarden == -1)
                         Toast.makeText(requireContext(), R.string.error_garden_not_selected, Toast.LENGTH_SHORT).show()
                     else Toast.makeText(requireContext(), R.string.error_not_all_data_populated, Toast.LENGTH_SHORT).show()
-
                 }
             }
         }
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val gardenNames = viewModel.loadGardensNames().map { it.name }
-            withContext(Dispatchers.Main) {
-                initSpinner(gardenNames)
-            }
+        lifecycleScope.launch(Dispatchers.IO) {
+            initSpinner(viewModel.loadGardensNames().map { it.name })
         }
-
-
         setViewPager()
     }
 
@@ -163,8 +152,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
     private fun convertDpToPx(dp: Float) = (dp * requireContext().resources.displayMetrics.density).toInt()
 
-    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) :
-        FragmentStateAdapter(fragment) {
+    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) : FragmentStateAdapter(fragment) {
 
         private val fragments = hashMapOf<Int, Fragment>()
 

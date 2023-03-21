@@ -6,7 +6,7 @@ import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.auth.UserEmailHelper
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.domain.usecases.app.UserEmailUseCase
-import com.entexy.gardenguru.utils.Extensions.getPrefs
+import com.entexy.gardenguru.utils.getPrefs
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

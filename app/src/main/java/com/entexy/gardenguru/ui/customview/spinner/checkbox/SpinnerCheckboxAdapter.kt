@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.databinding.SpinnerCheckboxItemBinding
-import com.entexy.gardenguru.utils.Extensions.setDrawable
+import com.entexy.gardenguru.utils.setDrawable
 
 class SpinnerCheckboxAdapter : RecyclerView.Adapter<SpinnerCheckboxAdapter.SpinnerAdapterViewHolder>() {
 

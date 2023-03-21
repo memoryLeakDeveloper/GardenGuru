@@ -6,7 +6,8 @@ import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentPestInfoBinding
-import com.entexy.gardenguru.utils.Extensions.setDrawable
+import com.entexy.gardenguru.utils.setDrawable
+import com.example.gardenguru.utils.toVisible
 
 class PestInfoFragment : BaseFragment<FragmentPestInfoBinding>() {
 
@@ -19,7 +20,7 @@ class PestInfoFragment : BaseFragment<FragmentPestInfoBinding>() {
         with(binding) {
             header.title.setText(R.string.disease_and_pests)
             header.menu.apply {
-                visibility = View.VISIBLE
+                toVisible()
                 setDrawable(R.drawable.ic_calendar)
             }
             header.back.setOnClickListener {

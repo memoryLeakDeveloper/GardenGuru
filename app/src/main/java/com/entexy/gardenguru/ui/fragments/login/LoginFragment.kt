@@ -14,8 +14,8 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.data.auth.UserEmailHelper
 import com.entexy.gardenguru.databinding.FragmentLoginBinding
-import com.entexy.gardenguru.utils.Extensions.getPrefs
 import com.entexy.gardenguru.utils.PrefsKeys
+import com.entexy.gardenguru.utils.getPrefs
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 

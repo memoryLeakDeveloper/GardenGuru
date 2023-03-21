@@ -10,8 +10,8 @@ interface GetGardenNamesDataSource {
 
     class Base @Inject constructor(private val service: GetGardenNamesService) : GetGardenNamesDataSource {
         override suspend fun fetch(token: String): ArrayList<GardenName> {
-            val response = service.fetch(token).execute()
-            if (response.code() == 200)
+            val response = service.fetch(token)
+            if (response.isSuccessful)
                 return response.body()!!
             throw ErrorResponseCodeException(response.code(), 200)
         }

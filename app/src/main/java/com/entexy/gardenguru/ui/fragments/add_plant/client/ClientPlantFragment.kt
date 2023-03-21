@@ -27,6 +27,7 @@ import com.entexy.gardenguru.databinding.AddPestsCardBinding
 import com.entexy.gardenguru.databinding.FragmentClientPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.entexy.gardenguru.ui.fragments.add_plant.GetPlantInfo
+import com.example.gardenguru.utils.toGone
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,7 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     BaseFragment<FragmentClientPlantBinding>(), GetPlantInfo {
 
     private val viewModel: ClientPlantViewModel by viewModels()
+    var imageView: ImageView? = null
 
     private val getPestImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -51,7 +53,6 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
                 }
             }
         }
-
 
     private val getPlantImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -82,7 +83,6 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
         hideKeyboard(binding.etPlantName)
         return@OnTouchListener true
     }
-    var imageView: ImageView? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -142,7 +142,7 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
             spinnerPests.setOnTouchListener(touchListener)
             spinnerCare.setOnTouchListener(touchListener)
             arrowDown.setOnClickListener {
-                shortForm.visibility = View.GONE
+                shortForm.toGone()
                 fullForm.visibility = View.VISIBLE
                 callback.update()
             }

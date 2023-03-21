@@ -3,11 +3,9 @@ package com.entexy.gardenguru.di.plant
 import com.entexy.gardenguru.core.Api
 import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.language.LanguageHelper
-import com.entexy.gardenguru.data.plant.PlantRepository
+import com.entexy.gardenguru.data.plant.PlantRepositoryImpl
 import com.entexy.gardenguru.data.plant.cloud.PlantCloudDataSource
-import com.entexy.gardenguru.data.plant.cloud.PlantCloudMapper
 import com.entexy.gardenguru.data.plant.cloud.PlantService
-import com.entexy.gardenguru.data.plant.cloud.create.CreatePlantCloudMapper
 import com.entexy.gardenguru.data.plant.cloud.create.CreatePlantService
 import com.entexy.gardenguru.data.plant.cloud.create.CreatePlantSource
 import com.entexy.gardenguru.domain.usecases.plant.CreatePlantUseCase
@@ -22,18 +20,15 @@ import javax.inject.Singleton
 class PlantModule {
 
     @Provides
-    fun providePlantRepository(
+    fun providePlantRepositoryImpl(
         tokenHelper: TokenHelper.Base,
         languageHelper: LanguageHelper.Base,
         createPlantService: CreatePlantService,
         plantService: PlantService,
-        cloudMapper: PlantCloudMapper.Base
-    ): PlantRepository = PlantRepository.Base(
+    ) = PlantRepositoryImpl(
         tokenHelper,
         CreatePlantSource.Base(createPlantService),
         PlantCloudDataSource.Base(plantService),
-        cloudMapper,
-        CreatePlantCloudMapper(),
         languageHelper
     )
 
@@ -46,9 +41,6 @@ class PlantModule {
     fun provideCreatePlantService(api: Api): CreatePlantService = api.makeService(CreatePlantService::class.java)
 
     @Provides
-    fun provideCreatePlantUseCase(plantRepository: PlantRepository): CreatePlantUseCase =
-        CreatePlantUseCase(plantRepository)
+    fun provideCreatePlantUseCase(plantRepository: PlantRepositoryImpl): CreatePlantUseCase = CreatePlantUseCase(plantRepository)
 
-    @Provides
-    fun providePlantCloudMapper() = PlantCloudMapper.Base()
 }

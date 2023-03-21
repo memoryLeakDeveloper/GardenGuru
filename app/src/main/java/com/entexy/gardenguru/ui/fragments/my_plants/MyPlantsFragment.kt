@@ -14,14 +14,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
 
     private val viewModel: MyPlantsViewModel by viewModels()
-
     private lateinit var rvAdapter: GardensRecyclerAdapter
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(binding) {
+        with(binding){
             header.apply {
                 back.setOnClickListener {
                     requireActivity().onBackPressed()
@@ -30,10 +28,10 @@ class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
             }
 
             initGardenList()
-            viewModel.gardens.observe(viewLifecycleOwner) {
-                if (it != null) {
+            viewModel.gardensLiveData.observe(viewLifecycleOwner){
+                if (it != null){
                     binding.progressBar.visibility = View.GONE
-                    if (viewModel.gardens.value?.isEmpty() == true) {
+                    if (viewModel.gardensLiveData.value?.isEmpty() == true){
                         rvGardens.visibility = View.GONE
                         noPlantsContainer.visibility = View.VISIBLE
                         //search logic
@@ -52,7 +50,6 @@ class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
 
     override fun onResume() {
         super.onResume()
-
         viewModel.initGardens()
     }
 

@@ -21,20 +21,13 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
     RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            RvGardenItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        return ViewHolder(RvGardenItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.binding) {
-            val garden = viewModel.gardens.value!![position]
-
+            val garden = viewModel.gardensLiveData.value!![position]
             tvGardenName.text = garden.name
             rvPlants.layoutManager = LinearLayoutManager(root.context)
             val adapter = PlantsRecyclerAdapter(garden.plants)
@@ -98,9 +91,8 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) :
 
 
     override fun getItemCount(): Int {
-        return viewModel.gardens.value?.size ?: 0
+        return viewModel.gardensLiveData.value?.size ?: 0
     }
 
-    class ViewHolder(val binding: RvGardenItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: RvGardenItemBinding) : RecyclerView.ViewHolder(binding.root)
 }

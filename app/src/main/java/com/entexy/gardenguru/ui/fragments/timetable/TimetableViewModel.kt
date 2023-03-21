@@ -8,7 +8,7 @@ import com.entexy.gardenguru.data.event.PlantEventsData
 import com.entexy.gardenguru.data.media.PhotoData
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.sun.relation.SunRelationData
-import com.entexy.gardenguru.utils.Extensions.toDmyString
+import com.entexy.gardenguru.utils.toDmyString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
