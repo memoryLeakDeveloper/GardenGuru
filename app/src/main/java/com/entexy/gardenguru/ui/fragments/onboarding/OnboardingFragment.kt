@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.core.InsetsBaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingBinding
 import com.entexy.gardenguru.utils.toVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
+class OnboardingFragment : InsetsBaseFragment<FragmentOnboardingBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

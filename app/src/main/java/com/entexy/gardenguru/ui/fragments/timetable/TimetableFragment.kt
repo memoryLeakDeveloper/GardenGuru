@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.core.InsetsBaseFragment
 import com.entexy.gardenguru.databinding.FragmentTimetableBinding
 import com.entexy.gardenguru.ui.customview.CalendarView
 import com.entexy.gardenguru.utils.checkAndVerifyCameraPermissions
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
+class TimetableFragment : InsetsBaseFragment<FragmentTimetableBinding>() {
 
     private val viewModel: TimetableViewModel by viewModels()
     private lateinit var calendarRecyclerAdapter: CalendarRecyclerAdapter
@@ -38,8 +38,6 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
                 findNavController().navigate(R.id.action_timetableFragment_to_settingsFragment)
             }
         }
-
-
         initAddButton()
         initCalendar()
     }

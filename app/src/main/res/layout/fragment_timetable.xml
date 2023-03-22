@@ -57,53 +57,81 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="-30dp"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_bg"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_bg"
         tools:itemCount="4"
         tools:layout_editor_absoluteX="4dp"
         tools:listitem="@layout/rv_timetable_item" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/calendar_bg"
-        android:layout_width="match_parent"
-        android:layout_height="196dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_calendar_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.entexy.gardenguru.ui.customview.CalendarView
-        android:id="@+id/calendar_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:itemCount="1"
-        tools:listitem="@layout/rv_calendar_item" />
+        android:background="@drawable/background_calendar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/oval_ring_green"
-        app:layout_constraintBottom_toBottomOf="@+id/calendar_view"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/calendar_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.entexy.gardenguru.ui.customview.CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:itemCount="1"
+            tools:listitem="@layout/rv_calendar_item" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/oval_ring_green"
+            app:layout_constraintTop_toBottomOf="@+id/tv_month_name"
+            app:layout_constraintBottom_toBottomOf="@+id/calendar_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_month_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/junction_regular"
+            android:textSize="20sp"
+            android:layout_marginTop="28dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/calendar_root"
+            app:layout_constraintBottom_toTopOf="@+id/calendar_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Октябрь" />
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_plus"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="-35dp"
+        android:background="@color/primary_green"
+        android:scaleType="center"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toTopOf="@+id/calendar_root"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendar_view" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_month_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/junction_regular"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/calendar_bg"
-        tools:text="Октябрь" />
-
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/expanded_btn_background"
@@ -131,8 +159,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:background="@color/transparent"
         android:alpha="0"
+        android:background="@color/transparent"
         android:fontFamily="@font/poppins_regular"
         android:maxLines="2"
         android:text="@string/enter_plant_name"
@@ -144,17 +172,5 @@
         app:layout_constraintTop_toTopOf="@+id/expanded_btn_background" />
 
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_plus"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="-35dp"
-        android:background="@color/primary_green"
-        android:scaleType="center"
-        android:src="@drawable/ic_plus"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
