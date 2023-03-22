@@ -3,11 +3,12 @@ package com.entexy.gardenguru.ui.fragments.plant_card.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.entexy.gardenguru.data.event.EventData
-import com.entexy.gardenguru.data.event.PlantEventsData
-import com.entexy.gardenguru.data.media.PhotoData
+import com.entexy.gardenguru.data.plant.CareComplexity
 import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.data.sun.relation.SunRelationData
+import com.entexy.gardenguru.data.plant.SunRelation
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
+import com.entexy.gardenguru.data.plant.event.EventData
+import com.entexy.gardenguru.data.plant.event.PlantEventsData
 import com.entexy.gardenguru.utils.toDmyString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
@@ -19,33 +20,21 @@ class PlantCardHistoryViewModel @Inject constructor() : ViewModel() {
         value =
             PlantEventsData(
                 PlantData(
-                    "0",
-                    0,
-                    "Иван",
+                    "qwwqeew",
+                    "НЕЗАБУДКА",
+                    "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+                    CareComplexity.Easy,
+                    "НЕЗАБУДКА DESC",
+                    SunRelation.DirectLight,
                     null,
-                    "Кактус",
-                    (PhotoData(
-                        "0",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
-                    )
-                            ),
-                    SunRelationData(0, ""),
-                    arrayListOf(),
-                    arrayListOf(),
-                    arrayListOf(),
-                    "",
-                    "",
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
+                    null,
+                    arrayListOf(BenefitData("qweqweqweqweqwe", "qwpoqfwepofqmvw")),
+                    "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ОБЯЗАТЕЛЬНО",
+                    Date(),
+                    3,
+                    4,
+                    5,
+                    6,
                 ),
                 arrayListOf(
                     EventData(

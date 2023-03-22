@@ -1,81 +1,84 @@
 package com.entexy.gardenguru.data.plant
 
-import com.entexy.gardenguru.data.benefit.BenefitData
-import com.entexy.gardenguru.data.media.PhotoData
-import com.entexy.gardenguru.data.pest.PestData
-import com.entexy.gardenguru.data.plant.cloud.PhotoDataCloud
+import android.os.Parcelable
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.cloud.PlantCloud
-import com.entexy.gardenguru.data.plant.cloud.create.CreatePlantCloud
-import com.entexy.gardenguru.data.reproduction.ReproductionData
-import com.entexy.gardenguru.data.sun.relation.SunRelationData
+import com.entexy.gardenguru.data.plant.pest.PestData
+import com.entexy.gardenguru.data.plant.reproduction.Reproduction
+import com.google.firebase.Timestamp
+import kotlinx.parcelize.Parcelize
+import java.util.*
 
+@Parcelize
 data class PlantData(
-    var id: String? = null,
-    var careComplexity: Int? = null,
+    var id: String,
     var name: String,
-//    var plantType: String? = null,
-    var code: String? = null,
+    var photo: String,
+    var careComplexity: CareComplexity = CareComplexity.Medium,
     var description: String? = null,
-    var photo: PhotoData,
-    var sunRelation: SunRelationData? = null,
+    var sunRelation: SunRelation? = null,
     var pests: ArrayList<PestData>? = null,
-    var reproduction: ArrayList<ReproductionData>? = null,
+    var reproduction: List<Reproduction>? = null,
     var benefits: ArrayList<BenefitData>? = null,
     var pruning: String? = null,
-    var plantingTime: String? = null,
-    var summerWatering: Int? = null,
-    var summerSpraying: Int? = null,
-    var summerFeeding: Int? = null,
-    var summerMinTemp: Int? = null,
-    var summerMaxTemp: Int? = null,
-    var winterWatering: Int? = null,
-    var winterSpraying: Int? = null,
-    var winterFeeding: Int? = null,
-    var winterMinTemp: Int? = null,
-    var winterMaxTemp: Int? = null
-)
+    var plantingTime: Date? = null,
+    var watering: Int? = null,
+    var spraying: Int? = null,
+    var minTemp: Int? = null,
+    var maxTemp: Int? = null
+) : Parcelable
 
-fun PlantData.mapToCreatePlantCloud() = CreatePlantCloud(
+
+fun PlantData.mapToPlantCloud() = PlantCloud(
     name = name,
-    photosIds = arrayListOf(photo.id),
-    careComplexity = careComplexity,
-    summerWatering = summerWatering,
-    summerSpraying = summerSpraying,
-    summerFeeding = summerFeeding,
-    summerMinTemp = summerMinTemp,
-    summerMaxTemp = summerMaxTemp,
-    winterWatering = winterWatering,
-    winterSpraying = winterSpraying,
-    winterFeeding = winterFeeding,
-    winterMinTemp = winterMinTemp,
-    winterMaxTemp = winterMaxTemp,
-    reproductionIds = reproduction?.map { it.id },
+    photo = photo,
+    careComplexity = careComplexity.cloudName,
     description = description,
+    sunRelation = sunRelation?.cloudName,
     pestsIds = pests?.map { it.id },
-    benefitsIds = benefits?.map { it.id }
+    reproduction = reproduction?.map {
+        it.cloudValue
+    },
+    benefitsIds = benefits?.map { it.id },
+    pruning = pruning,
+    plantingTime = if (plantingTime != null) Timestamp(plantingTime!!) else null,
+    watering = watering,
+    spraying = spraying,
+    minTemp = minTemp,
+    maxTemp = maxTemp
 )
 
-fun PlantData.mapToCloud() = PlantCloud(
-    id,
-    careComplexity,
-    name,
-    code,
-    description,
-    arrayListOf(PhotoDataCloud(photo.id, photo.thumbnail, photo.file)),
-    sunRelation,
-    pests,
-    reproduction,
-    benefits,
-    pruning,
-    plantingTime,
-    summerWatering,
-    summerSpraying,
-    summerFeeding,
-    summerMinTemp,
-    summerMaxTemp,
-    winterWatering,
-    winterSpraying,
-    winterFeeding,
-    winterMinTemp,
-    winterMaxTemp
+fun PlantCloud.mapToData() = PlantData(
+    id = "",
+    name = name,
+    photo = photo,
+    careComplexity = try {
+        if (careComplexity != null)
+            CareComplexity.valueOf(careComplexity)
+        else CareComplexity.Medium
+    } catch (e: java.lang.IllegalArgumentException) {
+        CareComplexity.Medium
+    },
+    description = description,
+    sunRelation = try {
+        if (sunRelation != null)
+            SunRelation.valueOf(sunRelation)
+        else null
+    } catch (e: java.lang.IllegalArgumentException) {
+        null
+    },
+    pests = null,
+    reproduction =
+    try {
+        reproduction?.map { Reproduction.valueOf(it) }
+    } catch (e: java.lang.IllegalArgumentException) {
+        null
+    },
+    benefits = null,
+    pruning = pruning,
+    plantingTime = plantingTime?.toDate(),
+    watering = watering,
+    spraying = spraying,
+    minTemp = minTemp,
+    maxTemp = maxTemp
 )

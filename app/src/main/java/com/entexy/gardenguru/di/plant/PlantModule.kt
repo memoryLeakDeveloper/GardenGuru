@@ -1,14 +1,13 @@
 package com.entexy.gardenguru.di.plant
 
-import com.entexy.gardenguru.core.Api
 import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.PlantRepositoryImpl
+import com.entexy.gardenguru.data.plant.benefit.BenefitsCloudDataSource
 import com.entexy.gardenguru.data.plant.cloud.PlantCloudDataSource
-import com.entexy.gardenguru.data.plant.cloud.PlantService
-import com.entexy.gardenguru.data.plant.cloud.create.CreatePlantService
-import com.entexy.gardenguru.data.plant.cloud.create.CreatePlantSource
-import com.entexy.gardenguru.domain.usecases.plant.CreatePlantUseCase
+import com.entexy.gardenguru.data.plant.cloud.SearchPlantDataSource
+import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
+import com.entexy.gardenguru.domain.repository.PlantRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,24 +22,35 @@ class PlantModule {
     fun providePlantRepositoryImpl(
         tokenHelper: TokenHelper,
         languageHelper: LanguageHelper,
-        createPlantService: CreatePlantService,
-        plantService: PlantService,
-    ) = PlantRepositoryImpl(
+        plantCloudDataSource: PlantCloudDataSource,
+        pestsCloudDataSource: PestsCloudDataSource,
+        benefitsCloudDataSource: BenefitsCloudDataSource
+    ): PlantRepository = PlantRepositoryImpl(
         tokenHelper,
-        CreatePlantSource.Base(createPlantService),
-        PlantCloudDataSource.Base(plantService),
+        plantCloudDataSource,
+        pestsCloudDataSource,
+        benefitsCloudDataSource,
+        SearchPlantDataSource.Base(),
         languageHelper
     )
 
     @Provides
     @Singleton
-    fun providePlantService(api: Api): PlantService = api.makeService(PlantService::class.java)
+    fun providePlantCloudDataSource(): PlantCloudDataSource = PlantCloudDataSource.Base()
+
 
     @Provides
     @Singleton
-    fun provideCreatePlantService(api: Api): CreatePlantService = api.makeService(CreatePlantService::class.java)
+    fun providePestsCloudDataSource(): PestsCloudDataSource = PestsCloudDataSource.Base()
+
 
     @Provides
-    fun provideCreatePlantUseCase(plantRepository: PlantRepositoryImpl): CreatePlantUseCase = CreatePlantUseCase(plantRepository)
+    @Singleton
+    fun provideBenefitsCloudDataSource(): BenefitsCloudDataSource = BenefitsCloudDataSource.Base()
+
+    @Provides
+    @Singleton
+    fun provideSearchPlantCloudDataSource(): SearchPlantDataSource = SearchPlantDataSource.Base()
+
 
 }

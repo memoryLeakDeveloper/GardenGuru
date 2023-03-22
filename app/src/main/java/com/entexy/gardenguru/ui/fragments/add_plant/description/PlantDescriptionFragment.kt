@@ -25,7 +25,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
 
     private fun initView(data: PlantData) {
         with(binding) {
-            Glide.with(requireContext()).load(data.photo.file).circleCrop()
+            Glide.with(requireContext()).load(data.photo).circleCrop()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder)).into(plantPhoto)
             plantName.text = data.name
             plantName1.text = data.name
@@ -36,7 +36,7 @@ class PlantDescriptionFragment(private val data: PlantData, private val callback
                 aboutPlant.visibility = View.GONE
                 plantName1.visibility = View.GONE
             }
-            careDifficult.initView(data.careComplexity!!, false)
+            careDifficult.initView(data.careComplexity, false)
             wheather.initView(data)
             careDescription.initView(data)
             pests.initView(data.pests)

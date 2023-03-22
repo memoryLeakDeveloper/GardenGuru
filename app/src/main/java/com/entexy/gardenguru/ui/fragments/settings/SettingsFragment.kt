@@ -46,7 +46,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             }
 
             val languages = resources.getStringArray(R.array.languages)
-            spinnerLanguages.initView(languages[0], 0, ArrayList(languages.toList()), false)
+            spinnerLanguages.initView(languages[0], ArrayList(languages.toList()), false)
         }
     }
 

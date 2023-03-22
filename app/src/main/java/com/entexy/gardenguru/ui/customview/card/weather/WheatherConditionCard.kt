@@ -22,18 +22,14 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
 
     fun initView(data: PlantData) {
         if (isDataIsEmpty(data)) return
-        setTemperature(data, Seasons.Summer) //TODO
+        setTemperature(data) //TODO
         setWatering(data, Seasons.Winter) // TODO
         setLightning(data)
     }
 
     private fun isDataIsEmpty(data: PlantData): Boolean {
-        return if (data.summerMinTemp == null &&
-            data.summerMaxTemp == null &&
-            data.winterMinTemp == null &&
-            data.winterMaxTemp == null &&
-            data.winterWatering == null &&
-            data.summerWatering == null &&
+        return if (data.minTemp == null &&
+            data.maxTemp == null &&
             data.sunRelation == null
         ) {
             this.visibility = GONE
@@ -41,53 +37,29 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
         } else false
     }
 
-    private fun setTemperature(data: PlantData, season: Seasons = Seasons.Summer) {
+    private fun setTemperature(data: PlantData) {
         with(binding) {
-            when (season) {
-                Seasons.Summer -> {
-                    if (data.summerMinTemp == null || data.summerMaxTemp == null) {
-                        temperature.visibility = GONE
-                        wateringDivider.visibility = GONE
-                    } else {
-                        temperature.setTextInfo("${data.summerMinTemp} ${R.string.celsium} / ${data.summerMaxTemp} ${R.string.celsium}")
-                    }
-                }
-                Seasons.Winter -> {
-                    if (data.winterMinTemp == null || data.winterMaxTemp == null) {
-                        temperature.visibility = GONE
-                        wateringDivider.visibility = GONE
-                    } else {
-                        temperature.setTextInfo("${data.winterMinTemp} ${R.string.celsium} / ${data.winterMaxTemp} ${R.string.celsium}")
-                    }
-                }
-                else -> {} //todo
+            if (data.minTemp == null || data.maxTemp == null) {
+                temperature.visibility = GONE
+                wateringDivider.visibility = GONE
+            } else {
+                temperature.setTextInfo("${data.minTemp} ${R.string.celsium} / ${data.maxTemp} ${R.string.celsium}")
             }
         }
     }
 
+
     private fun setWatering(data: PlantData, season: Seasons = Seasons.Summer) {
         with(binding) {
-            when (season) {
-                Seasons.Summer -> {
-                    if (data.summerWatering == null) {
-                        watering.visibility = GONE
-                        lightingDivider.visibility = GONE
-                    } else {
-                        watering.setTextInfo("${R.string.every} ${data.summerWatering} ${R.string.days}")
-                    }
-                }
-                Seasons.Winter -> {
-                    if (data.winterWatering == null) {
-                        watering.visibility = GONE
-                        lightingDivider.visibility = GONE
-                    } else {
-                        watering.setTextInfo("${R.string.every} ${data.winterWatering} ${R.string.days}")
-                    }
-                }
-                else -> {} //todo
+            if (data.watering == null) {
+                watering.visibility = GONE
+                lightingDivider.visibility = GONE
+            } else {
+                watering.setTextInfo("${R.string.every} ${data.watering} ${R.string.days}")
             }
         }
     }
+
 
     private fun setLightning(data: PlantData) {
         if (data.sunRelation == null) {

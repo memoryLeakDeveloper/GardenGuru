@@ -7,7 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.data.benefit.BenefitData
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.databinding.CardBenefitsBinding
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
@@ -23,7 +23,7 @@ class BenefitsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(con
         if (data == null) {
             this.visibility = View.GONE
         } else {
-            if (data.isNotEmpty()) binding.benefits.text = data.first().type
+            if (data.isNotEmpty()) binding.benefits.text = data.first().name
         }
     }
 }

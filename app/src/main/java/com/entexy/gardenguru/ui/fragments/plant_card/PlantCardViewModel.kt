@@ -4,8 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.entexy.gardenguru.data.garden.models.GardenData
-import com.entexy.gardenguru.data.garden.models.GardenPlantData
+import com.entexy.gardenguru.data.plant.CareComplexity
+import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.SunRelation
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,48 +20,24 @@ class PlantCardViewModel @Inject constructor() : ViewModel() {
             GardenData(
                 "Сад 1",
                 "",
-                GardenData.SummerClimateSeason.JuneAugust,
+                "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
                 arrayListOf(
-                    GardenPlantData(
-                        "0",
-                        "Иван",
-                        "Кактус",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                    ),
-                    GardenPlantData(
-                        "0",
-                        "Степан",
-                        "Фикус",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                    ), GardenPlantData(
-                        "0",
-                        "Женя",
-                        "Кактус",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                    )
-                )
-            ),
-            GardenData(
-                "Дом",
-                "Дом",
-                GardenData.SummerClimateSeason.JuneAugust,
-                arrayListOf(
-                    GardenPlantData(
-                        "0",
-                        "Василий",
-                        "Кактус",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                    ),
-                    GardenPlantData(
-                        "0",
-                        "Степан",
-                        "Фикус",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                    ), GardenPlantData(
-                        "0",
-                        "Павел",
-                        "Кактус",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
+                    PlantData(
+                        "qwwqeew",
+                        "НЕЗАБУДКА",
+                        "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+                        CareComplexity.Easy,
+                        "НЕЗАБУДКА DESC",
+                        SunRelation.DirectLight,
+                        null,
+                        null,
+                        arrayListOf(BenefitData("qweqweqweqweqwe", "qwpoqfwepofqmvw")),
+                        "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ОБЯЗАТЕЛЬНО",
+                        Date(),
+                        3,
+                        4,
+                        5,
+                        6,
                     )
                 )
             )

@@ -8,10 +8,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.data.garden.models.GardenPlantData
+import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.RvGardenPlantItemBinding
 
-class PlantsRecyclerAdapter(private val plants: ArrayList<GardenPlantData>) :
+class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
     RecyclerView.Adapter<PlantsRecyclerAdapter.ViewHolder>() {
 
 
@@ -36,7 +36,7 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<GardenPlantData>) :
                 .into(ivPlantImage)
 
             tvPlantName.text = item.name
-            tvPlantKind.text = item.plant
+            tvPlantKind.text = item.name //todo
 
             if (position == itemCount - 1) {
                 ivLine.visibility = View.GONE

@@ -20,7 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentCameraBinding
-import com.entexy.gardenguru.ui.fragments.camera.camera_result.CameraResultFragment
+import com.entexy.gardenguru.ui.fragments.camera.result.CameraResultFragment
 import com.entexy.gardenguru.utils.checkAndVerifyCameraPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*

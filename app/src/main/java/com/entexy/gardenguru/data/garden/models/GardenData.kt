@@ -3,20 +3,16 @@ package com.entexy.gardenguru.data.garden.models
 import android.content.res.Resources
 import android.os.Parcelable
 import com.entexy.gardenguru.R
+import com.entexy.gardenguru.data.plant.PlantData
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GardenData(
     val id: String,
     val name: String,
-    val summerClimateSeason: SummerClimateSeason,
-    val plants: ArrayList<GardenPlantData>,
-    val participants: ArrayList<Participant> = arrayListOf(),
+    val photo: String,
+    val plants: ArrayList<PlantData>,
 ): Parcelable {
-    fun getGuruEmail():String{
-        return participants.find { it.role == Participant.RoleInGarden.Guru}!!.email
-    }
-
     companion object {
         fun getSummerSeasonByValue(value: String): SummerClimateSeason {
             return when(value){

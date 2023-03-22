@@ -77,11 +77,11 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         setCustomAttributes(attrs)
     }
 
-    fun initView(defValue: String?, defPos: Int?, list: ArrayList<String>, isEditText: Boolean = false) {
+    fun initView(defValue: String?, list: ArrayList<String>, isEditText: Boolean = false) {
         spinnerAdapter.setListAdapter(list)
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
-        setSpinnerDefState(defValue, defPos, list)
+        setSpinnerDefState(defValue, list)
         if (isEditText) {
             initEditText()
         }
@@ -147,7 +147,8 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         }
     }
 
-    private fun setSpinnerDefState(defString: String?, defPos: Int?, list: ArrayList<String>) {
+    private fun setSpinnerDefState(defString: String?, list: ArrayList<String>) {
+        val defPos = 0
         if (defString.isNullOrEmpty()) {
             if ((defPos != null) && (defPos >= 0)) {
                 binding.spinnerText.text = list[defPos]

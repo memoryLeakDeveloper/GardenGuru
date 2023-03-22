@@ -72,12 +72,7 @@ class GardenManagementFragment : BaseFragment<FragmentGardenManagmentBinding>() 
                 resources.getString(GardenData.SummerClimateSeason.JuneAugust.stringNameRes),
                 resources.getString(GardenData.SummerClimateSeason.DecemberFebruary.stringNameRes)
             )
-            val defPosition = when (garden.summerClimateSeason) {
-                GardenData.SummerClimateSeason.JuneAugust -> 0
-                GardenData.SummerClimateSeason.DecemberFebruary -> 1
-                else -> 0
-            }
-            spinnerSeason.initView(null, defPosition, seasons)
+            spinnerSeason.initView(null, seasons)
 
             btSaveGarden.setOnClickListener {
                 btSaveGarden.isEnabled = false
@@ -173,16 +168,6 @@ class GardenManagementFragment : BaseFragment<FragmentGardenManagmentBinding>() 
             }
 
             rvUsers.layoutManager = LinearLayoutManager(requireContext())
-            rvUsers.adapter = ParticipantRecyclerAdapter(
-                resources,
-//                arrayListOf(
-//                    Participant("", "ekeke@g.f", Participant.RoleInGarden.Beginner),
-//                    Participant("", "ke@g.f", Participant.RoleInGarden.Experienced),
-//                    Participant("", "we@g.f", Participant.RoleInGarden.Beginner),
-//                ),
-                garden.participants.filter { it.email != viewModel.getEmail() }.toMutableList(),
-                viewModel
-            )
         }
     }
 }

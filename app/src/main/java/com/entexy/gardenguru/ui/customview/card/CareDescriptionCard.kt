@@ -28,22 +28,17 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
         if (isDataIsEmpty(data)) return
         setWatering(data)
         setSpraying(data)
-        setFeeding(data)
         setPlanting(data)
         setReproduction(data)
         setPruning(data)
     }
 
     private fun isDataIsEmpty(data: PlantData): Boolean {
-        return if (data.summerWatering == null &&
-            data.winterWatering == null &&
-            data.summerSpraying == null &&
-            data.winterSpraying == null &&
-            data.summerFeeding == null &&
-            data.winterFeeding == null &&
+        return if (data.watering == null &&
+            data.spraying == null &&
+            data.pruning == null &&
             data.plantingTime == null &&
-            data.reproduction == null &&
-            data.pruning == null
+            data.reproduction == null
         ) {
             this.visibility = View.GONE
             true
@@ -52,45 +47,44 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
 
     private fun setWatering(data: PlantData) {
         with(binding) {
-            if (data.summerWatering == null && data.winterWatering == null) {
+            if (data.watering == null) {
                 watering.visibility = View.GONE
             } else {
-                data.summerWatering?.let { wateringSummer.text = getString(1, it) } ?: run { wateringSummer.visibility = View.GONE }
-                data.winterWatering?.let { wateringWinter.text = getString(2, it) } ?: run { wateringWinter.visibility = View.GONE }
+                data.watering?.let { wateringSummer.text = getString(1, it) } ?: run { wateringSummer.visibility = View.GONE }
             }
         }
     }
 
     private fun setSpraying(data: PlantData) {
         with(binding) {
-            if (data.summerSpraying == null && data.winterSpraying == null) {
+            if (data.spraying == null && data.spraying == null) {
                 spraying.visibility = View.GONE
 
             } else {
-                data.summerSpraying?.let { sprayingSummer.text = getString(1, it) } ?: run { sprayingSummer.visibility = View.GONE }
-                data.winterSpraying?.let { sprayingWinter.text = getString(2, it) } ?: run { sprayingWinter.visibility = View.GONE }
+                data.spraying?.let { sprayingSummer.text = getString(1, it) } ?: run { sprayingSummer.visibility = View.GONE }
+                data.spraying?.let { sprayingWinter.text = getString(2, it) } ?: run { sprayingWinter.visibility = View.GONE }
             }
         }
     }
 
-    private fun setFeeding(data: PlantData) {
-        with(binding) {
-            if (data.summerFeeding == null && data.winterFeeding == null) {
-                feeding.visibility = View.GONE
-            } else {
-                data.summerFeeding?.let { feedingSummer.text = getString(1, it) } ?: run { feedingSummer.visibility = View.GONE }
-                data.winterFeeding?.let { feedingWinter.text = getString(2, it) } ?: run { feedingWinter.visibility = View.GONE }
-            }
-        }
-    }
+//    private fun setFeeding(data: PlantData) {
+//        with(binding) {
+//            if (data.feeding == null && data.winterFeeding == null) {
+//                feeding.visibility = View.GONE
+//            } else {
+//                data.summerFeeding?.let { feedingSummer.text = getString(1, it) } ?: run { feedingSummer.visibility = View.GONE }
+//                data.winterFeeding?.let { feedingWinter.text = getString(2, it) } ?: run { feedingWinter.visibility = View.GONE }
+//            }
+//        }
+//    }
 
     private fun setPlanting(data: PlantData) {
-        data.plantingTime?.let { binding.plantingText.text = it } ?: run { binding.planting.visibility = View.GONE }
+        data.plantingTime?.let { binding.plantingText.text = it.toString() } ?: run { binding.planting.visibility = View.GONE }
     }
 
     private fun setReproduction(data: PlantData) {
         data.reproduction?.let {
-            val listString = it.map { item -> item.type }
+            val listString = it.map { item -> item.name }
             val string = listString.joinToString(", ")
             binding.plantingText.text = string
         } ?: run { binding.reproduction.visibility = View.GONE }
