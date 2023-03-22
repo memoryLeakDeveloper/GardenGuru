@@ -42,7 +42,6 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     }
 
     private fun setVideoPlayer() = binding.apply {
-        videoView.setVideoPath("android.resource://" + requireContext().packageName + "/" + R.raw.onboarding_video)
         videoView.setOnPreparedListener { player ->
             val screenWidth = resources.displayMetrics.widthPixels
             val videoWidth = player.videoWidth
@@ -53,15 +52,18 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
                 width = screenWidth
                 height = newHeight
             }
+            videoView.background = null
         }
+        videoView.setVideoPath("android.resource://" + requireContext().packageName + "/" + R.raw.onboarding_video)
+        videoView.setZOrderOnTop(true)
         videoView.start()
         videoView.setOnCompletionListener {
             onboarding.apply {
+                videoView.setZOrderOnTop(false)
                 alpha = 0f
                 toVisible()
                 animate().alpha(1f).duration = 1000L
             }
-//            videoView.toGone()
         }
     }
 
