@@ -1,6 +1,6 @@
 package com.entexy.gardenguru.domain.repository
 
-import com.entexy.gardenguru.data.pest.cloud.PestCloud
+import com.entexy.gardenguru.data.plant.pest.cloud.PestCloud
 
 interface PestRepository {
 

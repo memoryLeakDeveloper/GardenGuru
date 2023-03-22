@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/timetableFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -176,7 +176,7 @@
     </fragment>
     <fragment
         android:id="@+id/cameraResultFragment"
-        android:name="com.entexy.gardenguru.ui.fragments.camera.camera_result.CameraResultFragment"
+        android:name="com.entexy.gardenguru.ui.fragments.camera.result.CameraResultFragment"
         android:label="CameraResultFragment"
         tools:layout="@layout/fragment_camera_result">
         <action

@@ -15,7 +15,7 @@ import com.entexy.gardenguru.domain.repository.GardenRepository
 import javax.inject.Inject
 
 class GardenRepositoryImpl @Inject constructor(
-    private val tokenHelper: TokenHelper.Base,
+    private val tokenHelper: TokenHelper,
     private val languageHelper: LanguageHelper,
     private val gardenCloudDataSource: GardensDataSource,
     private val editDataSource: EditGardenSource,

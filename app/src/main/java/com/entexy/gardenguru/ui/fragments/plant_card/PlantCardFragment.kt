@@ -7,11 +7,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
-import com.entexy.gardenguru.data.media.PhotoData
+import com.entexy.gardenguru.data.plant.CareComplexity
 import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.data.sun.relation.SunRelationData
+import com.entexy.gardenguru.data.plant.SunRelation
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.databinding.FragmentPlantCardBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -26,35 +28,23 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         plantData = PlantData(
-            "0",
-            0,
-            "Иван",
+            "wqqweqwe",
+            "НЕЗАБУДКА",
+            "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+            CareComplexity.Easy,
+            "НЕЗАБУДКА DESC",
+            SunRelation.DirectLight,
             null,
-            "Кактус",
-            (
-                    PhotoData(
-                        "0",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png",
-                        "https://flowers.evroopt.by/wp-content/uploads/2019/03/kaktus4_800h800_fon.png"
-                    )
-                    ),
-            SunRelationData(0, ""),
-            arrayListOf(),
-            arrayListOf(),
-            arrayListOf(),
-            "",
-            "",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+            null,
+            arrayListOf(BenefitData("qweqweqweqweqwe", "qwpoqfwepofqmvw")),
+            "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ОБЯЗАТЕЛЬНО",
+            Date(),
+            3,
+            4,
+            5,
+            6,
         )
 
         val idPlant = requireArguments().getString("PLANT_ID")

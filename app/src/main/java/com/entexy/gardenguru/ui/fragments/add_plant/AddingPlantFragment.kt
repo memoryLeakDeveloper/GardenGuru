@@ -14,12 +14,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
-import com.entexy.gardenguru.data.benefit.BenefitData
-import com.entexy.gardenguru.data.media.PhotoData
-import com.entexy.gardenguru.data.pest.PestData
+import com.entexy.gardenguru.data.plant.CareComplexity
 import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.data.reproduction.ReproductionData
-import com.entexy.gardenguru.data.sun.relation.SunRelationData
+import com.entexy.gardenguru.data.plant.SunRelation
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment.UpdateLayoutHeightCallback
 import com.entexy.gardenguru.ui.fragments.add_plant.client.ClientPlantFragment
@@ -30,6 +28,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 @AndroidEntryPoint
 class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
@@ -77,7 +76,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
     private fun initSpinner(gardens: List<String>) {
 
         with(binding) {
-            spinner.initView("Введите сад", null, ArrayList(gardens), true)
+            spinner.initView("Введите сад", ArrayList(gardens), true)
 
             spinner.setValueListener { pos, _ ->
                 viewModel.selectedGarden = pos
@@ -158,33 +157,21 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
         init {
             val data = PlantData(
-                "12121",
-                2,
+                "id",
                 "НЕЗАБУДКА",
+                "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+                CareComplexity.Easy,
+                "НЕЗАБУДКА DESC",
+                SunRelation.DirectLight,
                 null,
-                "УУУУУУУУ очень много букв УУУУУУУУь букв УУУУУУУУь много букв букв УУУУУУУУь много букв много букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверитьмного букв. надо здесь написать чтобы было, надо. текст проверить",
-                PhotoData("1", "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg", ""),
-                SunRelationData(1, "22222"),
-                arrayListOf(PestData("1", "EFKO"), PestData("2", "QA"), PestData("133", "YYYYY")),
-                arrayListOf(ReproductionData(1, "TTTTT")),
-                arrayListOf(
-                    BenefitData(
-                        1,
-                        "rrrrrhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhr"
-                    )
-                ),
-                "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ПОЛИТЬ ОБЯЗАТЕЛЬНО",
-                "LFDFQ DMFMSDFSKMFSDMKFSDMKFSDFDSKMFSDMK",
-                2,
+                null,
+                arrayListOf(BenefitData("qweqweqweqweqwe", "qwpoqfwepofqmvw")),
+                "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ОБЯЗАТЕЛЬНО",
+                Date(),
                 3,
                 4,
                 5,
                 6,
-                6,
-                7,
-                10,
-                8,
-                8,
             )
             for (i in 0 until itemCount - 1) {
                 fragments[i] = PlantDescriptionFragment(data, updateLayoutHeightCallback)

@@ -109,10 +109,10 @@ class ClientPlantFragment(private val callback: AddingPlantFragment.UpdateLayout
     private fun initView() {
         with(binding) {
             val listCareDifficult = ArrayList<String>(listOf(*resources.getStringArray(R.array.care_difficult)))
-            spinnerCare.initView(getString(R.string.define_care_difficult), null, listCareDifficult, false)
+            spinnerCare.initView(getString(R.string.define_care_difficult), listCareDifficult, false)
             val listCareType = ArrayList<String>(listOf(*resources.getStringArray(R.array.care_type)))
             spinnerWatering.apply {
-                initView(getString(R.string.choose), null, listCareType, false)
+                initView(getString(R.string.choose), listCareType, false)
                 setValueListener { position, name ->
                     updateForm(position)
                     callback.update()

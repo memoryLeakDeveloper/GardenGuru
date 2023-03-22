@@ -3,7 +3,7 @@ package com.entexy.gardenguru.ui.fragments.timetable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.entexy.gardenguru.data.event.EventData
+import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.databinding.RvEventItemBinding
 import kotlin.collections.ArrayList
 

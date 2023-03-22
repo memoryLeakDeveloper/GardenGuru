@@ -2,12 +2,14 @@ package com.entexy.gardenguru.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.SharedPreferences
 import com.entexy.gardenguru.core.Api
 import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.auth.UserEmailHelper
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.prefs.FirstLaunchPref
 import com.entexy.gardenguru.domain.usecases.app.UserEmailUseCase
+import com.entexy.gardenguru.utils.PrefsKeys
 import com.entexy.gardenguru.utils.PrefsKeys
 import dagger.Module
 import dagger.Provides
@@ -41,6 +43,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideEmailUseCase(sharedPreferences: SharedPreferences) = UserEmailUseCase(UserEmailHelper.Base(sharedPreferences))
+
 
     @Provides
     @Singleton

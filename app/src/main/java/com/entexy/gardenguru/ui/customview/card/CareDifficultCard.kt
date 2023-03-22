@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.entexy.gardenguru.R
+import com.entexy.gardenguru.data.plant.CareComplexity
 import com.entexy.gardenguru.databinding.CardCareDifficultBinding
 import com.entexy.gardenguru.databinding.DialogCareDifficultBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
@@ -18,33 +19,33 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
     private val binding = CardCareDifficultBinding.inflate(LayoutInflater.from(context), this)
     private val bindingDialog = DialogCareDifficultBinding.inflate(LayoutInflater.from(context))
     private val dialog = DialogHelper()
-    private var careDifficult = 0
+    private var careDifficult = CareComplexity.Easy
 
     init {
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
-    fun initView(difficult: Int?, isEditing: Boolean) {
-        this.careDifficult = difficult ?: 1
+    fun initView(difficult: CareComplexity, isEditing: Boolean) {
+        this.careDifficult = difficult
         with(binding) {
             if (!isEditing) edit.visibility = View.GONE
             else edit.setOnClickListener {
                 showDialog()
             }
             when (difficult) {
-                1 -> {
+                CareComplexity.Easy -> {
                     icon.setDrawable(R.drawable.ic_care_difficult_1)
                     textDescription.setText(R.string.care_difficult_1)
                 }
-                2 -> {
+                CareComplexity.Medium -> {
                     icon.setDrawable(R.drawable.ic_care_difficult_2)
                     textDescription.setText(R.string.care_difficult_2)
                 }
-                3 -> {
+                CareComplexity.Difficult -> {
                     icon.setDrawable(R.drawable.ic_care_difficult_3)
                     textDescription.setText(R.string.care_difficult_3)
                 }
-                4 -> {
+                CareComplexity.VeryDifficult -> {
                     icon.setDrawable(R.drawable.ic_care_difficult_4)
                     textDescription.setText(R.string.care_difficult_4)
                 }
@@ -132,7 +133,7 @@ class CareDifficultCard(context: Context, attrs: AttributeSet) : ConstraintLayou
                 setTextColor(ContextCompat.getColor(context, R.color.white))
                 setOnClickListener {
                     dialog.hideDialog()
-                    initView(position, true)
+                    initView(CareComplexity.values()[position], true)
                     setItemUnselected(position)
                     setButtonInactive()
                 }

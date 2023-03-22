@@ -32,7 +32,7 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) : Recycle
             val adapter = PlantsRecyclerAdapter(garden.plants)
             rvPlants.adapter = adapter
 
-            val guruEmail = garden.getGuruEmail()
+            val guruEmail = "qweqwe" //todo
             if (guruEmail == viewModel.userEmail) { //this so this is the user's garden
                 tvGardenOwner.visibility = View.GONE
                 ivEditDelete.setImageResource(R.drawable.ic_edit)

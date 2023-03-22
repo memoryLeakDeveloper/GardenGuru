@@ -1,59 +1,25 @@
 package com.entexy.gardenguru.data.plant.cloud
 
-import com.entexy.gardenguru.data.benefit.BenefitData
-import com.entexy.gardenguru.data.media.PhotoData
-import com.entexy.gardenguru.data.pest.PestData
-import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.data.reproduction.ReproductionData
-import com.entexy.gardenguru.data.sun.relation.SunRelationData
+import com.google.firebase.Timestamp
 import com.google.gson.annotations.SerializedName
 
 data class PlantCloud(
-    @SerializedName("id") val id: String? = null,
-    @SerializedName("care_complexity") val careComplexity: Int? = null,
     @SerializedName("name") val name: String,
-    @SerializedName("code") val code: String? = null,
+    @SerializedName("localized_name") val localizedName: Map<String, String>? = null,
+    @SerializedName("photo") val photo: String,
+    @SerializedName("care_complexity") val careComplexity: String? = null,
     @SerializedName("description") val description: String? = null,
-    @SerializedName("photos") val photo: ArrayList<PhotoDataCloud>,
-    @SerializedName("sunRelation") val sunRelation: SunRelationData? = null,
-    @SerializedName("pests") val pests: ArrayList<PestData>? = null,
-    @SerializedName("reproduction") val reproduction: ArrayList<ReproductionData>? = null,
-    @SerializedName("benefits") val benefits: ArrayList<BenefitData>? = null,
+    @SerializedName("description_localize") val descriptionWithLocalize: Map<String, String>? = null,
+    @SerializedName("sun_relation") val sunRelation: String? = null,
+    @SerializedName("pests") val pestsIds: List<String>? = null,
+    @SerializedName("reproduction") val reproduction: List<String>? = null,
+    @SerializedName("benefits") val benefitsIds: List<String>? = null,
     @SerializedName("pruning") val pruning: String? = null,
-    @SerializedName("plantingTime") val plantingTime: String? = null,
-    @SerializedName("summerWatering") val summerWatering: Int? = null,
-    @SerializedName("summerSpraying") val summerSpraying: Int? = null,
-    @SerializedName("summerFeeding") val summerFeeding: Int? = null,
-    @SerializedName("summerMinTemp") val summerMinTemp: Int? = null,
-    @SerializedName("summerMaxTemp") val summerMaxTemp: Int? = null,
-    @SerializedName("winterWatering") val winterWatering: Int? = null,
-    @SerializedName("winterSpraying") val winterSpraying: Int? = null,
-    @SerializedName("winterFeeding") val winterFeeding: Int? = null,
-    @SerializedName("winterMinTemp") val winterMinTemp: Int? = null,
-    @SerializedName("winterMaxTemp") val winterMaxTemp: Int? = null
+    @SerializedName("planting_time") val plantingTime: Timestamp? = null,
+    @SerializedName("watering") val watering: Int? = null,
+    @SerializedName("spraying") val spraying: Int? = null,
+    @SerializedName("min_temp") val minTemp: Int? = null,
+    @SerializedName("max_temp") val maxTemp: Int? = null,
 )
 
-fun PlantCloud.mapToData() = PlantData(
-    id,
-    careComplexity,
-    name,
-    code,
-    description,
-    PhotoData(photo.first().id, photo.first().thumbnail, photo.first().file),
-    sunRelation,
-    pests,
-    reproduction,
-    benefits,
-    pruning,
-    plantingTime,
-    summerWatering,
-    summerSpraying,
-    summerFeeding,
-    summerMinTemp,
-    summerMaxTemp,
-    winterWatering,
-    winterSpraying,
-    winterFeeding,
-    winterMinTemp,
-    winterMaxTemp
-)
+

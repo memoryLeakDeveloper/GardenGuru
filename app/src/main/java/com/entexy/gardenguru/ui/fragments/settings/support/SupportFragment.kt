@@ -63,7 +63,7 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
             }
 
             val themes = resources.getStringArray(R.array.support_themes)
-            spinnerThemes.initView(resources.getString(R.string.request_subject), null, ArrayList(themes.toList()))
+            spinnerThemes.initView(resources.getString(R.string.request_subject), ArrayList(themes.toList()))
             spinnerThemes.setValueListener { _: Int, _: String ->
                 checkAndActivateBtn()
             }

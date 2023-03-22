@@ -5,13 +5,11 @@ import com.entexy.gardenguru.data.garden.models.GardenName
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.domain.usecases.garden.CreateGardenUseCase
 import com.entexy.gardenguru.domain.usecases.garden.GetGardenNamesUseCase
-import com.entexy.gardenguru.domain.usecases.plant.CreatePlantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AddingPlantViewModel @Inject constructor(
-    private val createPlantUseCase: CreatePlantUseCase,
     private val createGardenUseCase: CreateGardenUseCase,
     private val getGardenNamesUseCase: GetGardenNamesUseCase
 ) : ViewModel() {
@@ -30,7 +28,8 @@ class AddingPlantViewModel @Inject constructor(
     }
 
     suspend fun createPlant(plantData: PlantData): Boolean {
-        return createPlantUseCase.createPlant(gardenNames[selectedGarden].id, plantData)
+//        return createPlantUseCase.createPlant(gardenNames[selectedGarden].id, plantData)
+        return false
     }
 
 }

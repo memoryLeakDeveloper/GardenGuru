@@ -9,7 +9,7 @@ import com.entexy.gardenguru.utils.copyToFile
 import javax.inject.Inject
 
 class MediaRepositoryImpl @Inject constructor(
-    private val tokenHelper: TokenHelper.Base,
+    private val tokenHelper: TokenHelper,
     private val createPlantSource: UploadImageSource
 ) : MediaRepository {
 

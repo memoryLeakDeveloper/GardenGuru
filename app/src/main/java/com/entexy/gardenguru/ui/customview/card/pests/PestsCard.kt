@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.data.pest.PestData
+import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.databinding.CardDiseasePestBinding
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 

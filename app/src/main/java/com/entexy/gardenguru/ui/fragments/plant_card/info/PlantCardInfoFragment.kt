@@ -45,7 +45,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
     private fun iniView(data: PlantData) {
         with(binding) {
             Glide.with(requireContext())
-                .load(data.photo.file)
+                .load(data.photo)
                 .circleCrop()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .into(plantPhoto)
@@ -65,7 +65,6 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             buttonMove.setOnClickListener {
                 bindingDialog.spinner.initView(
                     "Введите сад",
-                    null,
                     arrayListOf("11111111111", "2222222", "33333", "444444", "5555555"),
                     true
                 )
