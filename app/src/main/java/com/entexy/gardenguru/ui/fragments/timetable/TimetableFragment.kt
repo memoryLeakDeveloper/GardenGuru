@@ -24,46 +24,41 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(binding) {
-            ivLeaf.setOnClickListener {
-                findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
-            }
-
-            ivSettings.setOnClickListener {
-                findNavController().navigate(R.id.action_timetableFragment_to_settingsFragment)
-            }
-        }
-
-
+        setListeners()
         initAddButton()
         initCalendar()
+        updateInsets(binding.addPlant)
+    }
+
+    private fun setListeners() = binding.apply {
+        ivLeaf.setOnClickListener {
+            findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
+        }
+        ivSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_timetableFragment_to_settingsFragment)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun initCalendar() {
-        with(binding) {
-            eventsRecyclerAdapter = TimetableRecyclerAdapter(viewModel)
-            rvEvents.layoutManager = LinearLayoutManager(requireContext())
-            rvEvents.adapter = eventsRecyclerAdapter
-            val snapHelper = LinearSnapHelper()
-            snapHelper.attachToRecyclerView(rvEvents)
-            rvEvents.scrollToPosition(3 + 7)
-        }
+    private fun initCalendar() = binding.apply {
+        eventsRecyclerAdapter = TimetableRecyclerAdapter(viewModel)
+        rvEvents.layoutManager = LinearLayoutManager(requireContext())
+        rvEvents.adapter = eventsRecyclerAdapter
+        LinearSnapHelper().attachToRecyclerView(rvEvents)
+        rvEvents.scrollToPosition(3 + 7)
     }
 
-    private fun initAddButton() {
-        with(binding) {
-            addPlant.initView({
-                if (requireActivity().checkAndVerifyCameraPermissions() && requireActivity().checkAndVerifyCameraPermissions()) {
-                    findNavController().navigate(R.id.action_timetableFragment_to_cameraFragment)
-                }
-            }, {
-                findNavController().navigate(
-                    R.id.action_timetableFragment_to_addingPlantFragment,
-                    bundleOf(AddingPlantFragment.SEARCH_ARGUMENTS_KEY to it)
-                )
-            })
-        }
+    private fun initAddButton() = binding.apply {
+        addPlant.initView({
+            if (requireActivity().checkAndVerifyCameraPermissions() && requireActivity().checkAndVerifyCameraPermissions()) {
+                findNavController().navigate(R.id.action_timetableFragment_to_cameraFragment)
+            }
+        }, {
+            findNavController().navigate(
+                R.id.action_timetableFragment_to_addingPlantFragment,
+                bundleOf(AddingPlantFragment.SEARCH_ARGUMENTS_KEY to it)
+            )
+        })
     }
+
 }
