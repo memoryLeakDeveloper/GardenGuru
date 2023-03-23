@@ -129,3 +129,6 @@ fun Any?.ifNotNull(block: () -> Unit) = run {
 }
 
 fun Context.convertPxToDp(px: Float) = (px * resources.displayMetrics.density).toInt()
+
+fun Context.convertDpToPx(dp: Float) = (dp * resources.displayMetrics.density).toInt()
+
