@@ -7,20 +7,22 @@
     <string name="onboarding1_head">Уход за растением</string>
     <string name="onboarding1_hint">Мы подскажем, как и когда правильно \nухаживать за Вашим растением</string>
     <string name="onboarding2_head">Распознавание по фото</string>
-    <string name="onboarding2_hint">Если Вы не знаете, обладателем какого \nрастения Вы стали, то GardenGuru вам \nподскажет</string>
-    <string name="onboarding3_head">Совместный Сад</string>
-    <string name="onboarding3_hint">В Сад можно добавлять неограниченное \nколичество участников для совместного \nухода</string>
+    <string name="onboarding2_hint">Если Вы не знаете, обладателем какого растения Вы стали, то GardenGuru вам подскажет</string>
+    <string name="onboarding3_head">Мой сад</string>
+    <string name="onboarding3_hint">В Сад можно добавлять неограниченное количество растений</string>
 
     //login
     <string name="login">Авторизация</string>
-    <string name="login_text">Зарегистрировавшись, вы подтверждаете, что соглашаетесь с Условиями использования и Политикой конфиденциальности</string>
+    <string name="login_text">Нажимая “Продолжить”, вы соглашаетесь с:</string>
     <string name="login_continue">Продолжить с Google</string>
 
     //privacy police
     <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="privacy_policy_underline"><u>Политикой конфиденциальности</u></string>
 
     //term of use
     <string name="terms_of_use">Условия использования</string>
+    <string name="terms_of_use_underline"><u>Условиями использования</u></string>
     <string name="timetable">Расписание</string>
 
     //timetable

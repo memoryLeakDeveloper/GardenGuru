@@ -44,7 +44,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideFirstLaunchPref(sharedPreferences: SharedPreferences) = FirstLaunchPref.Base(sharedPreferences)
+    fun provideFirstLaunchPref(sharedPreferences: SharedPreferences): FirstLaunchPref = FirstLaunchPref.Base(sharedPreferences)
 
 
 }

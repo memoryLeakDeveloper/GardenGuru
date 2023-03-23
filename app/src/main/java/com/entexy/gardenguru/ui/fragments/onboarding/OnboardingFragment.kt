@@ -1,70 +1,69 @@
 package com.entexy.gardenguru.ui.fragments.onboarding
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.core.InsetsBaseFragment
+import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingBinding
 import com.entexy.gardenguru.utils.toVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OnboardingFragment : InsetsBaseFragment<FragmentOnboardingBinding>() {
+class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
+
+    private val viewModel: OnboardingViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapters()
+        setAdapter()
         setListeners()
-        setVideoPlayer()
     }
 
-    private fun setAdapters() = binding.apply {
+    private fun setAdapter() = binding.apply {
         viewPager.adapter = PagerAdapter(this@OnboardingFragment)
         dotsIndicator.attachTo(viewPager)
     }
 
     private fun setListeners() = binding.apply {
-        buttonNext.root.setOnClickListener {
-            when (viewPager.currentItem) {
-                0 -> viewPager.currentItem = 1
-                1 -> viewPager.currentItem = 2
-                2 -> {
-                    findNavController().navigate(R.id.loginFragment)
+        viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                if (position == 2)
+                    buttonNext.apply {
+                        animate().alpha(1f).duration = 500L
+                        setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+                    }
+                else
+                    buttonNext.apply {
+                        animate().alpha(0f).duration = 500L
+                        setOnClickListener(null)
+                    }
+            }
+        })
+        lottie.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(animation: Animator) {
+                onboarding.apply {
+                    alpha = 0f
+                    toVisible()
+                    animate().alpha(1f).duration = 1000L
                 }
             }
-        }
-        buttonSkip.setOnClickListener {
-            findNavController().navigate(R.id.loginFragment)
-        }
+
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
     }
 
-    private fun setVideoPlayer() = binding.apply {
-        videoView.setOnPreparedListener { player ->
-            val screenWidth = resources.displayMetrics.widthPixels
-            val videoWidth = player.videoWidth
-            val videoHeight = player.videoHeight
-            val videoProportion = videoWidth.toFloat() / videoHeight.toFloat()
-            val newHeight = (screenWidth.toFloat() / videoProportion).toInt()
-            videoView.layoutParams = videoView.layoutParams.apply {
-                width = screenWidth
-                height = newHeight
-            }
-            videoView.background = null
-        }
-        videoView.setVideoPath("android.resource://" + requireContext().packageName + "/" + R.raw.onboarding_video)
-        videoView.setZOrderOnTop(true)
-        videoView.start()
-        videoView.setOnCompletionListener {
-            onboarding.apply {
-                videoView.setZOrderOnTop(false)
-                alpha = 0f
-                toVisible()
-                animate().alpha(1f).duration = 1000L
-            }
-        }
+    override fun onStop() {
+        super.onStop()
+        viewModel.changePref()
     }
 
     private class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
