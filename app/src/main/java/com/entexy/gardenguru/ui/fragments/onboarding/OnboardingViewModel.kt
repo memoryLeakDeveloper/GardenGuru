@@ -8,5 +8,5 @@ import javax.inject.Inject
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(private val firstLaunchPref: FirstLaunchPref): ViewModel() {
 
-    fun changePref() = firstLaunchPref.set(false)
+    fun changePref() = firstLaunchPref.put(false)
 }
