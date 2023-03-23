@@ -21,4 +21,6 @@
     <color name="spinner_background">#55555C</color>
     <color name="error">#F80A7C</color>
     <color name="gray3">#5E6572</color>
+
+    <color name="gray4">#676C7B</color>
 </resources>

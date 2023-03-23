@@ -14,7 +14,7 @@ class TimetableRecyclerAdapter(private val viewModel: TimetableViewModel) :
     RecyclerView.Adapter<TimetableRecyclerAdapter.EventsViewHolder>() {
 
     private val calendar = Calendar.getInstance().apply {
-        add(Calendar.DAY_OF_YEAR, -(3 + 7)) //the calendar is built a week before today's date, +3 days for empty cells
+        add(Calendar.DAY_OF_YEAR, -(3 + 7))
     }
 
     private val todayCalendar = Calendar.getInstance()
@@ -46,23 +46,16 @@ class TimetableRecyclerAdapter(private val viewModel: TimetableViewModel) :
             val item = viewModel.getEventForDay(positionCalendar)
             if (item != null) {
                 if (item.events.find { !it.isComplete } == null) {
-                    eventContainer.visibility = View.GONE
                     eventsCompleteContainer.visibility = View.VISIBLE
                     noEventContainer.visibility = View.GONE
                 } else {
-                    eventContainer.visibility = View.VISIBLE
                     eventsCompleteContainer.visibility = View.GONE
                     noEventContainer.visibility = View.GONE
-
-                    tvPlantName.text = item.plant.name
-                    tvPlantKind.text = item.plant.name
-                    tvGardenName.text = "Сад $position"
 
                     rvEvents.layoutManager = LinearLayoutManager(root.context)
                     rvEvents.adapter = EventsRecyclerAdapter(item.events)
                 }
             } else {
-                eventContainer.visibility = View.GONE
                 eventsCompleteContainer.visibility = View.GONE
                 noEventContainer.visibility = View.VISIBLE
             }
@@ -79,6 +72,6 @@ class TimetableRecyclerAdapter(private val viewModel: TimetableViewModel) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount(): Int {
-        return CalendarRecyclerAdapter.ITEM_COUNT
+        return 48
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/expanded_btn_background"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/expanded_bt_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
+        app:layout_constraintEnd_toEndOf="@+id/iv_plus"
+        app:layout_constraintTop_toTopOf="@+id/iv_plus" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_cam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:alpha="0"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
+        app:layout_constraintStart_toStartOf="@+id/expanded_btn_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_plus" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_input_plant_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/transparent"
+        android:alpha="0"
+        android:fontFamily="@font/poppins_regular"
+        android:maxLines="2"
+        android:hint="@string/enter_plant_name"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/expanded_btn_background"
+        app:layout_constraintEnd_toStartOf="@+id/iv_plus"
+        app:layout_constraintStart_toEndOf="@+id/iv_cam"
+        app:layout_constraintTop_toTopOf="@+id/expanded_btn_background" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_plus"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/primary_green"
+        android:scaleType="center"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+</merge>
