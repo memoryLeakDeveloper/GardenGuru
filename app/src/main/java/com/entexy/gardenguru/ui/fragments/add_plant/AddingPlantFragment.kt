@@ -1,43 +1,41 @@
 package com.entexy.gardenguru.ui.fragments.add_plant
 
-import android.content.Context
-import android.graphics.Rect
+import AddingPlantPagerAdapter
+import HorizontalMarginItemDecoration
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
-import com.entexy.gardenguru.data.plant.CareComplexity
-import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.data.plant.SunRelation
-import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment.UpdateLayoutHeightCallback
-import com.entexy.gardenguru.ui.fragments.add_plant.client.ClientPlantFragment
-import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment
+import com.entexy.gardenguru.utils.convertDpToPx
 import com.entexy.gardenguru.utils.setString
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 @AndroidEntryPoint
 class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
-    private lateinit var pagerAdapter: PagerAdapter
+    private lateinit var pagerAdapter: AddingPlantPagerAdapter
     private val viewModel: AddingPlantViewModel by viewModels()
 
     fun interface UpdateLayoutHeightCallback {
         fun update()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//        val plantSearchQuires = requireArguments().getStringArray(SEARCH_ARGUMENTS_KEY) //todo
+//        viewModel.findPlants(plantSearchQuires) //todo
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +66,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
             }
         }
         lifecycleScope.launch(Dispatchers.IO) {
-            initSpinner(viewModel.loadGardensNames().map { it.name })
+//            initSpinner(viewModel.loadGardensNames().map { it.name }) //todo
         }
         setViewPager()
     }
@@ -104,11 +102,11 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
     private fun setViewPager() {
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
-            page.translationX = -convertDpToPx(50F) * position
+            page.translationX = -requireContext().convertDpToPx(50F) * position
             page.scaleY = 1 - (0.01F * kotlin.math.abs(position))
         }
         binding.viewPager.apply {
-            pagerAdapter = PagerAdapter(this@AddingPlantFragment, listOf())
+            pagerAdapter = AddingPlantPagerAdapter(this@AddingPlantFragment, listOf(), updateLayoutHeightCallback)
             adapter = pagerAdapter
             offscreenPageLimit = 2
             setPageTransformer(pageTransformer)
@@ -149,55 +147,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
         }
     }
 
-    private fun convertDpToPx(dp: Float) = (dp * requireContext().resources.displayMetrics.density).toInt()
-
-    private inner class PagerAdapter(fragment: Fragment, private val listData: List<PlantData>) : FragmentStateAdapter(fragment) {
-
-        private val fragments = hashMapOf<Int, Fragment>()
-
-        init {
-            val data = PlantData(
-                "id",
-                "НЕЗАБУДКА",
-                "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
-                CareComplexity.Easy,
-                "НЕЗАБУДКА DESC",
-                SunRelation.DirectLight,
-                null,
-                null,
-                arrayListOf(BenefitData("qweqweqweqweqwe", "qwpoqfwepofqmvw")),
-                "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ОБЯЗАТЕЛЬНО",
-                Date(),
-                3,
-                4,
-                5,
-                6,
-            )
-            for (i in 0 until itemCount - 1) {
-                fragments[i] = PlantDescriptionFragment(data, updateLayoutHeightCallback)
-            }
-            fragments[itemCount - 1] = ClientPlantFragment(updateLayoutHeightCallback)
-        }
-
-        override fun createFragment(position: Int): Fragment {
-            return fragments[position]!!
-        }
-
-        fun getCurrentPlantNameAndData(position: Int): PlantData? {
-            return (fragments[position] as GetPlantInfo).getPlantInfo()
-        }
-
-        override fun getItemCount() = 5
-    }
-}
-
-
-class HorizontalMarginItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
-
-    private val horizontalMarginInPx: Int = (30F * context.resources.displayMetrics.density).toInt()
-
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        outRect.right = horizontalMarginInPx
-        outRect.left = horizontalMarginInPx
+    companion object {
+        const val SEARCH_ARGUMENTS_KEY = "search-arguments-key"
     }
 }

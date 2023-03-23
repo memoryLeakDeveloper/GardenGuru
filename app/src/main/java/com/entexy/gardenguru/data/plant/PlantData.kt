@@ -30,6 +30,7 @@ data class PlantData(
 
 
 fun PlantData.mapToPlantCloud() = PlantCloud(
+    id = id,
     name = name,
     photo = photo,
     careComplexity = careComplexity.cloudName,
@@ -48,37 +49,42 @@ fun PlantData.mapToPlantCloud() = PlantCloud(
     maxTemp = maxTemp
 )
 
-fun PlantCloud.mapToData() = PlantData(
-    id = "",
-    name = name,
-    photo = photo,
-    careComplexity = try {
-        if (careComplexity != null)
-            CareComplexity.valueOf(careComplexity)
-        else CareComplexity.Medium
-    } catch (e: java.lang.IllegalArgumentException) {
-        CareComplexity.Medium
-    },
-    description = description,
-    sunRelation = try {
-        if (sunRelation != null)
-            SunRelation.valueOf(sunRelation)
-        else null
-    } catch (e: java.lang.IllegalArgumentException) {
-        null
-    },
-    pests = null,
-    reproduction =
-    try {
-        reproduction?.map { Reproduction.valueOf(it) }
-    } catch (e: java.lang.IllegalArgumentException) {
-        null
-    },
-    benefits = null,
-    pruning = pruning,
-    plantingTime = plantingTime?.toDate(),
-    watering = watering,
-    spraying = spraying,
-    minTemp = minTemp,
-    maxTemp = maxTemp
-)
+fun PlantCloud.mapToData(language: String): PlantData? {
+    if (name == null && photo == null) return null
+
+    return PlantData(
+        id = "",
+        name = localizedName?.get(language) ?: name!!,
+        photo = photo!!,
+        careComplexity = try {
+            if (careComplexity != null)
+                CareComplexity.valueOf(careComplexity!!)
+            else CareComplexity.Medium
+        } catch (e: java.lang.IllegalArgumentException) {
+            CareComplexity.Medium
+        },
+        description = localizeDescription?.get(language) ?: description,
+        sunRelation = try {
+            if (sunRelation != null)
+                SunRelation.valueOf(sunRelation!!)
+            else null
+        } catch (e: java.lang.IllegalArgumentException) {
+            null
+        },
+        pests = null,
+        reproduction =
+        try {
+            reproduction?.map { Reproduction.valueOf(it) }
+        } catch (e: java.lang.IllegalArgumentException) {
+            null
+        },
+        benefits = null,
+        pruning = pruning,
+        plantingTime = plantingTime?.toDate(),
+        watering = watering,
+        spraying = spraying,
+        minTemp = minTemp,
+        maxTemp = maxTemp
+    )
+}
+

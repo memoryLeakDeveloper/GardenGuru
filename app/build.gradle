@@ -130,6 +130,7 @@ dependencies {
     implementation "androidx.camera:camera-video:1.2.1"
     implementation "androidx.camera:camera-view:1.2.1"
     implementation "androidx.camera:camera-extensions:1.2.1"
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
 
     //firebase
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.5'
