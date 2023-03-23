@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ProgressBar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentCameraResultBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
+import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,14 +59,16 @@ class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
                 dialogHelper.showDialog(progressView, false)
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    val recognitionResult: List<PlantData> = viewModel.processImage(
+                    val recognitionResult: List<String> = viewModel.processImage(
                         requireContext(),
                         MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uriResult)
                     )
 
                     launch(Dispatchers.Main) {
                         dialogHelper.hideDialog()
-                        findNavController().navigate(R.id.action_cameraResultFragment_to_addingPlantFragment)
+                        findNavController().navigate(R.id.action_cameraResultFragment_to_addingPlantFragment, bundleOf(
+                            AddingPlantFragment.SEARCH_ARGUMENTS_KEY to recognitionResult
+                        ))
                     }
                 }
             }

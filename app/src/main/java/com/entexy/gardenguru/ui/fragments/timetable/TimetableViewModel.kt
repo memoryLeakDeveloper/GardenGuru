@@ -9,13 +9,14 @@ import com.entexy.gardenguru.data.plant.SunRelation
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.data.plant.event.PlantEventsData
+import com.entexy.gardenguru.domain.repository.PlantRepository
 import com.entexy.gardenguru.utils.toDmyString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class TimetableViewModel @Inject constructor() : ViewModel() {
+class TimetableViewModel @Inject constructor(private val plantRepository: PlantRepository) : ViewModel() {
     private val _events = MutableLiveData<ArrayList<PlantEventsData>>().apply {
         value = arrayListOf(
             PlantEventsData(
@@ -58,5 +59,13 @@ class TimetableViewModel @Inject constructor() : ViewModel() {
         return events.value?.find { plantEventData ->
             plantEventData.events.find { it.dateDMY == dateString } != null
         }
+    }
+
+    suspend fun testGetPlant(idPlant: String) {
+        plantRepository.searchPlantByVarietyCode(listOf(idPlant))
+    }
+
+    suspend fun testGetPlant1(idPlant: String) {
+        plantRepository.searchPlantByName(idPlant)
     }
 }

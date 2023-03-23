@@ -1,6 +1,6 @@
 package com.entexy.gardenguru.di.plant
 
-import com.entexy.gardenguru.data.auth.TokenHelper
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.PlantRepositoryImpl
 import com.entexy.gardenguru.data.plant.benefit.BenefitsCloudDataSource
@@ -20,37 +20,35 @@ class PlantModule {
 
     @Provides
     fun providePlantRepositoryImpl(
-        tokenHelper: TokenHelper,
         languageHelper: LanguageHelper,
         plantCloudDataSource: PlantCloudDataSource,
         pestsCloudDataSource: PestsCloudDataSource,
-        benefitsCloudDataSource: BenefitsCloudDataSource
+        benefitsCloudDataSource: BenefitsCloudDataSource,
+        searchPlantDataSource: SearchPlantDataSource
     ): PlantRepository = PlantRepositoryImpl(
-        tokenHelper,
         plantCloudDataSource,
         pestsCloudDataSource,
         benefitsCloudDataSource,
-        SearchPlantDataSource.Base(),
+        searchPlantDataSource,
         languageHelper
     )
 
     @Provides
     @Singleton
-    fun providePlantCloudDataSource(): PlantCloudDataSource = PlantCloudDataSource.Base()
+    fun providePlantCloudDataSource(): PlantCloudDataSource = PlantCloudDataSource.Base(App.firestorePlantsRef)
 
 
     @Provides
     @Singleton
-    fun providePestsCloudDataSource(): PestsCloudDataSource = PestsCloudDataSource.Base()
+    fun providePestsCloudDataSource(): PestsCloudDataSource = PestsCloudDataSource.Base(App.firestorePestsRef)
 
 
     @Provides
     @Singleton
-    fun provideBenefitsCloudDataSource(): BenefitsCloudDataSource = BenefitsCloudDataSource.Base()
+    fun provideBenefitsCloudDataSource(): BenefitsCloudDataSource = BenefitsCloudDataSource.Base(App.firestoreBenefitsRef)
 
     @Provides
     @Singleton
-    fun provideSearchPlantCloudDataSource(): SearchPlantDataSource = SearchPlantDataSource.Base()
-
+    fun provideSearchPlantCloudDataSource(): SearchPlantDataSource = SearchPlantDataSource.Base(App.firestorePlantsRef)
 
 }

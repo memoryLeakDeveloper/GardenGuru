@@ -1,5 +1,6 @@
-package com.example.gardenguru.utils
+package com.entexy.gardenguru.utils
 
+import android.content.Context
 import android.view.View
 
 fun View.toGone() {
@@ -17,3 +18,5 @@ fun View.toVisible() {
 fun View.isVisible() = this.visibility == View.VISIBLE
 
 fun View.isGone() = this.visibility == View.GONE
+
+fun Context.convertDpToPx(dp: Float) = (dp * resources.displayMetrics.density).toInt()

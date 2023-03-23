@@ -6,7 +6,10 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -15,8 +18,10 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentTimetableBinding
 import com.entexy.gardenguru.ui.customview.CalendarView
+import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.entexy.gardenguru.utils.checkAndVerifyCameraPermissions
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
@@ -31,7 +36,13 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
 
         with(binding) {
             ivLeaf.setOnClickListener {
-                findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
+                lifecycleScope.launch {
+
+
+                    viewModel.testGetPlant("abutilon_Isabella")
+                    viewModel.testGetPlant1("Кактус")
+                }
+//                findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
             }
 
             ivSettings.setOnClickListener {
@@ -108,6 +119,17 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
                 if (requireActivity().checkAndVerifyCameraPermissions() && requireActivity().checkAndVerifyCameraPermissions()) {
                     findNavController().navigate(R.id.action_timetableFragment_to_cameraFragment)
                 }
+            }
+
+            etInputPlantName.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    findNavController().navigate(
+                        R.id.action_timetableFragment_to_addingPlantFragment,
+                        bundleOf(AddingPlantFragment.SEARCH_ARGUMENTS_KEY to etInputPlantName.text.toString())
+                    )
+                    return@setOnEditorActionListener true
+                }
+                return@setOnEditorActionListener false
             }
 
             requireContext().resources.displayMetrics.widthPixels

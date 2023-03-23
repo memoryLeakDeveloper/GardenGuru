@@ -7,7 +7,7 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentPestInfoBinding
 import com.entexy.gardenguru.utils.setDrawable
-import com.example.gardenguru.utils.toVisible
+import com.entexy.gardenguru.utils.toVisible
 
 class PestInfoFragment : BaseFragment<FragmentPestInfoBinding>() {
 
