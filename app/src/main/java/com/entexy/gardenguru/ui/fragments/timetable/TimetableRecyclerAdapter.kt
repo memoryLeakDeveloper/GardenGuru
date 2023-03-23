@@ -21,11 +21,7 @@ class TimetableRecyclerAdapter(private val viewModel: TimetableViewModel) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         return EventsViewHolder(
-            RvTimetableItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            RvTimetableItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

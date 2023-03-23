@@ -31,23 +31,22 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
     private var imageCapture: ImageCapture? = null
     private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-    private val startForResultFromGallery =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                if (result.data != null) {
-                    val selectedImageUri = result.data!!.data ?: return@registerForActivityResult
+    private val startForResultFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            if (result.data != null) {
+                val selectedImageUri = result.data!!.data ?: return@registerForActivityResult
 
-                    findNavController().navigate(
-                        R.id.action_cameraFragment_to_cameraResultFragment,
-                        bundleOf(CameraResultFragment.CAMERA_RESULT_KEY to selectedImageUri)
-                    )
-                }
+                findNavController().navigate(
+                    R.id.action_cameraFragment_to_cameraResultFragment,
+                    bundleOf(CameraResultFragment.CAMERA_RESULT_KEY to selectedImageUri)
+                )
             }
         }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        updateInsets(binding.bottomRoot)
         if (requireActivity().checkAndVerifyCameraPermissions() && requireActivity().checkAndVerifyCameraPermissions()) {
             startCamera()
         }
@@ -78,13 +77,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
             }
 
             ivGallery.setOnClickListener {
-                val intent =
-                    Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-
-                startForResultFromGallery.launch(intent)
+                startForResultFromGallery.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
             }
         }
 

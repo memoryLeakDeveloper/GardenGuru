@@ -1,7 +1,8 @@
 package com.entexy.gardenguru.utils
 
-import android.content.Context
 import android.view.View
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 
 fun View.toGone() {
     this.visibility = View.GONE
@@ -19,4 +20,6 @@ fun View.isVisible() = this.visibility == View.VISIBLE
 
 fun View.isGone() = this.visibility == View.GONE
 
-fun Context.convertDpToPx(dp: Float) = (dp * resources.displayMetrics.density).toInt()
+fun View.setBackground(@DrawableRes drawable: Int) {
+    background = (ContextCompat.getDrawable(context, drawable))
+}

@@ -5,31 +5,38 @@ import android.view.View
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingStepBinding
-import com.entexy.gardenguru.utils.setDrawable
+import com.entexy.gardenguru.utils.setBackground
+import com.entexy.gardenguru.utils.setString
 
-class OnboardingStepFragment(private val position: Int) : BaseFragment<FragmentOnboardingStepBinding>() {
+class OnboardingStepFragment() : BaseFragment<FragmentOnboardingStepBinding>() {
+
+    private var position = 0
+
+    constructor(position: Int) : this() {
+        this.position = position
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
 
-    private fun initView() {
+    private fun initView() = binding.apply {
         when (position) {
             0 -> {
-                binding.imageView.setDrawable(R.drawable.onboarding1_image)
-                binding.textHead.text = getString(R.string.onboarding1_head)
-                binding.textHint.text = getString(R.string.onboarding1_hint)
+                root.setBackground(R.drawable.onboarding_1)
+                textHead.setString(R.string.onboarding1_head)
+                textHint.setString(R.string.onboarding1_hint)
             }
             1 -> {
-                binding.imageView.setDrawable(R.drawable.onboarding2_image)
-                binding.textHead.text = getString(R.string.onboarding2_head)
-                binding.textHint.text = getString(R.string.onboarding2_hint)
+                root.setBackground(R.drawable.onboarding_2)
+                textHead.setString(R.string.onboarding2_head)
+                textHint.setString(R.string.onboarding2_hint)
             }
             2 -> {
-                binding.imageView.setDrawable(R.drawable.onboarding3_image)
-                binding.textHead.text = getString(R.string.onboarding3_head)
-                binding.textHint.text = getString(R.string.onboarding3_hint)
+                root.setBackground(R.drawable.onboarding_3)
+                textHead.setString(R.string.onboarding3_head)
+                textHint.setString(R.string.onboarding3_hint)
             }
         }
     }

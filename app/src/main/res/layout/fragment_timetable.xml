@@ -7,7 +7,7 @@
     android:background="@drawable/primary_background"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

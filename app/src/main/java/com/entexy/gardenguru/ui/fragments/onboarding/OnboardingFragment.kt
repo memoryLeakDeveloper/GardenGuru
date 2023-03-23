@@ -1,45 +1,72 @@
 package com.entexy.gardenguru.ui.fragments.onboarding
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingBinding
+import com.entexy.gardenguru.utils.toVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
+    private val viewModel: OnboardingViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapters()
+        setAdapter()
         setListeners()
     }
 
-    private fun setAdapters() {
-        binding.viewPager.adapter = PagerAdapter(this)
-        binding.dotsIndicator.attachTo(binding.viewPager)
+    private fun setAdapter() = binding.apply {
+        viewPager.adapter = PagerAdapter(this@OnboardingFragment)
+        dotsIndicator.attachTo(viewPager)
     }
 
-    private fun setListeners() {
-        binding.buttonNext.root.setOnClickListener {
-            when (binding.viewPager.currentItem) {
-                0 -> binding.viewPager.currentItem = 1
-                1 -> binding.viewPager.currentItem = 2
-                2 -> {
-                    findNavController().navigate(R.id.loginFragment)
+    private fun setListeners() = binding.apply {
+        viewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                if (position == 2)
+                    buttonNext.apply {
+                        animate().alpha(1f).duration = 500L
+                        setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+                    }
+                else
+                    buttonNext.apply {
+                        animate().alpha(0f).duration = 500L
+                        setOnClickListener(null)
+                    }
+            }
+        })
+        lottie.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(animation: Animator) {
+                onboarding.apply {
+                    alpha = 0f
+                    toVisible()
+                    animate().alpha(1f).duration = 1000L
                 }
             }
-        }
-        binding.buttonSkip.setOnClickListener {
-            findNavController().navigate(R.id.loginFragment)
-        }
+
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
     }
 
-    private inner class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+    override fun onStop() {
+        super.onStop()
+        viewModel.changePref()
+    }
+
+    private class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
         override fun getItemCount() = 3
 
@@ -47,8 +74,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             when (position) {
                 0 -> OnboardingStepFragment(0)
                 1 -> OnboardingStepFragment(1)
-                2 -> OnboardingStepFragment(2)
-                else -> OnboardingStepFragment(0)
+                else -> OnboardingStepFragment(2)
             }
     }
 
