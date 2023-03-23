@@ -36,13 +36,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
 
         with(binding) {
             ivLeaf.setOnClickListener {
-                lifecycleScope.launch {
-
-
-                    viewModel.testGetPlant("abutilon_Isabella")
-                    viewModel.testGetPlant1("Кактус")
-                }
-//                findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
+                findNavController().navigate(R.id.action_timetableFragment_to_myPlantsFragment)
             }
 
             ivSettings.setOnClickListener {
