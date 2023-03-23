@@ -1,4 +1,4 @@
-package com.entexy.gardenguru.ui.fragments.my_plants
+package com.entexy.gardenguru.ui.fragments.plants
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.databinding.DialogRemoveGardenBinding
 import com.entexy.gardenguru.databinding.RvGardenItemBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
-import com.entexy.gardenguru.ui.fragments.my_plants.garden_managment.GardenManagementFragment
+import com.entexy.gardenguru.ui.fragments.plants.garden_managment.GardenManagementFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

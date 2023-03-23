@@ -1,4 +1,4 @@
-package com.entexy.gardenguru.ui.fragments.my_plants
+package com.entexy.gardenguru.ui.fragments.plants
 
 import android.os.Bundle
 import android.view.LayoutInflater

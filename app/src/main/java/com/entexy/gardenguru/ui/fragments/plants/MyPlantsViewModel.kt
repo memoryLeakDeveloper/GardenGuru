@@ -1,4 +1,4 @@
-package com.entexy.gardenguru.ui.fragments.my_plants
+package com.entexy.gardenguru.ui.fragments.plants
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

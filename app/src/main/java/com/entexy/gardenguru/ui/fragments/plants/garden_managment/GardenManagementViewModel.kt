@@ -1,4 +1,4 @@
-package com.entexy.gardenguru.ui.fragments.my_plants.garden_managment
+package com.entexy.gardenguru.ui.fragments.plants.garden_managment
 
 import androidx.lifecycle.ViewModel
 import com.entexy.gardenguru.domain.usecases.app.UserEmailUseCase
