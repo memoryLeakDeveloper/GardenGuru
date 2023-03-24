@@ -5,8 +5,7 @@ import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.benefit.BenefitsCloudDataSource
 import com.entexy.gardenguru.data.plant.benefit.mapToData
-import com.entexy.gardenguru.data.plant.cloud.PlantCloudDataSource
-import com.entexy.gardenguru.data.plant.cloud.SearchPlantDataSource
+import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
@@ -18,6 +17,9 @@ class PlantRepositoryImpl @Inject constructor(
     private val pestsSource: PestsCloudDataSource,
     private val benefitsSource: BenefitsCloudDataSource,
     private val searchPlantDataSource: SearchPlantDataSource,
+    private val deletePlantDataSource: DeletePlantDataSource,
+    private val movePlantDataSource: MovePlantDataSource,
+    private val renamePlantDataSource: RenamePlantDataSource,
     private val languageHelper: LanguageHelper
 ) : PlantRepository {
 
@@ -97,5 +99,16 @@ class PlantRepositoryImpl @Inject constructor(
         }
 
         return CloudResponse.Success(result)
+    }
+
+    override suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Boolean> =
+        renamePlantDataSource.renamePlant(plantId, plantName)
+
+    override suspend fun deletePlant(plantId: String): CloudResponse<Boolean> {
+        return deletePlantDataSource.deletePlant(plantId)
+    }
+
+    override suspend fun movePlantToAnotherGarden(plantId: String, gardenId: String): CloudResponse<Boolean> {
+        return movePlantDataSource.movePlant(plantId, gardenId)
     }
 }

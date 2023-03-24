@@ -9,15 +9,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.databinding.DialogRemoveGardenBinding
+import com.entexy.gardenguru.data.garden.models.GardenData
 import com.entexy.gardenguru.databinding.RvGardenItemBinding
-import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.ui.fragments.plants.garden_managment.GardenManagementFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) : RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
+class GardensRecyclerAdapter : RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
+
+    private var gardenList = ArrayList<GardenData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(RvGardenItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -26,55 +24,20 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) : Recycle
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.binding) {
-            val garden = viewModel.gardensLiveData.value!![position]
+            val garden = gardenList[position]
             tvGardenName.text = garden.name
             rvPlants.layoutManager = LinearLayoutManager(root.context)
             val adapter = PlantsRecyclerAdapter(garden.plants)
             rvPlants.adapter = adapter
 
-            val guruEmail = "qweqwe" //todo
-            if (guruEmail == viewModel.userEmail) { //this so this is the user's garden
-                tvGardenOwner.visibility = View.GONE
-                ivEditDelete.setImageResource(R.drawable.ic_edit)
-                ivEditDelete.setOnClickListener {
-                    root.findNavController().navigate(
-                        R.id.action_myPlantsFragment_to_gardenManagementFragment,
-                        bundleOf(GardenManagementFragment.GARDEN_EXTRA to garden)
-                    )
-                }
-            } else {
-                tvGardenOwner.visibility = View.VISIBLE
-                tvGardenOwner.text = root.resources.getString(R.string.garden_owner_name, guruEmail)
-                ivEditDelete.setImageResource(R.drawable.ic_delete)
-                ivEditDelete.setOnClickListener {
-                    //delete
-
-                    val dialogHelper = DialogHelper()
-                    val dialogBinding = DialogRemoveGardenBinding.inflate(LayoutInflater.from(root.context))
-                    with(dialogBinding) {
-
-                        tvDialogDescription.text = root.resources.getString(
-                            R.string.dialog_want_to_leave_garden,
-                            garden.name,
-                            guruEmail
-                        )
-
-                        btNo.setOnClickListener {
-                            dialogHelper.hideDialog()
-                        }
-                        btYes.setOnClickListener {
-                            //todo
-                            CoroutineScope(Dispatchers.Main).launch {
-                                viewModel.leaveGarden(garden.id)
-
-                                dialogHelper.hideDialog()
-                            }
-                        }
-                    }
-                    dialogHelper.showDialog(dialogBinding.root)
-                }
+            tvGardenOwner.visibility = View.GONE
+            ivEditDelete.setImageResource(R.drawable.ic_edit)
+            ivEditDelete.setOnClickListener {
+                root.findNavController().navigate(
+                    R.id.action_myPlantsFragment_to_gardenManagementFragment,
+                    bundleOf(GardenManagementFragment.GARDEN_EXTRA to garden)
+                )
             }
-
 
             spinnerArrow.setOnClickListener {
                 if (rvPlants.visibility == View.VISIBLE) {
@@ -88,9 +51,14 @@ class GardensRecyclerAdapter(private val viewModel: MyPlantsViewModel) : Recycle
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(gardenList: ArrayList<GardenData>){
+        this.gardenList = gardenList
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
-        return viewModel.gardensLiveData.value?.size ?: 0
+        return gardenList.size
     }
 
     class ViewHolder(val binding: RvGardenItemBinding) : RecyclerView.ViewHolder(binding.root)

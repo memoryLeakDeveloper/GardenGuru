@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/plantCardFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -112,6 +112,12 @@
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_myPlantsFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_myPlantsFragment_to_addingPlantFragment"
+            app:destination="@id/addingPlantFragment" />
     </fragment>
     <fragment
         android:id="@+id/gardenManagementFragment"
@@ -180,7 +186,7 @@
     </fragment>
     <fragment
         android:id="@+id/cameraResultFragment"
-        android:name="com.entexy.gardenguru.ui.fragments.camera.camera_result.CameraResultFragment"
+        android:name="com.entexy.gardenguru.ui.fragments.camera.result.CameraResultFragment"
         android:label="CameraResultFragment"
         tools:layout="@layout/fragment_camera_result">
         <action

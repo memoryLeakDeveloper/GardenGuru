@@ -5,7 +5,6 @@ import android.view.View
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.FragmentOnboardingStepBinding
-import com.entexy.gardenguru.utils.setBackground
 import com.entexy.gardenguru.utils.setString
 
 class OnboardingStepFragment() : BaseFragment<FragmentOnboardingStepBinding>() {
@@ -24,17 +23,17 @@ class OnboardingStepFragment() : BaseFragment<FragmentOnboardingStepBinding>() {
     private fun initView() = binding.apply {
         when (position) {
             0 -> {
-                root.setBackground(R.drawable.onboarding_1)
+                root.setBackgroundResource(R.drawable.onboarding_1)
                 textHead.setString(R.string.onboarding1_head)
                 textHint.setString(R.string.onboarding1_hint)
             }
             1 -> {
-                root.setBackground(R.drawable.onboarding_2)
+                root.setBackgroundResource(R.drawable.onboarding_2)
                 textHead.setString(R.string.onboarding2_head)
                 textHint.setString(R.string.onboarding2_hint)
             }
             2 -> {
-                root.setBackground(R.drawable.onboarding_3)
+                root.setBackgroundResource(R.drawable.onboarding_3)
                 textHead.setString(R.string.onboarding3_head)
                 textHint.setString(R.string.onboarding3_hint)
             }

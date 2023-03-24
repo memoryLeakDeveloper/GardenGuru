@@ -61,7 +61,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
             }, {
                 findNavController().navigate(
                     R.id.action_timetableFragment_to_addingPlantFragment,
-                    bundleOf(AddingPlantFragment.SEARCH_ARGUMENTS_KEY to it)
+                    bundleOf(AddingPlantFragment.SEARCH_BY_VARIETY_ARGUMENTS_KEY to it)
                 )
             })
         }

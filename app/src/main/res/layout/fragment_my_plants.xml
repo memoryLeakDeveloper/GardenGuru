@@ -19,7 +19,7 @@
         android:id="@+id/no_plants_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/card_bg"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,6 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_cam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -62,12 +63,14 @@
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView4" />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search_plant"
             android:layout_width="0dp"
             android:layout_height="47dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="35dp"
-
+            android:textColorHint="@color/gray"
+            android:imeOptions="actionDone"
             android:background="@drawable/bg_edit_text"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="12dp"
@@ -86,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
         tools:itemCount="4"

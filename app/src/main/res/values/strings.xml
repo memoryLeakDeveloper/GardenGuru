@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Garden Guru</string>
 
+    <string name="ok">Ок</string>
+
+
     //onboarding
     <string name="onboarding_skip">Пропустить</string>
     <string name="onboarding_next">Далее</string>
@@ -223,7 +226,7 @@
     //plant info
     <string name="move">Переместить</string>
     <string name="moving">Переезд!</string>
-    <string name="choose_garden">Выберите Сад для перемещения</string>
+    <string name="choose_garden_to_move">Выберите Сад для перемещения</string>
 
     //errors
     <string name="something_is_wrong">Что-то не так, попробуйте позже</string>
@@ -232,5 +235,8 @@
     <string name="error_garden_not_selected">Выберите сад</string>
     <string name="error_not_all_data_populated">Не все обязательные поля заполнены</string>
     <string name="error_image_is_loading">Фото еще не загрузилось, попробуйте позже</string>
+    <string name="error_loading_data">Не удалось загрузить данные.\nПроверьте интернет соединение</string>
+    <string name="error_update_data">Не удалось обновить данные.\nПроверьте интернет соединение</string>
+    <string name="error_deleting">Не удалось удалить данные.\nПроверьте интернет соединение</string>
 
 </resources>

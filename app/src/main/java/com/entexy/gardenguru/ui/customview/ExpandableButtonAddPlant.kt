@@ -100,8 +100,5 @@ class ExpandableButtonAddPlant(context: Context, attrs: AttributeSet) : Constrai
                 }
             }
         }
-
     }
-
-
 }

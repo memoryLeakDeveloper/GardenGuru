@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         navController = (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
-        if (!firstLaunchPref.get()) {
-            navController?.navigate(R.id.loginFragment)
-        }
+//        if (!firstLaunchPref.get()) {
+//            navController?.navigate(R.id.loginFragment)
+//        } //todo
     }
 
     override fun onBackPressed() {

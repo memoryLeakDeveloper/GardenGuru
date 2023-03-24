@@ -17,4 +17,10 @@ interface PlantRepository {
 
     suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>>
 
+    suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Boolean>
+
+    suspend fun deletePlant(plantId: String): CloudResponse<Boolean>
+
+    suspend fun movePlantToAnotherGarden(plantId: String, gardenId: String): CloudResponse<Boolean>
+
 }
