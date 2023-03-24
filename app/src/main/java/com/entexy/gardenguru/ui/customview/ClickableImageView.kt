@@ -10,9 +10,9 @@ class ClickableImageView(context: Context, attrs: AttributeSet) : AppCompatImage
 
     init {
         setOnTouchListener { _, event ->
-            if(event.action == MotionEvent.ACTION_UP) {
+            if (event.action == MotionEvent.ACTION_UP) {
                 val animation1 = AlphaAnimation(0.2f, 1.0f)
-                animation1.duration = 400
+                animation1.duration = 300
                 animation1.fillAfter = true
                 this.startAnimation(animation1)
                 performClick()

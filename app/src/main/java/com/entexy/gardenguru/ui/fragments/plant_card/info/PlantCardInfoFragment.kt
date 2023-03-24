@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -25,7 +26,6 @@ import com.entexy.gardenguru.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
@@ -74,16 +74,19 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
             buttonDelete.setOnClickListener {
                 lifecycleScope.launch {
+                    val dialogHelper = DialogHelper()
                     viewModel.deletePlant(data.id).collect {
                         it.getResult(
                             success = {
+                                dialogHelper.hideDialog()
                                 requireActivity().onBackPressed()
                             },
                             failure = {
+                                dialogHelper.hideDialog()
                                 root.showSnackBar(R.string.error_deleting)
                             },
                             loading = {
-                                TODO()
+                                dialogHelper.showDialog(ProgressBar(requireContext()), false)
                             }
                         )
                     }
@@ -91,19 +94,20 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             }
 
             buttonMove.setOnClickListener {
-                lifecycleScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch {
+                    val dialogHelper = DialogHelper()
                     viewModel.getGardens().collect { response ->
                         response.getResult(
                             success = {
-                                withContext(Dispatchers.Main) {
-                                    initSelectGardenToMove(data.id, it.result)
-                                }
+                                dialogHelper.hideDialog()
+                                initSelectGardenToMove(data.id, it.result)
                             },
                             failure = {
+                                dialogHelper.hideDialog()
                                 root.showSnackBar(R.string.error_loading_data)
                             },
                             loading = {
-                                TODO()
+                                dialogHelper.showDialog(ProgressBar(requireContext()), false)
                             }
                         )
                     }
@@ -115,16 +119,19 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             etPlantName.setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     lifecycleScope.launch(Dispatchers.IO) {
+                        val dialogHelper = DialogHelper()
                         viewModel.setPlantName(data.id, etPlantName.text.toString()).collect {
                             it.getResult(
                                 success = {
-                                    TODO()
+                                    dialogHelper.hideDialog()
                                 },
                                 failure = {
+                                    etPlantName.setText(data.name)
+                                    dialogHelper.hideDialog()
                                     root.showSnackBar(R.string.error_update_data)
                                 },
                                 loading = {
-                                    TODO()
+                                    dialogHelper.showDialog(ProgressBar(requireContext()), false)
                                 }
                             )
                         }
@@ -143,17 +150,19 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             true
         )
         bindingDialog.spinner.setValueListener { position: Int, name: String ->
-            lifecycleScope.launch(Dispatchers.IO) {
+            lifecycleScope.launch {
+                val dialogHelper = DialogHelper()
                 viewModel.movePlant(plantId, gardens[position].id).collect {
                     it.getResult(
                         success = {
-                            TODO()
+                            dialogHelper.hideDialog()
                         },
                         failure = {
+                            dialogHelper.hideDialog()
                             requireView().showSnackBar(R.string.error_update_data)
                         },
                         loading = {
-                            TODO()
+                            dialogHelper.showDialog(ProgressBar(requireContext()), false)
                         })
                 }
             }

@@ -36,7 +36,7 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
                 .into(ivPlantImage)
 
             tvPlantName.text = item.name
-            tvPlantKind.text = item.name //todo
+            tvPlantKind.text = item.variety
 
             if (position == itemCount - 1) {
                 ivLine.visibility = View.GONE

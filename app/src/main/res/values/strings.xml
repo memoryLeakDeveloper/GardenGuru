@@ -55,6 +55,9 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </array>
+    <string name="you_have_no_events">У вас нет событий</string>
+    <string name="you_have_no_events_description">Добавьте растение в ваш Сад\nдля отображения расписания</string>
+
 
     //custom cards
     <string name="change">Изменить</string>

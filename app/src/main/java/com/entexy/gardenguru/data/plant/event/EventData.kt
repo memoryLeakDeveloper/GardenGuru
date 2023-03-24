@@ -3,11 +3,12 @@ package com.entexy.gardenguru.data.plant.event
 import com.entexy.gardenguru.R
 
 data class EventData(
+    val eventId: String,
     val plantName: String,
     val plantVariety: String,
     val event: Event,
     val dateDMY: String,
-    val isComplete: Boolean,
+    var isComplete: Boolean,
     val executor: String = "",
     val timeOfCompletionHHMM: String = ""
 ) {

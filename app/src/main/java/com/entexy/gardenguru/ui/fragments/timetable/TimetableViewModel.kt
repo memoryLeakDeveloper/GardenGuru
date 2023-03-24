@@ -1,30 +1,20 @@
 package com.entexy.gardenguru.ui.fragments.timetable
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.entexy.gardenguru.data.plant.event.PlantEventsData
-import com.entexy.gardenguru.ui.PlantEventMockData
-import com.entexy.gardenguru.utils.toDmyString
+import com.entexy.gardenguru.data.plant.event.EventData
+import com.entexy.gardenguru.domain.usecases.events.CompleteEventUseCase
+import com.entexy.gardenguru.domain.usecases.events.FetchEventsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class TimetableViewModel @Inject constructor() : ViewModel() {
-    private val _events = MutableLiveData<ArrayList<PlantEventsData>>().apply {
-        value = arrayListOf(
-            PlantEventMockData.plant
-        )
-    }
-    val events: LiveData<ArrayList<PlantEventsData>> = _events
+class TimetableViewModel @Inject constructor(
+    private val fetchEventsUseCase: FetchEventsUseCase,
+    private val completeEventUseCase: CompleteEventUseCase
+) : ViewModel() {
 
+    suspend fun fetchEvents() = fetchEventsUseCase.perform()
 
-    fun getEventForDay(calendar: Calendar): PlantEventsData? {
-        val dateString = calendar.toDmyString()
-        return events.value?.find { plantEventData ->
-            plantEventData.events.find { it.dateDMY == dateString } != null
-        }
-    }
+    suspend fun completeEvent(event: EventData) = completeEventUseCase.perform(event)
 
 }

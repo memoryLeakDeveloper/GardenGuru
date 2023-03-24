@@ -1,6 +1,5 @@
 package com.entexy.gardenguru.ui.fragments.timetable
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,9 +7,11 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.databinding.RvEventItemBinding
 
-class EventsRecyclerAdapter(val events: ArrayList<EventData>) :
+class EventsRecyclerAdapter(
+    private val events: ArrayList<EventData>,
+    private val eventSelectedCallback: (eventData: EventData) -> Unit
+) :
     RecyclerView.Adapter<EventsRecyclerAdapter.EventsViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         return EventsViewHolder(
@@ -39,7 +40,8 @@ class EventsRecyclerAdapter(val events: ArrayList<EventData>) :
             }
 
             cbEvent.setOnCheckedChangeListener { _, isChecked ->
-                Log.d("qqqqq", "cbEvent isChecked: $isChecked")
+                item.isComplete = isChecked
+                eventSelectedCallback(item)
             }
         }
     }

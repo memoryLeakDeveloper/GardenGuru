@@ -2,4 +2,6 @@
 <resources>
     <dimen name="corner_large">40dp</dimen>
     <dimen name="xm_indent">20dp</dimen>
+
+    <dimen name="button_indent">81dp</dimen>
 </resources>
