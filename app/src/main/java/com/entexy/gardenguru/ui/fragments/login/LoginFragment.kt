@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
@@ -24,7 +25,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private val viewModel: LoginViewModel by viewModels()
     private val googleAuth = registerForActivityResult(GoogleAuthContract()) { result ->
         result?.let { id ->
-            lifecycleScope.launch(Dispatchers.IO) {
+            lifecycleScope.launch(Dispatchers.Main) {
                 viewModel.createUser(id).collect { response ->
                     handleCloudResponse(response, id)
                 }
@@ -58,10 +59,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
     }
 
-    private fun handleCloudResponse(response: CloudResponse<Unit>, id: String) = response.getResult(
+    private suspend fun handleCloudResponse(response: CloudResponse<Unit>, id: String) = response.getResult(
         success = {
             viewModel.saveNewToken(id)
-            findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+            withContext(Dispatchers.Main) {
+                findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+            }
         },
         failure = {
             bugger(it.exception?.stackTraceToString())

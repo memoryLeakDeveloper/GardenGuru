@@ -12,15 +12,15 @@
         android:scaleType="centerCrop"
         android:layout_height="0dp"
         android:layout_marginBottom="-16dp"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatImageView6"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView6"
+        android:id="@+id/bottom"
         android:layout_height="164dp"
         android:layout_width="wrap_content"
         android:scaleType="fitXY"
-        android:src="@drawable/header_bottom"
+        android:background="@drawable/bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appCompatImageView6" />
+        app:layout_constraintTop_toTopOf="@+id/bottom" />
 
     <com.entexy.gardenguru.ui.customview.ClickableImageView
         android:id="@+id/iv_close"

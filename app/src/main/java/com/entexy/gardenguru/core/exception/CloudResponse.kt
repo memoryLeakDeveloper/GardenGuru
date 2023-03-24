@@ -10,10 +10,10 @@ sealed interface CloudResponse<T> {
 
 inline fun <R> CloudResponse<R>.getResult(
     success: (CloudResponse.Success<R>) -> Unit,
-    failure: (CloudResponse.Error<R>) -> Unit,
-    loading: (CloudResponse.Loading<R>) -> Unit
+    failure: (CloudResponse.Error<Nothing>) -> Unit,
+    loading: (CloudResponse.Loading<Nothing>) -> Unit
 ): Unit = when (this) {
     is CloudResponse.Success -> success(this)
-    is CloudResponse.Loading -> loading(this)
-    else -> failure(this as CloudResponse.Error)
+    is CloudResponse.Loading -> loading(CloudResponse.Loading())
+    else -> failure(CloudResponse.Error((this as CloudResponse.Error).exception))
 }

@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ProgressBar
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
-import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentCameraResultBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
@@ -34,7 +32,7 @@ class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        updateInsets(binding.bottom)
         uriResult = requireArguments().getParcelable(CAMERA_RESULT_KEY)!!
 
         with(binding) {
@@ -63,12 +61,11 @@ class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
                         requireContext(),
                         MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uriResult)
                     )
-
                     launch(Dispatchers.Main) {
                         dialogHelper.hideDialog()
-                        findNavController().navigate(R.id.action_cameraResultFragment_to_addingPlantFragment, bundleOf(
-                            AddingPlantFragment.SEARCH_ARGUMENTS_KEY to recognitionResult
-                        ))
+                        findNavController().navigate(
+                            R.id.action_cameraResultFragment_to_addingPlantFragment,
+                            Bundle().apply { putStringArrayList(AddingPlantFragment.SEARCH_ARGUMENTS_KEY, recognitionResult as ArrayList) })
                     }
                 }
             }

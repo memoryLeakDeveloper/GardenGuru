@@ -21,7 +21,6 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
 
     init {
         orientation = VERTICAL
-        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
     fun initView(data: PlantData) {

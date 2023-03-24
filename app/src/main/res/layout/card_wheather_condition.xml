@@ -13,30 +13,32 @@
         android:layout_height="wrap_content"
         app:condition="value1" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/watering_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="20dp"
-        app:dividerColor="@color/white5" />
+    <!--    <com.google.android.material.divider.MaterialDivider-->
+    <!--        android:id="@+id/watering_divider"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="1dp"-->
+    <!--        android:layout_marginHorizontal="20dp"-->
+    <!--        app:dividerColor="@color/white5" />-->
 
     <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/watering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         app:condition="value2" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/lighting_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="20dp"
-        app:dividerColor="@color/white5" />
+    <!--    <com.google.android.material.divider.MaterialDivider-->
+    <!--        android:id="@+id/lighting_divider"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="1dp"-->
+    <!--        android:layout_marginHorizontal="20dp"-->
+    <!--        app:dividerColor="@color/white5" />-->
 
     <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionItem
         android:id="@+id/lighting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         app:condition="value3" />
 
 </merge>

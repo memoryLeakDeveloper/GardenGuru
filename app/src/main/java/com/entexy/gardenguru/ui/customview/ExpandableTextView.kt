@@ -16,12 +16,10 @@ import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 
 class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
-    private var callback: AddingPlantFragment.UpdateLayoutHeightCallback? = null
     private var isDescriptionShowed: Boolean = false
     private var fullText: String = ""
 
-    fun initView(fullText: String, callback: AddingPlantFragment.UpdateLayoutHeightCallback? = null) {
-        if (callback != null) this.callback = callback
+    fun initView(fullText: String) {
         this.fullText = fullText
         this.text = getSpannableNextString()
         this.movementMethod = LinkMovementMethod.getInstance()
@@ -79,7 +77,6 @@ class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextV
 
         override fun onClick(widget: View) {
             if (isDescriptionShowed) hideText() else expandText()
-            callback?.update()
         }
     }
 }

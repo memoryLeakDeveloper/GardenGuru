@@ -10,6 +10,8 @@ import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
 import com.entexy.gardenguru.domain.repository.PlantRepository
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PlantRepositoryImpl @Inject constructor(
@@ -23,22 +25,17 @@ class PlantRepositoryImpl @Inject constructor(
     private val languageHelper: LanguageHelper
 ) : PlantRepository {
 
-    override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
+    override suspend fun fetchPlant(idPlant: String) = flow {
+        emit(CloudResponse.Loading())
         val plantCloud = plantSource.fetchPlant(idPlant)
-
-        return if (plantCloud is CloudResponse.Success) {
-            val plantData = plantCloud.result!!.mapToData(languageHelper.getLanguage())
-
-            if (plantData != null)
-                CloudResponse.Success(plantData.apply {
-                    pests = fetchPests(plantCloud.result.pestsIds)
-                    benefits = fetchBenefits(plantCloud.result.benefitsIds)
-                })
-            else CloudResponse.Error(IllegalArgumentException())
-        } else {
-            val exception = (plantCloud as? CloudResponse.Error)?.exception
-            CloudResponse.Error(exception)
-        }
+        val plantData = plantCloud?.mapToData(languageHelper.getLanguage())
+        if (plantData != null)
+            emit(CloudResponse.Success(plantData.apply {
+                pests = fetchPests(plantCloud.pestsIds)
+                benefits = fetchBenefits(plantCloud.benefitsIds)
+            }))
+    }.catch {
+        emit(CloudResponse.Error(it))
     }
 
     override suspend fun fetchPests(idPests: List<String>?): ArrayList<PestData> {

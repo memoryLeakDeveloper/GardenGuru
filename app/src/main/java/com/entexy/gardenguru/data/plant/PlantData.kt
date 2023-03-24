@@ -14,19 +14,20 @@ data class PlantData(
     var id: String,
     var variety: String,
     var photo: String,
-    var name: String?,
-    var careComplexity: CareComplexity = CareComplexity.Medium,
-    var description: String? = null,
-    var sunRelation: SunRelation? = null,
+    var cover: String,
+    var name: String,
+    var careComplexity: CareComplexity,
+    var description: String,
+    var sunRelation: SunRelation,
     var pests: ArrayList<PestData>? = null,
-    var reproduction: List<Reproduction>? = null,
+    var reproduction: List<Reproduction>,
     var benefits: ArrayList<BenefitData>? = null,
-    var pruning: String? = null,
-    var plantingTime: Date? = null,
-    var watering: Int? = null,
-    var spraying: Int? = null,
-    var minTemp: Int? = null,
-    var maxTemp: Int? = null
+    var pruning: String,
+    var plantingTime: Date,
+    var watering: Int,
+    var spraying: Int,
+    var minTemp: Int,
+    var maxTemp: Int
 ) : Parcelable
 
 
@@ -34,55 +35,37 @@ fun PlantData.mapToPlantCloud() = PlantCloud(
     id = id,
     name = name,
     photo = photo,
+    cover = cover,
+    variety = variety,
     careComplexity = careComplexity.cloudName,
     description = description,
-    sunRelation = sunRelation?.cloudName,
+    sunRelation = sunRelation.cloudName,
     pestsIds = pests?.map { it.id },
-    reproduction = reproduction?.map {
-        it.cloudValue
-    },
+    reproduction = reproduction.map { it.cloudValue },
     benefitsIds = benefits?.map { it.id },
     pruning = pruning,
-    plantingTime = if (plantingTime != null) Timestamp(plantingTime!!) else null,
+    plantingTime = Timestamp(plantingTime),
     watering = watering,
     spraying = spraying,
     minTemp = minTemp,
     maxTemp = maxTemp
 )
 
-fun PlantCloud.mapToData(language: String): PlantData? {
-    if (name == null && photo == null) return null
-
+fun PlantCloud.mapToData(language: String): PlantData {
     return PlantData(
-        id = "",
-        variety = localizedName?.get(language) ?: name!!, //todo
-        photo = photo!!,
-        name = null,
-        careComplexity = try {
-            if (careComplexity != null)
-                CareComplexity.valueOf(careComplexity!!)
-            else CareComplexity.Medium
-        } catch (e: java.lang.IllegalArgumentException) {
-            CareComplexity.Medium
-        },
+        id = id,
+        variety = localizedName?.get(language) ?: name, //todo
+        photo = photo,
+        cover = cover,
+        name = name,
+        careComplexity = CareComplexity.valueOf(careComplexity),
         description = localizeDescription?.get(language) ?: description,
-        sunRelation = try {
-            if (sunRelation != null)
-                SunRelation.valueOf(sunRelation!!)
-            else null
-        } catch (e: java.lang.IllegalArgumentException) {
-            null
-        },
+        sunRelation = SunRelation.valueOf(sunRelation),
         pests = null,
-        reproduction =
-        try {
-            reproduction?.map { Reproduction.valueOf(it) }
-        } catch (e: java.lang.IllegalArgumentException) {
-            null
-        },
+        reproduction = reproduction.map { Reproduction.valueOf(it) },
         benefits = null,
         pruning = pruning,
-        plantingTime = plantingTime?.toDate(),
+        plantingTime = plantingTime.toDate(),
         watering = watering,
         spraying = spraying,
         minTemp = minTemp,
