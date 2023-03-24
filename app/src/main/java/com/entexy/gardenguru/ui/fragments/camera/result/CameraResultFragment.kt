@@ -34,7 +34,7 @@ class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        updateInsets(binding.bottom)
         uriResult = requireArguments().getParcelable(CAMERA_RESULT_KEY)!!
 
         with(binding) {

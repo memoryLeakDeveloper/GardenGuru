@@ -1,89 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/plant_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/plant_placeholder" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/plant_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        tools:text="Кактус колючий" />
-
-    <com.entexy.gardenguru.ui.customview.card.CareDifficultCard
-        android:id="@+id/care_difficult"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionCard
-        android:id="@+id/wheather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/about_plant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/gray"
-        android:textSize="20sp"
-        tools:text="Информация о растении" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/plant_name_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        tools:text="Информация о растении" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/plant_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/plant_placeholder" />
 
-    <com.entexy.gardenguru.ui.customview.ExpandableTextView
-        android:id="@+id/plant_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        tools:text="Информация о растении" />
+            </androidx.cardview.widget.CardView>
 
-    <com.entexy.gardenguru.ui.customview.card.CareDescriptionCard
-        android:id="@+id/care_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/plant_icon"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:elevation="20dp"
+                android:src="@drawable/plant_placeholder"
+                app:layout_constraintBottom_toBottomOf="@+id/card_view"
+                app:layout_constraintEnd_toEndOf="@+id/card_view"
+                app:layout_constraintStart_toStartOf="@+id/card_view"
+                app:layout_constraintTop_toBottomOf="@+id/card_view" />
 
-    <com.entexy.gardenguru.ui.customview.card.pests.PestsCard
-        android:id="@+id/pests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.entexy.gardenguru.ui.customview.card.BenefitsCard
-        android:id="@+id/benefits"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/plant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/sf_ui_font"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="Кактус колючий(вонючий)" />
 
-</LinearLayout>
+        <com.entexy.gardenguru.ui.customview.card.CareDifficultCard
+            android:id="@+id/care_difficult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <com.entexy.gardenguru.ui.customview.card.weather.WheatherConditionCard
+            android:id="@+id/wheather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/about_plant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/gray"
+            android:textSize="20sp"
+            tools:text="Информация о растении" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/plant_name_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="Информация о растении" />
+
+        <com.entexy.gardenguru.ui.customview.ExpandableTextView
+            android:id="@+id/plant_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="Информация о растении" />
+
+        <com.entexy.gardenguru.ui.customview.card.CareDescriptionCard
+            android:id="@+id/care_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <com.entexy.gardenguru.ui.customview.card.pests.PestsCard
+            android:id="@+id/pests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <com.entexy.gardenguru.ui.customview.card.BenefitsCard
+            android:id="@+id/benefits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+
+</ScrollView>

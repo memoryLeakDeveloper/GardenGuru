@@ -21,5 +21,3 @@ data class PlantCloud(
     var minTemp: Int? = null,
     var maxTemp: Int? = null,
 )
-
-

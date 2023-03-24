@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
@@ -13,46 +14,71 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
         android:fillViewport="true"
         android:overScrollMode="never">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/scroll_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dots_indicator"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="30dp" />
+                android:layout_marginTop="20dp"
+                app:dotsColor="@color/white"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="9dp"
+                app:dotsSpacing="4dp"
+                app:dotsWidthFactor="2.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view_pager"
+                app:progressMode="false"
+                app:selectedDotColor="@color/primary_green" />
+
+            <!--            <com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout-->
+            <!--                android:id="@+id/spinner"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginHorizontal="16dp"-->
+            <!--                android:layout_marginVertical="30dp" />-->
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipChildren="false"
-                android:clipToPadding="false"
+                android:layout_marginTop="12dp"
                 android:overScrollMode="never" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_add"
-                android:layout_width="match_parent"
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginVertical="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/sf_ui_font"
+                android:paddingHorizontal="26dp"
                 android:text="@string/add_a_plant"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="19sp" />
+                android:textSize="16sp" />
 
-        </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_see_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sf_ui_font"
+                android:text="@string/see_more"
+                android:textColor="@color/primary_green"
+                android:textSize="15sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

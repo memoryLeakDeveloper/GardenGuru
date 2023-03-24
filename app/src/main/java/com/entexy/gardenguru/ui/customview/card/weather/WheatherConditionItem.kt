@@ -24,19 +24,19 @@ class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayou
         a.recycle()
     }
 
-    private fun initView(type: String?) {
+    private fun initView(type: String?) = binding.apply {
         when (type?.toInt()) {
             1 -> {
-                binding.image.setDrawable(R.drawable.ic_temperature)
-                binding.textView1.setString(R.string.temperature)
+                image.setDrawable(R.drawable.ic_temperature_new)
+                textView1.setString(R.string.temperature)
             }
             2 -> {
-                binding.image.setDrawable(R.drawable.ic_watering_2)
-                binding.textView1.setString(R.string.watering)
+                image.setDrawable(R.drawable.ic_watering_new)
+                textView1.setString(R.string.watering)
             }
             3 -> {
-                binding.image.setDrawable(R.drawable.ic_lighting)
-                binding.textView1.setString(R.string.lighting)
+                image.setDrawable(R.drawable.ic_lighting_new)
+                textView1.setString(R.string.lighting)
             }
         }
     }

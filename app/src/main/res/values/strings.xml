@@ -62,6 +62,7 @@
     <string name="next_dots">Далее…</string>
     <string name="next">Далee</string>
     <string name="hide">Скрыть</string>
+    <string name="see_more">Просмотреть больше</string>
 
     //care difficult
     <string name="care_difficult">Сложность ухода</string>
@@ -101,6 +102,7 @@
     <string name="here_we_will_show_your_plants">Здесь мы будем показывать Ваши растения</string>
     <string name="look_for_a_plant">Искать растение</string>
     <string name="my_plants">Мои растения</string>
+    <string name="search">Поиск</string>
     <string name="garden_owner_name">Владелец Сада %1$s</string>
 
     //my plants

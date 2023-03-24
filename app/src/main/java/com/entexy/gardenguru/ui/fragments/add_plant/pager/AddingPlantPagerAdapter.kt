@@ -4,13 +4,13 @@ import com.entexy.gardenguru.data.plant.CareComplexity
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.SunRelation
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
-import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.entexy.gardenguru.ui.fragments.add_plant.GetPlantInfo
 import com.entexy.gardenguru.ui.fragments.add_plant.client.ClientPlantFragment
-import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment
+import com.entexy.gardenguru.ui.fragments.add_plant.result.NoMatchesSearchFragment
+import com.entexy.gardenguru.ui.fragments.add_plant.result.PlantSearchResultFragment
 import java.util.*
 
-class AddingPlantPagerAdapter(fragment: Fragment, private val listData: List<PlantData>, private val updateLayoutHeightCallback: AddingPlantFragment.UpdateLayoutHeightCallback) : FragmentStateAdapter(fragment) {
+class AddingPlantPagerAdapter(fragment: Fragment, private val listData: List<PlantData>) : FragmentStateAdapter(fragment) {
 
     private val fragments = hashMapOf<Int, Fragment>()
 
@@ -33,9 +33,9 @@ class AddingPlantPagerAdapter(fragment: Fragment, private val listData: List<Pla
             6,
         )
         for (i in 0 until itemCount - 1) {
-            fragments[i] = PlantDescriptionFragment(data, updateLayoutHeightCallback)
+            fragments[i] = PlantSearchResultFragment(data)
         }
-        fragments[itemCount - 1] = ClientPlantFragment(updateLayoutHeightCallback)
+        fragments[itemCount - 1] = NoMatchesSearchFragment()
     }
 
     override fun createFragment(position: Int): Fragment {
