@@ -18,13 +18,12 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
 
     init {
         orientation = VERTICAL
-//        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
     }
 
     fun initView(data: PlantData) {
         if (isDataIsEmpty(data)) return
         setTemperature(data) //TODO
-        setWatering(data, Seasons.Winter) // TODO
+        setWatering(data, Seasons.Winter)
         setLightning(data)
     }
 
@@ -39,9 +38,8 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
         with(binding) {
             if (data.minTemp == null || data.maxTemp == null) {
                 temperature.toGone()
-//                wateringDivider.toGone()
             } else {
-                temperature.setTextInfo("${data.minTemp} ${R.string.celsium} / ${data.maxTemp} ${R.string.celsium}")
+                temperature.setTextInfo("${data.minTemp} ${context.getString(R.string.celsium)} / ${data.maxTemp} ${context.getString(R.string.celsium)}")
             }
         }
     }
@@ -49,19 +47,17 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
 
     private fun setWatering(data: PlantData, season: Seasons = Seasons.Summer) = binding.apply {
         data.watering?.let {
-            watering.setTextInfo("${R.string.every} ${data.watering} ${R.string.days}")
+            watering.setTextInfo("${context.getString(R.string.every)} ${data.watering} ${context.getString(R.string.days)}")
         } ?: run {
             watering.toGone()
-//            lightingDivider.toGone()
         }
     }
 
     private fun setLightning(data: PlantData) = binding.apply {
-        data.watering?.let {
+        data.sunRelation?.let {
             lighting.setSunRelation(data.sunRelation!!)
         } ?: run {
             lighting.toGone()
-//            lightingDivider.toGone()
         }
     }
 

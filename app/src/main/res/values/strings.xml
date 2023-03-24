@@ -133,7 +133,8 @@
     <string name="enter_plant_spicies">Введите вид растения</string>
     <string name="define_care_difficult">Определите сложность ухода</string>
     <string name="plant_info">Информация о растении</string>
-    <string name="description">Описание…</string>
+    <string name="description...">Описание…</string>
+    <string name="description">Описание</string>
     <string name="pests_disease">Вредители (болезни)</string>
     <string name="choose_pests">Выберите вредителя(болезни)</string>
     <string name="add_pests">+ Добавить вредителя (болезнь)</string>
@@ -240,5 +241,10 @@
     <string name="error_loading_data">Не удалось загрузить данные.\nПроверьте интернет соединение</string>
     <string name="error_update_data">Не удалось обновить данные.\nПроверьте интернет соединение</string>
     <string name="error_deleting">Не удалось удалить данные.\nПроверьте интернет соединение</string>
+
+    //sun relation
+    <string name="direct_sunlight">Прямые солнечные лучи</string>
+    <string name="diffused_sunlight">Яркий, рассеянный свет</string>
+    <string name="penumbra">Полутень</string>
 
 </resources>

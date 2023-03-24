@@ -1,282 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:parentTag="android.widget.LinearLayout">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_care" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="18dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/care"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/watering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/primary_card_background"
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/watering_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/sf_ui_font_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/watering"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/watering_summer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="111111111111111111"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="111111111111111111" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/watering_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/poppins_regular"
-            android:text="111111111111111111"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="111111111111111111" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/watering_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            app:dividerColor="@color/white5" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/spraying"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="6dp"
+        android:background="@drawable/primary_card_background"
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/spraying_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/sf_ui_font_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/spraying"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/spraying_summer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="111111111111111111"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="111111111111111111" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/spraying_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/poppins_regular"
-            android:text="111111111111111111"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="111111111111111111" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/spraying_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            app:dividerColor="@color/white5" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/feeding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="6dp"
+        android:background="@drawable/primary_card_background"
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/sf_ui_font_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/nutrition"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/feeding_summer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="111111111111111111"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="111111111111111111" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/feeding_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/poppins_regular"
-            android:text="111111111111111111"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="111111111111111111" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/feeding_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            app:dividerColor="@color/white5" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/planting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="6dp"
+        android:background="@drawable/primary_card_background"
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/planting_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/sf_ui_font_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/planting_time"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/planting_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Весна, как только почва прогрелась"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="Весна, как только почва прогрелась" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/planting_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            app:dividerColor="@color/white5" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/reproduction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_marginTop="6dp"
+        android:background="@drawable/primary_card_background"
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/reproduction_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/sf_ui_font_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/reproduction"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/reproduction_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
-            android:fontFamily="@font/poppins_regular"
-            tools:text="Обрезка и посев"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="Обрезка и посев" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/reproduction_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            app:dividerColor="@color/white5" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/pruning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/primary_card_background"
         android:orientation="vertical"
+        android:padding="14dp"
         android:paddingBottom="15dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pruning_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:fontFamily="@font/sf_ui_font_bold"
+            android:fontFamily="@font/sf_ui_font"
             android:text="@string/pruning"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pruning_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Конец февраля"
+            android:fontFamily="@font/sf_ui_font"
             android:textColor="@color/gray"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            tools:text="Конец февраля" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </merge>

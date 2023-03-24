@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.core.exception.CloudResponse
@@ -37,24 +39,24 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        val idPlant = requireArguments().getString(keyIdPlant)!!
-        lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.fetchPlant(idPlant).collect { response ->
-                response.getResult(
-                    success = {
-                        iniView(it.result)
-                    },
-                    failure = {
-                        binding.scroll.toGone()
-                        binding.cardNoMatches.toVisible()
-                    },
-                    loading = {
-                        //todo
-                    }
-                )
-
-            }
+//        lifecycleScope.launch(Dispatchers.Main) {
+//            viewModel.fetchPlant(idPlant).collect { response ->
+//                response.getResult(
+//                    success = {
+//                        iniView(it.result)
+//                    },
+//                    failure = {
+//                        binding.scroll.toGone()
+//                        binding.cardNoMatches.toVisible()
+//                    },
+//                    loading = {
+//                        //todo
+//                    }
+//                )
+//
+//            }
         }
-    }
+//    }
 
     private fun initView(data: PlantData) {
         with(binding) {
@@ -65,7 +67,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                 .into(plantPhoto)
             plantName.text = data.name ?: data.variety
             data.description?.let {
-                plantInfo.initView(it, null)
+                plantInfo.initView(it)
             } ?: run {
                 plantInfo.visibility = View.GONE
                 aboutPlant.visibility = View.GONE
@@ -166,4 +168,5 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         }
         dialog.showDialog(bindingDialog.root)
     }
+
 }

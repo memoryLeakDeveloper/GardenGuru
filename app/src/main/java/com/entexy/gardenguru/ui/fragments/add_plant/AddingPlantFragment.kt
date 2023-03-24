@@ -4,14 +4,20 @@ import AddingPlantPagerAdapter
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
+import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment.Companion.PLANT_DATA_KEY
+import com.entexy.gardenguru.utils.bugger
 import com.entexy.gardenguru.utils.setString
+import com.entexy.gardenguru.utils.toGone
+import com.entexy.gardenguru.utils.toVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,16 +31,15 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        val plantSearchByNameQuire = requireArguments().getString(SEARCH_BY_NAME_ARGUMENTS_KEY)
-//        lifecycleScope.launch {
-//            if (plantSearchByNameQuire != null) {
-//                viewModel.findPlantsByVariety(plantSearchByNameQuire)
-//            } else {
-//                val plantSearchQuires = requireArguments().getStringArray(SEARCH_ARGUMENTS_KEY)!!
-//                viewModel.findPlants(plantSearchQuires.toList())
-//            }
-//        } //todo
+        val plantSearchByNameQuire = requireArguments().getString(SEARCH_BY_VARIETY_ARGUMENTS_KEY)
+        lifecycleScope.launch {
+            if (plantSearchByNameQuire != null) {
+                val response = viewModel.findPlantsByVariety(plantSearchByNameQuire)
+            } else {
+                val plantSearchQuires = requireArguments().getStringArrayList(SEARCH_ARGUMENTS_KEY)!!
+                val response = viewModel.findPlants(plantSearchQuires.toList())
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,19 +73,32 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
         lifecycleScope.launch(Dispatchers.IO) {
 
         }
-        setViewPager()
+        setViewPager(emptyList())
+        binding.tvSeeMore.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_addingPlantFragment_to_plantDescriptionFragment,
+                bundleOf(PLANT_DATA_KEY to pagerAdapter.getCurrentPlantNameAndData(binding.viewPager.currentItem))
+            )
+        }
     }
 
-    private fun setViewPager() {
-        binding.viewPager.apply {
-            pagerAdapter = AddingPlantPagerAdapter(this@AddingPlantFragment, listOf())
+    private fun setViewPager(list: List<PlantData>) = binding.apply {
+        viewPager.apply {
+            pagerAdapter = AddingPlantPagerAdapter(this@AddingPlantFragment, list)
             adapter = pagerAdapter
             offscreenPageLimit = 2
-            binding.dotsIndicator.attachTo(this)
+            dotsIndicator.attachTo(this)
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-//                    if()
+                    //todo list size
+                    if (position == 3) {
+                        btnAdd.toGone()
+                        tvSeeMore.toGone()
+                    } else {
+                        btnAdd.toVisible()
+                        tvSeeMore.toVisible()
+                    }
                 }
             })
         }

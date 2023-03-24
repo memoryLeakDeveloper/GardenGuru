@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.plant.SunRelation
 import com.entexy.gardenguru.databinding.ItemWheatherConditionBinding
+import com.entexy.gardenguru.utils.bugger
 import com.entexy.gardenguru.utils.setDrawable
 import com.entexy.gardenguru.utils.setString
 
@@ -42,6 +43,7 @@ class WheatherConditionItem(context: Context, attrs: AttributeSet) : LinearLayou
     }
 
     fun setSunRelation(data: SunRelation) {
+        binding.textView2.text = context.getString(data.id)
     }
 
     fun changeImage(drawable: Drawable) {

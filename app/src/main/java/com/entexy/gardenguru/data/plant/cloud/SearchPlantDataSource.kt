@@ -33,8 +33,7 @@ interface SearchPlantDataSource {
         override suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantCloud?> {
             val task = firestorePlantsRef.whereEqualTo("varietyCode", varietyCode).limit(1).get()
             val querySnapshot = task.await()
-
-            return if (task.exception == null) {
+            return if (task.exception == null && querySnapshot.documents.isNotEmpty()) {
                 val plantCloud = querySnapshot.documents.first().toObject(PlantCloud::class.java)?.apply {
                     id = ""
                 }
