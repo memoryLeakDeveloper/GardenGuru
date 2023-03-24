@@ -12,8 +12,9 @@ import java.util.*
 @Parcelize
 data class PlantData(
     var id: String,
-    var name: String,
+    var variety: String,
     var photo: String,
+    var name: String?,
     var careComplexity: CareComplexity = CareComplexity.Medium,
     var description: String? = null,
     var sunRelation: SunRelation? = null,
@@ -54,8 +55,9 @@ fun PlantCloud.mapToData(language: String): PlantData? {
 
     return PlantData(
         id = "",
-        name = localizedName?.get(language) ?: name!!,
+        variety = localizedName?.get(language) ?: name!!, //todo
         photo = photo!!,
+        name = null,
         careComplexity = try {
             if (careComplexity != null)
                 CareComplexity.valueOf(careComplexity!!)

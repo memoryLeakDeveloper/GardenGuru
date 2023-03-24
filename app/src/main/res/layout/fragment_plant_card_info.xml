@@ -51,7 +51,7 @@
                 tools:text="Кактус колючий" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editText"
+                android:id="@+id/et_plant_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -59,7 +59,7 @@
                 android:background="@drawable/bg_edit_text"
                 android:fontFamily="@font/poppins_regular"
                 android:hint="@string/enter_plant_name"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionDone"
                 android:inputType="textMultiLine"
                 android:padding="15dp"
                 android:textColor="@color/white"

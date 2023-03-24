@@ -27,7 +27,7 @@
             android:fontFamily="@font/sf_ui_font"
             android:text="@string/login_continue"
             android:textColor="@color/black_1"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </FrameLayout>

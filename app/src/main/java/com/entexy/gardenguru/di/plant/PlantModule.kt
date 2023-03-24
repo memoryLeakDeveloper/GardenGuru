@@ -4,8 +4,7 @@ import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.PlantRepositoryImpl
 import com.entexy.gardenguru.data.plant.benefit.BenefitsCloudDataSource
-import com.entexy.gardenguru.data.plant.cloud.PlantCloudDataSource
-import com.entexy.gardenguru.data.plant.cloud.SearchPlantDataSource
+import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.domain.repository.PlantRepository
 import dagger.Module
@@ -24,12 +23,18 @@ class PlantModule {
         plantCloudDataSource: PlantCloudDataSource,
         pestsCloudDataSource: PestsCloudDataSource,
         benefitsCloudDataSource: BenefitsCloudDataSource,
-        searchPlantDataSource: SearchPlantDataSource
+        searchPlantDataSource: SearchPlantDataSource,
+        deletePlantDataSource: DeletePlantDataSource,
+        movePlantDataSource: MovePlantDataSource,
+        renamePlantDataSource: RenamePlantDataSource,
     ): PlantRepository = PlantRepositoryImpl(
         plantCloudDataSource,
         pestsCloudDataSource,
         benefitsCloudDataSource,
         searchPlantDataSource,
+        deletePlantDataSource,
+        movePlantDataSource,
+        renamePlantDataSource,
         languageHelper
     )
 
@@ -49,6 +54,19 @@ class PlantModule {
 
     @Provides
     @Singleton
-    fun provideSearchPlantCloudDataSource(): SearchPlantDataSource = SearchPlantDataSource.Base(App.firestorePlantsRef)
+    fun provideDeletePlantDataSource(): DeletePlantDataSource = DeletePlantDataSource.Base(App.firestorePlantsRef)
 
+
+    @Provides
+    @Singleton
+    fun provideMovePlantDataSource(): MovePlantDataSource = MovePlantDataSource.Base(App.firestorePlantsRef)
+
+
+    @Provides
+    @Singleton
+    fun provideRenamePlantDataSource(): RenamePlantDataSource = RenamePlantDataSource.Base(App.firestorePlantsRef)
+
+    @Provides
+    @Singleton
+    fun provideSearchPlantCloudDataSource(): SearchPlantDataSource = SearchPlantDataSource.Base(App.firestorePlantsRef)
 }

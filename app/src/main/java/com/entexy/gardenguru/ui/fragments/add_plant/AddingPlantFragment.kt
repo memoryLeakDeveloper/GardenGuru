@@ -25,8 +25,16 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val plantSearchQuires = requireArguments().getStringArray(SEARCH_ARGUMENTS_KEY)
-//        viewModel.findPlants(plantSearchQuires)
+
+//        val plantSearchByNameQuire = requireArguments().getString(SEARCH_BY_NAME_ARGUMENTS_KEY)
+//        lifecycleScope.launch {
+//            if (plantSearchByNameQuire != null) {
+//                viewModel.findPlantsByVariety(plantSearchByNameQuire)
+//            } else {
+//                val plantSearchQuires = requireArguments().getStringArray(SEARCH_ARGUMENTS_KEY)!!
+//                viewModel.findPlants(plantSearchQuires.toList())
+//            }
+//        } //todo
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,5 +88,6 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
     companion object {
         const val SEARCH_ARGUMENTS_KEY = "search-arguments-key"
+        const val SEARCH_BY_VARIETY_ARGUMENTS_KEY = "search-by-name-arguments-key"
     }
 }

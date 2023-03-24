@@ -31,10 +31,12 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
+
+        android:layout_gravity="center"
         android:fontFamily="@font/pacifico"
         android:gravity="center"
-        android:maxWidth="250dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/back"
@@ -62,46 +64,48 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_tab_info"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="87dp"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="27dp"
-        android:text="@string/info"
-        android:textColor="@color/primary_green"
-        android:textSize="17sp"
-        app:fontFamily="@font/poppins_regular"
-        android:drawablePadding="4dp"
-        android:drawableBottom="@drawable/ic_green_dot"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_tab_notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="4dp"
-        android:text="@string/notification"
-        android:textColor="@color/gray"
-        android:textSize="17sp"
-        app:fontFamily="@font/poppins_regular"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_tab_info" />
+        app:layout_constraintTop_toBottomOf="@+id/back">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_tab_history"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="27dp"
-        android:drawablePadding="4dp"
-        android:text="@string/history"
-        android:textColor="@color/gray"
-        android:textSize="17sp"
-        app:fontFamily="@font/poppins_regular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_tab_info" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tab_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/ic_green_dot"
+            android:drawablePadding="4dp"
+            android:text="@string/info"
+            android:textColor="@color/primary_green"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/poppins_regular" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tab_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:drawablePadding="4dp"
+            android:text="@string/history"
+            android:textColor="@color/gray"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/poppins_regular" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,15 +14,22 @@ class PlantCardHistoryFragment : BaseFragment<FragmentPlantCardHistoryBinding>()
 
     private val viewModel: PlantCardHistoryViewModel by viewModels()
 
-    private val historyAdapter = HistoryRecyclerAdapter(viewModel)
+    private var historyAdapter: HistoryRecyclerAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
 
+            historyAdapter = HistoryRecyclerAdapter(viewModel)
             rvHistory.layoutManager = LinearLayoutManager(requireContext())
             rvHistory.adapter = historyAdapter
 
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        historyAdapter = null
     }
 }

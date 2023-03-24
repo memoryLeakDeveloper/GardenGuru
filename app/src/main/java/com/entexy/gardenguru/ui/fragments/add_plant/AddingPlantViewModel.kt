@@ -21,7 +21,9 @@ class AddingPlantViewModel @Inject constructor(
     var selectedGarden = -1
     suspend fun loadGardens() = getGardenNamesUseCase.getGardens()
 
-    suspend fun findPlants(plantSearchQuires: List<String>) = searchPlantUseCase.searchPlantByName(plantSearchQuires)
+    suspend fun findPlants(plantSearchQuires: List<String>) = searchPlantUseCase.searchPlantByVarietyCode(plantSearchQuires)
+
+    suspend fun findPlantsByVariety(plantVariety: String) = searchPlantUseCase.searchPlantByName(plantVariety)
 
     suspend fun createGarden(gardenName: String): GardenName? {
         val garden = createGardenUseCase.perform(gardenName)
