@@ -90,7 +90,22 @@
         android:id="@+id/addingPlantFragment"
         android:name="com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment"
         android:label="AddingPlantFragment"
-        tools:layout="@layout/fragment_adding_plant"/>
+        tools:layout="@layout/fragment_adding_plant">
+        <action
+            android:id="@+id/action_addingPlantFragment_to_plantDescriptionFragment"
+            app:destination="@id/plantDescriptionFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_addingPlantFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait_anim"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
     <fragment
         android:id="@+id/myPlantsFragment"
         android:name="com.entexy.gardenguru.ui.fragments.plants.MyPlantsFragment"
@@ -192,10 +207,13 @@
         <action
             android:id="@+id/action_cameraResultFragment_to_addingPlantFragment"
             app:destination="@id/addingPlantFragment"
-
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/plantDescriptionFragment"
+        android:name="com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment"
+        android:label="PlantDescriptionFragment" />
 </navigation>
