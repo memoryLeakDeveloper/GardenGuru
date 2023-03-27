@@ -22,6 +22,7 @@ class PlantRepositoryImpl @Inject constructor(
     private val deletePlantDataSource: DeletePlantDataSource,
     private val movePlantDataSource: MovePlantDataSource,
     private val renamePlantDataSource: RenamePlantDataSource,
+    private val addPlantDataSource: AddPlantDataSource,
     private val languageHelper: LanguageHelper
 ) : PlantRepository {
 
@@ -68,7 +69,6 @@ class PlantRepositoryImpl @Inject constructor(
         val result = mutableListOf<PlantData>()
         plantSearchQuires.forEach {
             val plantResult = searchPlantDataSource.searchPlantByVarietyCode(it)
-
             if (plantResult is CloudResponse.Success) {
                 val plantData = plantResult.result?.mapToData(languageHelper.getLanguage())
                 if (plantData != null)
@@ -83,27 +83,21 @@ class PlantRepositoryImpl @Inject constructor(
     override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>> {
         val plantResults = searchPlantDataSource.searchPlantByName(plantName)
         val result = mutableListOf<PlantData>()
-
         if (plantResults is CloudResponse.Success) {
             plantResults.result?.forEach {
-                val plantData = it.mapToData(languageHelper.getLanguage())
-                if (plantData != null)
-                    result.add(plantData)
+                result.add(it.mapToData(languageHelper.getLanguage()))
             }
-
         } else {
             return CloudResponse.Error((plantResults as? CloudResponse.Error)?.exception)
         }
-
         return CloudResponse.Success(result)
     }
 
-    override suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Boolean> =
-        renamePlantDataSource.renamePlant(plantId, plantName)
+    override suspend fun renamePlant(plantId: String, plantName: String) = renamePlantDataSource.renamePlant(plantId, plantName)
 
-    override suspend fun deletePlant(plantId: String): CloudResponse<Boolean> {
-        return deletePlantDataSource.deletePlant(plantId)
-    }
+    override suspend fun deletePlant(plantId: String) = deletePlantDataSource.deletePlant(plantId)
+
+    override suspend fun addPlant(plantId: String) = addPlantDataSource.addPlant(plantId)
 
     override suspend fun movePlantToAnotherGarden(plantId: String, gardenId: String): CloudResponse<Boolean> {
         return movePlantDataSource.movePlant(plantId, gardenId)

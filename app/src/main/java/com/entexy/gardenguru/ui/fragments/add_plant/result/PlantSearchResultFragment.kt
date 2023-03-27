@@ -24,7 +24,7 @@ class PlantSearchResultFragment(private val data: PlantData) : BaseFragment<Frag
             Glide.with(requireContext()).load(data.photo).fitCenter()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .transform(CenterCrop(), RoundedCorners(10)).into(plantPhoto)
-            Glide.with(requireContext()).load(data.cover).circleCrop()
+            Glide.with(requireContext()).load(data.coverPhoto).circleCrop()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder)).into(plantIcon)
             plantName.text = data.name
             careDifficult.initView(data.careComplexity, false)

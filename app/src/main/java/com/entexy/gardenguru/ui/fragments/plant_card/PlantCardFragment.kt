@@ -17,7 +17,7 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val plantData = PlantMockData.plant
+        val plantData = PlantMockData.plantsData.first()
 
         val idPlant = requireArguments().getString("PLANT_ID")
 

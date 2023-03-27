@@ -93,7 +93,7 @@
     <string name="pruning">Обрезка</string>
     <string name="in_summer">Летом</string>
     <string name="in_winter">Зимой</string>
-    <string name="disease_and_pests">Болезни и  \nвредители</string>
+    <string name="disease_and_pests">Болезни и вредители</string>
 
     //benefits
     <string name="benefits">Польза</string>
@@ -230,6 +230,8 @@
     <string name="move">Переместить</string>
     <string name="moving">Переезд!</string>
     <string name="choose_garden_to_move">Выберите Сад для перемещения</string>
+    <string name="every_n_days_in_summer">Летом каждые %1$d дня</string>
+    <string name="every_n_days_in_winter">Зимой каждые %1$d дня</string>
 
     //errors
     <string name="something_is_wrong">Что-то не так, попробуйте позже</string>

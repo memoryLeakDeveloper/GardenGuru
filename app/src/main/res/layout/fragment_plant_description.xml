@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/primary_background"
     android:orientation="vertical">
 
     <include
@@ -40,7 +41,6 @@
                     android:id="@+id/plant_icon"
                     android:layout_width="74dp"
                     android:layout_height="74dp"
-                    android:elevation="20dp"
                     android:src="@drawable/plant_placeholder"
                     app:layout_constraintBottom_toBottomOf="@+id/plant_photo"
                     app:layout_constraintEnd_toEndOf="parent"

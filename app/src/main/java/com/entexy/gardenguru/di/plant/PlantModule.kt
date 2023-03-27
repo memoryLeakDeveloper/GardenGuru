@@ -27,6 +27,7 @@ class PlantModule {
         deletePlantDataSource: DeletePlantDataSource,
         movePlantDataSource: MovePlantDataSource,
         renamePlantDataSource: RenamePlantDataSource,
+        addPlantDataSource: AddPlantDataSource
     ): PlantRepository = PlantRepositoryImpl(
         plantCloudDataSource,
         pestsCloudDataSource,
@@ -35,6 +36,7 @@ class PlantModule {
         deletePlantDataSource,
         movePlantDataSource,
         renamePlantDataSource,
+        addPlantDataSource,
         languageHelper
     )
 
@@ -65,6 +67,10 @@ class PlantModule {
     @Provides
     @Singleton
     fun provideRenamePlantDataSource(): RenamePlantDataSource = RenamePlantDataSource.Base(App.firestorePlantsRef)
+
+    @Provides
+    @Singleton
+    fun provideAddPlantDataSource(): AddPlantDataSource = AddPlantDataSource.Base(App.firestorePlantsRef)
 
     @Provides
     @Singleton

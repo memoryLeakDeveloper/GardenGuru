@@ -2,7 +2,6 @@ package com.entexy.gardenguru.ui.customview.card.pests
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.databinding.ItemPestsBinding
@@ -14,13 +13,7 @@ class PestsCardAdapter(private val listPests: List<PestData>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: PestsCardViewHolder, position: Int) {
-        holder.binding.pest.apply {
-            text = listPests[position].name
-            setOnClickListener {
-                //TODO
-                Toast.makeText(context, listPests[position].name, Toast.LENGTH_SHORT).show()
-            }
-        }
+        holder.binding.pest.text = listPests[position].name
     }
 
     override fun getItemCount() = listPests.size

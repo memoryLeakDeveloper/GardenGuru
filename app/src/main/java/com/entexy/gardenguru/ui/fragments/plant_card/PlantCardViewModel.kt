@@ -18,7 +18,7 @@ class PlantCardViewModel @Inject constructor() : ViewModel() {
                 "",
                 "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
                 arrayListOf(
-                    PlantMockData.plant
+                    PlantMockData.plantsData.first()
                 )
             )
         )

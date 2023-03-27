@@ -66,12 +66,8 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
                 .into(plantPhoto)
             plantName.text = data.name ?: data.variety
-            data.description?.let {
+            data.description.let {
                 plantInfo.initView(it)
-            } ?: run {
-                plantInfo.visibility = View.GONE
-                aboutPlant.visibility = View.GONE
-                plantName1.visibility = View.GONE
             }
             careDifficult.initView(data.careComplexity, true)
             wheather.initView(data)
