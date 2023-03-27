@@ -37,7 +37,10 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
                 if (position == 2)
                     buttonNext.apply {
                         animate().alpha(1f).duration = 500L
-                        setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+                        setOnClickListener {
+                            viewModel.changePref()
+                            findNavController().navigate(R.id.loginFragment)
+                        }
                     }
                 else
                     buttonNext.apply {
@@ -59,11 +62,6 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.changePref()
     }
 
     private class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
