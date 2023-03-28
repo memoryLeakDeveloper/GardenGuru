@@ -213,6 +213,12 @@
         <item>Жалоба</item>
         <item>Другое</item>
     </array>
+    <string name="delete_account">Удалить аккаунт</string>
+    <string name="exit_account">Выйти из аккаунта</string>
+    <string name="turn_on_notifications">Вкл. уведомления</string>
+    <string name="turn_off_notifications">Выкл. уведомления</string>
+    <string name="account_deleting">Удаление аккаунта!</string>
+    <string name="are_you_sure">Вы действительно хотите удалить аккаунт?</string>
 
     <string name="info">Инфо</string>
     <string name="history">История</string>

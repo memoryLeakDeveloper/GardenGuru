@@ -2,7 +2,6 @@ package com.entexy.gardenguru.core
 
 import android.app.Application
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -13,8 +12,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-//        firestoreUserRef = Firebase.firestore.document("")
+        firestoreUserRef = Firebase.firestore.collection("Users")
         firestorePlantsRef = Firebase.firestore.collection("plants")
         firestoreGardensRef = Firebase.firestore.collection("gardens")
         firestorePestsRef = Firebase.firestore.collection("pests")
@@ -22,7 +20,7 @@ class App : Application() {
     }
 
     companion object {
-        lateinit var firestoreUserRef: DocumentReference //todo дать сылку на текущего пользователя
+        lateinit var firestoreUserRef: CollectionReference
         lateinit var firestorePlantsRef: CollectionReference
         lateinit var firestoreGardensRef: CollectionReference
         lateinit var firestorePestsRef: CollectionReference

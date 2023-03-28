@@ -6,4 +6,6 @@ interface UserRepository {
 
     suspend fun createUser(id: String): CloudResponse<Unit>
 
+    suspend fun deleteUser(): CloudResponse<Unit>
+
 }

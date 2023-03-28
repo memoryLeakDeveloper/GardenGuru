@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fontFamily="@font/poppins_regular"
-    android:gravity="center_vertical"
-    android:padding="15dp"
-    android:text="TextView"
-    android:textColor="@color/white"
-    android:textSize="16sp" />
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_ui_font"
+        android:gravity="center_vertical"
+        android:paddingVertical="10dp"
+        android:paddingStart="16dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        tools:text="TextView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/white5" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

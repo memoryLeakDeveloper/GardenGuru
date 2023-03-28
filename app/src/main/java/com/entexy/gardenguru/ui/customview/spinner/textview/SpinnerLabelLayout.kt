@@ -31,7 +31,7 @@ class SpinnerLabelLayout(context: Context, attrs: AttributeSet) : ConstraintLayo
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
     private var list: ArrayList<String> = arrayListOf()
-    private val selectListener = SpinnerLayout.SelectListener { text: String, position: Int, close: Boolean ->
+    private val selectListener: (String, Int, Boolean) -> Unit = { text: String, position: Int, close: Boolean ->
         binding.spinnerText.text = text
         valueCallback?.value(position, text)
         spinnerValue = text

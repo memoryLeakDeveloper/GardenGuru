@@ -155,7 +155,6 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         bindingDialog.spinner.initView(
             null,
             ArrayList(gardens.map { it.name }),
-            true
         )
         bindingDialog.spinner.setValueListener { position: Int, name: String ->
             lifecycleScope.launch {

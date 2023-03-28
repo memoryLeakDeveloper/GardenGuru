@@ -12,7 +12,6 @@
         android:color="#88BC87" />
 
     <corners
-        android:bottomRightRadius="25dp"
-        android:bottomLeftRadius="25dp"/>
+        android:radius="10dp"/>
 
 </shape>
