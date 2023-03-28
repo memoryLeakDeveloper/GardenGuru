@@ -1,5 +1,6 @@
 package com.entexy.gardenguru.di.user
 
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.user.UserRepositoryImpl
 import com.entexy.gardenguru.data.user.cloud.CreateUserDataSource
 import com.entexy.gardenguru.domain.repository.UserRepository
@@ -14,7 +15,7 @@ import dagger.hilt.android.components.ViewModelComponent
 class UserModule {
 
     @Provides
-    fun provideCreateUserDataSource(): CreateUserDataSource = CreateUserDataSource.Base()
+    fun provideCreateUserDataSource(): CreateUserDataSource = CreateUserDataSource.Base(App.firestoreUserRef)
 
     @Provides
     fun provideCreateUserUseCase(repository: UserRepository): CreateUserUseCase = CreateUserUseCase(repository)

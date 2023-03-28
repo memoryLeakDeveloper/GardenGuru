@@ -137,6 +137,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.5'
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
 
     //pytorch
     implementation 'org.pytorch:pytorch_android_lite:1.10.0'
