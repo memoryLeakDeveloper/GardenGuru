@@ -1,8 +1,9 @@
 package com.entexy.gardenguru.data.plant.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
+import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.ui.PlantMockData
 import com.google.firebase.firestore.CollectionReference
-import kotlinx.coroutines.tasks.await
 
 interface SearchPlantDataSource {
 
@@ -29,7 +30,7 @@ interface SearchPlantDataSource {
 //                CloudResponse.Success(result)
 //            } else CloudResponse.Error(task.exception)
 
-            return CloudResponse.Success(PlantMockData.plantsCloud) //todo
+            return CloudResponse.Success(PlantMockData.plantsData) //todo
         }
 
         override suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantData> {
@@ -44,7 +45,7 @@ interface SearchPlantDataSource {
 //                } else CloudResponse.Error(null)
 //            } else CloudResponse.Error(task.exception)
 
-            return CloudResponse.Success(PlantMockData.plantsData.first().mapToPlantCloud()) //todo
+            return CloudResponse.Success(PlantMockData.plantsData.first()) //todo
         }
     }
 }

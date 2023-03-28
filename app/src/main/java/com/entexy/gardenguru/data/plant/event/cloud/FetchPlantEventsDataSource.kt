@@ -1,10 +1,7 @@
 package com.entexy.gardenguru.data.plant.event.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
-import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.data.plant.event.PlantEventData
-import com.entexy.gardenguru.ui.EventMockData
-import com.entexy.gardenguru.ui.PlantEventMockData
 
 interface FetchPlantEventsDataSource {
 
@@ -17,7 +14,7 @@ interface FetchPlantEventsDataSource {
             //return if (task.exception == null) {
             //    result.toObject(PlantCloud::class.java)?.apply { id = idPlant }
             //} else throw task.exception!!
-            return CloudResponse.Success(PlantEventMockData.timetableListData) //todo
+            return CloudResponse.Success(arrayListOf()) //todo
         }
     }
 }

@@ -4,7 +4,7 @@ import com.google.firebase.Timestamp
 
 data class PlantCloud(
     var id: String,
-    var name: String,
+    var name: String?,
     var variety: String,
     var localizedVariety: Map<String, String>? = null,
     var photo: String,
@@ -18,9 +18,9 @@ data class PlantCloud(
     var reproduction: List<String>,
     var benefitsIds: List<String>? = null,
     var pruning: String,
+    var plantingTime: Timestamp,
     var feedingSummer: Int,
     var feedingWinter: Int,
-    var plantingTime: Timestamp,
     var wateringSummer: Int,
     var wateringWinter: Int,
     var sprayingSummer: Int,

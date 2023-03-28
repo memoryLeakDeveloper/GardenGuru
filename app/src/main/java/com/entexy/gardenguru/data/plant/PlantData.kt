@@ -12,7 +12,7 @@ import java.util.*
 @Parcelize
 data class PlantData(
     var id: String,
-    var name: String,
+    var name: String?,
     var variety: String,
     var photo: String,
     var customPhoto: String?,
@@ -24,9 +24,9 @@ data class PlantData(
     var reproduction: List<Reproduction>,
     var benefits: List<BenefitData>? = null,
     var pruning: String,
+    var plantingTime: Date,
     var feedingSummer: Int,
     var feedingWinter: Int,
-    var plantingTime: Date,
     var wateringSummer: Int,
     var wateringWinter: Int,
     var sprayingSummer: Int,
@@ -34,9 +34,21 @@ data class PlantData(
     var minTemp: Int,
     var maxTemp: Int,
     var localizedVariety: Map<String, String>? = null,
-    var localizeDescription: Map<String, String>? = null,
+    var localizeDescription: Map<String, String>? = null
+) : Parcelable{
+    fun getPlantName(locale: String): String{
+        return name ?: getPlantVariety(locale)
+    }
 
-    ) : Parcelable
+    fun getPlantVariety(locale: String): String{
+        return localizedVariety?.get(locale) ?: variety
+    }
+
+    fun getPlantDescription(locale: String): String{
+        return localizeDescription?.get(locale) ?: description
+    }
+}
+
 
 
 fun PlantData.mapToPlantCloud() = PlantCloud(
@@ -69,8 +81,8 @@ fun PlantCloud.mapToData(): PlantData {
         id = id,
         variety = variety,
         photo = photo,
-        coverPhoto = cover,
-        customName = name,
+        coverPhoto = coverPhoto,
+        name = name,
         customPhoto = customPhoto,
         careComplexity = CareComplexity.valueOf(careComplexity),
         description = description,
@@ -81,9 +93,9 @@ fun PlantCloud.mapToData(): PlantData {
         reproduction = reproduction.map { Reproduction.valueOf(it) },
         benefits = null,
         pruning = pruning,
+        plantingTime = plantingTime.toDate(),
         feedingSummer = feedingSummer,
         feedingWinter = feedingWinter,
-        plantingTime = plantingTime.toDate(),
         wateringSummer = wateringSummer,
         wateringWinter = wateringWinter,
         sprayingSummer = sprayingSummer,

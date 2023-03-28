@@ -33,7 +33,7 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
 
     private fun initView(plantData: PlantData) {
 
-        binding.title.text = plantData.customName ?: plantData.variety
+        binding.title.text = plantData.getPlantName("ru")
         initPager(plantData)
     }
 

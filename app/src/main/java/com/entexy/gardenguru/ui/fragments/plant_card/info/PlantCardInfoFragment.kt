@@ -53,8 +53,8 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
         with(binding) {
             plantCaver.setImageByGlide(plantData.coverPhoto)
-            plantName.text = plantData.customName ?: plantData.variety
-            plantInfo.initView(plantData.description)
+            plantName.text = plantData.getPlantName("ru")
+            plantInfo.initView(plantData.getPlantDescription("ru"))
             careDifficult.initView(plantData.careComplexity, true)
             wheather.initView(plantData)
             careDescription.initView(plantData)
@@ -70,15 +70,15 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                     val spannableText = SpannableString(
                         resources.getString(
                             R.string.dialog_want_to_delete_plant,
-                            plantData.customName ?: plantData.variety
+                            plantData.getPlantName("ru")
                         )
                     )
-                    val spannableStartIndex = spannableText.indexOf(plantData.customName ?: plantData.variety)
+                    val spannableStartIndex = spannableText.indexOf(plantData.getPlantName("ru"))
 
                     spannableText.setSpan(
                         ForegroundColorSpan(resources.getColor(R.color.primary_green, requireContext().theme)),
                         spannableStartIndex, // start
-                        spannableStartIndex + (plantData.customName ?: plantData.variety).length, // end
+                        spannableStartIndex + (plantData.getPlantName("ru")).length, // end
                         Spannable.SPAN_EXCLUSIVE_INCLUSIVE
                     )
                     tvDialogDescription.text =
@@ -111,7 +111,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
     }
 
     private fun initPlantNameView(data: PlantData) = with(binding) {
-        tvPlantName.text = data.customName ?: data.variety
+        tvPlantName.text = plantData.getPlantName("ru")
 
         ivEditPlantName.setOnClickListener {
             containerPlantName.toGone()
@@ -134,7 +134,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                             },
                             failure = {
                                 etPlantName.hideKeyboard()
-                                etPlantName.setText(data.customName)
+                                etPlantName.setText(plantData.getPlantName("ru"))
                                 dialogHelper.hideDialog()
                                 root.showSnackBar(R.string.error_update_data)
                             },

@@ -3,7 +3,6 @@ package com.entexy.gardenguru.domain.repository
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
-import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.data.plant.pest.PestData
 
 interface PlantRepository {
@@ -25,6 +24,4 @@ interface PlantRepository {
     suspend fun deletePlant(plantId: String): CloudResponse<Unit>
 
     suspend fun addPlant(plantId: String): CloudResponse<Boolean>
-
-    suspend fun movePlantToAnotherGarden(plantId: String, gardenId: String): CloudResponse<Boolean>
 }
