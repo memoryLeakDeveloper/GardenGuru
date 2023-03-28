@@ -241,7 +241,8 @@
     <string name="gallery">Галерея</string>
     <string name="camera">Камера</string>
     <string name="delete_photo">Удалить фото</string>
-
+    <string name="every_n_days_in_summer">Летом каждые %1$d дня</string>
+    <string name="every_n_days_in_winter">Зимой каждые %1$d дня</string>
 
     //errors
     <string name="something_is_wrong">Что-то не так, попробуйте позже</string>

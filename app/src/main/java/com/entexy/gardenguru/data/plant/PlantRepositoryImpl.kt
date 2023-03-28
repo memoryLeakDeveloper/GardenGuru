@@ -1,6 +1,7 @@
 package com.entexy.gardenguru.data.plant
 
 import com.entexy.gardenguru.core.exception.CloudResponse
+import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.benefit.BenefitsCloudDataSource
 import com.entexy.gardenguru.data.plant.benefit.mapToData
@@ -9,6 +10,8 @@ import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
 import com.entexy.gardenguru.domain.repository.PlantRepository
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PlantRepositoryImpl @Inject constructor(
@@ -19,6 +22,7 @@ class PlantRepositoryImpl @Inject constructor(
     private val deletePlantDataSource: DeletePlantDataSource,
     private val deletePlantPhotoDataSource: DeletePlantPhotoDataSource,
     private val renamePlantDataSource: RenamePlantDataSource,
+    private val addPlantDataSource: AddPlantDataSource,
 ) : PlantRepository {
 
     override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
@@ -55,7 +59,6 @@ class PlantRepositoryImpl @Inject constructor(
         val result = mutableListOf<PlantData>()
         plantSearchQuires.forEach {
             val plantResult = searchPlantDataSource.searchPlantByVarietyCode(it)
-
             if (plantResult is CloudResponse.Success) {
                 result.add(plantResult.result)
             } else {
@@ -85,4 +88,7 @@ class PlantRepositoryImpl @Inject constructor(
     override suspend fun deletePlant(plantId: String): CloudResponse<Unit> {
         return deletePlantDataSource.deletePlant(plantId)
     }
+
+    override suspend fun addPlant(plantId: String) = addPlantDataSource.addPlant(plantId)
+
 }

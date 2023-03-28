@@ -12,7 +12,6 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 
 class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
@@ -21,33 +20,33 @@ class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextV
 
     fun initView(fullText: String) {
         this.fullText = fullText
-        this.text = getSpannableNextString()
-        this.movementMethod = LinkMovementMethod.getInstance()
+        text = getSpannableNextString()
+        movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun expandText() {
         isDescriptionShowed = true
-        this.text = getSpannableHideString()
+        text = getSpannableHideString()
     }
 
     private fun hideText() {
         isDescriptionShowed = false
-        this.text = getSpannableNextString()
+        text = getSpannableNextString()
     }
 
     private fun getSpannableNextString(): SpannableString {
-        val text = fullText.substringBefore(".")
-        return SpannableString(text + ". " + context.getString(R.string.next_dots)).apply {
+        val newText = fullText.substringBefore(".")
+        return SpannableString(newText + ". " + context.getString(R.string.next_dots)).apply {
             setSpan(
                 getClickableSpan(),
                 0,
-                text.length + context.getString(R.string.next_dots).length + 2,
+                newText.length + context.getString(R.string.next_dots).length + 2,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             setSpan(
                 ForegroundColorSpan(ContextCompat.getColor(context, R.color.primary_green)),
-                text.length + 2,
-                text.length + context.getString(R.string.next_dots).length + 2,
+                newText.length + 2,
+                newText.length + context.getString(R.string.next_dots).length + 2,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }

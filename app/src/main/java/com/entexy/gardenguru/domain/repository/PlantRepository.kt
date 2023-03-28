@@ -23,4 +23,8 @@ interface PlantRepository {
     suspend fun deletePlantPhoto(plantId: String): CloudResponse<Unit>
 
     suspend fun deletePlant(plantId: String): CloudResponse<Unit>
+
+    suspend fun addPlant(plantId: String): CloudResponse<Boolean>
+
+    suspend fun movePlantToAnotherGarden(plantId: String, gardenId: String): CloudResponse<Boolean>
 }

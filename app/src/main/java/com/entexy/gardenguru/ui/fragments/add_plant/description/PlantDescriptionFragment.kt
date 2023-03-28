@@ -11,8 +11,6 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.entexy.gardenguru.utils.setString
-import com.entexy.gardenguru.utils.toGone
-import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,27 +25,21 @@ class PlantDescriptionFragment : BaseFragment<FragmentPlantDescriptionBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.setBackgroundCompat(ContextCompat.getDrawable(requireContext(), R.drawable.primary_card_background))
-        data?.let { initView(it) }
+        data?.let { initView(it) } ?: run { requireActivity().onBackPressed() }
     }
 
     private fun initView(data: PlantData) = binding.apply {
+        header.title.setString(R.string.adding)
+        header.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         Glide.with(requireContext()).load(data.photo).fitCenter()
             .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
             .transform(CenterCrop(), RoundedCorners(10)).into(plantPhoto)
         Glide.with(requireContext()).load(data.coverPhoto).circleCrop()
             .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder)).into(plantIcon)
-        plantName.text = data.customName
-        header.title.setString(R.string.adding)
-        header.back.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-        data.description?.let {
-            plantInfo.initView(it)
-        } ?: run {
-            plantInfo.toGone()
-            aboutPlant.toGone()
-        }
+        plantName.text = data.name
+        plantInfo.initView(data.description)
         careDifficult.initView(data.careComplexity, false)
         wheather.initView(data)
         careDescription.initView(data)
