@@ -6,10 +6,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentPlantCardBinding
 import com.entexy.gardenguru.ui.PlantMockData
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
@@ -17,27 +17,29 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        val plantData = requireArguments().getParcelable<PlantData>(PLANT_CARD_PLANT_DATA_KEY)
         val plantData = PlantMockData.plant
-
-        val idPlant = requireArguments().getString("PLANT_ID")
+        initView(plantData)
 
         with(binding) {
             back.setOnClickListener {
                 requireActivity().onBackPressed()
             }
-            title.text = plantData.name ?: plantData.variety
-
             calendar.setOnClickListener {
                 findNavController().popBackStack(R.id.timetableFragment, false)
             }
-
-            initPager(idPlant)
         }
     }
 
-    private fun initPager(idPlant: String?) {
+    private fun initView(plantData: PlantData) {
+
+        binding.title.text = plantData.customName ?: plantData.variety
+        initPager(plantData)
+    }
+
+    private fun initPager(plantData: PlantData) {
         with(binding) {
-            val adapter = PlantCardPagerAdapter(requireActivity(), idPlant)
+            val adapter = PlantCardPagerAdapter(requireActivity(), plantData)
             viewPager.adapter = adapter
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -45,9 +47,6 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
                     when (position) {
                         0 -> {
                             selectInfoTab()
-                        }
-                        1 -> {
-                            selectNotificationTab()
                         }
                         else -> {
                             selectHistoryTab()
@@ -68,38 +67,23 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
 
     private fun selectInfoTab() {
         with(binding) {
-            tvTabInfo.setTextColor(resources.getColor(R.color.primary_green, null))
-            tvTabInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_green_dot)
-
-            tvTabHistory.setTextColor(resources.getColor(R.color.gray, requireContext().theme))
-            tvTabHistory.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-
+            tvTabInfo.setBackgroundResource(R.drawable.bg_active_segment_picker)
+            tvTabHistory.background = null
 
             viewPager.setCurrentItem(0, true)
         }
     }
 
-    private fun selectNotificationTab() {
-        with(binding) {
-            tvTabInfo.setTextColor(resources.getColor(R.color.gray, requireContext().theme))
-            tvTabInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-
-            tvTabHistory.setTextColor(resources.getColor(R.color.gray, requireContext().theme))
-            tvTabHistory.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-
-            viewPager.setCurrentItem(1, true)
-        }
-    }
-
     private fun selectHistoryTab() {
         with(binding) {
-            tvTabInfo.setTextColor(resources.getColor(R.color.gray, requireContext().theme))
-            tvTabInfo.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-
-            tvTabHistory.setTextColor(resources.getColor(R.color.primary_green, requireContext().theme))
-            tvTabHistory.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.ic_green_dot)
+            tvTabHistory.setBackgroundResource(R.drawable.bg_active_segment_picker)
+            tvTabInfo.background = null
 
             viewPager.setCurrentItem(2, true)
         }
+    }
+
+    companion object {
+        const val PLANT_CARD_PLANT_DATA_KEY = "plant-card-plant-data"
     }
 }

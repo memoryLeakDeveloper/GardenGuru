@@ -1,7 +1,6 @@
 package com.entexy.gardenguru.di.plant
 
 import com.entexy.gardenguru.core.App
-import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.PlantRepositoryImpl
 import com.entexy.gardenguru.data.plant.benefit.BenefitsCloudDataSource
 import com.entexy.gardenguru.data.plant.cloud.*
@@ -19,13 +18,12 @@ class PlantModule {
 
     @Provides
     fun providePlantRepositoryImpl(
-        languageHelper: LanguageHelper,
         plantCloudDataSource: PlantCloudDataSource,
         pestsCloudDataSource: PestsCloudDataSource,
         benefitsCloudDataSource: BenefitsCloudDataSource,
         searchPlantDataSource: SearchPlantDataSource,
         deletePlantDataSource: DeletePlantDataSource,
-        movePlantDataSource: MovePlantDataSource,
+        deletePlantPhotoDataSource: DeletePlantPhotoDataSource,
         renamePlantDataSource: RenamePlantDataSource,
     ): PlantRepository = PlantRepositoryImpl(
         plantCloudDataSource,
@@ -33,9 +31,8 @@ class PlantModule {
         benefitsCloudDataSource,
         searchPlantDataSource,
         deletePlantDataSource,
-        movePlantDataSource,
+        deletePlantPhotoDataSource,
         renamePlantDataSource,
-        languageHelper
     )
 
     @Provides
@@ -56,11 +53,9 @@ class PlantModule {
     @Singleton
     fun provideDeletePlantDataSource(): DeletePlantDataSource = DeletePlantDataSource.Base(App.firestorePlantsRef)
 
-
     @Provides
     @Singleton
-    fun provideMovePlantDataSource(): MovePlantDataSource = MovePlantDataSource.Base(App.firestorePlantsRef)
-
+    fun provideDeletePlantPhotoDataSource(): DeletePlantPhotoDataSource = DeletePlantPhotoDataSource.Base(App.firestorePlantsRef)
 
     @Provides
     @Singleton

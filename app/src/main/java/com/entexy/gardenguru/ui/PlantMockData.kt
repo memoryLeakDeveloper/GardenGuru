@@ -4,6 +4,8 @@ import com.entexy.gardenguru.data.plant.CareComplexity
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.SunRelation
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
+import com.entexy.gardenguru.data.plant.pest.PestData
+import com.entexy.gardenguru.data.plant.reproduction.Reproduction
 import java.util.*
 
 object PlantMockData {
@@ -12,13 +14,14 @@ object PlantMockData {
             "id",
             "Незабудка",
             "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
-            "https://n1s1.hsmedia.ru/52/bc/05/52bc058ca615dd1193673a3d7be39e49/690x460_0xc0a8392b_949800641501063422.jpeg",
-            "ЗДАРОВА",
+            "https://www.poison.org/-/media/images/shared/articles/plants/dumbane-dieffenbachia.jpg?h=336&w=448&la=en&hash=E7C4CE9A4E588C8EFA0B79533EC3E658",
+            "Петя",
+            null,
             CareComplexity.Easy,
             "НЕЗАБУДКА DESC",
             SunRelation.DirectLight,
-            null,
-            emptyList(),
+            arrayListOf(PestData("qweqweqwe", "Жук Олень")),
+            arrayListOf(Reproduction.Seeds),
             arrayListOf(BenefitData("qweqweqweqweqwe", "Плюсы определенно есть")),
             "СЕГОДНЯ ИЛИ ЗАВТРА НАДО ОБЯЗАТЕЛЬНО",
             Date(),

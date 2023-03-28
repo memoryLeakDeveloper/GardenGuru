@@ -7,54 +7,96 @@
     android:background="@drawable/primary_background"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="188dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.entexy.gardenguru.ui.customview.ClickableImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:padding="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
+        android:background="@drawable/header"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        <com.entexy.gardenguru.ui.customview.ClickableImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            app:srcCompat="@drawable/ic_back" />
 
-        android:layout_gravity="center"
-        android:fontFamily="@font/pacifico"
-        android:gravity="center"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/back"
-        app:layout_constraintEnd_toStartOf="@+id/calendar"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toTopOf="@+id/back"
-        tools:text="SSSSSSSSSSSSSS" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:fontFamily="@font/pacifico"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/calendar"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="SSSSSSSSSSSSSS" />
 
-    <com.entexy.gardenguru.ui.customview.ClickableImageView
-        android:id="@+id/calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back"
-        app:srcCompat="@drawable/ic_calendar" />
+        <com.entexy.gardenguru.ui.customview.ClickableImageView
+            android:id="@+id/calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/bg_segment_picker"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_tab_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/bg_active_segment_picker"
+                android:text="@string/info"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                app:fontFamily="@font/poppins_regular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_tab_history"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+
+                android:text="@string/history"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                app:fontFamily="@font/poppins_regular" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.viewpager2.widget.ViewPager2
@@ -62,50 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="87dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tab_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableBottom="@drawable/ic_green_dot"
-            android:drawablePadding="4dp"
-            android:text="@string/info"
-            android:textColor="@color/primary_green"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/poppins_regular" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tab_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:drawablePadding="4dp"
-            android:text="@string/history"
-            android:textColor="@color/gray"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/poppins_regular" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

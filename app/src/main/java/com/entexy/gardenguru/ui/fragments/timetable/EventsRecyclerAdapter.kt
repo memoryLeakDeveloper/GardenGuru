@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.data.plant.event.EventData
+import com.entexy.gardenguru.data.plant.event.PlantEventData
 import com.entexy.gardenguru.databinding.RvEventItemBinding
 
 class EventsRecyclerAdapter(
-    private val events: ArrayList<EventData>,
-    private val eventSelectedCallback: (eventData: EventData) -> Unit
+    private val events: ArrayList<PlantEventData>,
+    private val eventSelectedCallback: (plantEventData: PlantEventData) -> Unit
 ) :
     RecyclerView.Adapter<EventsRecyclerAdapter.EventsViewHolder>() {
 

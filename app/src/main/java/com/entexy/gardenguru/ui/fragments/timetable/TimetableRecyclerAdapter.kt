@@ -8,14 +8,14 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
-import com.entexy.gardenguru.data.plant.event.EventData
+import com.entexy.gardenguru.data.plant.event.PlantEventData
 import com.entexy.gardenguru.databinding.RvTimetableItemBinding
 import com.entexy.gardenguru.utils.toDmyString
 import com.entexy.gardenguru.utils.toGone
 import com.entexy.gardenguru.utils.toVisible
 import java.util.*
 
-class TimetableRecyclerAdapter(private val eventCompletedCallback: (eventData: EventData) -> Unit) :
+class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventData: PlantEventData) -> Unit) :
     RecyclerView.Adapter<TimetableRecyclerAdapter.EventsViewHolder>() {
 
     private val calendar = Calendar.getInstance().apply {
@@ -24,7 +24,7 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (eventData: E
 
     private val todayCalendar = Calendar.getInstance()
 
-    private var events = arrayListOf<EventData>()
+    private var events = arrayListOf<PlantEventData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         return EventsViewHolder(
@@ -87,12 +87,12 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (eventData: E
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setEvents(events: ArrayList<EventData>) {
+    fun setEvents(events: ArrayList<PlantEventData>) {
         this.events = events
         notifyDataSetChanged()
     }
 
-    private fun getEventsForDay(calendar: Calendar): List<EventData> {
+    private fun getEventsForDay(calendar: Calendar): List<PlantEventData> {
         val dateString = calendar.toDmyString()
         return events.filter {
             it.dateDMY == dateString

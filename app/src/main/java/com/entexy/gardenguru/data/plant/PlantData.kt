@@ -15,7 +15,8 @@ data class PlantData(
     var variety: String,
     var photo: String,
     var coverPhoto: String,
-    var name: String,
+    var customName: String?,
+    var customPhoto: String?,
     var careComplexity: CareComplexity,
     var description: String,
     var sunRelation: SunRelation,
@@ -27,18 +28,22 @@ data class PlantData(
     var watering: Int,
     var spraying: Int,
     var minTemp: Int,
-    var maxTemp: Int
-) : Parcelable
+    var maxTemp: Int,
+    var localizedVariety: Map<String, String>? = null,
+    var localizeDescription: Map<String, String>? = null,
+
+    ) : Parcelable
 
 
 fun PlantData.mapToPlantCloud() = PlantCloud(
     id = id,
-    name = name,
+    name = customName,
     photo = photo,
     cover = coverPhoto,
     variety = variety,
     careComplexity = careComplexity.cloudName,
     description = description,
+    customPhoto = customPhoto,
     sunRelation = sunRelation.cloudName,
     pestsIds = pests?.map { it.id },
     reproduction = reproduction.map { it.cloudValue },
@@ -51,15 +56,18 @@ fun PlantData.mapToPlantCloud() = PlantCloud(
     maxTemp = maxTemp
 )
 
-fun PlantCloud.mapToData(language: String): PlantData {
+fun PlantCloud.mapToData(): PlantData {
     return PlantData(
         id = id,
-        variety = localizedName?.get(language) ?: name, //todo
+        variety = variety,
         photo = photo,
         coverPhoto = cover,
-        name = name,
+        customName = name,
+        customPhoto = customPhoto,
         careComplexity = CareComplexity.valueOf(careComplexity),
-        description = localizeDescription?.get(language) ?: description,
+        description = description,
+        localizeDescription = localizeDescription,
+        localizedVariety = localizedVariety,
         sunRelation = SunRelation.valueOf(sunRelation),
         pests = null,
         reproduction = reproduction.map { Reproduction.valueOf(it) },

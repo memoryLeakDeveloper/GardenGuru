@@ -1,28 +1,34 @@
 package com.entexy.gardenguru.ui
 
 import com.entexy.gardenguru.data.plant.event.EventData
-import com.entexy.gardenguru.utils.toDmyString
 import java.util.*
 
 object EventMockData {
 
-    val listData = listOf(
-        EventData("event_id_213wqe", "Игорь", "НЕЗАБУДКА", EventData.Event.Watering, Calendar.getInstance().apply {
+    val timetableListData = listOf(
+        EventData("event_id_213wqe", true, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -10)
+        }.time, EventData.EventType.Create),
+        EventData("event_id_213wqe1", false, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -8)
+        }.time, EventData.EventType.Watering),
+        EventData("event_id_213wqe1", true, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -7)
+        }.time, EventData.EventType.Watering),
+        EventData("event_id_213wqe2", true, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -7)
+        }.time, EventData.EventType.Spraying),
+        EventData("event_id_213wqe4", true, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -4)
+        }.time, EventData.EventType.Transfer),
+        EventData("event_id_213wqe5", true, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -3)
+        }.time, EventData.EventType.TopDressing),
+        EventData("event_id_213wqe7", true, Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -2)
+        }.time, EventData.EventType.Watering),
+        EventData("event_id_213wqe8", true, Calendar.getInstance().apply {
             add(Calendar.DAY_OF_YEAR, -1)
-        }.toDmyString(), true),
-        EventData("event_id_213sad", "Иван", "ЗАБУДКА", EventData.Event.Spraying, Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR, -1)
-        }.toDmyString(), false),
-        EventData("event_id_21321333", "Вася", "Роза", EventData.Event.Transfer, Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR, -1)
-        }.toDmyString(), false),
-        EventData("event_id_213", "Игорь", "НЕЗАБУДКА", EventData.Event.Watering, Calendar.getInstance().toDmyString(), true),
-        EventData("event_id_234", "Иван", "ЗАБУДКА", EventData.Event.Watering, Calendar.getInstance().toDmyString(), false),
-        EventData("event_id_345", "Игорь", "НЕЗАБУДКА", EventData.Event.Watering, Calendar.getInstance().toDmyString(), true),
-        EventData("event_id_456", "Иван", "ЗАБУДКА", EventData.Event.Spraying, Calendar.getInstance().toDmyString(), false),
-
-        EventData("event_id_21312", "Вася", "Роза", EventData.Event.Watering, Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR, +1)
-        }.toDmyString(), false),
-    )
+        }.time, EventData.EventType.Spraying),
+        )
 }

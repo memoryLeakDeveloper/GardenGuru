@@ -96,7 +96,7 @@
     <string name="pruning">Обрезка</string>
     <string name="in_summer">Летом</string>
     <string name="in_winter">Зимой</string>
-    <string name="disease_and_pests">Болезни и  \nвредители</string>
+    <string name="disease_and_pests">Болезни и вредители</string>
 
     //benefits
     <string name="benefits">Польза</string>
@@ -127,6 +127,7 @@
     <string name="copy_link">Копировать ссылку</string>
     <string name="garden_management">Управление садом</string>
     <string name="dialog_want_to_delete_garden">Вы хотите удалить Сад “%1$s”?</string>
+    <string name="dialog_want_to_delete_plant">Вы хотите удалить растение %1$s из вашего сада?</string>
 
     //client plant
     <string name="fill_info_about_plant">Заполните информацию о \nрастении</string>
@@ -233,6 +234,14 @@
     <string name="move">Переместить</string>
     <string name="moving">Переезд!</string>
     <string name="choose_garden_to_move">Выберите Сад для перемещения</string>
+    <string name="plant_name">Имя растения</string>
+    <string name="delete_plant">Удалить растение</string>
+    <string name="cancel">Отмена</string>
+    <string name="photo_editing">Редактирование фото</string>
+    <string name="gallery">Галерея</string>
+    <string name="camera">Камера</string>
+    <string name="delete_photo">Удалить фото</string>
+
 
     //errors
     <string name="something_is_wrong">Что-то не так, попробуйте позже</string>

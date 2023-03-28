@@ -16,7 +16,6 @@ class PestsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(contex
     fun initView(data: ArrayList<PestData>?) {
         if (data == null || data.isEmpty()) {
             toGone()
-            binding.divider.toGone()
         } else {
             binding.recycler.apply {
                 adapter = PestsCardAdapter(data)

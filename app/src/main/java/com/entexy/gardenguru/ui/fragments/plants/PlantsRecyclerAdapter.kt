@@ -35,7 +35,7 @@ class PlantsRecyclerAdapter(private val plants: ArrayList<PlantData>) :
                 .placeholder(R.drawable.image_plasholder)
                 .into(ivPlantImage)
 
-            tvPlantName.text = item.name
+            tvPlantName.text = item.customName
             tvPlantKind.text = item.variety
 
             if (position == itemCount - 1) {

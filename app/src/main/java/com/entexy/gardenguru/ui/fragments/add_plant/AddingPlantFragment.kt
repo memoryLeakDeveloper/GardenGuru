@@ -14,7 +14,6 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment.Companion.PLANT_DATA_KEY
-import com.entexy.gardenguru.utils.bugger
 import com.entexy.gardenguru.utils.setString
 import com.entexy.gardenguru.utils.toGone
 import com.entexy.gardenguru.utils.toVisible
@@ -44,7 +43,6 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateInsets(binding.scrollRoot)
         with(binding) {
             header.title.setString(R.string.adding)
             header.back.setOnClickListener {

@@ -29,7 +29,6 @@ class PlantDescriptionFragment : BaseFragment<FragmentPlantDescriptionBinding>()
         super.onViewCreated(view, savedInstanceState)
         binding.root.setBackgroundCompat(ContextCompat.getDrawable(requireContext(), R.drawable.primary_card_background))
         data?.let { initView(it) }
-        updateInsets(binding.linear)
     }
 
     private fun initView(data: PlantData) = binding.apply {
@@ -38,7 +37,7 @@ class PlantDescriptionFragment : BaseFragment<FragmentPlantDescriptionBinding>()
             .transform(CenterCrop(), RoundedCorners(10)).into(plantPhoto)
         Glide.with(requireContext()).load(data.coverPhoto).circleCrop()
             .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder)).into(plantIcon)
-        plantName.text = data.name
+        plantName.text = data.customName
         header.title.setString(R.string.adding)
         header.back.setOnClickListener {
             requireActivity().onBackPressed()

@@ -10,8 +10,7 @@ import javax.inject.Inject
 class RenamePlantUseCase @Inject constructor(private val repository: PlantRepository) {
     suspend fun perform(plantId: String, plantName: String): Flow<CloudResponse<Unit>> = flow {
         emit(CloudResponse.Loading())
-        repository.renamePlant(plantId, plantName)
-        emit(CloudResponse.Success(Unit))
+        emit(repository.renamePlant(plantId, plantName))
     }.catch {
         emit(CloudResponse.Error(it))
     }

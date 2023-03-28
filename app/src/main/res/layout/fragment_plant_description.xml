@@ -27,10 +27,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/plant_photo"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
+                    tools:src="@color/blue"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
                     android:layout_marginHorizontal="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

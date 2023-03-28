@@ -1,97 +1,142 @@
 package com.entexy.gardenguru.ui.fragments.plant_card.info
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
-import com.entexy.gardenguru.core.exception.CloudResponse
-import com.entexy.gardenguru.core.exception.getResult
-import com.entexy.gardenguru.data.garden.models.GardenData
 import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.databinding.DialogPlantMovingBinding
+import com.entexy.gardenguru.databinding.DialogChangePhotoBinding
+import com.entexy.gardenguru.databinding.DialogRemovePlantBinding
 import com.entexy.gardenguru.databinding.FragmentPlantCardInfoBinding
-import com.entexy.gardenguru.ui.PlantMockData
 import com.entexy.gardenguru.ui.customview.DialogHelper
-import com.entexy.gardenguru.utils.setImageByGlide
-import com.entexy.gardenguru.utils.toGone
-import com.entexy.gardenguru.utils.toVisible
-import com.entexy.gardenguru.utils.showSnackBar
+import com.entexy.gardenguru.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
+import java.util.*
 
 @AndroidEntryPoint
 class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
     private val viewModel: PlantCardInfoViewModel by viewModels()
-    private val bindingDialog by lazy { DialogPlantMovingBinding.inflate(LayoutInflater.from(requireContext())) }
-    private val dialog by lazy { DialogHelper() }
+
+    private lateinit var plantData: PlantData
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val idPlant = requireArguments().getString(keyIdPlant)!!
-//        lifecycleScope.launch(Dispatchers.Main) {
-//            viewModel.fetchPlant(idPlant).collect { response ->
-//                response.getResult(
-//                    success = {
-//                        iniView(it.result)
-//                    },
-//                    failure = {
-//                        binding.scroll.toGone()
-//                        binding.cardNoMatches.toVisible()
-//                    },
-//                    loading = {
-//                        //todo
-//                    }
-//                )
-//
-//            }
-        }
-//    }
+        plantData = requireArguments().getParcelable(CARD_INFO_PLANT_DATA_KEY)!!
 
-    private fun initView(data: PlantData) {
+        initView()
+    }
+
+    private fun initView() {
+        initPlantNameView(plantData)
+        initPlantPhotoView(plantData)
+
         with(binding) {
-            Glide.with(requireContext())
-                .load(data.photo)
-                .circleCrop()
-                .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
-                .into(plantPhoto)
-            plantName.text = data.name ?: data.variety
-            data.description?.let {
-                plantInfo.initView(it)
-            } ?: run {
-                plantInfo.visibility = View.GONE
-                aboutPlant.visibility = View.GONE
-                plantName1.visibility = View.GONE
-            }
-            careDifficult.initView(data.careComplexity, true)
-            wheather.initView(data)
-            careDescription.initView(data)
-            pests.initView(data.pests)
-            benefits.initView(data.benefits)
-
+            plantCaver.setImageByGlide(plantData.coverPhoto)
+            plantName.text = plantData.customName ?: plantData.variety
+            plantInfo.initView(plantData.description)
+            careDifficult.initView(plantData.careComplexity, true)
+            wheather.initView(plantData)
+            careDescription.initView(plantData)
+            pests.initView(plantData.pests)
+            benefits.initView(plantData.benefits)
 
             buttonDelete.setOnClickListener {
+                val dialogHelper = DialogHelper()
+
+                val dialogBinding = DialogRemovePlantBinding.inflate(LayoutInflater.from(requireContext()))
+
+                with(dialogBinding) {
+                    val spannableText = SpannableString(
+                        resources.getString(
+                            R.string.dialog_want_to_delete_plant,
+                            plantData.customName ?: plantData.variety
+                        )
+                    )
+                    val spannableStartIndex = spannableText.indexOf(plantData.customName ?: plantData.variety)
+
+                    spannableText.setSpan(
+                        ForegroundColorSpan(resources.getColor(R.color.primary_green, requireContext().theme)),
+                        spannableStartIndex, // start
+                        spannableStartIndex + (plantData.customName ?: plantData.variety).length, // end
+                        Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                    )
+                    tvDialogDescription.text =
+                        spannableText
+                    btNo.setOnClickListener { dialogHelper.hideDialog() }
+                    btYes.setOnClickListener {
+                        lifecycleScope.launch {
+                            viewModel.deletePlant(plantData.id).collect {
+                                it.getResult(
+                                    success = {
+                                        dialogHelper.hideDialog()
+                                        requireActivity().onBackPressed()
+                                    },
+                                    failure = {
+                                        dialogHelper.hideDialog()
+                                        root.showSnackBar(R.string.error_deleting)
+                                    },
+                                    loading = {
+                                        dialogHelper.hideDialog()
+                                        dialogHelper.showDialog(ProgressBar(requireContext()), false)
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+                dialogHelper.showDialog(dialogBinding.root)
+            }
+        }
+    }
+
+    private fun initPlantNameView(data: PlantData) = with(binding) {
+        tvPlantName.text = data.customName ?: data.variety
+
+        ivEditPlantName.setOnClickListener {
+            containerPlantName.toGone()
+            etPlantName.toVisible()
+        }
+
+        etPlantName.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 lifecycleScope.launch {
                     val dialogHelper = DialogHelper()
-                    viewModel.deletePlant(data.id).collect {
+                    viewModel.setPlantName(data.id, etPlantName.text.toString()).collect {
                         it.getResult(
                             success = {
                                 dialogHelper.hideDialog()
-                                requireActivity().onBackPressed()
+
+                                scrollRoot.hideKeyboard()
+                                tvPlantName.text = etPlantName.text.toString()
+                                containerPlantName.toVisible()
+                                etPlantName.toGone()
                             },
                             failure = {
+                                etPlantName.hideKeyboard()
+                                etPlantName.setText(data.customName)
                                 dialogHelper.hideDialog()
-                                root.showSnackBar(R.string.error_deleting)
+                                root.showSnackBar(R.string.error_update_data)
                             },
                             loading = {
                                 dialogHelper.showDialog(ProgressBar(requireContext()), false)
@@ -99,83 +144,112 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                         )
                     }
                 }
+                return@setOnEditorActionListener true
             }
+            return@setOnEditorActionListener false
+        }
+    }
 
-            buttonMove.setOnClickListener {
-                lifecycleScope.launch {
-                    val dialogHelper = DialogHelper()
-                    viewModel.getGardens().collect { response ->
-                        response.getResult(
-                            success = {
-                                dialogHelper.hideDialog()
-                                initSelectGardenToMove(data.id, it.result)
-                            },
-                            failure = {
-                                dialogHelper.hideDialog()
-                                root.showSnackBar(R.string.error_loading_data)
-                            },
-                            loading = {
-                                dialogHelper.showDialog(ProgressBar(requireContext()), false)
-                            }
-                        )
-                    }
+    private fun initPlantPhotoView(data: PlantData) = with(binding) {
 
+        Glide.with(requireContext())
+            .load(data.customPhoto ?: data.photo)
+            .circleCrop()
+            .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
+            .into(plantIcon)
+
+        plantIcon.setOnClickListener {
+            val dialogBinding = DialogChangePhotoBinding.inflate(LayoutInflater.from(requireContext()))
+            val dialogHelper = DialogHelper()
+            with(dialogBinding) {
+                if (data.customPhoto == null) {
+                    tvDeletePhoto.toGone()
+                    dividerDeletePhoto.toGone()
                 }
 
-            }
+                btCancel.setOnClickListener { dialogHelper.hideDialog() }
+                tvCamera.setOnClickListener {
+                    dialogHelper.hideDialog()
 
-            etPlantName.setOnEditorActionListener { v, actionId, event ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val dialogHelper = DialogHelper()
-                        viewModel.setPlantName(data.id, etPlantName.text.toString()).collect {
+                    val photoFile: File = File(requireContext().filesDir, "${Date().time}.jpg").apply {
+                        createNewFile()
+                    }
+
+                    tempPhotoUri = FileProvider.getUriForFile(
+                        requireContext(), requireContext().packageName,
+                        photoFile
+                    )
+                    takePicture.launch(tempPhotoUri)
+                }
+                tvGallery.setOnClickListener {
+                    dialogHelper.hideDialog()
+                    startForResultFromGallery.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+                }
+                tvDeletePhoto.setOnClickListener {
+                    dialogHelper.hideDialog()
+                    lifecycleScope.launch {
+                        viewModel.deletePhoto(data.id, data.customPhoto ?: return@launch).collect {
                             it.getResult(
                                 success = {
                                     dialogHelper.hideDialog()
                                 },
                                 failure = {
-                                    etPlantName.setText(data.name)
                                     dialogHelper.hideDialog()
-                                    root.showSnackBar(R.string.error_update_data)
+                                    root.showSnackBar(R.string.error_deleting)
                                 },
                                 loading = {
-                                    dialogHelper.showDialog(ProgressBar(requireContext()), false)
+                                    dialogHelper.showDialog(ProgressBar(requireContext()))
                                 }
                             )
                         }
                     }
-                    return@setOnEditorActionListener true
                 }
-                return@setOnEditorActionListener false
+            }
+            dialogHelper.showDialog(dialogBinding.root, gravity = Gravity.BOTTOM)
+        }
+    }
+
+    private val startForResultFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            if (result.data != null) {
+                val selectedImageUri = result.data!!.data ?: return@registerForActivityResult
+
+                loadPhoto(selectedImageUri)
             }
         }
     }
 
-    private fun initSelectGardenToMove(plantId: String, gardens: List<GardenData>) {
-        bindingDialog.spinner.initView(
-            null,
-            ArrayList(gardens.map { it.name }),
-            true
-        )
-        bindingDialog.spinner.setValueListener { position: Int, name: String ->
-            lifecycleScope.launch {
-                val dialogHelper = DialogHelper()
-                viewModel.movePlant(plantId, gardens[position].id).collect {
-                    it.getResult(
-                        success = {
-                            dialogHelper.hideDialog()
-                        },
-                        failure = {
-                            dialogHelper.hideDialog()
-                            requireView().showSnackBar(R.string.error_update_data)
-                        },
-                        loading = {
-                            dialogHelper.showDialog(ProgressBar(requireContext()), false)
-                        })
-                }
-            }
+    private var tempPhotoUri: Uri? = null
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success == true) {
+            loadPhoto(tempPhotoUri!!)
+            tempPhotoUri = null
         }
-        dialog.showDialog(bindingDialog.root)
     }
 
+    private fun loadPhoto(uri: Uri) {
+        val dialogHelper = DialogHelper()
+        lifecycleScope.launch {
+            viewModel.uploadPhoto(uri, requireContext()).collect { cloudResponse ->
+                cloudResponse.getResult(
+                    success = {
+                        binding.plantIcon.setImageByGlide(it.result)
+                        plantData.customPhoto = it.result
+                        dialogHelper.hideDialog()
+                    },
+                    failure = {
+                        dialogHelper.hideDialog()
+                        binding.root.showSnackBar(R.string.error_update_data)
+                    },
+                    loading = {
+                        dialogHelper.showDialog(ProgressBar(requireContext()))
+                    }
+                )
+            }
+        }
+    }
+
+    companion object {
+        const val CARD_INFO_PLANT_DATA_KEY = "plant-data-key"
+    }
 }

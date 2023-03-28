@@ -31,6 +31,8 @@ fun TextView.setString(stringRes: Int) {
 
 fun Calendar.toDmyString() = SimpleDateFormat(Constance.dmyDatePattern, Locale.ENGLISH).format(this.time) ?: ""
 
+fun Date.toDmyString() = SimpleDateFormat(Constance.dmyHmDatePattern, Locale.ENGLISH).format(this) ?: ""
+
 fun Activity.checkAndVerifyStoragePermissions(): Boolean {
     val permission = ActivityCompat.checkSelfPermission(
         this,

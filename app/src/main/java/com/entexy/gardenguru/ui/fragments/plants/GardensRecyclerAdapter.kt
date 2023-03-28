@@ -4,14 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.garden.models.GardenData
 import com.entexy.gardenguru.databinding.RvGardenItemBinding
-import com.entexy.gardenguru.ui.fragments.plants.garden_managment.GardenManagementFragment
 
 class GardensRecyclerAdapter : RecyclerView.Adapter<GardensRecyclerAdapter.ViewHolder>() {
 
@@ -33,10 +30,10 @@ class GardensRecyclerAdapter : RecyclerView.Adapter<GardensRecyclerAdapter.ViewH
             tvGardenOwner.visibility = View.GONE
             ivEditDelete.setImageResource(R.drawable.ic_edit)
             ivEditDelete.setOnClickListener {
-                root.findNavController().navigate(
-                    R.id.action_myPlantsFragment_to_gardenManagementFragment,
-                    bundleOf(GardenManagementFragment.GARDEN_EXTRA to garden)
-                )
+//                root.findNavController().navigate(
+//                    R.id.action_myPlantsFragment_to_gardenManagementFragment,
+//                    bundleOf(GardenManagementFragment.GARDEN_EXTRA to garden)
+//                )
             }
 
             spinnerArrow.setOnClickListener {
@@ -52,7 +49,7 @@ class GardensRecyclerAdapter : RecyclerView.Adapter<GardensRecyclerAdapter.ViewH
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(gardenList: ArrayList<GardenData>){
+    fun setData(gardenList: ArrayList<GardenData>) {
         this.gardenList = gardenList
         notifyDataSetChanged()
     }
