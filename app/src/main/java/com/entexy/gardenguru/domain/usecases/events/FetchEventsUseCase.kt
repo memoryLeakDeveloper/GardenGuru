@@ -10,10 +10,9 @@ import javax.inject.Inject
 
 class FetchEventsUseCase @Inject constructor(private val repository: EventRepository) {
 
-    suspend fun perform(): Flow<CloudResponse<List<EventData>>> = flow {
+    suspend fun fetchPlant(idPlant: String): Flow<CloudResponse<List<EventData>>> = flow {
         emit(CloudResponse.Loading())
-        kotlinx.coroutines.delay(3000)
-        emit(repository.fetchEvents())
+        emit(repository.fetchEvents(idPlant))
     }.catch {
         emit(CloudResponse.Error(it))
     }

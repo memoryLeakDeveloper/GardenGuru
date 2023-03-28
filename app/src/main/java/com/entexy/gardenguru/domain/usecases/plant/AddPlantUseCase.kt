@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class MovePlantUseCase @Inject constructor(private val repository: PlantRepository) {
-    suspend fun perform(plantId: String, gardenId: String): Flow<CloudResponse<Unit>> = flow {
+class AddPlantUseCase @Inject constructor(private val repository: PlantRepository) {
+    suspend fun invoke(plantId: String): Flow<CloudResponse<Unit>> = flow {
         emit(CloudResponse.Loading())
-        repository.movePlantToAnotherGarden(plantId, gardenId)
+        repository.addPlant(plantId)
         emit(CloudResponse.Success(Unit))
     }.catch {
         emit(CloudResponse.Error(it))

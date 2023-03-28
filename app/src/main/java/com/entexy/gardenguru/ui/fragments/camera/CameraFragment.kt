@@ -46,7 +46,6 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateInsets(binding.bottomRoot)
         if (requireActivity().checkAndVerifyCameraPermissions() && requireActivity().checkAndVerifyCameraPermissions()) {
             startCamera()
         }

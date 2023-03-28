@@ -5,11 +5,12 @@ import com.google.firebase.firestore.CollectionReference
 
 interface DeletePlantDataSource {
 
-    suspend fun deletePlant(idPlant: String): CloudResponse<Boolean>
+    suspend fun deletePlant(idPlant: String): CloudResponse<Unit>
 
     class Base(private val firestorePlantsRef: CollectionReference) : DeletePlantDataSource {
-        override suspend fun deletePlant(idPlant: String): CloudResponse<Boolean> {
-            TODO()
+        override suspend fun deletePlant(idPlant: String): CloudResponse<Unit> {
+//            TODO()
+            return CloudResponse.Success(Unit)
         }
     }
 }

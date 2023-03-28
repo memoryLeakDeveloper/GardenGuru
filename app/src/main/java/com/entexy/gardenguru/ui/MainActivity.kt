@@ -1,9 +1,7 @@
 package com.entexy.gardenguru.ui
 
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.entexy.gardenguru.R
@@ -22,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+//        WindowCompat.setDecorFitsSystemWindows(window, false)
+//        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         navController = (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
 //        if (!firstLaunchPref.get()) {
 //            navController?.navigate(R.id.loginFragment)

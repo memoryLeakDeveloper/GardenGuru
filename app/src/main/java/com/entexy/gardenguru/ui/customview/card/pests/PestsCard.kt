@@ -13,15 +13,13 @@ class PestsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(contex
 
     private var binding = CardDiseasePestBinding.inflate(LayoutInflater.from(context), this)
 
-    fun initView(data: ArrayList<PestData>?) {
+    fun initView(data: List<PestData>?) = binding.apply {
         if (data == null || data.isEmpty()) {
             toGone()
-            binding.divider.toGone()
+            divider.toGone()
         } else {
-            binding.recycler.apply {
-                adapter = PestsCardAdapter(data)
-                layoutManager = LinearLayoutManager(context)
-            }
+            recycler.adapter = PestsCardAdapter(data)
+            recycler.layoutManager = LinearLayoutManager(context)
         }
     }
 }

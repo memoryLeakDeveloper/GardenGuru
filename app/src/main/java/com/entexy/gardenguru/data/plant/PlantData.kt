@@ -12,64 +12,95 @@ import java.util.*
 @Parcelize
 data class PlantData(
     var id: String,
+    var name: String?,
     var variety: String,
     var photo: String,
+    var customPhoto: String?,
     var coverPhoto: String,
-    var name: String,
     var careComplexity: CareComplexity,
     var description: String,
     var sunRelation: SunRelation,
-    var pests: ArrayList<PestData>? = null,
+    var pests: List<PestData>? = null,
     var reproduction: List<Reproduction>,
-    var benefits: ArrayList<BenefitData>? = null,
+    var benefits: List<BenefitData>? = null,
     var pruning: String,
     var plantingTime: Date,
-    var watering: Int,
-    var spraying: Int,
+    var feedingSummer: Int,
+    var feedingWinter: Int,
+    var wateringSummer: Int,
+    var wateringWinter: Int,
+    var sprayingSummer: Int,
+    var sprayingWinter: Int,
     var minTemp: Int,
-    var maxTemp: Int
-) : Parcelable
+    var maxTemp: Int,
+    var localizedVariety: Map<String, String>? = null,
+    var localizeDescription: Map<String, String>? = null
+) : Parcelable{
+    fun getPlantName(locale: String): String{
+        return name ?: getPlantVariety(locale)
+    }
+
+    fun getPlantVariety(locale: String): String{
+        return localizedVariety?.get(locale) ?: variety
+    }
+
+    fun getPlantDescription(locale: String): String{
+        return localizeDescription?.get(locale) ?: description
+    }
+}
+
 
 
 fun PlantData.mapToPlantCloud() = PlantCloud(
     id = id,
     name = name,
     photo = photo,
-    cover = coverPhoto,
+    coverPhoto = coverPhoto,
     variety = variety,
     careComplexity = careComplexity.cloudName,
     description = description,
+    customPhoto = customPhoto,
     sunRelation = sunRelation.cloudName,
     pestsIds = pests?.map { it.id },
     reproduction = reproduction.map { it.cloudValue },
     benefitsIds = benefits?.map { it.id },
     pruning = pruning,
+    feedingSummer = feedingSummer,
+    feedingWinter = feedingWinter,
     plantingTime = Timestamp(plantingTime),
-    watering = watering,
-    spraying = spraying,
+    wateringSummer = wateringSummer,
+    wateringWinter = wateringWinter,
+    sprayingSummer = sprayingSummer,
+    sprayingWinter = sprayingWinter,
     minTemp = minTemp,
     maxTemp = maxTemp
 )
 
-fun PlantCloud.mapToData(language: String): PlantData {
+fun PlantCloud.mapToData(): PlantData {
     return PlantData(
         id = id,
-        variety = localizedName?.get(language) ?: name, //todo
+        variety = variety,
         photo = photo,
-        coverPhoto = cover,
+        coverPhoto = coverPhoto,
         name = name,
+        customPhoto = customPhoto,
         careComplexity = CareComplexity.valueOf(careComplexity),
-        description = localizeDescription?.get(language) ?: description,
+        description = description,
+        localizeDescription = localizeDescription,
+        localizedVariety = localizedVariety,
         sunRelation = SunRelation.valueOf(sunRelation),
         pests = null,
         reproduction = reproduction.map { Reproduction.valueOf(it) },
         benefits = null,
         pruning = pruning,
         plantingTime = plantingTime.toDate(),
-        watering = watering,
-        spraying = spraying,
+        feedingSummer = feedingSummer,
+        feedingWinter = feedingWinter,
+        wateringSummer = wateringSummer,
+        wateringWinter = wateringWinter,
+        sprayingSummer = sprayingSummer,
+        sprayingWinter = sprayingWinter,
         minTemp = minTemp,
         maxTemp = maxTemp
     )
 }
-

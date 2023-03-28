@@ -8,12 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CameraResultViewModel @Inject constructor(
-    private val recognizePlantUseCase: RecognizePlantUseCase
-) : ViewModel() {
+class CameraResultViewModel @Inject constructor(private val recognizePlantUseCase: RecognizePlantUseCase) : ViewModel() {
 
-    suspend fun processImage(context: Context, bitmap: Bitmap): List<String> {
-        return recognizePlantUseCase.recognizePlant(context, bitmap)
-    }
+    suspend fun processImage(context: Context, bitmap: Bitmap) = recognizePlantUseCase.recognizePlant(context, bitmap)
 
 }

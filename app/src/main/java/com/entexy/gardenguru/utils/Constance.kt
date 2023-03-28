@@ -5,5 +5,7 @@ object Constance {
 
     const val dmyDatePattern = "dd.MM.yyy"
 
+    const val dmyHmDatePattern = "dd.MM.yyyy-HH:mm"
+
 
 }

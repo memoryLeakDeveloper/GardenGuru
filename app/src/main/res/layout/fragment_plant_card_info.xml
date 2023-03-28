@@ -32,39 +32,104 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/plant_photo"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/plant_placeholder" />
+                android:layout_marginTop="20dp">
 
-            <TextView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/plant_caver"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    tools:src="@color/blue"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/plant_icon"
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:elevation="20dp"
+                    android:src="@drawable/plant_placeholder"
+                    app:layout_constraintBottom_toBottomOf="@+id/plant_caver"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/plant_caver"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_caver" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/plant_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/poppins_bold"
+                android:layout_marginTop="8dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 tools:text="Кактус колючий" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_plant_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/bg_edit_text"
-                android:fontFamily="@font/poppins_regular"
+                android:background="@drawable/bg_edit_text_small_corners_with_stroke"
                 android:hint="@string/enter_plant_name"
                 android:imeOptions="actionDone"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
+                android:inputType="textPersonName"
+                android:lines="1"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_plant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plant_name"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_plant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray1"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4"
+                    tools:text="Богдан" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_edit_plant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:padding="8dp"
+                    android:src="@drawable/ic_edit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.entexy.gardenguru.ui.customview.calendar.events.EventsCalendar
                 android:id="@+id/events_calendar"
@@ -84,27 +149,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/about_plant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/plant_info"
-                android:textColor="@color/gray"
-                android:textSize="20sp" />
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                app:dividerColor="@color/gray1" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/plant_name_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppins_bold"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:text="@string/description"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                tools:text="Информация о растении" />
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/ic_description"
+                android:textSize="17sp" />
 
             <com.entexy.gardenguru.ui.customview.ExpandableTextView
                 android:id="@+id/plant_info"
@@ -112,51 +173,63 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginTop="12dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/white"
+                android:textColor="@color/gray"
                 android:textSize="16sp"
                 tools:text="Информация о растении" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="22dp"
+                app:dividerColor="@color/gray1" />
 
             <com.entexy.gardenguru.ui.customview.card.CareDescriptionCard
                 android:id="@+id/care_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="22dp" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="22dp"
+                app:dividerColor="@color/gray1" />
 
             <com.entexy.gardenguru.ui.customview.card.pests.PestsCard
                 android:id="@+id/pests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="22dp" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="22dp"
+                app:dividerColor="@color/gray1" />
 
             <com.entexy.gardenguru.ui.customview.card.BenefitsCard
                 android:id="@+id/benefits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="22dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_move"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/spinner_background"
-                android:fontFamily="@font/sf_ui_font"
-                android:text="@string/move"
-                android:textAllCaps="false"
-                android:textSize="19sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingEnd="32dp"
+                android:paddingStart="32dp"
+                android:paddingTop="18dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bg_button_pink_stroke"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:padding="10dp"
-                android:text="@string/delete"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
+                android:textAllCaps="false"
+                android:text="@string/delete_plant"
+                android:textSize="17sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

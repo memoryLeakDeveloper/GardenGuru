@@ -12,7 +12,7 @@ class BenefitsCard(context: Context, attrs: AttributeSet) : ConstraintLayout(con
 
     private var binding = CardBenefitsBinding.inflate(LayoutInflater.from(context), this)
 
-    fun initView(data: ArrayList<BenefitData>?) {
+    fun initView(data: List<BenefitData>?) {
         if (data == null) {
             toGone()
         } else {

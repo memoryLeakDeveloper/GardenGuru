@@ -1,10 +1,10 @@
 package com.entexy.gardenguru.di.events
 
-import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.event.EventRepositoryImpl
 import com.entexy.gardenguru.data.plant.event.cloud.CompleteEventsDataSource
 import com.entexy.gardenguru.data.plant.event.cloud.FetchEventsDataSource
+import com.entexy.gardenguru.data.plant.event.cloud.FetchPlantEventsDataSource
 import com.entexy.gardenguru.domain.repository.EventRepository
 import dagger.Module
 import dagger.Provides
@@ -18,14 +18,18 @@ class EventsModule {
 
     @Provides
     fun provideEventRepository(
-        languageHelper: LanguageHelper,
+        fetchPlantEventsDataSource: FetchPlantEventsDataSource,
         fetchEventsDataSource: FetchEventsDataSource,
         completeEventsDataSource: CompleteEventsDataSource
     ): EventRepository = EventRepositoryImpl(
-        languageHelper,
+        fetchPlantEventsDataSource,
         fetchEventsDataSource,
         completeEventsDataSource
     )
+
+    @Provides
+    @Singleton
+    fun provideFetchPlantEventsDataSource(): FetchPlantEventsDataSource = FetchPlantEventsDataSource.Base()
 
     @Provides
     @Singleton

@@ -1,8 +1,9 @@
 package com.entexy.gardenguru.di.media
 
 import com.entexy.gardenguru.data.media.MediaRepositoryImpl
+import com.entexy.gardenguru.data.media.cloud.DeleteImageSource
 import com.entexy.gardenguru.data.media.cloud.UploadImageSource
-import com.entexy.gardenguru.domain.usecases.media.UploadImageUseCase
+import com.entexy.gardenguru.domain.repository.MediaRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,9 +14,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object MediaModule {
     @Provides
-    fun provideUploadImageUseCase(mediaRepository: MediaRepositoryImpl): UploadImageUseCase = UploadImageUseCase(mediaRepository)
+    fun provideMediaRepository(
+        createImageSource: UploadImageSource,
+        deleteImageSource: DeleteImageSource
+    ): MediaRepository =
+        MediaRepositoryImpl(createImageSource, deleteImageSource)
+
+    @Provides
+    fun provideUploadImageDataSource(): UploadImageSource = UploadImageSource.Base()
 
     @Provides
     @Singleton
-    fun provideUploadImageDataSource(): UploadImageSource = UploadImageSource.Base()
+    fun provideDeleteImageSource(): DeleteImageSource = DeleteImageSource.Base()
 }

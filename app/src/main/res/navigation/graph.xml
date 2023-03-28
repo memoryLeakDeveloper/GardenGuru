@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/settingsFragment">
+    app:startDestination="@id/plantCardFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.entexy.gardenguru.ui.fragments.onboarding.OnboardingFragment"
         android:label="OnboardingFragment"
-        tools:layout="@layout/fragment_onboarding"/>
+        tools:layout="@layout/fragment_onboarding" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.entexy.gardenguru.ui.fragments.login.LoginFragment"
@@ -22,7 +22,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_loginFragment_to_termOfUseFragment"
             app:destination="@id/termOfUseFragment"
@@ -30,7 +30,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_loginFragment_to_timetableFragment"
             app:destination="@id/timetableFragment"
@@ -38,7 +38,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_loginFragment_to_onboardingFragment"
             app:destination="@id/onboardingFragment" />
@@ -47,12 +47,12 @@
         android:id="@+id/privacyPolicyFragment"
         android:name="com.entexy.gardenguru.ui.fragments.info.PrivacyPolicyFragment"
         android:label="PrivacyPolicyFragment"
-        tools:layout="@layout/fragment_privacy_policy"/>
+        tools:layout="@layout/fragment_privacy_policy" />
     <fragment
         android:id="@+id/termOfUseFragment"
         android:name="com.entexy.gardenguru.ui.fragments.info.TermOfUseFragment"
         android:label="TermOfUseFragment"
-        tools:layout="@layout/fragment_term_of_use"/>
+        tools:layout="@layout/fragment_term_of_use" />
     <fragment
         android:id="@+id/timetableFragment"
         android:name="com.entexy.gardenguru.ui.fragments.timetable.TimetableFragment"
@@ -65,14 +65,14 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_timetableFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_timetableFragment_to_cameraFragment"
             app:destination="@id/cameraFragment"
@@ -80,7 +80,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_timetableFragment_to_addingPlantFragment"
             app:destination="@id/addingPlantFragment" />
@@ -97,28 +97,21 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_addingPlantFragment_to_cameraFragment"
             app:destination="@id/cameraFragment"
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/myPlantsFragment"
         android:name="com.entexy.gardenguru.ui.fragments.plants.MyPlantsFragment"
-        tools:layout="@layout/fragment_my_plants"
-        android:label="MyPlantsFragment" >
-        <action
-            android:id="@+id/action_myPlantsFragment_to_gardenManagementFragment"
-            app:destination="@id/gardenManagementFragment"
+        android:label="MyPlantsFragment"
+        tools:layout="@layout/fragment_my_plants">
 
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait_anim"
-            app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_myPlantsFragment_to_plantCardFragment"
             app:destination="@id/plantCardFragment"
@@ -126,7 +119,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_myPlantsFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
@@ -135,15 +128,10 @@
             app:destination="@id/addingPlantFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gardenManagementFragment"
-        android:name="com.entexy.gardenguru.ui.fragments.plants.garden_managment.GardenManagementFragment"
-        android:label="GardenManagementFragment"
-        tools:layout="@layout/fragment_garden_managment"/>
-    <fragment
         android:id="@+id/plantCardFragment"
         android:name="com.entexy.gardenguru.ui.fragments.plant_card.PlantCardFragment"
         android:label="PlantCardFragment"
-        tools:layout="@layout/fragment_plant_card"/>
+        tools:layout="@layout/fragment_plant_card" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.entexy.gardenguru.ui.fragments.settings.SettingsFragment"
@@ -155,14 +143,14 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment"
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_settingsFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -170,7 +158,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
         <action
             android:id="@+id/action_settingsFragment_to_supportFragment"
             app:destination="@id/supportFragment"
@@ -178,13 +166,13 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
         android:name="com.entexy.gardenguru.ui.fragments.settings.support.SupportFragment"
         android:label="SupportFragment"
-        tools:layout="@layout/fragment_support"/>
+        tools:layout="@layout/fragment_support" />
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.entexy.gardenguru.ui.fragments.camera.CameraFragment"
@@ -197,7 +185,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/cameraResultFragment"
@@ -210,7 +198,7 @@
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/wait_anim"
             app:popEnterAnim="@anim/wait_anim"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/plantDescriptionFragment"

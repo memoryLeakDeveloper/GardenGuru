@@ -1,14 +1,13 @@
 package com.entexy.gardenguru.domain.repository
 
 import com.entexy.gardenguru.core.exception.CloudResponse
-import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.pest.PestData
-import kotlinx.coroutines.flow.Flow
 
 interface PlantRepository {
 
-    suspend fun fetchPlant(idPlant: String): Flow<CloudResponse<PlantData>>
+    suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData>
 
     suspend fun fetchPests(idPests: List<String>?): ArrayList<PestData>
 
@@ -18,10 +17,11 @@ interface PlantRepository {
 
     suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>>
 
-    suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Boolean>
+    suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Unit>
 
-    suspend fun deletePlant(plantId: String): CloudResponse<Boolean>
+    suspend fun deletePlantPhoto(plantId: String): CloudResponse<Unit>
 
-    suspend fun movePlantToAnotherGarden(plantId: String, gardenId: String): CloudResponse<Boolean>
+    suspend fun deletePlant(plantId: String): CloudResponse<Unit>
 
+    suspend fun addPlant(plantId: String): CloudResponse<Boolean>
 }
