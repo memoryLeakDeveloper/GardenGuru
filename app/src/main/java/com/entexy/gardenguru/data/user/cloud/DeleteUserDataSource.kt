@@ -2,17 +2,19 @@ package com.entexy.gardenguru.data.user.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.utils.bugger
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 interface DeleteUserDataSource {
 
     suspend fun delete(): CloudResponse<Unit>
 
-    class Base(private val firebaseUser: FirebaseUser) : DeleteUserDataSource {
+    class Base : DeleteUserDataSource {
 
         override suspend fun delete(): CloudResponse<Unit> {
-            val task = firebaseUser.delete().addOnCompleteListener {
+            val currentUser = Firebase.auth.currentUser ?: return CloudResponse.Error(Exception())
+            val task = currentUser.delete().addOnCompleteListener {
                 bugger("USER DELETED")
             }
             task.await()

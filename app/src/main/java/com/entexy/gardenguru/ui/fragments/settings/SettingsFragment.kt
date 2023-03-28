@@ -18,7 +18,9 @@ import com.entexy.gardenguru.databinding.FragmentSettingsBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.utils.bugger
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 
@@ -52,31 +54,14 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             findNavController().navigate(R.id.action_settingsFragment_to_supportFragment)
         }
         btnExit.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.deleteUser().collect {
-                    it.getResult(
-                        loading = {
-                            bugger("loading")
-                        },
-                        success = {
-                            bugger("success")
-
-                        },
-                        failure = {
-                            bugger("failure")
-
-                        }
-                    )
-                }
-            }
+            handleExitFromAccountEvent()
 //            findNavController().popBackStack(R.id.loginFragment, false)
         }
         tvDeleteAccount.setOnClickListener {
             val dialogBinding = DialogDeleteAccountBinding.inflate(LayoutInflater.from(requireContext()))
             dialog.showDialog(dialogBinding.apply {
                 tvAccept.setOnClickListener {
-                    //todo delete account
-                    dialog.hideDialog()
+                    handleSignOutUserEvent()
                 }
                 tvDecline.setOnClickListener {
                     dialog.hideDialog()
@@ -121,6 +106,53 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             //todo change system language
         }
     }
+
+    private fun handleExitFromAccountEvent() {
+        lifecycleScope.launch {
+            viewModel.signOutUser().collect {
+                withContext(Dispatchers.Main) {
+                    it.getResult(
+                        loading = {
+                            bugger("loading")
+                        },
+                        success = {
+                            bugger("success")
+
+                        },
+                        failure = {
+                            bugger("failure")
+
+                        }
+                    )
+                    dialog.hideDialog()
+                }
+            }
+        }
+    }
+
+    private fun handleSignOutUserEvent() {
+        lifecycleScope.launch {
+            viewModel.deleteUser().collect {
+                withContext(Dispatchers.Main) {
+                    it.getResult(
+                        loading = {
+                            bugger("loading")
+                        },
+                        success = {
+                            bugger("success")
+
+                        },
+                        failure = {
+                            bugger("failure")
+
+                        }
+                    )
+                    dialog.hideDialog()
+                }
+            }
+        }
+    }
+
 
     companion object {
         private const val PRIVACY_POLICY_URL =

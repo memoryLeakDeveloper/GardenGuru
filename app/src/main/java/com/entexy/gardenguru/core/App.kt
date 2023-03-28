@@ -21,6 +21,9 @@ class App : Application() {
         firestorePestsRef = Firebase.firestore.collection("pests")
         firestoreBenefitsRef = Firebase.firestore.collection("benefits")
         firebaseAuth = Firebase.auth
+        Firebase.auth.addAuthStateListener {
+            //todo handle user auth state
+        }
     }
 
     companion object {

@@ -4,17 +4,15 @@ import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.user.UserRepositoryImpl
 import com.entexy.gardenguru.data.user.cloud.CreateUserDataSource
 import com.entexy.gardenguru.data.user.cloud.DeleteUserDataSource
+import com.entexy.gardenguru.data.user.cloud.SignOutUserDataSource
 import com.entexy.gardenguru.domain.repository.UserRepository
 import com.entexy.gardenguru.domain.usecases.user.CreateUserUseCase
 import com.entexy.gardenguru.domain.usecases.user.DeleteUserUseCase
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.entexy.gardenguru.domain.usecases.user.SignOutUserUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -27,18 +25,22 @@ class UserModule {
     fun provideCreateUserUseCase(repository: UserRepository): CreateUserUseCase = CreateUserUseCase(repository)
 
     @Provides
-    fun provideDeleteUserDataSource(firebaseUser: FirebaseUser): DeleteUserDataSource = DeleteUserDataSource.Base(firebaseUser)
+    fun provideDeleteUserDataSource(): DeleteUserDataSource = DeleteUserDataSource.Base()
 
     @Provides
     fun provideDeleteUserUseCase(repository: UserRepository): DeleteUserUseCase = DeleteUserUseCase(repository)
 
     @Provides
+    fun provideSignOutUserDataSource(): SignOutUserDataSource = SignOutUserDataSource.Base()
+
+    @Provides
+    fun provideSignOutUserUseCase(repository: UserRepository): SignOutUserUseCase = SignOutUserUseCase(repository)
+
+    @Provides
     fun provideUserRepository(
         createUserDataSource: CreateUserDataSource,
-        deleteUserDataSource: DeleteUserDataSource
-    ): UserRepository = UserRepositoryImpl(createUserDataSource, deleteUserDataSource)
+        deleteUserDataSource: DeleteUserDataSource,
+        signOutUserDataSource: SignOutUserDataSource
+    ): UserRepository = UserRepositoryImpl(createUserDataSource, deleteUserDataSource, signOutUserDataSource)
 
-    @Singleton
-    @Provides
-    fun provideCurrentUser(): FirebaseUser = Firebase.auth.currentUser!!
 }
