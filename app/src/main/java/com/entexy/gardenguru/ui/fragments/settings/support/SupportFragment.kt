@@ -1,9 +1,11 @@
 package com.entexy.gardenguru.ui.fragments.settings.support
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,10 +18,7 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.databinding.DialogSupportSuccessBinding
 import com.entexy.gardenguru.databinding.FragmentSupportBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
-import com.entexy.gardenguru.utils.checkAndVerifyStoragePermissions
-import com.entexy.gardenguru.utils.copyToFile
-import com.entexy.gardenguru.utils.toGone
-import com.entexy.gardenguru.utils.toVisible
+import com.entexy.gardenguru.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,27 +28,26 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
 
     private lateinit var attachmentsAdapter: AttachmentsRecyclerAdapter
     private val viewModel: SupportViewModel by viewModels()
-    private val startForFileResult = registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-        if (result == null) return@registerForActivityResult
-        val file = result.copyToFile(requireContext())
-        val fileSizeInMB = file.length() / (1024 * 1024)
-        if (viewModel.files.value.size > 10) {
-            binding.tvMaxFileAttachment.toVisible()
-        } else if (fileSizeInMB > 100) {
-            binding.tvFileSizeWarning.toVisible()
-        } else {
-            viewModel.addFile(file)
-            binding.tvMaxFileAttachment.toGone()
-            binding.tvFileSizeWarning.toGone()
-        }
-    }
-    private val addPhotoCallback: () -> Unit = {
-        if (requireActivity().checkAndVerifyStoragePermissions()) {
-            startForFileResult.launch("")
-        }
-    }
     private val dialogHelper = DialogHelper()
     private var descriptionError = false
+    private val startForFileResult = registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+        result?.let {
+            viewModel.addFile(FileModel(result.copyToFile(requireContext()), false))
+        } ?: run {
+            return@registerForActivityResult
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private val changeAdapterModeCallback: () -> Unit = {
+        attachmentsAdapter.adapterMode = changeMode(attachmentsAdapter.adapterMode)
+        attachmentsAdapter.notifyDataSetChanged()
+        binding.ivAddPhoto changeStateTo (attachmentsAdapter.adapterMode == AdapterMode.Default && attachmentsAdapter.list.size < 10)
+        viewModel.modeChanged()
+    }
+    private val selectFileToDeleteCallback: (Int, Boolean) -> Unit = { position, isSelected ->
+        viewModel.selectItem(position, isSelected)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -119,25 +117,25 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
                     }
                 }
             }
-            btnAddPhoto.setOnClickListener {
-                if (requireActivity().checkAndVerifyStoragePermissions()) {
-                    startForFileResult.launch("image/*")
-                }
-            }
             iniAdapter()
         }
     }
 
-    private fun observeListPhotos() {
+    private fun observeListPhotos() = binding.apply {
+        viewModel.files.observe(viewLifecycleOwner) {
+            attachmentsAdapter.updateData(it.toList())
+            binding.rvFileAttachment.smoothScrollToPosition(0)
+            ivAddPhoto changeStateTo (it.size < 10)
+        }
         lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.files.collect {
-                attachmentsAdapter.updateData(it.toList())
+            viewModel.filesSize.collect {
+                tvFileSizeWarning.apply { if (it > 100) toVisible() else toGone() }
             }
         }
     }
 
     private fun iniAdapter() = binding.apply {
-        attachmentsAdapter = AttachmentsRecyclerAdapter(emptyList(), addPhotoCallback)
+        attachmentsAdapter = AttachmentsRecyclerAdapter(emptyList(), changeAdapterModeCallback, selectFileToDeleteCallback)
         rvFileAttachment.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rvFileAttachment.adapter = attachmentsAdapter
     }
@@ -155,6 +153,18 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
                 btnSend.setBackgroundResource(R.drawable.button_green_stroke)
             }
         }
+    }
+
+    private infix fun ImageView.changeStateTo(isClickable: Boolean) {
+        if (isClickable)
+            setOnClickListener {
+                if (requireActivity().checkAndVerifyStoragePermissions()) {
+                    startForFileResult.launch("image/*")
+                }
+            }
+        else
+            setOnClickListener(null)
+        setDrawable(if (isClickable) R.drawable.ic_add_photo else R.drawable.ic_add_photo_disabled)
     }
 
     override fun onDestroy() {

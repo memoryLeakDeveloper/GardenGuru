@@ -1,29 +1,47 @@
 package com.entexy.gardenguru.ui.fragments.settings.support
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.nedim.maildroidx.MaildroidX
 import co.nedim.maildroidx.MaildroidXType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class SupportViewModel @Inject constructor() : ViewModel() {
 
-    private val _files = MutableStateFlow<MutableList<File>>(mutableListOf())
+    private val _files = MutableLiveData<MutableList<FileModel>>(mutableListOf())
     val files = _files
 
-    fun addFile(file: File) {
-        _files.value = mutableListOf<File>().apply {
-            addAll(_files.value)
-            add(file)
+    private val _filesSize = MutableStateFlow(0L)
+    val filesSize = _filesSize
+
+    fun addFile(model: FileModel) {
+        _filesSize.value += model.file.length() / (1024 * 1024)
+        _files.value = mutableListOf<FileModel>().apply {
+            addAll(_files.value ?: emptyList())
+            add(0, model)
         }
     }
 
     fun removeAtFile(position: Int) {
-        _files.value.removeAt(position).delete()
+//        _files.value.removeAt(position).delete()
+    }
+
+    fun selectItem(position: Int, isSelected: Boolean) {
+        _files.value?.let {
+            it[position].apply {
+                this.isSelected = isSelected
+            }
+        }
+    }
+
+    fun modeChanged() {
+        _files.value?.forEach {
+            it.isSelected = false
+        }
     }
 
     fun sendFeedback(
@@ -56,17 +74,18 @@ class SupportViewModel @Inject constructor() : ViewModel() {
                 }
             })
 
-        if (files.value.size == 1) builder = builder.attachment(files.value.first().absolutePath)
-        else if (files.value.size > 1) builder = builder.attachments(files.value.map { it.absolutePath })
-
+        if (files.value != null) {
+            if (files.value?.size == 1) builder = builder.attachment(files.value!!.first().file.absolutePath)
+            else if (files.value!!.size > 1) builder = builder.attachments(files.value!!.map { it.file.absolutePath })
+        }
         builder.mail()
     }
 
     fun removeAllFiles() {
-        _files.value.forEach {
-            it.delete()
+        _files.value?.forEach {
+            it.file.delete()
         }
-        _files.value = arrayListOf()
+        _files.value = mutableListOf()
     }
 
 }
