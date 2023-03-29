@@ -200,7 +200,7 @@
         <item>English</item>
     </array>
     <string name="description_required">Описание…*</string>
-    <string name="attach_a_file">Прикрепить файл (необязательно)</string>
+    <string name="add_a_photo">Добавить фото (необязательно)</string>
     <string name="send">Отправить</string>
     <string name="max_attached_files">Максимальное количество документов во вложении: 10</string>
     <string name="file_size_warning">Объем файлов не может превышать 100МБ</string>
@@ -265,5 +265,12 @@
     <string name="direct_sunlight">Прямые солнечные лучи</string>
     <string name="diffused_sunlight">Яркий, рассеянный свет</string>
     <string name="penumbra">Полутень</string>
+
+    //support
+    <string name="wrong_email">Неверный формат email</string>
+    <string name="required_field">Обязательное поле для заполнения</string>
+    <string name="request_theme">Тема запроса</string>
+    <string name="count">%1$d/2000</string>
+
 
 </resources>

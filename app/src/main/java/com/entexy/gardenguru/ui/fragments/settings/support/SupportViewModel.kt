@@ -1,27 +1,29 @@
 package com.entexy.gardenguru.ui.fragments.settings.support
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.nedim.maildroidx.MaildroidX
 import co.nedim.maildroidx.MaildroidXType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class SupportViewModel @Inject constructor() : ViewModel() {
 
-    private val _files = MutableLiveData<ArrayList<File>>().apply { value = arrayListOf() }
-    val files: LiveData<ArrayList<File>> = _files
+    private val _files = MutableStateFlow<MutableList<File>>(mutableListOf())
+    val files = _files
 
     fun addFile(file: File) {
-        _files.value!!.add(file)
+        _files.value = mutableListOf<File>().apply {
+            addAll(_files.value)
+            add(file)
+        }
     }
 
     fun removeAtFile(position: Int) {
-        _files.value!!.removeAt(position).delete()
+        _files.value.removeAt(position).delete()
     }
 
     fun sendFeedback(
@@ -54,14 +56,14 @@ class SupportViewModel @Inject constructor() : ViewModel() {
                 }
             })
 
-        if (files.value!!.size == 1) builder = builder.attachment(files.value!!.first().absolutePath)
-        else if (files.value!!.size > 1) builder = builder.attachments(files.value!!.map { it.absolutePath })
+        if (files.value.size == 1) builder = builder.attachment(files.value.first().absolutePath)
+        else if (files.value.size > 1) builder = builder.attachments(files.value.map { it.absolutePath })
 
         builder.mail()
     }
 
     fun removeAllFiles() {
-        _files.value!!.forEach {
+        _files.value.forEach {
             it.delete()
         }
         _files.value = arrayListOf()
