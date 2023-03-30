@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/event_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,36 +10,37 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_plant_image"
-        android:layout_width="67dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginVertical="9dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintVertical_bias="0"
-        android:src="@color/teal_200"
+        android:scaleType="center"
+        tools:src="@color/primary_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize10Percent" />
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
         android:layout_margin="14dp"
         android:src="@drawable/ic_next"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_plant_image"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_plant_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_plant_image" />
+        app:layout_constraintTop_toTopOf="@+id/tv_plant_name" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_plant_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="14dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/iv_plant_image"
         app:layout_constraintTop_toTopOf="@+id/iv_plant_image"
         tools:text="Богдан" />
@@ -49,25 +49,11 @@
         android:id="@+id/tv_plant_kind"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="14dp"
-        android:layout_marginBottom="6dp"
         android:textColor="@color/gray"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_plant_image"
-        app:layout_constraintStart_toEndOf="@+id/iv_plant_image"
+        app:layout_constraintStart_toStartOf="@+id/tv_plant_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_plant_name"
         tools:text="Кактус" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_line"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="7dp"
-        android:visibility="visible"
-        android:src="@color/white10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_plant_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

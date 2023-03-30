@@ -17,13 +17,23 @@ class PlantRepositoryImpl @Inject constructor(
     private val benefitsSource: BenefitsCloudDataSource,
     private val searchPlantDataSource: SearchPlantDataSource,
     private val deletePlantDataSource: DeletePlantDataSource,
-    private val deletePlantPhotoDataSource: DeletePlantPhotoDataSource,
     private val renamePlantDataSource: RenamePlantDataSource,
+    private val updatePlantCustomPhotoDataSource: UpdatePlantCustomPhotoDataSource,
     private val addPlantDataSource: AddPlantDataSource,
 ) : PlantRepository {
 
     override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
-        return plantSource.fetchPlant(idPlant)
+        val plantDataCloud = plantSource.fetchPlant(idPlant)
+
+        return if (plantDataCloud is CloudResponse.Success) {
+            val plantData = plantDataCloud.result.mapToData()
+            if (plantData != null)
+                CloudResponse.Success(plantData.apply {
+                    pests = fetchPests(plantDataCloud.result.pestsIds)
+                    benefits = fetchBenefits(plantDataCloud.result.benefitsIds)
+                })
+            else CloudResponse.Error(null)
+        } else CloudResponse.Error(null)
     }
 
     override suspend fun fetchPests(idPests: List<String>?): ArrayList<PestData> {
@@ -78,9 +88,8 @@ class PlantRepositoryImpl @Inject constructor(
     override suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Unit> =
         renamePlantDataSource.renamePlant(plantId, plantName)
 
-    override suspend fun deletePlantPhoto(plantId: String): CloudResponse<Unit> {
-        return deletePlantPhotoDataSource.deletePhoto(plantId)
-    }
+    override suspend fun updatePlantCustomPhoto(plantId: String, photoUrl: String?): CloudResponse<Unit> =
+        updatePlantCustomPhotoDataSource.renamePlant(plantId, photoUrl)
 
     override suspend fun deletePlant(plantId: String): CloudResponse<Unit> {
         return deletePlantDataSource.deletePlant(plantId)

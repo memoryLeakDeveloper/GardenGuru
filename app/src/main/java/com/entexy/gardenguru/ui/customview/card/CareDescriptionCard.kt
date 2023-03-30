@@ -24,7 +24,7 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
         sprayingWinter.text = getString(Seasons.Winter, data.sprayingWinter)
         feedingSummer.text = getString(Seasons.Summer, data.feedingSummer)
         feedingWinter.text = getString(Seasons.Summer, data.feedingWinter)
-        plantingText.text = data.plantingTime.toString()
+        plantingText.text = data.addingTime.toString()
         pruningText.text = data.pruning
         val listString = data.reproduction.map { item -> item.name }
         reproductionText.text = listString.joinToString(", ")

@@ -1,5 +1,6 @@
 package com.entexy.gardenguru.di.events
 
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.event.EventRepositoryImpl
 import com.entexy.gardenguru.data.plant.event.cloud.CompleteEventsDataSource
@@ -33,7 +34,7 @@ class EventsModule {
 
     @Provides
     @Singleton
-    fun provideFetchEventsDataSource(): FetchEventsDataSource = FetchEventsDataSource.Base()
+    fun provideFetchEventsDataSource(): FetchEventsDataSource = FetchEventsDataSource.Base(App.firestoreUserPlantRef!!)
 
     @Provides
     @Singleton

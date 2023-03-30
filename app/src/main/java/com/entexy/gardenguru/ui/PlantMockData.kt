@@ -14,13 +14,13 @@ object PlantMockData {
     val plant =
         PlantData(
             "id",
-            "Петя",
-            "Незабудка",
-            "https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg",
+            "Петр",
+            "Кактус",
+            "https://cactus.by/sites/default/files/styles/product/public/products/chi-chi-pi_edit.jpg?itok=USPbAKWy",
             null,
-            "https://www.poison.org/-/media/images/shared/articles/plants/dumbane-dieffenbachia.jpg?h=336&w=448&la=en&hash=E7C4CE9A4E588C8EFA0B79533EC3E658",
-            CareComplexity.Easy,
-            "НЕЗАБУДКА DESC",
+            "https://meksika.info/wp-content/uploads/2018/09/Kaktusy-Meksiki.jpg",
+            CareComplexity.Medium,
+            "Ка́ктусовые (лат. Cactaceae) — семейство многолетних цветковых растений порядка Гвоздичноцветные, включает около 127 родов и около 1750 видов[2], обитающих преимущественно в засушливых областях, включая одну из самых сухих пустынь мира — пустыню Атакама.",
             SunRelation.DirectLight,
             arrayListOf(PestData("qweqweqwe", "Жук Олень")),
             arrayListOf(Reproduction.Seeds),
@@ -35,6 +35,9 @@ object PlantMockData {
             4,
             5,
             6,
+            "Темной весенней ночью в полночь",
+            mapOf("ru" to "qweqwe"),
+            mapOf("ru" to "qweqwe"),
         )
 
     val plantsData = listOf(
@@ -66,6 +69,10 @@ object PlantMockData {
             33,
             5,
             6,
+            "Темной весенней ночью в полночь",
+
+            mapOf("ru" to "qweqwe"),
+            mapOf("ru" to "qweqwe"),
         ),
         PlantData(
             "id",
@@ -95,6 +102,10 @@ object PlantMockData {
             666,
             999,
             9999292,
+            "Темной весенней ночью в полночь",
+
+            mapOf("ru" to "qweqwe"),
+            mapOf("ru" to "qweqwe"),
         ),
         PlantData(
             "id",
@@ -124,6 +135,10 @@ object PlantMockData {
             666,
             5,
             6,
+            "Темной весенней ночью в полночь",
+
+            mapOf("ru" to "qweqwe"),
+            mapOf("ru" to "qweqwe"),
         ),
         PlantData(
             "id",
@@ -153,6 +168,10 @@ object PlantMockData {
             666,
             5,
             6,
+            "Темной весенней ночью в полночь",
+
+            mapOf("ru" to "qweqwe"),
+            mapOf("ru" to "qweqwe"),
         )
     )
 
@@ -174,6 +193,8 @@ object PlantMockData {
             listOf("23423", "2", "23423423"),
             "qwpkq[kfdqw[kd",
             Timestamp(Date()),
+            "Темной весенней ночью в полночь",
+
             555,
             1,
             3,

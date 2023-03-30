@@ -23,7 +23,7 @@ class PlantModule {
         benefitsCloudDataSource: BenefitsCloudDataSource,
         searchPlantDataSource: SearchPlantDataSource,
         deletePlantDataSource: DeletePlantDataSource,
-        deletePlantPhotoDataSource: DeletePlantPhotoDataSource,
+        updatePlantCustomPhotoDataSource: UpdatePlantCustomPhotoDataSource,
         renamePlantDataSource: RenamePlantDataSource,
         addPlantDataSource: AddPlantDataSource
     ): PlantRepository = PlantRepositoryImpl(
@@ -32,14 +32,14 @@ class PlantModule {
         benefitsCloudDataSource,
         searchPlantDataSource,
         deletePlantDataSource,
-        deletePlantPhotoDataSource,
         renamePlantDataSource,
+        updatePlantCustomPhotoDataSource,
         addPlantDataSource
     )
 
     @Provides
     @Singleton
-    fun providePlantCloudDataSource(): PlantCloudDataSource = PlantCloudDataSource.Base(App.firestorePlantsRef)
+    fun providePlantCloudDataSource(): PlantCloudDataSource = PlantCloudDataSource.Base(App.firestoreUserPlantRef!!)
 
 
     @Provides
@@ -53,20 +53,20 @@ class PlantModule {
 
     @Provides
     @Singleton
-    fun provideDeletePlantDataSource(): DeletePlantDataSource = DeletePlantDataSource.Base(App.firestorePlantsRef)
+    fun provideDeletePlantDataSource(): DeletePlantDataSource = DeletePlantDataSource.Base(App.firestoreUserPlantRef!!)
 
 
     @Provides
     @Singleton
-    fun provideDeletePlantPhotoDataSource(): DeletePlantPhotoDataSource = DeletePlantPhotoDataSource.Base(App.firestorePlantsRef)
+    fun provideDeletePlantPhotoDataSource(): UpdatePlantCustomPhotoDataSource = UpdatePlantCustomPhotoDataSource.Base(App.firestoreUserPlantRef!!)
 
     @Provides
     @Singleton
-    fun provideRenamePlantDataSource(): RenamePlantDataSource = RenamePlantDataSource.Base(App.firestorePlantsRef)
+    fun provideRenamePlantDataSource(): RenamePlantDataSource = RenamePlantDataSource.Base(App.firestoreUserPlantRef!!)
 
     @Provides
     @Singleton
-    fun provideAddPlantDataSource(): AddPlantDataSource = AddPlantDataSource.Base(App.firestorePlantsRef)
+    fun provideAddPlantDataSource(): AddPlantDataSource = AddPlantDataSource.Base(App.firestoreUserPlantRef!!)
 
     @Provides
     @Singleton

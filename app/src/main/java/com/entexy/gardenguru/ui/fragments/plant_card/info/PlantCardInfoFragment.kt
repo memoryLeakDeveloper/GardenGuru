@@ -16,6 +16,7 @@ import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -52,9 +53,10 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         initPlantPhotoView(plantData)
 
         with(binding) {
-            plantCaver.setImageByGlide(plantData.coverPhoto)
+            plantCaver.setImageByGlide(plantData.coverPhoto, null)
             plantName.text = plantData.getPlantName("ru")
             plantInfo.initView(plantData.getPlantDescription("ru"))
+            eventsCalendar.initView(viewModel.predictEvents(plantData, arrayListOf()))
             careDifficult.initView(plantData.careComplexity, true)
             wheather.initView(plantData)
             careDescription.initView(plantData)
@@ -116,10 +118,12 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         ivEditPlantName.setOnClickListener {
             containerPlantName.toGone()
             etPlantName.toVisible()
+            etPlantName.setText(data.name)
         }
 
         etPlantName.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (etPlantName.text?.isEmpty() == true) return@setOnEditorActionListener false
                 lifecycleScope.launch {
                     val dialogHelper = DialogHelper()
                     viewModel.setPlantName(data.id, etPlantName.text.toString()).collect {
@@ -147,6 +151,14 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
+        }
+
+        etPlantName.addTextChangedListener {
+            if (it?.isEmpty() == true) {
+                etPlantName.setBackgroundResource(R.drawable.bg_edit_text_small_corners_with_error_stroke)
+            } else {
+                etPlantName.setBackgroundResource(R.drawable.bg_edit_text_small_corners_with_stroke)
+            }
         }
     }
 
@@ -191,6 +203,8 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                         viewModel.deletePhoto(data.id, data.customPhoto ?: return@launch).collect {
                             it.getResult(
                                 success = {
+                                    plantData.customPhoto = null
+                                    plantIcon.setCircleImageByGlide(plantData.photo)
                                     dialogHelper.hideDialog()
                                 },
                                 failure = {
@@ -230,10 +244,10 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
     private fun loadPhoto(uri: Uri) {
         val dialogHelper = DialogHelper()
         lifecycleScope.launch {
-            viewModel.uploadPhoto(uri, requireContext()).collect { cloudResponse ->
+            viewModel.uploadPhoto(uri, requireContext(), plantData.id, plantData.customPhoto).collect { cloudResponse ->
                 cloudResponse.getResult(
                     success = {
-                        binding.plantIcon.setImageByGlide(it.result)
+                        binding.plantIcon.setCircleImageByGlide(it.result)
                         plantData.customPhoto = it.result
                         dialogHelper.hideDialog()
                     },

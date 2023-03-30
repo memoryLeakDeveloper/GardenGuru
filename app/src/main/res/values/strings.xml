@@ -83,7 +83,7 @@
     <string name="lighting">Освещение</string>
     <string name="transfer">Пересадка</string>
     <string name="spraying">Опрыскивание</string>
-    <string name="top_dressing">Подкормка</string>
+    <string name="feeding">Подкормка</string>
     <string name="no_events_text">Событий на сегодня нет!\nВозвращайтесь завтра</string>
     <string name="complete_all_events_text">Вы позаботились о всех Ваших растениях!</string>
     <string name="congratulations">Поздравляем!</string>
@@ -259,5 +259,6 @@
     <string name="direct_sunlight">Прямые солнечные лучи</string>
     <string name="diffused_sunlight">Яркий, рассеянный свет</string>
     <string name="penumbra">Полутень</string>
+    <string name="your_garden">Ваш Сад</string>
 
 </resources>

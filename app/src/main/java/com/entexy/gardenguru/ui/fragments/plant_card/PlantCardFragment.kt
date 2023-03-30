@@ -8,7 +8,6 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentPlantCardBinding
-import com.entexy.gardenguru.ui.PlantMockData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,8 +16,7 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val plantData = requireArguments().getParcelable<PlantData>(PLANT_CARD_PLANT_DATA_KEY)
-        val plantData = PlantMockData.plant
+        val plantData = requireArguments().getParcelable<PlantData>(PLANT_CARD_PLANT_DATA_KEY)!!
         initView(plantData)
 
         with(binding) {

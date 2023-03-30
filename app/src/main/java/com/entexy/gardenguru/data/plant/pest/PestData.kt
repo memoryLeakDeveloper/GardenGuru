@@ -14,7 +14,7 @@ data class PestData(
 fun PestCloud.mapToData(): PestData? {
     if (name == null) return null
     return PestData(
-        "",
+        id!!,
         name!!,
         localizedName
     )

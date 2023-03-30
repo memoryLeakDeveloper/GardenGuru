@@ -134,3 +134,10 @@ fun Context.convertPxToDp(px: Float) = (px * resources.displayMetrics.density).t
 
 fun Context.convertDpToPx(dp: Float) = (dp * resources.displayMetrics.density).toInt()
 
+fun Calendar.isSummerSeason(): Boolean {
+    return get(Calendar.MONTH) in 4..11
+}
+
+fun Calendar.isDaysEquals(calendar: Calendar): Boolean {
+    return get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR) && get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+}

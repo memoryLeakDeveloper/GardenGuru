@@ -20,11 +20,11 @@ data class PlantData(
     var careComplexity: CareComplexity,
     var description: String,
     var sunRelation: SunRelation,
-    var pests: List<PestData>? = null,
+    var pests: List<PestData>,
     var reproduction: List<Reproduction>,
-    var benefits: List<BenefitData>? = null,
+    var benefits: List<BenefitData>,
     var pruning: String,
-    var plantingTime: Date,
+    var addingTime: Date,
     var feedingSummer: Int,
     var feedingWinter: Int,
     var wateringSummer: Int,
@@ -33,22 +33,26 @@ data class PlantData(
     var sprayingWinter: Int,
     var minTemp: Int,
     var maxTemp: Int,
-    var localizedVariety: Map<String, String>? = null,
-    var localizeDescription: Map<String, String>? = null
-) : Parcelable{
-    fun getPlantName(locale: String): String{
+    var plantingTime: String,
+    var localizedVariety: Map<String, String>,
+    var localizeDescription: Map<String, String>
+) : Parcelable {
+    fun getPlantName(locale: String): String {
         return name ?: getPlantVariety(locale)
     }
 
-    fun getPlantVariety(locale: String): String{
-        return localizedVariety?.get(locale) ?: variety
+    fun getPlantVariety(locale: String): String {
+        return localizedVariety.get(locale) ?: variety
     }
 
-    fun getPlantDescription(locale: String): String{
-        return localizeDescription?.get(locale) ?: description
+    fun getPlantDescription(locale: String): String {
+        return localizeDescription.get(locale) ?: description
+    }
+
+    fun getPlantPhoto(): String {
+        return customPhoto ?: photo
     }
 }
-
 
 
 fun PlantData.mapToPlantCloud() = PlantCloud(
@@ -61,13 +65,14 @@ fun PlantData.mapToPlantCloud() = PlantCloud(
     description = description,
     customPhoto = customPhoto,
     sunRelation = sunRelation.cloudName,
-    pestsIds = pests?.map { it.id },
+    pestsIds = pests.map { it.id },
     reproduction = reproduction.map { it.cloudValue },
-    benefitsIds = benefits?.map { it.id },
+    benefitsIds = benefits.map { it.id },
     pruning = pruning,
+    plantingTime = plantingTime,
     feedingSummer = feedingSummer,
     feedingWinter = feedingWinter,
-    plantingTime = Timestamp(plantingTime),
+    addingDate = Timestamp(addingTime),
     wateringSummer = wateringSummer,
     wateringWinter = wateringWinter,
     sprayingSummer = sprayingSummer,
@@ -76,31 +81,41 @@ fun PlantData.mapToPlantCloud() = PlantCloud(
     maxTemp = maxTemp
 )
 
-fun PlantCloud.mapToData(): PlantData {
-    return PlantData(
-        id = id,
-        variety = variety,
-        photo = photo,
-        coverPhoto = coverPhoto,
-        name = name,
-        customPhoto = customPhoto,
-        careComplexity = CareComplexity.valueOf(careComplexity),
-        description = description,
-        localizeDescription = localizeDescription,
-        localizedVariety = localizedVariety,
-        sunRelation = SunRelation.valueOf(sunRelation),
-        pests = null,
-        reproduction = reproduction.map { Reproduction.valueOf(it) },
-        benefits = null,
-        pruning = pruning,
-        plantingTime = plantingTime.toDate(),
-        feedingSummer = feedingSummer,
-        feedingWinter = feedingWinter,
-        wateringSummer = wateringSummer,
-        wateringWinter = wateringWinter,
-        sprayingSummer = sprayingSummer,
-        sprayingWinter = sprayingWinter,
-        minTemp = minTemp,
-        maxTemp = maxTemp
-    )
+fun PlantCloud.mapToData(): PlantData? {
+    if (allRequiredFields()) {
+        return PlantData(
+            id = id!!,
+            variety = variety!!,
+            photo = photo!!,
+            coverPhoto = coverPhoto!!,
+            name = name,
+            customPhoto = customPhoto,
+            careComplexity = CareComplexity.values().find {
+                it.cloudName == careComplexity
+            } ?: CareComplexity.Easy,
+            description = description!!,
+            localizeDescription = localizeDescription!!,
+            localizedVariety = localizedVariety!!,
+            sunRelation = SunRelation.values().find { it.cloudName == sunRelation }!!,
+            pests = arrayListOf(),
+            reproduction = reproduction!!.map { cloud ->
+                Reproduction.values().find {
+                    it.cloudValue == cloud
+                }!!
+            },
+            benefits = listOf(),
+            pruning = pruning!!,
+            plantingTime = plantingTime!!,
+            addingTime = addingDate!!.toDate(),
+            feedingSummer = feedingSummer!!,
+            feedingWinter = feedingWinter!!,
+            wateringSummer = wateringSummer!!,
+            wateringWinter = wateringWinter!!,
+            sprayingSummer = sprayingSummer!!,
+            sprayingWinter = sprayingWinter!!,
+            minTemp = minTemp!!,
+            maxTemp = maxTemp!!,
+        )
+    }
+    return null
 }
