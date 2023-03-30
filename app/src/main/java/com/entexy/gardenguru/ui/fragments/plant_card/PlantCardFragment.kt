@@ -2,22 +2,61 @@ package com.entexy.gardenguru.ui.fragments.plant_card
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.databinding.FragmentPlantCardBinding
+import com.entexy.gardenguru.ui.customview.DialogHelper
+import com.entexy.gardenguru.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
+
+    private val viewModel: PlantCardViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val plantData = requireArguments().getParcelable<PlantData>(PLANT_CARD_PLANT_DATA_KEY)!!
-        initView(plantData)
+
+        lifecycleScope.launch {
+
+            val dialogHelper = DialogHelper()
+
+            viewModel.fetchEvents(plantData.id).collect { cloudResponse ->
+                cloudResponse.getResult(
+                    success = {
+                        with(binding) {
+                            dialogHelper.hideDialog()
+
+                            initView(plantData, ArrayList(it.result.sortedByDescending { it.eventTime.time }).apply {
+                                add(0, EventData("", true, Calendar.getInstance().apply {
+                                    time = plantData.addingTime
+                                }, EventData.EventType.Create))
+                            })
+
+                        }
+                    },
+                    failure = {
+                        dialogHelper.hideDialog()
+                        requireView().showSnackBar(R.string.error_loading_data)
+                    },
+                    loading = {
+                        dialogHelper.showDialog(ProgressBar(requireContext()), cancelable = false)
+                    }
+                )
+            }
+        }
 
         with(binding) {
             back.setOnClickListener {
@@ -29,15 +68,15 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
         }
     }
 
-    private fun initView(plantData: PlantData) {
+    private fun initView(plantData: PlantData, events: ArrayList<EventData>) {
 
         binding.title.text = plantData.getPlantName("ru")
-        initPager(plantData)
+        initPager(plantData, events)
     }
 
-    private fun initPager(plantData: PlantData) {
+    private fun initPager(plantData: PlantData, events: ArrayList<EventData>) {
         with(binding) {
-            val adapter = PlantCardPagerAdapter(requireActivity(), plantData)
+            val adapter = PlantCardPagerAdapter(requireActivity(), plantData, events)
             viewPager.adapter = adapter
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

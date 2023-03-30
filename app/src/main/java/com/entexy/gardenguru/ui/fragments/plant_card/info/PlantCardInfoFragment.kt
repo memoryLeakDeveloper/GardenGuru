@@ -24,6 +24,7 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.databinding.DialogChangePhotoBinding
 import com.entexy.gardenguru.databinding.DialogRemovePlantBinding
 import com.entexy.gardenguru.databinding.FragmentPlantCardInfoBinding
@@ -33,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
@@ -40,10 +42,12 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
     private val viewModel: PlantCardInfoViewModel by viewModels()
 
     private lateinit var plantData: PlantData
+    private lateinit var plantEvents: ArrayList<EventData>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         plantData = requireArguments().getParcelable(CARD_INFO_PLANT_DATA_KEY)!!
+        plantEvents = requireArguments().getParcelableArrayList(CARD_INFO_PLANT_EVENTS_KEY)!!
 
         initView()
     }
@@ -56,7 +60,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             plantCaver.setImageByGlide(plantData.coverPhoto, null)
             plantName.text = plantData.getPlantName("ru")
             plantInfo.initView(plantData.getPlantDescription("ru"))
-            eventsCalendar.initView(viewModel.predictEvents(plantData, arrayListOf()))
+            eventsCalendar.initView(viewModel.predictEvents(plantData, plantEvents))
             careDifficult.initView(plantData.careComplexity, true)
             wheather.initView(plantData)
             careDescription.initView(plantData)
@@ -265,5 +269,6 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
     companion object {
         const val CARD_INFO_PLANT_DATA_KEY = "plant-data-key"
+        const val CARD_INFO_PLANT_EVENTS_KEY = "plant-events-key"
     }
 }

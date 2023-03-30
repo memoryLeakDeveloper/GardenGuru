@@ -73,41 +73,34 @@ fun Activity.checkAndVerifyCameraPermissions(): Boolean {
 }
 
 fun Uri.copyToFile(context: Context): File {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        var fileName = ""
+    var fileName = ""
 
-        this.let { returnUri ->
-            context.contentResolver.query(returnUri, null, null, null)
-        }?.use { cursor ->
-            val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            cursor.moveToFirst()
-            fileName = cursor.getString(nameIndex)
-        }
-
-        val iStream: InputStream = context.contentResolver.openInputStream(this)!!
-        val outputDir: File = context.cacheDir!!
-        val outputFile = File(outputDir, fileName)
-
-        iStream.use { input ->
-            val outputStream = FileOutputStream(outputFile)
-            outputStream.use { output ->
-                val buffer = ByteArray(4 * 1024) // buffer size
-                while (true) {
-                    val byteCount = input.read(buffer)
-                    if (byteCount < 0) break
-                    output.write(buffer, 0, byteCount)
-                }
-                output.flush()
-            }
-        }
-        iStream.close()
-        return outputFile
-    } else { //todo test
-        val file = this.toFile()
-        val outputFile = File(context.cacheDir, Date().toString())
-        file.copyTo(outputFile, true)
-        return file
+    this.let { returnUri ->
+        context.contentResolver.query(returnUri, null, null, null)
+    }?.use { cursor ->
+        val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        cursor.moveToFirst()
+        fileName = cursor.getString(nameIndex)
     }
+
+    val iStream: InputStream = context.contentResolver.openInputStream(this)!!
+    val outputDir: File = context.cacheDir!!
+    val outputFile = File(outputDir, fileName)
+
+    iStream.use { input ->
+        val outputStream = FileOutputStream(outputFile)
+        outputStream.use { output ->
+            val buffer = ByteArray(4 * 1024) // buffer size
+            while (true) {
+                val byteCount = input.read(buffer)
+                if (byteCount < 0) break
+                output.write(buffer, 0, byteCount)
+            }
+            output.flush()
+        }
+    }
+    iStream.close()
+    return outputFile
 }
 
 fun Context.showToastLong(text: String) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
