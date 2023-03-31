@@ -170,7 +170,7 @@
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
-        android:name="com.entexy.gardenguru.ui.fragments.settings.support.SupportFragment"
+        android:name="com.entexy.gardenguru.ui.fragments.support.SupportFragment"
         android:label="SupportFragment"
         tools:layout="@layout/fragment_support" />
     <fragment

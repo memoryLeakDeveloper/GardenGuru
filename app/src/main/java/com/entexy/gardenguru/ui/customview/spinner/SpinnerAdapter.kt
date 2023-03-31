@@ -10,7 +10,7 @@ import com.entexy.gardenguru.databinding.SpinnerItemBinding
 import com.entexy.gardenguru.utils.toGone
 import com.entexy.gardenguru.utils.toVisible
 
-class SpinnerAdapter(private val listener: (String, Int, Boolean) -> Unit, private var selectedPosition: Int = 0) :
+class SpinnerAdapter(private val listener: (String, Int, Boolean) -> Unit, private var selectedPosition: Int = -1) :
     RecyclerView.Adapter<SpinnerAdapter.SpinnerAdapterViewHolder>() {
 
     private var lastSelectedPosition: Int = -1

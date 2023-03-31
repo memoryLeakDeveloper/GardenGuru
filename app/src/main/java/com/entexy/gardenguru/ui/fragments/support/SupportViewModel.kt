@@ -1,10 +1,11 @@
-package com.entexy.gardenguru.ui.fragments.settings.support
+package com.entexy.gardenguru.ui.fragments.support
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.nedim.maildroidx.MaildroidX
 import co.nedim.maildroidx.MaildroidXType
+import com.entexy.gardenguru.ui.fragments.support.adapter.FileModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -26,8 +27,13 @@ class SupportViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun removeAtFile(position: Int) {
-//        _files.value.removeAt(position).delete()
+    fun deleteFiles() {
+        val allFiles = _files.value
+        val list = _files.value?.filter { it.isSelected }
+        list?.let {
+            allFiles?.removeAll(it)
+        }
+        _files.postValue(allFiles ?: emptyList<FileModel>().toMutableList())
     }
 
     fun selectItem(position: Int, isSelected: Boolean) {
@@ -64,7 +70,6 @@ class SupportViewModel @Inject constructor() : ViewModel() {
                 override val timeout: Long = 2000
 
                 override fun onFail(errorMessage: String) {
-                    Log.d("qqqqq", "MaildroidX error: $errorMessage")
                     onCompleteLambda(false)
                 }
 

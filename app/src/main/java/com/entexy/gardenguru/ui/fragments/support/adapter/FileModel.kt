@@ -1,4 +1,4 @@
-package com.entexy.gardenguru.ui.fragments.settings.support
+package com.entexy.gardenguru.ui.fragments.support.adapter
 
 import java.io.File
 

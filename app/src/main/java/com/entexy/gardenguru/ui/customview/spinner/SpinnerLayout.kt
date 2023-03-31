@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.databinding.SpinnerLayoutBinding
 import com.entexy.gardenguru.databinding.SpinnerLayoutNewBinding
+import com.entexy.gardenguru.utils.hideKeyboard
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
@@ -31,7 +32,8 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         if (close) popupWindow?.dismiss()
     }
     private val dismissListener = PopupWindow.OnDismissListener {
-        binding.root.background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
+        if (defValue != null && list.contains(spinnerValue))
+            binding.root.background = AppCompatResources.getDrawable(context, R.drawable.spinner_background)
         isListExpanded = false
         arrowAnimation(true)
     }
@@ -40,6 +42,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     fun setValueListener(callback: ValueCallback) {
         valueCallback = callback
     }
+
     var spinnerValue: String? = null
         private set
 
@@ -49,7 +52,6 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
 
     init {
         spinnerAdapter = SpinnerAdapter((selectListener))
-        setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.spinner_background))
         setRootClickListener()
         setCustomAttributes(attrs)
     }
@@ -58,6 +60,13 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         spinnerAdapter.setListAdapter(list.toMutableList())
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
+        setBackgroundCompat(
+            ContextCompat.getDrawable(
+                context,
+                if (defValue != null && list.contains(defValue)
+                ) R.drawable.spinner_background else R.drawable.edit_text_background_unfocused
+            )
+        )
         setSpinnerDefState(defValue, list)
         this.defValue = defValue
         this.list = list
@@ -75,6 +84,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
 
     private fun setRootClickListener() {
         this.setOnClickListener {
+            hideKeyboard()
             if (isListExpanded) {
                 popupWindow?.dismiss()
                 isListExpanded = false

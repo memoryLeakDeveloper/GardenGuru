@@ -203,10 +203,10 @@
     <string name="add_a_photo">Добавить фото (необязательно)</string>
     <string name="send">Отправить</string>
     <string name="max_attached_files">Максимальное количество документов во вложении: 10</string>
-    <string name="file_size_warning">Объем файлов не может превышать 100МБ</string>
+    <string name="file_size_warning">Максимально 100 MB</string>
     <string name="hooray">Ура!</string>
     <string name="support">Поддержка</string>
-    <string name="your_request_send">Ваш запрос отправлен</string>
+    <string name="your_request_send">Ваш запрос успешно отправлен</string>
     <string name="request_subject">Тема запроса</string>
     <array name="support_themes">
         <item>Предложения по улучшению</item>
@@ -271,6 +271,7 @@
     <string name="required_field">Обязательное поле для заполнения</string>
     <string name="request_theme">Тема запроса</string>
     <string name="count">%1$d/2000</string>
+    <string name="max_email_count">Максимальное количество символов 256</string>
 
 
 </resources>
