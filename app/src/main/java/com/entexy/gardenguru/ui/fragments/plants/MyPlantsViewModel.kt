@@ -21,12 +21,6 @@ class MyPlantsViewModel @Inject constructor(
 ) : ViewModel() {
 
     suspend fun fetchPlants(): Flow<CloudResponse<ArrayList<PlantData>>> {
-        Firebase.auth.currentUser?.uid?.let {
-            fetchUserPlantsUseCase.fetch(it)?.let { list ->
-                App.user = UserData(it, list)
-                bugger(App.user)
-            }
-        }
         return fetchAllPlantsUseCase.perform(App.user!!.userPlants)
     }
 }

@@ -3,6 +3,7 @@ package com.entexy.gardenguru.core
 import android.app.Application
 import android.content.SharedPreferences
 import com.entexy.gardenguru.data.language.LanguagePreference
+import com.entexy.gardenguru.data.prefs.UserDataPref
 import com.entexy.gardenguru.data.user.UserData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -21,6 +22,9 @@ class App : Application() {
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
+    @Inject
+    lateinit var userDataPref: UserDataPref
+
     override fun onCreate() {
         super.onCreate()
 
@@ -33,7 +37,9 @@ class App : Application() {
         storagePhotos = Firebase.storage.reference.child("plants")
 
         languagePreference = LanguagePreference(sharedPreferences)
+
         user = UserData("L7HK0VHcPaTteMoaHoWmAAM7ejy2", arrayListOf("JYgWks56qM4AL6vhGQuv", "HVWKaTo8IgaJdGYMR2ph", "eQ9Q36KPRyhz03VEJrDY"))
+//        user = userDataPref.get()
     }
 
     companion object {

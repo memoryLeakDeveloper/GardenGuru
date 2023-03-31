@@ -161,6 +161,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     private fun signOutFromGoogle() {
         App.user = null
+        viewModel.clearUserDataPref()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(GoogleAuthContract.client_id).requestEmail().build()
         GoogleSignIn.getClient(requireContext(), gso).signOut()
