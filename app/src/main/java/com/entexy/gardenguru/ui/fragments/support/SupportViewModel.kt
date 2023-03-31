@@ -49,14 +49,11 @@ class SupportViewModel @Inject constructor(private val sendFeedbackUseCase: Send
     }
 
     fun sendFeedback(email: String, subject: String?, body: String, onCompleteLambda: (success: Boolean) -> Unit) {
-        val callback: (success: Boolean) -> Unit = {
-            onCompleteLambda.invoke(it)
-            if (it) removeAllFiles()
-        }
-        sendFeedbackUseCase.send(email, subject, body, _files.value?.map { it.file }, callback)
+        sendFeedbackUseCase.send(email, subject, body, _files.value?.map { it.file }, onCompleteLambda)
     }
 
-    fun removeAllFiles() {
+    override fun onCleared() {
+        super.onCleared()
         _files.value?.forEach {
             it.file.delete()
         }

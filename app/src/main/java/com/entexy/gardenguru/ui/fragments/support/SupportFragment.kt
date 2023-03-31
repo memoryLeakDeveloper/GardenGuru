@@ -215,10 +215,4 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         tvEmailHint.toGone()
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.removeAllFiles()
-    }
-
 }
