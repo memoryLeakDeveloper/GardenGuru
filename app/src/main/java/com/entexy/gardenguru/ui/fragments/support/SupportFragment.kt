@@ -119,12 +119,13 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
             if (!checkValidInput()) return@setOnClickListener
             btnSend.isEnabled = false
             dialogHelper.showDialog(ProgressBar(requireContext()), false)
-            viewModel.sendFeedback(etEmail.text.toString(), spinnerThemes.spinnerValue!!, etDescription.text.toString()) {
+            viewModel.sendFeedback(etEmail.text.toString(), spinnerThemes.spinnerValue, etDescription.text.toString()) {
                 dialogHelper.hideDialog()
                 btnSend.isEnabled = true
                 if (it) {
                     val dialogBinding = DialogSupportSuccessBinding.inflate(LayoutInflater.from(requireContext())).apply {
                         tvOk.setOnClickListener {
+                            dialogHelper.hideDialog()
                             requireActivity().onBackPressed()
                         }
                     }

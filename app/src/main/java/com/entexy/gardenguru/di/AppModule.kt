@@ -3,7 +3,6 @@ package com.entexy.gardenguru.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.entexy.gardenguru.core.Api
-import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.auth.UserEmailHelper
 import com.entexy.gardenguru.data.language.LanguagePreference
 import com.entexy.gardenguru.data.notifcations.NotificationsPref
@@ -29,10 +28,6 @@ class AppModule {
     @Singleton
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
         context.getSharedPreferences(PrefsKeys.PREFS, Context.MODE_PRIVATE)
-
-    @Provides
-    @Singleton
-    fun provideTokenHelper(sharedPreferences: SharedPreferences): TokenHelper = TokenHelper.Base(sharedPreferences)
 
     @Provides
     @Singleton

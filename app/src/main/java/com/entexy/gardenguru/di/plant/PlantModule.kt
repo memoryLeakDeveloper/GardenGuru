@@ -25,7 +25,8 @@ class PlantModule {
         deletePlantDataSource: DeletePlantDataSource,
         updatePlantCustomPhotoDataSource: UpdatePlantCustomPhotoDataSource,
         renamePlantDataSource: RenamePlantDataSource,
-        addPlantDataSource: AddPlantDataSource
+        addPlantDataSource: AddPlantDataSource,
+        userPlantsDataSource: UserPlantsDataSource
     ): PlantRepository = PlantRepositoryImpl(
         plantCloudDataSource,
         pestsCloudDataSource,
@@ -34,7 +35,8 @@ class PlantModule {
         deletePlantDataSource,
         renamePlantDataSource,
         updatePlantCustomPhotoDataSource,
-        addPlantDataSource
+        addPlantDataSource,
+        userPlantsDataSource
     )
 
     @Provides
@@ -58,7 +60,8 @@ class PlantModule {
 
     @Provides
     @Singleton
-    fun provideDeletePlantPhotoDataSource(): UpdatePlantCustomPhotoDataSource = UpdatePlantCustomPhotoDataSource.Base(App.firestoreUserPlantRef!!)
+    fun provideDeletePlantPhotoDataSource(): UpdatePlantCustomPhotoDataSource =
+        UpdatePlantCustomPhotoDataSource.Base(App.firestoreUserPlantRef!!)
 
     @Provides
     @Singleton
@@ -71,4 +74,8 @@ class PlantModule {
     @Provides
     @Singleton
     fun provideSearchPlantCloudDataSource(): SearchPlantDataSource = SearchPlantDataSource.Base(App.firestorePlantsRef)
+
+    @Provides
+    fun provideUserPlantsDataSource(): UserPlantsDataSource = UserPlantsDataSource.Base(App.firestoreUsersRef)
+
 }

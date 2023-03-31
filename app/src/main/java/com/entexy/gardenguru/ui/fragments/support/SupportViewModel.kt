@@ -1,17 +1,15 @@
 package com.entexy.gardenguru.ui.fragments.support
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import co.nedim.maildroidx.MaildroidX
-import co.nedim.maildroidx.MaildroidXType
+import com.entexy.gardenguru.domain.usecases.support.SendFeedbackUseCase
 import com.entexy.gardenguru.ui.fragments.support.adapter.FileModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SupportViewModel @Inject constructor() : ViewModel() {
+class SupportViewModel @Inject constructor(private val sendFeedbackUseCase: SendFeedbackUseCase) : ViewModel() {
 
     private val _files = MutableLiveData<MutableList<FileModel>>(mutableListOf())
     val files = _files
@@ -50,40 +48,12 @@ class SupportViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun sendFeedback(
-        email: String,
-        subject: String,
-        body: String,
-        onCompleteLambda: (success: Boolean) -> Unit
-    ) {
-        var builder = MaildroidX.Builder()
-            .smtp("smtp.yandex.ru")
-            .smtpUsername("yurykorhav@yandex.by")
-            .smtpPassword("pudauhxfbqdwmcwm")
-            .port("465")
-            .type(MaildroidXType.HTML)
-            .to("mlearsoft+gardenguru@gmail.com")
-            .from("yurykorhav@yandex.by")
-            .subject("$subject - Sent from Android, email: $email")
-            .body(body)
-            .onCompleteCallback(object : MaildroidX.onCompleteCallback {
-                override val timeout: Long = 2000
-
-                override fun onFail(errorMessage: String) {
-                    onCompleteLambda(false)
-                }
-
-                override fun onSuccess() {
-                    onCompleteLambda(true)
-                    removeAllFiles()
-                }
-            })
-
-        if (files.value != null) {
-            if (files.value?.size == 1) builder = builder.attachment(files.value!!.first().file.absolutePath)
-            else if (files.value!!.size > 1) builder = builder.attachments(files.value!!.map { it.file.absolutePath })
+    fun sendFeedback(email: String, subject: String?, body: String, onCompleteLambda: (success: Boolean) -> Unit) {
+        val callback: (success: Boolean) -> Unit = {
+            onCompleteLambda.invoke(it)
+            if (it) removeAllFiles()
         }
-        builder.mail()
+        sendFeedbackUseCase.send(email, subject, body, _files.value?.map { it.file }, callback)
     }
 
     fun removeAllFiles() {

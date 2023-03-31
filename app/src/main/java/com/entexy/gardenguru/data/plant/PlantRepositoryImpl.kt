@@ -8,6 +8,7 @@ import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
+import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
 import com.entexy.gardenguru.domain.repository.PlantRepository
 import javax.inject.Inject
 
@@ -20,6 +21,7 @@ class PlantRepositoryImpl @Inject constructor(
     private val renamePlantDataSource: RenamePlantDataSource,
     private val updatePlantCustomPhotoDataSource: UpdatePlantCustomPhotoDataSource,
     private val addPlantDataSource: AddPlantDataSource,
+    private val userPlantsDataSource: UserPlantsDataSource
 ) : PlantRepository {
 
     override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
@@ -111,5 +113,7 @@ class PlantRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addPlant(plantId: String) = addPlantDataSource.addPlant(plantId)
+
+    override suspend fun fetchAllPlants(uid: String) = userPlantsDataSource.fetch(uid)
 
 }

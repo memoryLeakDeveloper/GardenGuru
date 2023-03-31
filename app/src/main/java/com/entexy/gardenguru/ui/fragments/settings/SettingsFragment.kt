@@ -97,13 +97,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     }
 
     private fun initSpinner() = binding.apply {
-        val languages = resources.getStringArray(R.array.languages).toList()
+        val languages = Languages.values().map { resources.getString(it.longNameRes) }
         val initSpinnerValue = when (Locale.getDefault().language) {
             Languages.Russian.shortName -> {
-                languages.indexOf(Languages.Russian.longName)
+                languages.indexOf(resources.getString(Languages.Russian.longNameRes))
             }
             else -> {
-                languages.indexOf(Languages.English.longName)
+                languages.indexOf(resources.getString(Languages.English.longNameRes))
             }
         }
         spinnerLanguages.initView(languages[initSpinnerValue], ArrayList(languages.toList()))
@@ -122,7 +122,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                             progressDialog.showDialog(ProgressBar(requireContext()), false)
                         },
                         success = {
-                            viewModel.tokenHelper.setToken(null)
                             signOutFromGoogle()
                             findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         },
@@ -147,7 +146,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                             progressDialog.showDialog(ProgressBar(requireContext()), false)
                         },
                         success = {
-                            viewModel.tokenHelper.setToken(null)
                             findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         },
                         failure = {

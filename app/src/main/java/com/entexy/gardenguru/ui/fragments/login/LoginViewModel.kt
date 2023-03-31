@@ -1,25 +1,28 @@
 package com.entexy.gardenguru.ui.fragments.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.entexy.gardenguru.core.App
-import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.user.UserData
 import com.entexy.gardenguru.domain.usecases.user.CreateUserUseCase
-import com.entexy.gardenguru.domain.usecases.user.FetchUserPlantsUseCase
+import com.entexy.gardenguru.domain.usecases.plant.FetchUserPlantsUseCase
 import com.entexy.gardenguru.domain.usecases.user.LoginUserUseCase
 import com.entexy.gardenguru.utils.bugger
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val tokenHelper: TokenHelper,
     private val createUserUseCase: CreateUserUseCase,
     private val loginUserUseCase: LoginUserUseCase,
     private val fetchUserPlantsUseCase: FetchUserPlantsUseCase
 ) : ViewModel() {
 
-    fun saveNewToken(token: String) = tokenHelper.setToken(token)
+    suspend fun isUserAuthorized() =
+        viewModelScope.async { Firebase.auth.currentUser?.let { return@async true } ?: run { return@async false } }.await()
 
     suspend fun createUser(id: String) = createUserUseCase.createUser(id)
 

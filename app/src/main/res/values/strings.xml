@@ -195,10 +195,9 @@
     <string name="support_description_text">Введите данные своего запроса. Сотрудник нашей службы поддержки ответит вам в ближайшее время.</string>
     <string name="submit_an_inquiry">Отправить запрос</string>
     <string name="enter_email">Введите E-mail*</string>
-    <array name="languages">
-        <item>Русский</item>
-        <item>English</item>
-    </array>
+    <string name="russian">Русский</string>
+    <string name="english">English</string>
+
     <string name="description_required">Описание…*</string>
     <string name="add_a_photo">Добавить фото (необязательно)</string>
     <string name="send">Отправить</string>

@@ -1,4 +1,4 @@
-package com.entexy.gardenguru.data.user.cloud
+package com.entexy.gardenguru.data.plant.cloud
 
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await

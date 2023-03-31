@@ -12,14 +12,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.databinding.SpinnerLayoutBinding
-import com.entexy.gardenguru.databinding.SpinnerLayoutNewBinding
+import com.entexy.gardenguru.databinding.SpinnerPopupBinding
 import com.entexy.gardenguru.utils.hideKeyboard
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 
 class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var binding = SpinnerLayoutBinding.inflate(LayoutInflater.from(context), this)
-    private var popupBinding = SpinnerLayoutNewBinding.inflate(LayoutInflater.from(context))
+    private var popupBinding = SpinnerPopupBinding.inflate(LayoutInflater.from(context))
     private var spinnerAdapter: SpinnerAdapter
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false

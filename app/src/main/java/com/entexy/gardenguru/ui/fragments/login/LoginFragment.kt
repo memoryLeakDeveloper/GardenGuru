@@ -14,7 +14,6 @@ import com.entexy.gardenguru.data.auth.GoogleAuthContract
 import com.entexy.gardenguru.databinding.FragmentLoginBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.utils.bugger
-import com.entexy.gardenguru.utils.ifNotNull
 import com.entexy.gardenguru.utils.showToastLong
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -35,16 +34,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        checkLogin()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkLogin()
         setListener()
     }
 
-    private fun checkLogin() {
-        viewModel.tokenHelper.getToken().ifNotNull {
+    private fun checkLogin() = lifecycleScope.launch {
+        if (viewModel.isUserAuthorized())
             findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
-        }
     }
 
     private fun setListener() = binding.apply {
@@ -72,7 +74,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private suspend fun handleCloudResponse(response: CloudResponse<Unit>, id: String) = withContext(Dispatchers.Main) {
         response.getResult(
             success = {
-                viewModel.saveNewToken(id)
                 findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
             },
             failure = {

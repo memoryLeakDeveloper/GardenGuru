@@ -1,9 +1,11 @@
 package com.entexy.gardenguru.di.user
 
 import com.entexy.gardenguru.core.App
+import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
 import com.entexy.gardenguru.data.user.UserRepositoryImpl
 import com.entexy.gardenguru.data.user.cloud.*
 import com.entexy.gardenguru.domain.repository.UserRepository
+import com.entexy.gardenguru.domain.usecases.plant.FetchUserPlantsUseCase
 import com.entexy.gardenguru.domain.usecases.user.*
 import dagger.Module
 import dagger.Provides
@@ -39,20 +41,12 @@ class UserModule {
     fun provideLoginUserUseCase(repository: UserRepository): LoginUserUseCase = LoginUserUseCase(repository)
 
     @Provides
-    fun provideUserPlantsDataSource(): UserPlantsDataSource = UserPlantsDataSource.Base(App.firestoreUsersRef)
-
-    @Provides
-    fun provideFetchUserPlantsUseCase(repository: UserRepository): FetchUserPlantsUseCase = FetchUserPlantsUseCase(repository)
-
-
-    @Provides
     fun provideUserRepository(
         loginUserDataSource: LoginUserDataSource,
         createUserDataSource: CreateUserDataSource,
         deleteUserDataSource: DeleteUserDataSource,
-        signOutUserDataSource: SignOutUserDataSource,
-        userPlantsDataSource: UserPlantsDataSource
+        signOutUserDataSource: SignOutUserDataSource
     ): UserRepository =
-        UserRepositoryImpl(loginUserDataSource, createUserDataSource, deleteUserDataSource, signOutUserDataSource, userPlantsDataSource)
+        UserRepositoryImpl(loginUserDataSource, createUserDataSource, deleteUserDataSource, signOutUserDataSource)
 
 }

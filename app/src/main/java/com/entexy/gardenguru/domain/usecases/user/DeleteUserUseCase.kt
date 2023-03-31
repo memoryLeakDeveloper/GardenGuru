@@ -10,8 +10,7 @@ class DeleteUserUseCase @Inject constructor(private val repository: UserReposito
 
     suspend fun delete() = flow {
         emit(CloudResponse.Loading())
-        repository.deleteUser()
-        emit(CloudResponse.Success(Unit))
+        emit(repository.deleteUser())
     }.catch {
         emit(CloudResponse.Error(it))
     }

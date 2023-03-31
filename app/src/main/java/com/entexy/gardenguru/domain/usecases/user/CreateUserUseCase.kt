@@ -10,8 +10,7 @@ class CreateUserUseCase @Inject constructor(private val repository: UserReposito
 
     suspend fun createUser(id: String) = flow {
         emit(CloudResponse.Loading())
-        repository.createUser(id)
-        emit(CloudResponse.Success(Unit))
+        emit(repository.createUser(id))
     }.catch {
         emit(CloudResponse.Error(it))
     }

@@ -13,7 +13,4 @@ interface UserRepository {
 
     suspend fun signOutUser(): CloudResponse<Unit>
 
-    suspend fun fetchAllPlants(uid: String): List<String>?
-
-
 }
