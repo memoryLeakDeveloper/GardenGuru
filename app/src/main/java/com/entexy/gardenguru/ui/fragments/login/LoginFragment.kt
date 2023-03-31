@@ -28,6 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private var loadingDialog = DialogHelper()
     private val googleAuth = registerForActivityResult(GoogleAuthContract()) { result ->
         result?.let {
+            loadingDialog.showDialog(ProgressBar(requireContext()), false)
             loginUser(it)
         } ?: run {
             requireContext().showToastLong(R.string.something_is_wrong)
@@ -66,7 +67,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         } ?: run {
             requireContext().showToastLong(R.string.something_is_wrong)
         }
-
     }
 
     private suspend fun handleCloudResponse(response: CloudResponse<Unit>, id: String) = withContext(Dispatchers.Main) {
@@ -79,7 +79,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 bugger(it.exception?.stackTraceToString())
             },
             loading = {
-                loadingDialog.showDialog(ProgressBar(requireContext()), false)
             }
         )
         loadingDialog.hideDialog()
