@@ -39,24 +39,21 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="14dp"
-        app:dividerColor="@color/gray1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler" />
+        app:dividerColor="@color/gray1" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/watering"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:orientation="horizontal"
-        android:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:src="@drawable/ic_watering" />
+            android:src="@drawable/ic_watering" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -66,23 +63,23 @@
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/gray"
             android:textSize="16sp"
-            tools:text="@string/watering" />
+            android:text="@string/watering" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/pruning"
+        android:id="@+id/feeding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:orientation="horizontal"
-        android:visibility="gone">
+        tools:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:src="@drawable/ic_pruning" />
+            android:src="@drawable/ic_feeding" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -92,59 +89,7 @@
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/gray"
             android:textSize="16sp"
-            tools:text="@string/pruning" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/dressing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:src="@drawable/ic_top_dressing" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="14dp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:text="@string/top_dressing" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/transfer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="16dp"
-        android:visibility="gone">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:src="@drawable/ic_transfer" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="14dp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:text="@string/transfer" />
+            android:text="@string/feeding" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -153,14 +98,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:orientation="horizontal"
-        android:visibility="gone">
+        tools:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:src="@drawable/ic_spraying" />
+            android:src="@drawable/ic_spraying" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -170,7 +115,7 @@
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/gray"
             android:textSize="16sp"
-            tools:text="@string/spraying" />
+            android:text="@string/spraying" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -178,11 +123,18 @@
         android:id="@+id/text_no_events"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:visibility="gone"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/sf_ui_font"
         android:gravity="center"
-        android:padding="20dp"
+        android:layout_marginTop="14dp"
+        android:paddingHorizontal="20dp"
         android:text="@string/no_events"
         android:textSize="18sp" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"/>
 
 </merge>

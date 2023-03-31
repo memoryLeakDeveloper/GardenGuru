@@ -1,5 +1,6 @@
 package com.entexy.gardenguru.di.media
 
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.media.MediaRepositoryImpl
 import com.entexy.gardenguru.data.media.cloud.DeleteImageSource
 import com.entexy.gardenguru.data.media.cloud.UploadImageSource
@@ -21,9 +22,9 @@ object MediaModule {
         MediaRepositoryImpl(createImageSource, deleteImageSource)
 
     @Provides
-    fun provideUploadImageDataSource(): UploadImageSource = UploadImageSource.Base()
+    fun provideUploadImageDataSource(): UploadImageSource = UploadImageSource.Base(App.storagePhotos)
 
     @Provides
     @Singleton
-    fun provideDeleteImageSource(): DeleteImageSource = DeleteImageSource.Base()
+    fun provideDeleteImageSource(): DeleteImageSource = DeleteImageSource.Base(App.storagePhotos)
 }

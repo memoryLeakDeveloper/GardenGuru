@@ -1,6 +1,8 @@
 package com.entexy.gardenguru.data.media.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
+import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 interface DeleteImageSource {
@@ -9,10 +11,15 @@ interface DeleteImageSource {
         imageUrl: String
     ): CloudResponse<Unit>
 
-    class Base @Inject constructor() : DeleteImageSource {
+    class Base @Inject constructor(private val storageRef: StorageReference) : DeleteImageSource {
         override suspend fun deleteImage(imageUrl: String): CloudResponse<Unit> {
-            //TODO("Not yet implemented")
-            return CloudResponse.Success(Unit)
+            val deleteTask = storageRef.storage.getReferenceFromUrl(imageUrl).delete()
+            deleteTask.await()
+            return if (deleteTask.isSuccessful){
+                CloudResponse.Success(Unit)
+            }else{
+                CloudResponse.Error(deleteTask.exception)
+            }
         }
 
     }

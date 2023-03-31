@@ -20,7 +20,6 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Pattern
 
 fun Context.getPrefs(): SharedPreferences = getSharedPreferences(PrefsKeys.PREFS, Context.MODE_PRIVATE)
 
@@ -135,6 +134,9 @@ fun Context.convertPxToDp(px: Float) = (px * resources.displayMetrics.density).t
 
 fun Context.convertDpToPx(dp: Float) = (dp * resources.displayMetrics.density).toInt()
 
+fun Calendar.isSummerSeason(): Boolean {
+    return get(Calendar.MONTH) in 4..11
+}
 fun String.isEmailValid(): Boolean {
     return Pattern.compile(
         "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
@@ -165,3 +167,7 @@ fun String.isEmailLengthIsValid(): Boolean {
     return true
 }
 
+
+fun Calendar.isDaysEquals(calendar: Calendar): Boolean {
+    return get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR) && get(Calendar.YEAR) == calendar.get(Calendar.YEAR)
+}

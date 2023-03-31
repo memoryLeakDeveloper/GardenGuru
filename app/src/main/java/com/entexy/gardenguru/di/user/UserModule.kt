@@ -19,7 +19,7 @@ import dagger.hilt.android.components.ViewModelComponent
 class UserModule {
 
     @Provides
-    fun provideCreateUserDataSource(): CreateUserDataSource = CreateUserDataSource.Base(App.firestoreUserRef)
+    fun provideCreateUserDataSource(): CreateUserDataSource = CreateUserDataSource.Base(App.firestoreUsersRef)
 
     @Provides
     fun provideCreateUserUseCase(repository: UserRepository): CreateUserUseCase = CreateUserUseCase(repository)

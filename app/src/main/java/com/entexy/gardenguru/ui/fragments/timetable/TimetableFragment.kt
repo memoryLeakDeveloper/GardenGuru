@@ -41,6 +41,10 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
             ivScrollUp.setOnClickListener {
                 rvEvents.smoothScrollToPosition(10)
             }
+
+            title.setOnClickListener {
+//                App.firestoreUserRef.document(App.user.userId).collection("plants").document().set(PlantMockData.plant.mapToPlantCloud())
+            }
         }
 
         initCalendar()
@@ -57,7 +61,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
                         it.getResult(
                             success = {},
                             failure = {
-                                      requireView().showSnackBar(R.string.error_update_data)
+                                requireView().showSnackBar(R.string.error_update_data)
                             },
                             loading = {}
                         )
@@ -106,7 +110,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
                             requireView().showSnackBar(R.string.error_loading_data)
                         },
                         loading = {
-                            rvEvents.loadSkeleton(R.layout.rv_timetable_item){
+                            rvEvents.loadSkeleton(R.layout.rv_timetable_item) {
                                 itemCount(10)
                             }
                         }

@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PlantCardViewModel @Inject constructor(
+class PlantCardHistoryViewModel @Inject constructor(
     private val fetchEventsUseCase: FetchEventsUseCase
 ) : ViewModel() {
     suspend fun fetchEvents(plantId: String) = fetchEventsUseCase.fetchPlant(plantId)

@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.entexy.gardenguru.R
 import com.google.android.material.snackbar.Snackbar
@@ -41,10 +40,15 @@ fun View.showSnackBar(@StringRes resId: Int) {
     snackBar.show()
 }
 
-fun ImageView.setImageByGlide(model: Any?) = Glide.with(context)
+fun ImageView.setCircleImageByGlide(model: Any?) = Glide.with(context)
     .load(model)
     .circleCrop()
-    .placeholder(ContextCompat.getDrawable(context, R.drawable.plant_placeholder))
+    .placeholder(R.drawable.plant_placeholder)
+    .into(this)
+
+fun ImageView.setImageByGlide(model: Any?, placeholderResId: Int?) = Glide.with(context)
+    .load(model)
+    .placeholder(placeholderResId ?: 0)
     .into(this)
 
 fun View.hideKeyboard() {

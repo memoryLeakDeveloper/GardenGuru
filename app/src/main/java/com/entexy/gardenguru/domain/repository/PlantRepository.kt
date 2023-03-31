@@ -19,7 +19,7 @@ interface PlantRepository {
 
     suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Unit>
 
-    suspend fun deletePlantPhoto(plantId: String): CloudResponse<Unit>
+    suspend fun updatePlantCustomPhoto(plantId: String, photoUrl: String?): CloudResponse<Unit>
 
     suspend fun deletePlant(plantId: String): CloudResponse<Unit>
 
