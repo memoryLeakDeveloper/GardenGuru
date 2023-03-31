@@ -6,4 +6,5 @@ data class EventCloud(
     var id: String? = null,
     var eventTime: Timestamp? = null,
     var eventType: String? = null,
+    var plantId: String? = null
 )

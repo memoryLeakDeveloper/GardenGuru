@@ -42,7 +42,7 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
                             initView(plantData, ArrayList(it.result.sortedByDescending { it.eventTime.time }).apply {
                                 add(0, EventData("", true, Calendar.getInstance().apply {
                                     time = plantData.addingTime
-                                }, EventData.EventType.Create))
+                                }, EventData.EventType.Create, plantData.id))
                             })
 
                         }

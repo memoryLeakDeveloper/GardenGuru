@@ -10,7 +10,19 @@ import javax.inject.Inject
 
 class PredictEventsUseCase @Inject constructor() {
 
-    fun predictPastEvents(plantData: PlantData, events: ArrayList<EventData>): List<EventData> {
+    fun predictTimetableEvents(plants: List<PlantData>, events: List<EventData>): List<EventData> {
+        val result = arrayListOf<EventData>()
+
+        plants.forEach { plantData ->
+            val pastEvents = predictPastEvents(plantData, events.filter { it.plantId == plantData.id })
+            val futureEvents = predictFutureEvents(plantData, events.filter { it.plantId == plantData.id }, 30)
+            result.addAll(pastEvents)
+            result.addAll(futureEvents)
+        }
+        return result
+    }
+
+    fun predictPastEvents(plantData: PlantData, events: List<EventData>): List<EventData> {
         val sortedEvents = ArrayList(events.sortedByDescending { it.eventTime.time })
 
         val wateringPrediction = predictPastEvents(
@@ -18,7 +30,8 @@ class PredictEventsUseCase @Inject constructor() {
             EventData.EventType.Watering,
             sortedEvents.filter { it.eventType == EventData.EventType.Watering },
             plantData.wateringSummer,
-            plantData.wateringWinter
+            plantData.wateringWinter,
+            plantData.id
         )
 
         val sprayingPrediction = predictPastEvents(
@@ -26,7 +39,8 @@ class PredictEventsUseCase @Inject constructor() {
             EventData.EventType.Spraying,
             sortedEvents.filter { it.eventType == EventData.EventType.Spraying },
             plantData.sprayingSummer,
-            plantData.sprayingWinter
+            plantData.sprayingWinter,
+            plantData.id
         )
 
         val feedingPrediction = predictPastEvents(
@@ -34,7 +48,8 @@ class PredictEventsUseCase @Inject constructor() {
             EventData.EventType.Feeding,
             sortedEvents.filter { it.eventType == EventData.EventType.Feeding },
             plantData.wateringSummer,
-            plantData.wateringWinter
+            plantData.wateringWinter,
+            plantData.id
         )
 
         val filterValue = listOf(
@@ -57,6 +72,7 @@ class PredictEventsUseCase @Inject constructor() {
         events: List<EventData>,
         eventPeriodSummer: Int,
         eventPeriodWinter: Int,
+        plantId: String
     ): List<EventData> {
         val eventPrediction = mutableListOf<EventData>()
         eventPrediction.addAll(events)
@@ -74,7 +90,8 @@ class PredictEventsUseCase @Inject constructor() {
                     null,
                     false,
                     Calendar.getInstance().apply { timeInMillis = firstPrediction.timeInMillis },
-                    eventType
+                    eventType,
+                    plantId
                 )
             )
         }
@@ -82,12 +99,12 @@ class PredictEventsUseCase @Inject constructor() {
 
         var i = 0
 
-        val currentTime = System.currentTimeMillis()
+        val currentTime = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 0) }.timeInMillis
         while (currentEventDate.timeInMillis <= currentTime) {
             val iEvent = eventPrediction.getOrNull(i)
             val daysAfterEvent = if (iEvent?.isCompleted == true) {
-                    if (currentEventDate.isSummerSeason()) eventPeriodSummer else eventPeriodWinter
-                } else 1
+                if (currentEventDate.isSummerSeason()) eventPeriodSummer else eventPeriodWinter
+            } else 1
 
             val predictedTime = Calendar.getInstance().apply {
                 timeInMillis = currentEventDate.timeInMillis
@@ -95,14 +112,15 @@ class PredictEventsUseCase @Inject constructor() {
             }
 
             val iNextEvent = eventPrediction.getOrNull(i + 1)
-            if (iNextEvent == null || !predictedTime.isDaysEquals(iNextEvent.eventTime)) {
+            if ((predictedTime.timeInMillis < currentTime) && (iNextEvent == null || !predictedTime.isDaysEquals(iNextEvent.eventTime))) {
                 eventPrediction.add(
                     min(i + 1, eventPrediction.size - 1),
                     EventData(
                         null,
                         false,
                         Calendar.getInstance().apply { timeInMillis = predictedTime.timeInMillis },
-                        eventType
+                        eventType,
+                        plantId
                     )
                 )
             }
@@ -112,7 +130,7 @@ class PredictEventsUseCase @Inject constructor() {
         return eventPrediction
     }
 
-    fun predictFutureEvents(plantData: PlantData, events: ArrayList<EventData>, predictCount: Int): List<EventData> {
+    fun predictFutureEvents(plantData: PlantData, events: List<EventData>, predictCount: Int): List<EventData> {
         val sortedEvents = events.sortedByDescending { it.eventTime.time }
 
 
@@ -127,15 +145,30 @@ class PredictEventsUseCase @Inject constructor() {
         }
 
         val wateringPrediction = predictFutureEvents(
-            lastWatering?.eventTime?.time, EventData.EventType.Watering, plantData.wateringSummer, plantData.wateringWinter, lastDay
+            lastWatering?.eventTime?.time,
+            EventData.EventType.Watering,
+            plantData.wateringSummer,
+            plantData.wateringWinter,
+            lastDay,
+            plantData.id
         )
 
         val sprayingPrediction = predictFutureEvents(
-            lastSpraying?.eventTime?.time, EventData.EventType.Spraying, plantData.sprayingSummer, plantData.sprayingWinter, lastDay
+            lastSpraying?.eventTime?.time,
+            EventData.EventType.Spraying,
+            plantData.sprayingSummer,
+            plantData.sprayingWinter,
+            lastDay,
+            plantData.id
         )
 
         val feedingPrediction = predictFutureEvents(
-            lastFeeding?.eventTime?.time, EventData.EventType.Feeding, plantData.feedingSummer, plantData.feedingWinter, lastDay
+            lastFeeding?.eventTime?.time,
+            EventData.EventType.Feeding,
+            plantData.feedingSummer,
+            plantData.feedingWinter,
+            lastDay,
+            plantData.id
         )
 
         val result = mutableListOf<EventData>()
@@ -146,7 +179,12 @@ class PredictEventsUseCase @Inject constructor() {
     }
 
     private fun predictFutureEvents(
-        lastEventTime: Date?, eventType: EventData.EventType, eventPeriodSummer: Int, eventPeriodWinter: Int, lastPredictionDay: Calendar
+        lastEventTime: Date?,
+        eventType: EventData.EventType,
+        eventPeriodSummer: Int,
+        eventPeriodWinter: Int,
+        lastPredictionDay: Calendar,
+        plantId: String
     ): List<EventData> {
 
         val eventPrediction = mutableListOf<EventData>()
@@ -160,11 +198,11 @@ class PredictEventsUseCase @Inject constructor() {
             }
             if (nextEventPredictions.timeInMillis > System.currentTimeMillis()) lastEventTime
             else {
-                eventPrediction.add(EventData(null, false, Calendar.getInstance(), eventType))
+                eventPrediction.add(EventData(null, false, Calendar.getInstance(), eventType, plantId))
                 Date()
             }
         } else {
-            eventPrediction.add(EventData(null, false, Calendar.getInstance(), eventType))
+            eventPrediction.add(EventData(null, false, Calendar.getInstance(), eventType, plantId))
             Date()
         }
 
@@ -178,7 +216,7 @@ class PredictEventsUseCase @Inject constructor() {
             )
             eventPrediction.add(EventData(null, false, Calendar.getInstance().apply {
                 timeInMillis = currentDate.timeInMillis
-            }, eventType))
+            }, eventType, plantId))
         }
 
         return eventPrediction

@@ -9,6 +9,8 @@ interface PlantRepository {
 
     suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData>
 
+    suspend fun fetchPlainUserPlants(): CloudResponse<ArrayList<PlantData>>
+
     suspend fun fetchPests(idPests: List<String>?): ArrayList<PestData>
 
     suspend fun fetchBenefits(idBenefits: List<String>?): ArrayList<BenefitData>

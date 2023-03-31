@@ -12,4 +12,6 @@ interface EventRepository {
 
     suspend fun fetchEvents(plantId: String): CloudResponse<List<EventData>>
 
+    suspend fun fetchUserEvents(plantIds: List<String>): CloudResponse<List<EventData>>
+
 }
