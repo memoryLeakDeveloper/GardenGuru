@@ -42,7 +42,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun checkLogin() {
-        GoogleSignIn.getLastSignedInAccount(requireContext())?.account.ifNotNull {
+        bugger("LoginFragment ${viewModel.tokenHelper.getToken()}")
+       viewModel.tokenHelper.getToken().ifNotNull {
             findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
         }
     }

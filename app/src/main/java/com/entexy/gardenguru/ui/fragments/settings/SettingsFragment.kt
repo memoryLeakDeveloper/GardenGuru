@@ -6,17 +6,22 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
+import com.entexy.gardenguru.data.auth.GoogleAuthContract
 import com.entexy.gardenguru.data.language.Languages
 import com.entexy.gardenguru.databinding.DialogDeleteAccountBinding
 import com.entexy.gardenguru.databinding.FragmentSettingsBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.utils.bugger
+import com.entexy.gardenguru.utils.showToastLong
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +34,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     private val viewModel: SettingsViewModel by viewModels()
     private var dialog: DialogHelper = DialogHelper()
+    private var progressDialog = DialogHelper()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,13 +61,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
         }
         btnExit.setOnClickListener {
             handleExitFromAccountEvent()
-//            findNavController().popBackStack(R.id.loginFragment, false)
         }
         tvDeleteAccount.setOnClickListener {
             val dialogBinding = DialogDeleteAccountBinding.inflate(LayoutInflater.from(requireContext()))
             dialog.showDialog(dialogBinding.apply {
                 tvAccept.setOnClickListener {
-                    handleSignOutUserEvent()
+                    handleDeleteUserEvent()
                 }
                 tvDecline.setOnClickListener {
                     dialog.hideDialog()
@@ -113,46 +118,53 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                 withContext(Dispatchers.Main) {
                     it.getResult(
                         loading = {
-                            bugger("loading")
+                            progressDialog.showDialog(ProgressBar(requireContext()), false)
                         },
                         success = {
-                            bugger("success")
-
+                            viewModel.tokenHelper.setToken(null)
+                            signOutFromGoogle()
+                            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         },
                         failure = {
-                            bugger("failure")
-
+                            requireContext().showToastLong(R.string.something_is_wrong)
                         }
                     )
+                    progressDialog.hideDialog()
                     dialog.hideDialog()
                 }
             }
         }
     }
 
-    private fun handleSignOutUserEvent() {
+    private fun handleDeleteUserEvent() {
         lifecycleScope.launch {
+            signOutFromGoogle()
             viewModel.deleteUser().collect {
                 withContext(Dispatchers.Main) {
                     it.getResult(
                         loading = {
-                            bugger("loading")
+                            progressDialog.showDialog(ProgressBar(requireContext()), false)
                         },
                         success = {
-                            bugger("success")
-
+                            viewModel.tokenHelper.setToken(null)
+                            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         },
                         failure = {
-                            bugger("failure")
-
+                            requireContext().showToastLong(R.string.something_is_wrong)
                         }
                     )
+                    progressDialog.hideDialog()
                     dialog.hideDialog()
                 }
             }
         }
     }
 
+    private fun signOutFromGoogle() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(GoogleAuthContract.client_id).requestEmail().build()
+        GoogleSignIn.getClient(requireContext(), gso).signOut()
+    }
 
     companion object {
         private const val PRIVACY_POLICY_URL =

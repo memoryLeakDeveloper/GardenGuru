@@ -14,9 +14,7 @@ interface DeleteUserDataSource {
 
         override suspend fun delete(): CloudResponse<Unit> {
             val currentUser = Firebase.auth.currentUser ?: return CloudResponse.Error(Exception())
-            val task = currentUser.delete().addOnCompleteListener {
-                bugger("USER DELETED")
-            }
+            val task = currentUser.delete()
             task.await()
             return if (task.exception == null) {
                 CloudResponse.Success(Unit)

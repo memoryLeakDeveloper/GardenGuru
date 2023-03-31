@@ -10,8 +10,7 @@ class SignOutUserUseCase @Inject constructor(private val repository: UserReposit
 
     suspend fun signOut() = flow {
         emit(CloudResponse.Loading())
-        repository.signOutUser()
-        emit(CloudResponse.Success(Unit))
+        emit(repository.signOutUser())
     }.catch {
         emit(CloudResponse.Error(it))
     }

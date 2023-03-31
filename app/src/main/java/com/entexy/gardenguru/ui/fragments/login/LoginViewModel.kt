@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val tokenHelper: TokenHelper, private val createUserUseCase: CreateUserUseCase) :
+class LoginViewModel @Inject constructor(val tokenHelper: TokenHelper, private val createUserUseCase: CreateUserUseCase) :
     ViewModel() {
 
     fun saveNewToken(token: String) = tokenHelper.setToken(token)
