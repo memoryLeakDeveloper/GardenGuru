@@ -38,7 +38,7 @@ class PlantCardInfoViewModel @Inject constructor(
         deletePlantPhotoUseCase.perform(plantId, customPhoto)
 
     fun predictEvents(plantData: PlantData, events: ArrayList<EventData>): List<EventData> =
-        predictEventsUseCase.predictEvents(plantData, events, 3)
+        predictEventsUseCase.predictFutureEvents(plantData, events, 3)
 
     @Suppress("DEPRECATION")
     suspend fun uploadPhoto(imageUri: Uri, context: Context, plantId: String, oldImageUrl: String?): Flow<CloudResponse<String>> {

@@ -49,7 +49,6 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
 
         initCalendar()
         initAddButton()
-
     }
 
     @SuppressLint("ClickableViewAccessibility")

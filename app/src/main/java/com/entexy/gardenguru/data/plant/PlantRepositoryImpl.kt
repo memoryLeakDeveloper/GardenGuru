@@ -36,6 +36,21 @@ class PlantRepositoryImpl @Inject constructor(
         } else CloudResponse.Error(null)
     }
 
+    //returns a list of plants with empty benefits, pests
+    override suspend fun fetchPlainUserPlants(): CloudResponse<ArrayList<PlantData>> {
+        val plantDataCloud = plantSource.fetchPlants()
+
+        return if (plantDataCloud is CloudResponse.Success) {
+            val result = arrayListOf<PlantData>()
+            plantDataCloud.result.forEach {
+                val plantData = it.mapToData()
+                if (plantData != null)
+                    result.add(plantData)
+            }
+            CloudResponse.Success(result)
+        } else CloudResponse.Error(null)
+    }
+
     override suspend fun fetchPests(idPests: List<String>?): ArrayList<PestData> {
         val result = arrayListOf<PestData>()
         idPests?.forEach {

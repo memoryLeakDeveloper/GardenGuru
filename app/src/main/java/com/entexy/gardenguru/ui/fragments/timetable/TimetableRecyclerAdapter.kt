@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.plant.event.PlantEventData
 import com.entexy.gardenguru.databinding.RvTimetableItemBinding
-import com.entexy.gardenguru.utils.toDmyString
+import com.entexy.gardenguru.utils.isDaysEquals
 import com.entexy.gardenguru.utils.toGone
 import com.entexy.gardenguru.utils.toVisible
 import java.util.*
@@ -37,10 +37,19 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
         with(holder.binding) {
             val positionCalendar = getCalendarToPosition(position)
 
-            when (todayCalendar[Calendar.DAY_OF_YEAR] - positionCalendar[Calendar.DAY_OF_YEAR]) {
-                0 -> tvDate.setText(R.string.today)
-                -1 -> tvDate.setText(R.string.tomorrow)
+            val fromTodayToThisPosition = todayCalendar[Calendar.DAY_OF_YEAR] - positionCalendar[Calendar.DAY_OF_YEAR]
+            when (fromTodayToThisPosition) {
+                0 -> {
+                    tvDate.setText(R.string.today)
+                    tvDate.setTextColor(root.resources.getColor(R.color.white, null))
+                }
+                -1 -> {
+                    tvDate.setTextColor(root.resources.getColor(R.color.gray, null))
+                    tvDate.setText(R.string.tomorrow)
+                }
                 else -> {
+                    tvDate.setTextColor(root.resources.getColor(R.color.gray, null))
+
                     val month = root.resources.getStringArray(R.array.calendar_month)[positionCalendar[Calendar.MONTH]]
                     tvDate.text = "${positionCalendar[Calendar.DAY_OF_MONTH]} $month"
                 }
@@ -58,7 +67,7 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
                 rvEvents.toVisible()
 
                 rvEvents.layoutManager = LinearLayoutManager(root.context)
-                rvEvents.adapter = EventsRecyclerAdapter(ArrayList(items)) { eventData ->
+                rvEvents.adapter = EventsRecyclerAdapter(ArrayList(items), fromTodayToThisPosition == 0) { eventData ->
                     if ((items.find { !it.isComplete } == null) != hasIncompleteEvent)
                         notifyItemChanged(position)
                     eventCompletedCallback(eventData)
@@ -93,9 +102,8 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
     }
 
     private fun getEventsForDay(calendar: Calendar): List<PlantEventData> {
-        val dateString = calendar.toDmyString()
         return events.filter {
-            it.dateDMY == dateString
+            it.eventTime.isDaysEquals(calendar)
         }
     }
 

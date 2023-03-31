@@ -7,6 +7,7 @@ import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.auth.UserEmailHelper
 import com.entexy.gardenguru.data.language.LanguageHelper
 import com.entexy.gardenguru.data.notifcations.NotificationsPref
+import com.entexy.gardenguru.data.language.LanguagePreference
 import com.entexy.gardenguru.data.prefs.FirstLaunchPref
 import com.entexy.gardenguru.domain.usecases.app.UserEmailUseCase
 import com.entexy.gardenguru.utils.PrefsKeys
@@ -36,7 +37,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideLanguageHelper(sharedPreferences: SharedPreferences): LanguageHelper = LanguageHelper.Base(sharedPreferences)
+    fun provideLanguagePreference(sharedPreferences: SharedPreferences): LanguagePreference = LanguagePreference(sharedPreferences)
+
 
     @Provides
     @Singleton
