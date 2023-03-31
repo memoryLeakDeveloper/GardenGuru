@@ -15,13 +15,14 @@ class SupportRepositoryImpl @Inject constructor() : SupportRepository {
         files: List<File>?,
         onCompleteLambda: (success: Boolean) -> Unit
     ) {
+        //todo change email
         var builder = MaildroidX.Builder()
             .smtp("smtp.yandex.ru")
             .smtpUsername("yurykorhav@yandex.by")
             .smtpPassword("pudauhxfbqdwmcwm")
             .port("465")
             .type(MaildroidXType.HTML)
-            .to("mlearsoft+gardenguru@gmail.com")
+            .to("gu@planx.one")
             .from("yurykorhav@yandex.by")
             .subject("${subject ?: run { "no theme" }} - Sent from Android, email: $email")
             .body(body)
