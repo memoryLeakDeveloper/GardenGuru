@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.auth.GoogleAuthContract
@@ -161,6 +162,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     }
 
     private fun signOutFromGoogle() {
+        App.user = null
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(GoogleAuthContract.client_id).requestEmail().build()
         GoogleSignIn.getClient(requireContext(), gso).signOut()
@@ -171,6 +173,5 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             "https://docs.google.com/document/d/1kGUnptN58bFXPeQTpFTe0YPgk1nxUdtS7h6OJ9ShWs4/edit"
         private const val TERM_OF_USE_URL = "https://docs.google.com/document/d/1zaRDgrfNGsF_YOPKNs3UUoO8TyvIRsBcSf1pZQ6tDn0/edit"
     }
-
 
 }

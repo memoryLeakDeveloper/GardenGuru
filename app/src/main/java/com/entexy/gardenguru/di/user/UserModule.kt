@@ -2,13 +2,9 @@ package com.entexy.gardenguru.di.user
 
 import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.data.user.UserRepositoryImpl
-import com.entexy.gardenguru.data.user.cloud.CreateUserDataSource
-import com.entexy.gardenguru.data.user.cloud.DeleteUserDataSource
-import com.entexy.gardenguru.data.user.cloud.SignOutUserDataSource
+import com.entexy.gardenguru.data.user.cloud.*
 import com.entexy.gardenguru.domain.repository.UserRepository
-import com.entexy.gardenguru.domain.usecases.user.CreateUserUseCase
-import com.entexy.gardenguru.domain.usecases.user.DeleteUserUseCase
-import com.entexy.gardenguru.domain.usecases.user.SignOutUserUseCase
+import com.entexy.gardenguru.domain.usecases.user.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,10 +33,26 @@ class UserModule {
     fun provideSignOutUserUseCase(repository: UserRepository): SignOutUserUseCase = SignOutUserUseCase(repository)
 
     @Provides
+    fun provideLoginUserDataSource(): LoginUserDataSource = LoginUserDataSource.Base(App.firebaseAuth)
+
+    @Provides
+    fun provideLoginUserUseCase(repository: UserRepository): LoginUserUseCase = LoginUserUseCase(repository)
+
+    @Provides
+    fun provideUserPlantsDataSource(): UserPlantsDataSource = UserPlantsDataSource.Base(App.firestoreUsersRef)
+
+    @Provides
+    fun provideFetchUserPlantsUseCase(repository: UserRepository): FetchUserPlantsUseCase = FetchUserPlantsUseCase(repository)
+
+
+    @Provides
     fun provideUserRepository(
+        loginUserDataSource: LoginUserDataSource,
         createUserDataSource: CreateUserDataSource,
         deleteUserDataSource: DeleteUserDataSource,
-        signOutUserDataSource: SignOutUserDataSource
-    ): UserRepository = UserRepositoryImpl(createUserDataSource, deleteUserDataSource, signOutUserDataSource)
+        signOutUserDataSource: SignOutUserDataSource,
+        userPlantsDataSource: UserPlantsDataSource
+    ): UserRepository =
+        UserRepositoryImpl(loginUserDataSource, createUserDataSource, deleteUserDataSource, signOutUserDataSource, userPlantsDataSource)
 
 }

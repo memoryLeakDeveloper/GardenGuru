@@ -1,5 +1,6 @@
 package com.entexy.gardenguru.data.user.cloud
 
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.auth.ktx.auth
@@ -14,6 +15,7 @@ interface DeleteUserDataSource {
 
         override suspend fun delete(): CloudResponse<Unit> {
             val currentUser = Firebase.auth.currentUser ?: return CloudResponse.Error(Exception())
+            App.firestoreUsersRef.document(Firebase.auth.currentUser!!.uid).delete().await()
             val task = currentUser.delete()
             task.await()
             return if (task.exception == null) {

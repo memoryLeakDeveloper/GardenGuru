@@ -1,12 +1,9 @@
 package com.entexy.gardenguru.core
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import com.entexy.gardenguru.data.language.LanguagePreference
 import com.entexy.gardenguru.data.user.UserData
-import com.entexy.gardenguru.utils.PrefsKeys
-import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
@@ -45,7 +42,7 @@ class App : Application() {
                 if (value != null) {
                     firestoreUserRef = firestoreUsersRef.document(value.userId)
                     firestoreUserPlantRef = firestoreUserRef!!.collection("plants")
-                }else{
+                } else {
                     firestoreUserRef = null
                     firestoreUserPlantRef = null
                 }

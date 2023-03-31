@@ -5,9 +5,8 @@ import android.content.SharedPreferences
 import com.entexy.gardenguru.core.Api
 import com.entexy.gardenguru.data.auth.TokenHelper
 import com.entexy.gardenguru.data.auth.UserEmailHelper
-import com.entexy.gardenguru.data.language.LanguageHelper
-import com.entexy.gardenguru.data.notifcations.NotificationsPref
 import com.entexy.gardenguru.data.language.LanguagePreference
+import com.entexy.gardenguru.data.notifcations.NotificationsPref
 import com.entexy.gardenguru.data.prefs.FirstLaunchPref
 import com.entexy.gardenguru.domain.usecases.app.UserEmailUseCase
 import com.entexy.gardenguru.utils.PrefsKeys
