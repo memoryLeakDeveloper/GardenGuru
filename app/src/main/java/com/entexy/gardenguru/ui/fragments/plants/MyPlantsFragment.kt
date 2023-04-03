@@ -33,63 +33,55 @@ class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
         super.onViewCreated(view, savedInstanceState)
         initGardenList()
         initNoPlants()
-        with(binding) {
-            header.apply {
-                back.setOnClickListener {
-                    requireActivity().onBackPressed()
-                }
-                title.setText(R.string.my_plants)
-            }
-        }
     }
 
-    private fun initNoPlants() {
-        with(binding) {
-            ivCam.setOnClickListener {
-                findNavController().navigate(R.id.action_myPlantsFragment_to_cameraFragment)
-            }
-            etSearchPlant.setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    findNavController().navigate(
-                        R.id.action_myPlantsFragment_to_addingPlantFragment, bundleOf(
-                            AddingPlantFragment.SEARCH_BY_VARIETY_ARGUMENTS_KEY to etSearchPlant.text.toString()
-                        )
+    private fun initNoPlants() = binding.apply {
+        header.title.setText(R.string.my_plants)
+        header.back.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        ivCam.setOnClickListener {
+            findNavController().navigate(R.id.action_myPlantsFragment_to_cameraFragment)
+        }
+        etSearchPlant.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                findNavController().navigate(
+                    R.id.action_myPlantsFragment_to_addingPlantFragment, bundleOf(
+                        AddingPlantFragment.SEARCH_BY_VARIETY_ARGUMENTS_KEY to etSearchPlant.text.toString()
                     )
-                    return@setOnEditorActionListener true
-                }
-                return@setOnEditorActionListener false
+                )
+                return@setOnEditorActionListener true
             }
+            return@setOnEditorActionListener false
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun initGardenList() {
-        with(binding) {
-            rvAdapter = PlantsRecyclerAdapter()
-            rvPlants.layoutManager = LinearLayoutManager(requireContext())
-            rvPlants.adapter = rvAdapter
-        }
-
+    private fun initGardenList() = binding.apply {
+        rvAdapter = PlantsRecyclerAdapter()
+        rvPlants.layoutManager = LinearLayoutManager(requireContext())
+        rvPlants.adapter = rvAdapter
         val dialogHelper = DialogHelper()
         lifecycleScope.launch {
-            viewModel.fetchPlants().collect { cloudResponse ->
-                cloudResponse.getResult(success = {
-                    dialogHelper.hideDialog()
-                    if (it.result.isEmpty()) {
-                        binding.rvPlants.toGone()
-                        binding.noPlantsContainer.toVisible()
-                    } else {
-                        rvAdapter.setData(ArrayList(it.result))
-                        binding.rvPlants.toVisible()
-                        binding.noPlantsContainer.toGone()
-                    }
-                }, failure = {
-                    dialogHelper.hideDialog()
-                    requireView().showSnackBar(R.string.error_loading_data)
-                }, loading = {
-                    dialogHelper.showDialog(ProgressBar(requireContext()))
-                })
-            }
+//            viewModel.fetchPlants().collect { cloudResponse ->
+//                cloudResponse.getResult(success = {
+//                    dialogHelper.hideDialog()
+//                    if (it.result.isEmpty()) {
+//                        rvPlants.toGone()
+//                        noPlantsContainer.toVisible()
+//                    } else {
+//                        rvAdapter.setData(ArrayList(it.result))
+//                        rvPlants.toVisible()
+//                        noPlantsContainer.toGone()
+//                    }
+//                }, failure = {
+//                    dialogHelper.hideDialog()
+//                    requireView().showSnackBar(R.string.error_loading_data)
+//                }, loading = {
+//                    dialogHelper.showDialog(ProgressBar(requireContext()))
+//                })
+//            }
         }
     }
+
 }

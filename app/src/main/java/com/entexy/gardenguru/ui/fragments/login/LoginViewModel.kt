@@ -8,7 +8,6 @@ import com.entexy.gardenguru.data.user.UserData
 import com.entexy.gardenguru.domain.usecases.plant.FetchUserPlantsUseCase
 import com.entexy.gardenguru.domain.usecases.user.CreateUserUseCase
 import com.entexy.gardenguru.domain.usecases.user.LoginUserUseCase
-import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,10 +31,8 @@ class LoginViewModel @Inject constructor(
         val loginResponse = loginUserUseCase.login(id)
         loginResponse?.let { user ->
             fetchUserPlantsUseCase.fetch(user.uid)?.let { list ->
-                App.user = UserData(user.uid, list)
-                userDataPref.put(UserData(user.uid, list))
-                bugger("App.user = ${App.user}")
-                bugger("pref = ${userDataPref.get()}")
+                App.user = UserData(user.uid)
+                userDataPref.put(UserData(user.uid))
             } ?: run {
                 return null
             }

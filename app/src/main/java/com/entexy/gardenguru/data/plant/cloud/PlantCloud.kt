@@ -12,14 +12,16 @@ data class PlantCloud(
     var coverPhoto: String? = null,
     var careComplexity: String? = null,
     var description: String? = null,
-    var localizeDescription: Map<String, String>? = null,
+    var localizedDescription: Map<String, String>? = null,
+    var plantingTime: String? = null,
+    var localizedPlantingTime: Map<String, String>? = null,
+    var pruning: String? = null,
+    var localizedPruning: Map<String, String>,
     var sunRelation: String? = null,
     var pestsIds: List<String>? = null,
     var reproduction: List<String>? = null,
     var benefitsIds: List<String>? = null,
-    var pruning: String? = null,
     var addingDate: Timestamp? = null,
-    var plantingTime: String? = null,
     var feedingSummer: Int? = null,
     var feedingWinter: Int? = null,
     var wateringSummer: Int? = null,
@@ -28,7 +30,8 @@ data class PlantCloud(
     var sprayingWinter: Int? = null,
     var minTemp: Int? = null,
     var maxTemp: Int? = null,
-) {
+    ) {
+
     fun allRequiredFields(): Boolean {
         variety ?: return false
         localizedVariety ?: return false
@@ -36,7 +39,8 @@ data class PlantCloud(
         coverPhoto ?: return false
         careComplexity ?: return false
         description ?: return false
-        localizeDescription ?: return false
+        localizedDescription ?: return false
+        localizedPlantingTime ?: return false
         sunRelation ?: return false
         pestsIds ?: return false
         reproduction ?: return false

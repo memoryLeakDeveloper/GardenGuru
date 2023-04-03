@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.data.plant.pest.PestData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.databinding.ItemPestsBinding
 
 class PestsCardAdapter(private val listPests: List<PestData>) : RecyclerView.Adapter<PestsCardAdapter.PestsCardViewHolder>() {

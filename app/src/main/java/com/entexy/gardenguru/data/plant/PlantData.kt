@@ -14,16 +14,21 @@ data class PlantData(
     var id: String,
     var name: String?,
     var variety: String,
+    var localizedVariety: Map<String, String>,
     var photo: String,
     var customPhoto: String?,
     var coverPhoto: String,
     var careComplexity: CareComplexity,
     var description: String,
+    var localizeDescription: Map<String, String>,
+    var plantingTime: String,
+    var localizedPlantingTime: Map<String, String>,
+    var pruning: String,
+    var localizedPruning: Map<String, String>,
     var sunRelation: SunRelation,
     var pests: List<PestData>,
     var reproduction: List<Reproduction>,
     var benefits: List<BenefitData>,
-    var pruning: String,
     var addingTime: Date,
     var feedingSummer: Int,
     var feedingWinter: Int,
@@ -33,9 +38,6 @@ data class PlantData(
     var sprayingWinter: Int,
     var minTemp: Int,
     var maxTemp: Int,
-    var plantingTime: String,
-    var localizedVariety: Map<String, String>,
-    var localizeDescription: Map<String, String>
 ) : Parcelable {
     fun getPlantName(locale: String): String {
         return name ?: getPlantVariety(locale)
@@ -53,7 +55,6 @@ data class PlantData(
         return customPhoto ?: photo
     }
 }
-
 
 fun PlantData.mapToPlantCloud() = PlantCloud(
     id = id,
@@ -78,7 +79,11 @@ fun PlantData.mapToPlantCloud() = PlantCloud(
     sprayingSummer = sprayingSummer,
     sprayingWinter = sprayingWinter,
     minTemp = minTemp,
-    maxTemp = maxTemp
+    maxTemp = maxTemp,
+    localizedDescription = localizeDescription,
+    localizedVariety = localizedVariety,
+    localizedPlantingTime = localizedPlantingTime,
+    localizedPruning = localizedPruning
 )
 
 fun PlantCloud.mapToData(): PlantData? {
@@ -94,7 +99,7 @@ fun PlantCloud.mapToData(): PlantData? {
                 it.cloudName == careComplexity
             } ?: CareComplexity.Easy,
             description = description!!,
-            localizeDescription = localizeDescription!!,
+            localizeDescription = localizedDescription!!,
             localizedVariety = localizedVariety!!,
             sunRelation = SunRelation.values().find { it.cloudName == sunRelation }!!,
             pests = arrayListOf(),
@@ -115,6 +120,8 @@ fun PlantCloud.mapToData(): PlantData? {
             sprayingWinter = sprayingWinter!!,
             minTemp = minTemp!!,
             maxTemp = maxTemp!!,
+            localizedPruning = localizedPruning,
+            localizedPlantingTime = localizedPlantingTime!!
         )
     }
     return null

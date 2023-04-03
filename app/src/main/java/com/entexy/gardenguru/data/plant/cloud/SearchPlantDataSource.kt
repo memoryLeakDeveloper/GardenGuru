@@ -1,51 +1,44 @@
 package com.entexy.gardenguru.data.plant.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
-import com.entexy.gardenguru.data.plant.PlantData
-import com.entexy.gardenguru.ui.PlantMockData
+import com.entexy.gardenguru.data.plant.search.PlantSearchCloud
 import com.google.firebase.firestore.CollectionReference
+import kotlinx.coroutines.tasks.await
 
 interface SearchPlantDataSource {
 
-    suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>>
+    suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchCloud>>
 
-    suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantData>
+    suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantSearchCloud>
 
     class Base(private val firestorePlantsRef: CollectionReference) : SearchPlantDataSource {
 
-        override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>> {
-//            val task = firestorePlantsRef.whereEqualTo("name", plantName).get()
-//            val querySnapshot = task.await()
-//            val result = arrayListOf<PlantData>()
-//
-//            return if (task.exception == null) {
-//                querySnapshot.documents.forEach {
-//                    val plantCloud = it.toObject(PlantCloud::class.java)?.apply {
-//                        id = ""
-//                    }
-//
-//                    if (plantCloud != null)
-//                        result.add(plantCloud.mapToData())
-//                }
-//                CloudResponse.Success(result)
-//            } else CloudResponse.Error(task.exception)
-
-            return CloudResponse.Success(PlantMockData.plantsData) //todo
+        override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchCloud>> {
+            val task = firestorePlantsRef.whereEqualTo("name", plantName).get()
+            val querySnapshot = task.await()
+            val result = arrayListOf<PlantSearchCloud>()
+            return if (task.exception == null) {
+                querySnapshot.documents.forEach {
+                    val plantCloud = it.toObject(PlantSearchCloud::class.java)
+                    if (plantCloud != null)
+                        result.add(plantCloud)
+                }
+                CloudResponse.Success(result)
+            } else CloudResponse.Error(task.exception)
         }
 
-        override suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantData> {
-//            val task = firestorePlantsRef.whereEqualTo("varietyCode", varietyCode).limit(1).get()
-//            val querySnapshot = task.await()
-//            return if (task.exception == null && querySnapshot.documents.isNotEmpty()) {
-//                val plantCloud = querySnapshot.documents.first().toObject(PlantCloud::class.java)?.apply {
-//                    id = ""
-//                }
-//                if (plantCloud != null){
-//                    CloudResponse.Success(plantCloud.mapToData())
-//                } else CloudResponse.Error(null)
-//            } else CloudResponse.Error(task.exception)
-
-            return CloudResponse.Success(PlantMockData.plantsData.first()) //todo
+        override suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantSearchCloud> {
+            val task = firestorePlantsRef.whereEqualTo("varietyCode", varietyCode).limit(1).get()
+            val querySnapshot = task.await()
+            return if (task.exception == null && querySnapshot.documents.isNotEmpty()) {
+                querySnapshot.documents.map {
+                    val plantCloud = it.toObject(PlantSearchCloud::class.java)
+                    if (plantCloud != null) {
+                        CloudResponse.Success(plantCloud)
+                    }
+                }
+                CloudResponse.Error(null)
+            } else CloudResponse.Error(task.exception)
         }
     }
 }

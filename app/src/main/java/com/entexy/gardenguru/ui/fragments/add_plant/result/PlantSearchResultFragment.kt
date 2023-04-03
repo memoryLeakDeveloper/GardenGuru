@@ -9,17 +9,18 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.databinding.FragmentPlantSearchResultBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.GetPlantInfo
 
-class PlantSearchResultFragment(private val data: PlantData) : BaseFragment<FragmentPlantSearchResultBinding>(), GetPlantInfo {
+class PlantSearchResultFragment(private val data: PlantSearchData) : BaseFragment<FragmentPlantSearchResultBinding>(), GetPlantInfo {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(data)
     }
 
-    private fun initView(data: PlantData) {
+    private fun initView(data: PlantSearchData) {
         with(binding) {
             Glide.with(requireContext()).load(data.photo).fitCenter()
                 .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.plant_placeholder))
@@ -32,7 +33,7 @@ class PlantSearchResultFragment(private val data: PlantData) : BaseFragment<Frag
         }
     }
 
-    override fun getPlantInfo(): PlantData {
+    override fun getPlantInfo(): PlantSearchData {
         return data
     }
 }

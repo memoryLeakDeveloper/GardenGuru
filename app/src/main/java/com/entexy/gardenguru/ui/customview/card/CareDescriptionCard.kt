@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.enums.Seasons
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.databinding.CardCareDescriptionBinding
 
 class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
@@ -17,7 +18,7 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
         orientation = VERTICAL
     }
 
-    fun initView(data: PlantData) = binding.apply {
+    fun initView(data: PlantSearchData) = binding.apply {
         wateringSummer.text = getString(Seasons.Summer, data.wateringSummer)
         wateringWinter.text = getString(Seasons.Winter, data.wateringWinter)
         sprayingSummer.text = getString(Seasons.Summer, data.sprayingSummer)

@@ -13,6 +13,8 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
+import com.entexy.gardenguru.data.plant.search.mapToPlantData
 import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
 import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment.Companion.PLANT_DATA_KEY
 import com.entexy.gardenguru.utils.setString
@@ -62,7 +64,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
             val plantData = pagerAdapter.getCurrentPlantNameAndData(viewPager.currentItem)
             if (plantData != null) {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    val response = viewModel.addPlant(plantData)
+                    val response = viewModel.addPlant(plantData.mapToPlantData()!!)
                     response.collect {
                         withContext(Dispatchers.Main) {
                             it.getResult(
@@ -70,7 +72,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
                                     requireContext().showToastLong("LOOOOOODING")
                                 },
                                 success = {
-                                    findNavController().navigate(R.id.timetableFragment)
+                                    findNavController().navigate(R.id.action_addingPlantFragment_to_myPlantsFragment)
                                 },
                                 failure = {
                                     requireContext().showToastLong(R.string.something_is_wrong)
@@ -89,7 +91,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
         }
     }
 
-    private fun setViewPager(list: List<PlantData>) = binding.apply {
+    private fun setViewPager(list: List<PlantSearchData>) = binding.apply {
         pagerAdapter = AddingPlantPagerAdapter(this@AddingPlantFragment, list)
         viewPager.adapter = pagerAdapter
         viewPager.offscreenPageLimit = 2

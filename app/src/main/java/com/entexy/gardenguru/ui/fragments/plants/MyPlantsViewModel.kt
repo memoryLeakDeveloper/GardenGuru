@@ -9,6 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyPlantsViewModel @Inject constructor(private val fetchAllPlantsUseCase: FetchAllPlantsUseCase) : ViewModel() {
 
-    suspend fun fetchPlants() = fetchAllPlantsUseCase.perform(App.user!!.userPlants)
+    //todo change to request all plants ids
+//    suspend fun fetchPlants() = fetchAllPlantsUseCase.perform(App.user!!)
 
 }

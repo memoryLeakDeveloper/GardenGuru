@@ -46,8 +46,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun checkLogin() = lifecycleScope.launch {
-        if (viewModel.isUserAuthorized() && App.user != null)
+        if (viewModel.isUserAuthorized() && App.user != null) {
+            bugger("id = ${App.user?.userId}")
             findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+        }
     }
 
     private fun setListener() = binding.apply {

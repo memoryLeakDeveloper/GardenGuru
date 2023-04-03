@@ -8,7 +8,8 @@ import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
-import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
+import com.entexy.gardenguru.data.plant.search.mapToData
 import com.entexy.gardenguru.domain.repository.PlantRepository
 import javax.inject.Inject
 
@@ -25,7 +26,6 @@ class PlantRepositoryImpl @Inject constructor(
 
     override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
         val plantDataCloud = plantSource.fetchPlant(idPlant)
-
         return if (plantDataCloud is CloudResponse.Success) {
             val plantData = plantDataCloud.result.mapToData()
             if (plantData != null)
@@ -78,12 +78,13 @@ class PlantRepositoryImpl @Inject constructor(
         return result
     }
 
-    override suspend fun searchPlantByVarietyCode(plantSearchQuires: List<String>): CloudResponse<List<PlantData>> {
-        val result = mutableListOf<PlantData>()
+    override suspend fun searchPlantByVarietyCode(plantSearchQuires: List<String>): CloudResponse<List<PlantSearchData>> {
+        val result = mutableListOf<PlantSearchData>()
         plantSearchQuires.forEach {
             val plantResult = searchPlantDataSource.searchPlantByVarietyCode(it)
             if (plantResult is CloudResponse.Success) {
-                result.add(plantResult.result)
+                val plant = plantResult.result.mapToData(fetchBenefits(plantResult.result.benefits), fetchPests(plantResult.result.pests))
+                result.add(plant)
             } else {
                 return CloudResponse.Error((plantResult as? CloudResponse.Error)?.exception)
             }
@@ -91,11 +92,13 @@ class PlantRepositoryImpl @Inject constructor(
         return CloudResponse.Success(result)
     }
 
-    override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>> {
+    override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchData>> {
         val plantResults = searchPlantDataSource.searchPlantByName(plantName)
-
         return if (plantResults is CloudResponse.Success) {
-            CloudResponse.Success(plantResults.result)
+            val resultList = plantResults.result.map {
+                it.mapToData(fetchBenefits(it.benefits), fetchPests(it.pests))
+            }
+            CloudResponse.Success(resultList)
         } else {
             CloudResponse.Error((plantResults as? CloudResponse.Error)?.exception)
         }
@@ -111,7 +114,7 @@ class PlantRepositoryImpl @Inject constructor(
         return deletePlantDataSource.deletePlant(plantId)
     }
 
-    override suspend fun addPlant(plantId: String) = addPlantDataSource.addPlant(plantId)
+    override suspend fun addPlant(data: PlantData) = addPlantDataSource.addPlant(data)
 
 
 }

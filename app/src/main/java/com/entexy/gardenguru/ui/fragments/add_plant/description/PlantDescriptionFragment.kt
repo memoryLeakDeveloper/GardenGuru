@@ -3,20 +3,32 @@ package com.entexy.gardenguru.ui.fragments.add_plant.description
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.entexy.gardenguru.R
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
+import com.entexy.gardenguru.data.plant.search.mapToPlantData
 import com.entexy.gardenguru.databinding.FragmentPlantDescriptionBinding
 import com.entexy.gardenguru.utils.setString
+import com.entexy.gardenguru.utils.showToastLong
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class PlantDescriptionFragment : BaseFragment<FragmentPlantDescriptionBinding>() {
 
-    private var data: PlantData? = null
+    private var data: PlantSearchData? = null
+    private val viewModel: PlantDescriptionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +40,7 @@ class PlantDescriptionFragment : BaseFragment<FragmentPlantDescriptionBinding>()
         data?.let { initView(it) } ?: run { requireActivity().onBackPressed() }
     }
 
-    private fun initView(data: PlantData) = binding.apply {
+    private fun initView(data: PlantSearchData) = binding.apply {
         header.title.setString(R.string.adding)
         header.back.setOnClickListener {
             requireActivity().onBackPressed()
@@ -45,6 +57,26 @@ class PlantDescriptionFragment : BaseFragment<FragmentPlantDescriptionBinding>()
         careDescription.initView(data)
         pests.initView(data.pests)
         benefits.initView(data.benefits)
+        btnAdd.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val response = viewModel.addPlant(data.mapToPlantData())
+                response.collect {
+                    withContext(Dispatchers.Main) {
+                        it.getResult(
+                            loading = {
+                                requireContext().showToastLong("LOOOOOODING")
+                            },
+                            success = {
+                                findNavController().navigate(R.id.action_plantDescriptionFragment_to_myPlantsFragment)
+                            },
+                            failure = {
+                                requireContext().showToastLong(R.string.something_is_wrong)
+                            }
+                        )
+                    }
+                }
+            }
+        }
     }
 
     companion object {

@@ -2,6 +2,7 @@ package com.entexy.gardenguru.ui.fragments.add_plant
 
 import androidx.lifecycle.ViewModel
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.domain.usecases.plant.AddPlantUseCase
 import com.entexy.gardenguru.domain.usecases.plant.SearchPlantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,5 +18,5 @@ class AddingPlantViewModel @Inject constructor(
 
     suspend fun findPlantsByVariety(plantVariety: String) = searchPlantUseCase.searchPlantByName(plantVariety)
 
-    suspend fun addPlant(plantData: PlantData) = addPlantUseCase.invoke(plantData.id)
+    suspend fun addPlant(plantData: PlantData) = addPlantUseCase.invoke(plantData)
 }

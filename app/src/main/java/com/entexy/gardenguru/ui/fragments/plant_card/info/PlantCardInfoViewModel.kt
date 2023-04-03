@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.event.EventData
+import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.domain.usecases.events.PredictEventsUseCase
 import com.entexy.gardenguru.domain.usecases.media.UploadPlantImageUseCase
 import com.entexy.gardenguru.domain.usecases.plant.DeletePlantPhotoUseCase
