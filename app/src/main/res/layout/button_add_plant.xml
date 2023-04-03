@@ -10,8 +10,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/expanded_btn_background"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="32dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="36dp"
         android:src="@drawable/expanded_bt_bg"
         app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
         app:layout_constraintEnd_toEndOf="@+id/iv_plus"
@@ -21,9 +21,9 @@
         android:id="@+id/iv_cam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_margin="10dp"
         android:alpha="0"
-        android:src="@drawable/ic_camera"
+        android:src="@drawable/ic_timetable_camera"
         app:layout_constraintBottom_toBottomOf="@+id/iv_plus"
         app:layout_constraintStart_toStartOf="@+id/expanded_btn_background"
         app:layout_constraintTop_toTopOf="@+id/iv_plus" />
@@ -31,7 +31,8 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_input_plant_name"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
+
         android:layout_marginHorizontal="10dp"
         android:background="@color/transparent"
         android:alpha="0"
@@ -40,8 +41,8 @@
         android:hint="@string/enter_plant_name"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:textSize="16sp"
-        android:inputType="text"
+        android:textSize="15sp"
+        android:inputType="textMultiLine"
         android:imeOptions="actionSearch"
         app:layout_constraintBottom_toBottomOf="@+id/expanded_btn_background"
         app:layout_constraintEnd_toStartOf="@+id/iv_plus"
@@ -51,9 +52,9 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_plus"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/primary_green"
         android:scaleType="center"
         android:src="@drawable/ic_plus"

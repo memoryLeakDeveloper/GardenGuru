@@ -1,6 +1,5 @@
 package com.entexy.gardenguru.ui.fragments.settings.support
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,7 +43,6 @@ class SupportViewModel @Inject constructor() : ViewModel() {
                 override val timeout: Long = 2000
 
                 override fun onFail(errorMessage: String) {
-                    Log.d("qqqqq", "MaildroidX error: $errorMessage")
                     onCompleteLambda(false)
                 }
 

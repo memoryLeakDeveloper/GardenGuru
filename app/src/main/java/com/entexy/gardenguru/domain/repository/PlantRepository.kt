@@ -7,9 +7,9 @@ import com.entexy.gardenguru.data.plant.pest.PestData
 
 interface PlantRepository {
 
-    suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData>
+    suspend fun fetchUserPlants(): CloudResponse<ArrayList<PlantData>>
 
-    suspend fun fetchPlainUserPlants(): CloudResponse<ArrayList<PlantData>>
+    suspend fun fetchPlainUserPlants(): CloudResponse<List<PlantData>>
 
     suspend fun fetchPests(idPests: List<String>?): ArrayList<PestData>
 

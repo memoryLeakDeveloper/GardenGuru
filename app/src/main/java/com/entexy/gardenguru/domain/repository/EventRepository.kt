@@ -6,7 +6,7 @@ import com.entexy.gardenguru.data.plant.event.PlantEventData
 
 interface EventRepository {
 
-    suspend fun completeEvent(event: PlantEventData): CloudResponse<Unit>
+    suspend fun updateEvent(event: EventData): CloudResponse<EventData?>
 
     suspend fun fetchPlantEvents(): CloudResponse<List<PlantEventData>>
 

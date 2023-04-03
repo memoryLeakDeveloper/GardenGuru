@@ -8,6 +8,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
+import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.data.plant.event.PlantEventData
 import com.entexy.gardenguru.databinding.RvTimetableItemBinding
 import com.entexy.gardenguru.utils.isDaysEquals
@@ -15,11 +16,11 @@ import com.entexy.gardenguru.utils.toGone
 import com.entexy.gardenguru.utils.toVisible
 import java.util.*
 
-class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventData: PlantEventData) -> Unit) :
+class TimetableRecyclerAdapter(private val eventCompletedCallback: (eventData: PlantEventData, itemPosition: Int) -> Unit) :
     RecyclerView.Adapter<TimetableRecyclerAdapter.EventsViewHolder>() {
 
     private val calendar = Calendar.getInstance().apply {
-        add(Calendar.DAY_OF_YEAR, -(3 + 7))
+        add(Calendar.DAY_OF_YEAR, -7)
     }
 
     private val todayCalendar = Calendar.getInstance()
@@ -39,6 +40,10 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
 
             val fromTodayToThisPosition = todayCalendar[Calendar.DAY_OF_YEAR] - positionCalendar[Calendar.DAY_OF_YEAR]
             when (fromTodayToThisPosition) {
+                1 -> {
+                    tvDate.setText(R.string.yesterday)
+                    tvDate.setTextColor(root.resources.getColor(R.color.white, null))
+                }
                 0 -> {
                     tvDate.setText(R.string.today)
                     tvDate.setTextColor(root.resources.getColor(R.color.white, null))
@@ -67,10 +72,10 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
                 rvEvents.toVisible()
 
                 rvEvents.layoutManager = LinearLayoutManager(root.context)
-                rvEvents.adapter = EventsRecyclerAdapter(ArrayList(items), fromTodayToThisPosition == 0) { eventData ->
-                    if ((items.find { !it.isComplete } == null) != hasIncompleteEvent)
-                        notifyItemChanged(position)
-                    eventCompletedCallback(eventData)
+                rvEvents.adapter = EventsRecyclerAdapter(ArrayList(items), fromTodayToThisPosition in 0..1) { eventData ->
+//                    if ((items.find { !it.isComplete } == null) != hasIncompleteEvent)
+//                        notifyItemChanged(position)
+                    eventCompletedCallback(eventData, position)
                 }
 
             } else {
@@ -101,6 +106,19 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
         notifyDataSetChanged()
     }
 
+    fun updateEvent(event: PlantEventData, changedEvent: EventData?, itemPosition: Int) {
+        val indexOfItem = events.indexOfFirst { it.eventTime == event.eventTime && it.event == event.event && it.plantId == event.plantId }
+
+        if (indexOfItem > 0){
+            events[indexOfItem].apply {
+                eventId = changedEvent?.id
+                isComplete = event.isComplete
+            }
+        }
+
+        notifyItemChanged(itemPosition)
+    }
+
     private fun getEventsForDay(calendar: Calendar): List<PlantEventData> {
         return events.filter {
             it.eventTime.isDaysEquals(calendar)
@@ -117,6 +135,6 @@ class TimetableRecyclerAdapter(private val eventCompletedCallback: (plantEventDa
         RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount(): Int {
-        return 48
+        return 38
     }
 }

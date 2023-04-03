@@ -14,8 +14,17 @@ class EventRepositoryImpl(
     private val fetchUserEventsDataSource: FetchUserEventsDataSource,
 ) : EventRepository {
 
-    override suspend fun completeEvent(event: PlantEventData) =
-        completeEventsDataSource.completeEvent(event)
+    override suspend fun updateEvent(event: EventData): CloudResponse<EventData?> {
+        return if (event.isCompleted)
+            completeEventsDataSource.setEvent(event)
+        else {
+            val removePlant = completeEventsDataSource.removeEvent(event)
+
+            if (removePlant is CloudResponse.Success)
+                CloudResponse.Success(null)
+            else CloudResponse.Error((removePlant as? CloudResponse.Error)?.exception)
+        }
+    }
 
     override suspend fun fetchPlantEvents(): CloudResponse<List<PlantEventData>> {
         return fetchPlantEventsDataSource.fetchEvents()
@@ -29,3 +38,4 @@ class EventRepositoryImpl(
         return fetchUserEventsDataSource.fetchEvents(plantIds)
     }
 }
+
