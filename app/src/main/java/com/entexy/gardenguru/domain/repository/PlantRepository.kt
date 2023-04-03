@@ -27,6 +27,4 @@ interface PlantRepository {
 
     suspend fun addPlant(plantId: String): CloudResponse<Boolean>
 
-    suspend fun fetchAllPlants(uid: String): List<String>?
-
 }

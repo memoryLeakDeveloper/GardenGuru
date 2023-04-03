@@ -1,7 +1,10 @@
 package com.entexy.gardenguru.ui.fragments.support
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -37,13 +40,16 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
     private val viewModel: SupportViewModel by viewModels()
     private val dialogHelper = DialogHelper()
     private var descriptionError = false
-    private val startForFileResult = registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-        result?.let {
-            viewModel.addFile(FileModel(result.copyToFile(requireContext()), false))
-        } ?: run {
-            return@registerForActivityResult
+    private val startForFileResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            result.data?.data?.let {
+                viewModel.addFile(FileModel(result.data!!.data!!.copyToFile(requireContext()), false))
+            } ?: run {
+                return@registerForActivityResult
+            }
         }
     }
+
     private val selectFileToDeleteCallback: (Int, Boolean) -> Unit = { position, isSelected ->
         viewModel.selectItem(position, isSelected)
     }
@@ -195,7 +201,11 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         if (isClickable)
             setOnClickListener {
                 if (requireActivity().checkAndVerifyStoragePermissions()) {
-                    startForFileResult.launch("image/*")
+                    val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+                        type = "image/*"
+                        putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
+                    }
+                    startForFileResult.launch(intent)
                 }
             }
         else

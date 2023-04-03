@@ -23,7 +23,7 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
         sprayingSummer.text = getString(Seasons.Summer, data.sprayingSummer)
         sprayingWinter.text = getString(Seasons.Winter, data.sprayingWinter)
         feedingSummer.text = getString(Seasons.Summer, data.feedingSummer)
-        feedingWinter.text = getString(Seasons.Summer, data.feedingWinter)
+        feedingWinter.text = getString(Seasons.Winter, data.feedingWinter)
         plantingText.text = data.addingTime.toString()
         pruningText.text = data.pruning
         val listString = data.reproduction.map { item -> item.name }
@@ -32,9 +32,9 @@ class CareDescriptionCard(context: Context, attrs: AttributeSet) : LinearLayout(
 
     private fun getString(season: Seasons, days: Int): String {
         return if (season == Seasons.Winter) {
-            context.getString(R.string.every_n_days_in_winter, days)
+            context.getString(R.string.winter_interval_days, days)
         } else {
-            context.getString(R.string.every_n_days_in_winter, days)
+            context.getString(R.string.summer_interval_days, days)
         }
     }
 }

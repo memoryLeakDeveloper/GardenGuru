@@ -20,8 +20,7 @@ class PlantRepositoryImpl @Inject constructor(
     private val deletePlantDataSource: DeletePlantDataSource,
     private val renamePlantDataSource: RenamePlantDataSource,
     private val updatePlantCustomPhotoDataSource: UpdatePlantCustomPhotoDataSource,
-    private val addPlantDataSource: AddPlantDataSource,
-    private val userPlantsDataSource: UserPlantsDataSource
+    private val addPlantDataSource: AddPlantDataSource
 ) : PlantRepository {
 
     override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
@@ -114,6 +113,5 @@ class PlantRepositoryImpl @Inject constructor(
 
     override suspend fun addPlant(plantId: String) = addPlantDataSource.addPlant(plantId)
 
-    override suspend fun fetchAllPlants(uid: String) = userPlantsDataSource.fetch(uid)
 
 }

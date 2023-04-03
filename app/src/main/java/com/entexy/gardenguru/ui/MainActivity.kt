@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navController = (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
-        if (!firstLaunchPref.get()) {
+        if (firstLaunchPref.get()) {
             navController?.navigate(R.id.onboardingFragment)
         }
     }

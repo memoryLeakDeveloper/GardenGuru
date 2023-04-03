@@ -52,10 +52,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             title.setText(R.string.settings)
         }
         btPrivacyPolicy.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
         }
         btTermOfUse.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERM_OF_USE_URL)))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERM_OF_USE_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
         }
         btDeveloperContact.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_supportFragment)

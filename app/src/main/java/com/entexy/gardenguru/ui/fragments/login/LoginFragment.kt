@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.entexy.gardenguru.R
+import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.core.exception.getResult
@@ -45,7 +46,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun checkLogin() = lifecycleScope.launch {
-        if (viewModel.isUserAuthorized())
+        if (viewModel.isUserAuthorized() && App.user != null)
             findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
     }
 
@@ -67,7 +68,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 handleCloudResponse(response, uid)
             }
         } ?: run {
-            requireContext().showToastLong(R.string.something_is_wrong)
+            withContext(Dispatchers.Main) {
+                requireContext().showToastLong(R.string.something_is_wrong)
+            }
         }
     }
 

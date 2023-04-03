@@ -38,8 +38,9 @@ class App : Application() {
 
         languagePreference = LanguagePreference(sharedPreferences)
 
-        user = UserData("L7HK0VHcPaTteMoaHoWmAAM7ejy2", arrayListOf("JYgWks56qM4AL6vhGQuv", "HVWKaTo8IgaJdGYMR2ph", "eQ9Q36KPRyhz03VEJrDY"))
 //        user = userDataPref.get()
+        user = userDataPref.get()
+
     }
 
     companion object {

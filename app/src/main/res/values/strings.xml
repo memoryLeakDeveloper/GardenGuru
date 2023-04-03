@@ -69,6 +69,9 @@
     <string name="next">Далee</string>
     <string name="hide">Скрыть</string>
     <string name="see_more">Просмотреть больше</string>
+    <string name="interval_days">Интервал, дней: %1$d</string>
+    <string name="summer_interval_days">Лето - интервал, дней: %1$d</string>
+    <string name="winter_interval_days">Зима - интервал, дней: %1$d</string>
 
     //care difficult
     <string name="care_difficult">Сложность ухода</string>
