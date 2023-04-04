@@ -20,6 +20,7 @@ class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextV
 
     fun initView(fullText: String) {
         this.fullText = fullText
+        hideText()
         text = getSpannableNextString()
         movementMethod = LinkMovementMethod.getInstance()
     }
@@ -35,7 +36,8 @@ class ExpandableTextView(context: Context, attrs: AttributeSet) : AppCompatTextV
     }
 
     private fun getSpannableNextString(): SpannableString {
-        val newText = fullText.substringBefore(".")
+        if (text.length <= 64) return SpannableString(fullText)
+        val newText = fullText.substring(0, 64)
         return SpannableString(newText + ". " + context.getString(R.string.next_dots)).apply {
             setSpan(
                 getClickableSpan(),

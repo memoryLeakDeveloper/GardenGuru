@@ -109,7 +109,7 @@ class PlantRepositoryImpl @Inject constructor(
         renamePlantDataSource.renamePlant(plantId, plantName)
 
     override suspend fun updatePlantCustomPhoto(plantId: String, photoUrl: String?): CloudResponse<Unit> =
-        updatePlantCustomPhotoDataSource.renamePlant(plantId, photoUrl)
+        updatePlantCustomPhotoDataSource.updatePhoto(plantId, photoUrl)
 
     override suspend fun deletePlant(plantId: String): CloudResponse<Unit> {
         return deletePlantDataSource.deletePlant(plantId)

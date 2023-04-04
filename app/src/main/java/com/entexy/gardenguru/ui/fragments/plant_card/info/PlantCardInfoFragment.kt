@@ -44,7 +44,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
     private lateinit var plantEvents: ArrayList<EventData>
     private lateinit var updateNameCallback: (String) -> Unit
 
-    fun setUpdateNameCallback(callback: (String) -> Unit){
+    fun setUpdateNameCallback(callback: (String) -> Unit) {
         updateNameCallback = callback
     }
 
@@ -139,10 +139,12 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                             success = {
                                 dialogHelper.hideDialog()
 
-                                updateNameCallback(etPlantName.text.toString())
-                                plantData.name = etPlantName.text.toString()
+                                val newName = etPlantName.text.toString()
+                                updateNameCallback(newName)
+                                plantData.name = newName
                                 scrollRoot.hideKeyboard()
-                                tvPlantName.text = etPlantName.text.toString()
+                                tvPlantName.text = newName
+                                plantName.text = newName
                                 containerPlantName.toVisible()
                                 etPlantName.toGone()
                             },
@@ -218,8 +220,8 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                                     dialogHelper.hideDialog()
                                 },
                                 failure = {
+                                    requireView().showSnackBar(R.string.error_deleting)
                                     dialogHelper.hideDialog()
-                                    root.showSnackBar(R.string.error_deleting)
                                 },
                                 loading = {
                                     dialogHelper.showDialog(ProgressBar(requireContext()))
@@ -272,7 +274,6 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             }
         }
     }
-
 
 
     companion object {

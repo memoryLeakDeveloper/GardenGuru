@@ -10,8 +10,7 @@ import javax.inject.Inject
 class DeletePlantUseCase @Inject constructor(private val repository: PlantRepository) {
     suspend fun perform(plantId: String): Flow<CloudResponse<Unit>> = flow {
         emit(CloudResponse.Loading())
-        repository.deletePlant(plantId)
-        emit(CloudResponse.Success(Unit))
+        emit(repository.deletePlant(plantId))
     }.catch {
         emit(CloudResponse.Error(it))
     }

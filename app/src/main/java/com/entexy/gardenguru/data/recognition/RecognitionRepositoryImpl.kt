@@ -26,11 +26,26 @@ class RecognitionRepositoryImpl : RecognitionRepository {
         val NO_MEAN_RGB = floatArrayOf(0.485f, 0.456f, 0.406f)
         val NO_STD_RGB = floatArrayOf(0.229f, 0.224f, 0.225f)
 
+        val newBitmap = getResizedBitmap(bitmap, 440)
+
         val inputTensor = TensorImageUtils.bitmapToFloat32Tensor(
-            bitmap, NO_MEAN_RGB, NO_STD_RGB
+            newBitmap, NO_MEAN_RGB, NO_STD_RGB
         )
         val outputTensor = module.forward(IValue.from(inputTensor)).toTensor()
         return outputTensor.dataAsIntArray
+    }
+
+    private fun getResizedBitmap(image: Bitmap, size: Int): Bitmap? {
+        var width = image.width
+        var height = image.height
+        if (width > height) {
+            height = size
+            width = (image.width * size) / image.height
+        } else {
+            width = size
+            height = (image.height * size) / image.width
+        }
+        return Bitmap.createBitmap(Bitmap.createScaledBitmap(image, width, height, true), 0, 0, size, size)
     }
 
     private fun assetFilePath(context: Context, assetName: String): String? {
