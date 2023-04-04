@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.data.plant.pest.PestData
-import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.databinding.CardDiseasePestBinding
 import com.entexy.gardenguru.utils.toGone
 
