@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.databinding.SpinnerLabelLayoutBinding
 import com.entexy.gardenguru.databinding.SpinnerPopupBinding
+import com.entexy.gardenguru.databinding.SpinnerPopupWithEtBinding
 import com.entexy.gardenguru.ui.customview.spinner.SpinnerAdapter
 import com.entexy.gardenguru.ui.customview.spinner.SpinnerLayout
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
@@ -27,11 +28,11 @@ class SpinnerLabelLayout(context: Context, attrs: AttributeSet) : ConstraintLayo
 
     private lateinit var binding: SpinnerLabelLayoutBinding
     private var spinnerAdapter: SpinnerAdapter
-    private var popupBinding: SpinnerPopupBinding
+    private var popupBinding: SpinnerPopupWithEtBinding
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
     private var list: ArrayList<String> = arrayListOf()
-    private val selectListener = SpinnerLayout.SelectListener { text: String, position: Int, close: Boolean ->
+    private val selectListener: (String, Int, Boolean) -> Unit = { text: String, position: Int, close: Boolean ->
         binding.spinnerText.text = text
         valueCallback?.value(position, text)
         spinnerValue = text
@@ -61,7 +62,7 @@ class SpinnerLabelLayout(context: Context, attrs: AttributeSet) : ConstraintLayo
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = SpinnerLabelLayoutBinding.inflate(inflater, this)
-        popupBinding = SpinnerPopupBinding.inflate(inflater)
+        popupBinding = SpinnerPopupWithEtBinding.inflate(inflater)
         spinnerAdapter = SpinnerAdapter(selectListener)
         setBackgroundCompat(ContextCompat.getDrawable(context, R.drawable.primary_card_background))
         setRootClickListener()

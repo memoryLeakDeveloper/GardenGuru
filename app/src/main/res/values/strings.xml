@@ -70,6 +70,9 @@
     <string name="next">Далee</string>
     <string name="hide">Скрыть</string>
     <string name="see_more">Просмотреть больше</string>
+    <string name="interval_days">Интервал, дней: %1$d</string>
+    <string name="summer_interval_days">Лето - интервал, дней: %1$d</string>
+    <string name="winter_interval_days">Зима - интервал, дней: %1$d</string>
 
     //care difficult
     <string name="care_difficult">Сложность ухода</string>
@@ -196,18 +199,17 @@
     <string name="support_description_text">Введите данные своего запроса. Сотрудник нашей службы поддержки ответит вам в ближайшее время.</string>
     <string name="submit_an_inquiry">Отправить запрос</string>
     <string name="enter_email">Введите E-mail*</string>
-    <array name="languages">
-        <item>Русский</item>
-        <item>English</item>
-    </array>
+    <string name="russian">Русский</string>
+    <string name="english">English</string>
+
     <string name="description_required">Описание…*</string>
-    <string name="attach_a_file">Прикрепить файл (необязательно)</string>
+    <string name="add_a_photo">Добавить фото (необязательно)</string>
     <string name="send">Отправить</string>
     <string name="max_attached_files">Максимальное количество документов во вложении: 10</string>
-    <string name="file_size_warning">Объем файлов не может превышать 100МБ</string>
+    <string name="file_size_warning">Максимально 100 MB</string>
     <string name="hooray">Ура!</string>
     <string name="support">Поддержка</string>
-    <string name="your_request_send">Ваш запрос отправлен</string>
+    <string name="your_request_send">Ваш запрос успешно отправлен</string>
     <string name="request_subject">Тема запроса</string>
     <array name="support_themes">
         <item>Предложения по улучшению</item>
@@ -215,6 +217,12 @@
         <item>Жалоба</item>
         <item>Другое</item>
     </array>
+    <string name="delete_account">Удалить аккаунт</string>
+    <string name="exit_account">Выйти из аккаунта</string>
+    <string name="turn_on_notifications">Вкл. уведомления</string>
+    <string name="turn_off_notifications">Выкл. уведомления</string>
+    <string name="account_deleting">Удаление аккаунта!</string>
+    <string name="are_you_sure">Вы действительно хотите удалить аккаунт?</string>
 
     <string name="info">Инфо</string>
     <string name="history">История</string>
@@ -264,5 +272,13 @@
     <string name="diffused_sunlight">Яркий, рассеянный свет</string>
     <string name="penumbra">Полутень</string>
     <string name="your_garden">Ваш Сад</string>
+
+    //support
+    <string name="wrong_email">Неверный формат email</string>
+    <string name="required_field">Обязательное поле для заполнения</string>
+    <string name="request_theme">Тема запроса</string>
+    <string name="count">%1$d/2000</string>
+    <string name="max_email_count">Максимальное количество символов 256</string>
+
 
 </resources>

@@ -20,12 +20,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        WindowCompat.setDecorFitsSystemWindows(window, false)
-//        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         navController = (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).navController
-//        if (!firstLaunchPref.get()) {
-//            navController?.navigate(R.id.loginFragment)
-//        } //todo
+        if (firstLaunchPref.get()) {
+            navController?.navigate(R.id.onboardingFragment)
+        }
     }
 
     override fun onBackPressed() {

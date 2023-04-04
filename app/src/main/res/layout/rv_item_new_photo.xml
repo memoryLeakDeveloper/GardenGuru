@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/event_container"
+    android:layout_width="61dp"
+    android:layout_height="61dp"
+    android:background="@drawable/edit_text_background_focus"
+    android:padding="1dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_checkbox_off"
+        android:visibility="gone" />
+
+</FrameLayout>

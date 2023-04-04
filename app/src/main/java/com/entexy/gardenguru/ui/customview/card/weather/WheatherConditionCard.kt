@@ -8,7 +8,6 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.enums.Seasons
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.CardWheatherConditionBinding
-import com.entexy.gardenguru.utils.toGone
 
 class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
@@ -20,7 +19,7 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
 
     fun initView(data: PlantData) {
         setTemperature(data) //TODO
-        setWatering(data, Seasons.Winter)
+        setWatering(data, Seasons.Summer)
         setLightning(data)
     }
 
@@ -30,10 +29,9 @@ class WheatherConditionCard(context: Context, attrs: AttributeSet) : LinearLayou
         }
     }
 
-
     private fun setWatering(data: PlantData, season: Seasons = Seasons.Summer) = binding.apply {
         //todo
-            watering.setTextInfo("${context.getString(R.string.every)} ${data.wateringSummer} ${context.getString(R.string.days)}")
+        watering.setTextInfo(context.getString(R.string.interval_days, data.wateringSummer))
     }
 
     private fun setLightning(data: PlantData) = binding.apply {

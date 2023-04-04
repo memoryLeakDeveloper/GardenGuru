@@ -19,6 +19,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 fun Context.getPrefs(): SharedPreferences = getSharedPreferences(PrefsKeys.PREFS, Context.MODE_PRIVATE)
 
@@ -142,6 +143,37 @@ fun Context.convertDpToPx(dp: Float) = (dp * resources.displayMetrics.density).t
 fun Calendar.isSummerSeason(): Boolean {
     return get(Calendar.MONTH) in 4..11
 }
+
+fun String.isEmailValid(): Boolean {
+    return Pattern.compile(
+        "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
+    ).matcher(this).matches()
+}
+
+fun String.isEmailLengthIsValid(): Boolean {
+    val maxEmailLength = 256
+    val maxLocalPartLength = 64
+    val maxDomainLength = 253
+    if (length > maxEmailLength) {
+        return false
+    }
+    val parts = split("@")
+    if (parts.size != 2) {
+        return false
+    }
+    val localPart = parts[0]
+    val domain = parts[1]
+    if (localPart.length > maxLocalPartLength || domain.length > maxDomainLength) {
+        return false
+    }
+    return true
+}
+
 
 fun Calendar.isDaysEquals(calendar: Calendar): Boolean {
     return get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR) && get(Calendar.YEAR) == calendar.get(Calendar.YEAR)

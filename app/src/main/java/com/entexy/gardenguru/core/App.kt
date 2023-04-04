@@ -3,6 +3,7 @@ package com.entexy.gardenguru.core
 import android.app.Application
 import android.content.SharedPreferences
 import com.entexy.gardenguru.data.language.LanguagePreference
+import com.entexy.gardenguru.data.prefs.UserDataPref
 import com.entexy.gardenguru.data.user.UserData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -21,6 +22,9 @@ class App : Application() {
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
+    @Inject
+    lateinit var userDataPref: UserDataPref
+
     override fun onCreate() {
         super.onCreate()
 
@@ -34,6 +38,7 @@ class App : Application() {
 
         languagePreference = LanguagePreference(sharedPreferences)
         user = UserData("L7HK0VHcPaTteMoaHoWmAAM7ejy2")
+        //user = userDataPref.get()
     }
 
     companion object {
@@ -42,6 +47,9 @@ class App : Application() {
                 if (value != null) {
                     firestoreUserRef = firestoreUsersRef.document(value.userId)
                     firestoreUserPlantRef = firestoreUserRef!!.collection("plants")
+                } else {
+                    firestoreUserRef = null
+                    firestoreUserPlantRef = null
                 }
                 field = value
             }

@@ -17,6 +17,8 @@ import com.entexy.gardenguru.databinding.FragmentMyPlantsBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.entexy.gardenguru.utils.showSnackBar
+import com.entexy.gardenguru.utils.toGone
+import com.entexy.gardenguru.utils.toVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -29,10 +31,8 @@ class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initGardenList()
         initNoPlants()
-
         with(binding) {
             header.apply {
                 back.setOnClickListener {
@@ -75,14 +75,13 @@ class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
             viewModel.fetchPlants().collect { cloudResponse ->
                 cloudResponse.getResult(success = {
                     dialogHelper.hideDialog()
-
                     if (it.result.isEmpty()) {
-                        binding.rvPlants.visibility = View.GONE
-                        binding.noPlantsContainer.visibility = View.VISIBLE
+                        binding.rvPlants.toGone()
+                        binding.noPlantsContainer.toVisible()
                     } else {
                         rvAdapter.setData(ArrayList(it.result))
-                        binding.rvPlants.visibility = View.VISIBLE
-                        binding.noPlantsContainer.visibility = View.GONE
+                        binding.rvPlants.toVisible()
+                        binding.noPlantsContainer.toGone()
                     }
                 }, failure = {
                     dialogHelper.hideDialog()

@@ -1,10 +1,11 @@
 package com.entexy.gardenguru.di.user
 
 import com.entexy.gardenguru.core.App
+import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
 import com.entexy.gardenguru.data.user.UserRepositoryImpl
-import com.entexy.gardenguru.data.user.cloud.CreateUserDataSource
+import com.entexy.gardenguru.data.user.cloud.*
 import com.entexy.gardenguru.domain.repository.UserRepository
-import com.entexy.gardenguru.domain.usecases.user.CreateUserUseCase
+import com.entexy.gardenguru.domain.usecases.user.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,34 @@ class UserModule {
     fun provideCreateUserUseCase(repository: UserRepository): CreateUserUseCase = CreateUserUseCase(repository)
 
     @Provides
-    fun provideUserRepository(createUserDataSource: CreateUserDataSource): UserRepository = UserRepositoryImpl(createUserDataSource)
+    fun provideDeleteUserDataSource(): DeleteUserDataSource = DeleteUserDataSource.Base()
+
+    @Provides
+    fun provideDeleteUserUseCase(repository: UserRepository): DeleteUserUseCase = DeleteUserUseCase(repository)
+
+    @Provides
+    fun provideSignOutUserDataSource(): SignOutUserDataSource = SignOutUserDataSource.Base()
+
+    @Provides
+    fun provideSignOutUserUseCase(repository: UserRepository): SignOutUserUseCase = SignOutUserUseCase(repository)
+
+    @Provides
+    fun provideLoginUserDataSource(): LoginUserDataSource = LoginUserDataSource.Base(App.firebaseAuth)
+
+    @Provides
+    fun provideLoginUserUseCase(repository: UserRepository): LoginUserUseCase = LoginUserUseCase(repository)
+
+    @Provides
+    fun provideUserPlantsDataSource(): UserPlantsDataSource = UserPlantsDataSource.Base(App.firestoreUsersRef)
+
+    @Provides
+    fun provideUserRepository(
+        loginUserDataSource: LoginUserDataSource,
+        createUserDataSource: CreateUserDataSource,
+        deleteUserDataSource: DeleteUserDataSource,
+        signOutUserDataSource: SignOutUserDataSource,
+        userPlantsDataSource: UserPlantsDataSource
+    ): UserRepository =
+        UserRepositoryImpl(loginUserDataSource, createUserDataSource, deleteUserDataSource, signOutUserDataSource, userPlantsDataSource)
 
 }

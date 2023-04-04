@@ -52,6 +52,7 @@ fun ImageView.setImageByGlide(model: Any?, placeholderResId: Int?) = Glide.with(
     .into(this)
 
 fun View.hideKeyboard() {
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    imm?.hideSoftInputFromWindow(windowToken, 0)
+    clearFocus()
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
 }

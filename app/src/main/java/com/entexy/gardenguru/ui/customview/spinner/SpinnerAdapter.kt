@@ -2,43 +2,47 @@ package com.entexy.gardenguru.ui.customview.spinner
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.databinding.SpinnerItemBinding
+import com.entexy.gardenguru.utils.toGone
+import com.entexy.gardenguru.utils.toVisible
 
-class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
+class SpinnerAdapter(private val listener: (String, Int, Boolean) -> Unit, private var selectedPosition: Int = -1) :
     RecyclerView.Adapter<SpinnerAdapter.SpinnerAdapterViewHolder>() {
 
     private var lastSelectedPosition: Int = -1
-    private var selectedPosition: Int = -1
     var isUpdating = false
-    var list: ArrayList<String> = ArrayList()
+    var list: MutableList<String> = mutableListOf()
     var textColor: ColorStateList? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpinnerAdapterViewHolder {
-        val binding = SpinnerItemBinding.inflate(LayoutInflater.from(parent.context))
-        binding.textView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val binding = SpinnerItemBinding.inflate(LayoutInflater.from(parent.context)).also {
+            it.root.layoutParams =
+                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
         return SpinnerAdapterViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SpinnerAdapterViewHolder, position: Int) {
-        with(holder.binding) {
+        holder.binding.apply {
             if (position == selectedPosition) {
-                root.setBackgroundColor(ContextCompat.getColor(holder.binding.root.context, R.color.primary_green))
+                textView.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.primary_green))
             } else {
-                root.setBackgroundColor(ContextCompat.getColor(holder.binding.root.context, R.color.transparent))
+                textView.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.white))
             }
-            textView.visibility = View.VISIBLE
+            textView.toVisible()
             textView.text = list[position]
             textColor?.let { holder.binding.textView.setTextColor(it) }
+            if (position == list.size - 1)
+                divider.toGone()
             root.setOnClickListener { view ->
-                listener.onSelect(holder.binding.textView.text.toString(), position, true)
+                textView.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.primary_green))
+                listener.invoke(holder.binding.textView.text.toString(), position, true)
                 notifyItemChanged(selectedPosition)
                 selectedPosition = holder.bindingAdapterPosition
-                view.setBackgroundColor(ContextCompat.getColor(view.context, R.color.primary_green))
             }
         }
     }
@@ -65,13 +69,8 @@ class SpinnerAdapter(private val listener: SpinnerLayout.SelectListener) :
         notifyItemInserted(selectedPosition)
     }
 
-    fun deleteLastItem() {
-        list.removeLast()
-        selectedPosition = 0
-        notifyItemRemoved(list.lastIndex + 1)
-    }
 
-    fun setListAdapter(list: ArrayList<String>) {
+    fun setListAdapter(list: MutableList<String>) {
         this.list = list
     }
 

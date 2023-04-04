@@ -18,12 +18,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
 
     private val viewModel: CameraResultViewModel by viewModels()
-
     private lateinit var uriResult: Uri
 
     companion object {
@@ -45,9 +43,7 @@ class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
                 requireActivity().onBackPressed()
             }
 
-            Glide.with(requireContext())
-                .load(uriResult)
-                .into(ivCameraResult)
+            Glide.with(requireContext()).load(uriResult).into(ivCameraResult)
 
             ivConfirmBtn.setOnClickListener {
                 val dialogHelper = DialogHelper()

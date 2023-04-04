@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/timetableFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
@@ -170,7 +170,7 @@
     </fragment>
     <fragment
         android:id="@+id/supportFragment"
-        android:name="com.entexy.gardenguru.ui.fragments.settings.support.SupportFragment"
+        android:name="com.entexy.gardenguru.ui.fragments.support.SupportFragment"
         android:label="SupportFragment"
         tools:layout="@layout/fragment_support" />
     <fragment
