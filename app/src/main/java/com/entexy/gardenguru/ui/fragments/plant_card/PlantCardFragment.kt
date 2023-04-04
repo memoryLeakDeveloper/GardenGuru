@@ -76,7 +76,9 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
 
     private fun initPager(plantData: PlantData, events: ArrayList<EventData>) {
         with(binding) {
-            val adapter = PlantCardPagerAdapter(requireActivity(), plantData, events)
+            val adapter = PlantCardPagerAdapter(requireActivity(), plantData, events) {
+                binding.title.text = it
+            }
             viewPager.adapter = adapter
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

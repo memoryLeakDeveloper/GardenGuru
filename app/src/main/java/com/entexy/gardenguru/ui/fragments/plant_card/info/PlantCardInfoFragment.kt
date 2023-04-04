@@ -34,7 +34,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
@@ -43,6 +42,11 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
     private lateinit var plantData: PlantData
     private lateinit var plantEvents: ArrayList<EventData>
+    private lateinit var updateNameCallback: (String) -> Unit
+
+    fun setUpdateNameCallback(callback: (String) -> Unit){
+        updateNameCallback = callback
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -125,7 +129,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             etPlantName.setText(data.name)
         }
 
-        etPlantName.setOnEditorActionListener { v, actionId, event ->
+        etPlantName.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (etPlantName.text?.isEmpty() == true) return@setOnEditorActionListener false
                 lifecycleScope.launch {
@@ -135,6 +139,8 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                             success = {
                                 dialogHelper.hideDialog()
 
+                                updateNameCallback(etPlantName.text.toString())
+                                plantData.name = etPlantName.text.toString()
                                 scrollRoot.hideKeyboard()
                                 tvPlantName.text = etPlantName.text.toString()
                                 containerPlantName.toVisible()
@@ -266,6 +272,8 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             }
         }
     }
+
+
 
     companion object {
         const val CARD_INFO_PLANT_DATA_KEY = "plant-data-key"

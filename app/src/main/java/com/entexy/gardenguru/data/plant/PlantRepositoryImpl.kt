@@ -8,7 +8,6 @@ import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
-import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
 import com.entexy.gardenguru.domain.repository.PlantRepository
 import javax.inject.Inject
 
