@@ -19,7 +19,6 @@ class EventsCalendarAdapter(
 ) :
     RecyclerView.Adapter<EventsCalendarAdapter.ViewHolder>() {
 
-    private val calendarToday = Calendar.getInstance()
     private val calendar = Calendar.getInstance()
     private var selectedPosition: Int = 0
 
@@ -35,7 +34,7 @@ class EventsCalendarAdapter(
         val today = getCalendarToPosition(position)
         with(holder.binding) {
             if (position == selectedPosition) {
-                root.background = ContextCompat.getDrawable(root.context, R.drawable.spinner_background)
+                root.background = ContextCompat.getDrawable(root.context, R.drawable.bg_calendar_selected)
                 itemSelectedListener(today)
             } else {
                 root.background = null
