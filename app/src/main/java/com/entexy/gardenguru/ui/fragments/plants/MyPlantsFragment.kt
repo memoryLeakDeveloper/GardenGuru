@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
+import com.entexy.gardenguru.data.plant.mapToPlantCloud
 import com.entexy.gardenguru.databinding.FragmentMyPlantsBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
+import com.entexy.gardenguru.utils.bugger
 import com.entexy.gardenguru.utils.showSnackBar
 import com.entexy.gardenguru.utils.toGone
 import com.entexy.gardenguru.utils.toVisible
@@ -63,24 +65,24 @@ class MyPlantsFragment : BaseFragment<FragmentMyPlantsBinding>() {
         rvPlants.adapter = rvAdapter
         val dialogHelper = DialogHelper()
         lifecycleScope.launch {
-//            viewModel.fetchPlants().collect { cloudResponse ->
-//                cloudResponse.getResult(success = {
-//                    dialogHelper.hideDialog()
-//                    if (it.result.isEmpty()) {
-//                        rvPlants.toGone()
-//                        noPlantsContainer.toVisible()
-//                    } else {
-//                        rvAdapter.setData(ArrayList(it.result))
-//                        rvPlants.toVisible()
-//                        noPlantsContainer.toGone()
-//                    }
-//                }, failure = {
-//                    dialogHelper.hideDialog()
-//                    requireView().showSnackBar(R.string.error_loading_data)
-//                }, loading = {
-//                    dialogHelper.showDialog(ProgressBar(requireContext()))
-//                })
-//            }
+            viewModel.fetchPlants().collect { cloudResponse ->
+                cloudResponse.getResult(success = {
+                    dialogHelper.hideDialog()
+                    if (it.result.isEmpty()) {
+                        rvPlants.toGone()
+                        noPlantsContainer.toVisible()
+                    } else {
+                        rvAdapter.setData(it.result)
+                        rvPlants.toVisible()
+                        noPlantsContainer.toGone()
+                    }
+                }, failure = {
+                    dialogHelper.hideDialog()
+                    requireView().showSnackBar(R.string.error_loading_data)
+                }, loading = {
+                    dialogHelper.showDialog(ProgressBar(requireContext()))
+                })
+            }
         }
     }
 

@@ -120,7 +120,7 @@ fun PlantCloud.mapToData(): PlantData? {
             sprayingWinter = sprayingWinter!!,
             minTemp = minTemp!!,
             maxTemp = maxTemp!!,
-            localizedPruning = localizedPruning,
+            localizedPruning = localizedPruning!!,
             localizedPlantingTime = localizedPlantingTime!!
         )
     }

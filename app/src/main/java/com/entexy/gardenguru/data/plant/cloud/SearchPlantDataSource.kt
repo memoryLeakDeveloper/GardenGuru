@@ -2,8 +2,9 @@ package com.entexy.gardenguru.data.plant.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.data.plant.search.PlantSearchCloud
-import com.entexy.gardenguru.ui.PlantSearchMOCKData
+import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FieldPath
 import kotlinx.coroutines.tasks.await
 
 interface SearchPlantDataSource {
@@ -15,8 +16,9 @@ interface SearchPlantDataSource {
     class Base(private val firestorePlantsRef: CollectionReference) : SearchPlantDataSource {
 
         override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchCloud>> {
-            val task = firestorePlantsRef.whereEqualTo("name", plantName).get()
+            val task = firestorePlantsRef.whereGreaterThanOrEqualTo(FieldPath.of("localizedDescription", "ru"), plantName).get()
             val querySnapshot = task.await()
+            bugger("plantName = ${plantName}   querySnapshot ${querySnapshot.documents.size}")
             val result = arrayListOf<PlantSearchCloud>()
             return if (task.exception == null) {
                 querySnapshot.documents.forEach {
@@ -24,26 +26,24 @@ interface SearchPlantDataSource {
                     if (plantCloud != null)
                         result.add(plantCloud)
                 }
-                val list = PlantSearchMOCKData.plantsCloud
-                CloudResponse.Success(list)
+                CloudResponse.Success(result)
             } else CloudResponse.Error(task.exception)
         }
 
         override suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantSearchCloud> {
             val task = firestorePlantsRef.whereEqualTo("varietyCode", varietyCode).limit(1).get()
             val querySnapshot = task.await()
-            val list = PlantSearchMOCKData.plantsCloud.first()
-            return CloudResponse.Success(list)
-            return if (task.exception == null && querySnapshot.documents.isNotEmpty()) {
+            if (task.exception == null && querySnapshot.documents.isNotEmpty()) {
                 querySnapshot.documents.map {
                     val plantCloud = it.toObject(PlantSearchCloud::class.java)
                     if (plantCloud != null) {
-                        val list = PlantSearchMOCKData.plantsCloud
-                        CloudResponse.Success(list)
+                        return CloudResponse.Success(plantCloud)
                     }
+                    return CloudResponse.Error(null)
                 }
-                CloudResponse.Error(null)
-            } else CloudResponse.Error(task.exception)
+            } else
+                return CloudResponse.Error(task.exception)
+            return CloudResponse.Error(null)
         }
     }
 }

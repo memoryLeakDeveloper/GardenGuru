@@ -4,7 +4,6 @@ import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.pest.PestData
-import com.entexy.gardenguru.data.plant.search.PlantSearchData
 
 interface PlantRepository {
 
@@ -16,9 +15,9 @@ interface PlantRepository {
 
     suspend fun fetchBenefits(idBenefits: List<String>?): ArrayList<BenefitData>
 
-    suspend fun searchPlantByVarietyCode(plantSearchQuires: List<String>): CloudResponse<List<PlantSearchData>>
+    suspend fun searchPlantByVarietyCode(plantSearchQuires: List<String>): CloudResponse<List<PlantData>>
 
-    suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchData>>
+    suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>>
 
     suspend fun renamePlant(plantId: String, plantName: String): CloudResponse<Unit>
 
@@ -26,6 +25,6 @@ interface PlantRepository {
 
     suspend fun deletePlant(plantId: String): CloudResponse<Unit>
 
-    suspend fun addPlant(data: PlantData): CloudResponse<Boolean>
+    suspend fun addPlant(data: PlantData): CloudResponse<Unit>
 
 }

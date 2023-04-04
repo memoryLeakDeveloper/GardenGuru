@@ -1,10 +1,12 @@
 package com.entexy.gardenguru.data.plant.search
 
 import com.entexy.gardenguru.data.plant.CareComplexity
+import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.SunRelation
 import com.entexy.gardenguru.data.plant.benefit.BenefitData
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.reproduction.Reproduction
+import java.util.*
 
 data class PlantSearchCloud(
     var name: String? = null,
@@ -19,7 +21,7 @@ data class PlantSearchCloud(
     var plantingTime: String? = null,
     var localizedPlantingTime: Map<String, String>? = null,
     var pruning: String? = null,
-    var localizedPruning: Map<String, String>,
+    var localizedPruning: Map<String, String>? = null,
     var sunRelation: String? = null,
     var pests: List<String>? = null,
     var reproduction: List<String>? = null,
@@ -34,7 +36,8 @@ data class PlantSearchCloud(
     var maxTemp: Int? = null,
 )
 
-fun PlantSearchCloud.mapToData(listBenefits: List<BenefitData>, listPests: List<PestData>) = PlantSearchData(
+fun PlantSearchCloud.mapToData(listBenefits: List<BenefitData>, listPests: List<PestData>) = PlantData(
+    id = "",
     name = name!!,
     variety = variety!!,
     photo = photo!!,
@@ -44,7 +47,7 @@ fun PlantSearchCloud.mapToData(listBenefits: List<BenefitData>, listPests: List<
         it.cloudName == careComplexity
     } ?: CareComplexity.Easy,
     description = description!!,
-    localizedDescription = localizedDescription!!,
+    localizeDescription = localizedDescription!!,
     localizedVariety = localizedVariety!!,
     sunRelation = SunRelation.values().find { it.cloudName == sunRelation }!!,
     pests = listPests,
@@ -64,6 +67,7 @@ fun PlantSearchCloud.mapToData(listBenefits: List<BenefitData>, listPests: List<
     sprayingWinter = sprayingWinter!!,
     minTemp = minTemp!!,
     maxTemp = maxTemp!!,
-    localizedPruning = localizedPruning,
-    localizedPlantingTime = localizedPlantingTime!!
+    localizedPruning = localizedPruning!!,
+    localizedPlantingTime = localizedPlantingTime!!,
+    addingTime = Date()
 )

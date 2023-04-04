@@ -13,15 +13,11 @@ import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.core.exception.getResult
-import com.entexy.gardenguru.data.plant.search.PlantSearchData
-import com.entexy.gardenguru.data.plant.search.mapToPlantData
+import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.FragmentAddingPlantBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.ui.fragments.add_plant.description.PlantDescriptionFragment.Companion.PLANT_DATA_KEY
-import com.entexy.gardenguru.utils.setString
-import com.entexy.gardenguru.utils.showToastLong
-import com.entexy.gardenguru.utils.toGone
-import com.entexy.gardenguru.utils.toVisible
+import com.entexy.gardenguru.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -67,19 +63,15 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
         btnAdd.setOnClickListener {
             pagerAdapter.getCurrentPlantNameAndData(viewPager.currentItem)?.let {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    viewModel.addPlant(it.mapToPlantData()).collect {
+                    viewModel.addPlant(it).collect {
                         withContext(Dispatchers.Main) {
-                            val dialog = DialogHelper()
                             it.getResult(
                                 loading = {
-                                    dialog.showDialog(ProgressBar(requireContext()), false)
                                 },
                                 success = {
-                                    dialog.hideDialog()
                                     findNavController().navigate(R.id.action_addingPlantFragment_to_myPlantsFragment)
                                 },
                                 failure = {
-                                    dialog.hideDialog()
                                     requireContext().showToastLong(R.string.something_is_wrong)
                                 }
                             )
@@ -102,7 +94,7 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
         }
     }
 
-    private suspend fun handleSearchResponse(response: Flow<CloudResponse<List<PlantSearchData>>>) = withContext(Dispatchers.Main) {
+    private suspend fun handleSearchResponse(response: Flow<CloudResponse<List<PlantData>>>) = withContext(Dispatchers.Main) {
         val dialog = DialogHelper()
         response.collect {
             it.getResult(
@@ -114,6 +106,8 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
                     dialog.showDialog(ProgressBar(requireContext()), false)
                 },
                 failure = {
+                    bugger("failure ${it.exception?.stackTraceToString()}")
+                    viewModel.plantsData.postValue(emptyList())
                     requireContext().showToastLong(R.string.something_is_wrong)
                     dialog.hideDialog()
                 }
@@ -121,11 +115,14 @@ class AddingPlantFragment : BaseFragment<FragmentAddingPlantBinding>() {
         }
     }
 
-    private fun setViewPager(list: List<PlantSearchData>) = binding.apply {
+    private fun setViewPager(list: List<PlantData>) = binding.apply {
         pagerAdapter = AddingPlantPagerAdapter(this@AddingPlantFragment, list)
         viewPager.adapter = pagerAdapter
         viewPager.offscreenPageLimit = 2
-        dotsIndicator.attachTo(viewPager)
+        if (list.isNotEmpty())
+            dotsIndicator.attachTo(viewPager)
+        else
+            dotsIndicator.toInvisible()
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)

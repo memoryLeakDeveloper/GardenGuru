@@ -16,7 +16,7 @@ data class PlantCloud(
     var plantingTime: String? = null,
     var localizedPlantingTime: Map<String, String>? = null,
     var pruning: String? = null,
-    var localizedPruning: Map<String, String>,
+    var localizedPruning: Map<String, String>? = null,
     var sunRelation: String? = null,
     var pestsIds: List<String>? = null,
     var reproduction: List<String>? = null,

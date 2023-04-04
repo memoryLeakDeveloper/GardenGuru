@@ -25,8 +25,6 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.event.EventData
-import com.entexy.gardenguru.data.plant.search.PlantSearchData
-import com.entexy.gardenguru.data.plant.search.mapToPlantData
 import com.entexy.gardenguru.databinding.DialogChangePhotoBinding
 import com.entexy.gardenguru.databinding.DialogRemovePlantBinding
 import com.entexy.gardenguru.databinding.FragmentPlantCardInfoBinding
@@ -36,21 +34,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
     private val viewModel: PlantCardInfoViewModel by viewModels()
 
-    private lateinit var plantData: PlantSearchData
+    private lateinit var plantData: PlantData
     private lateinit var plantEvents: ArrayList<EventData>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         plantData = requireArguments().getParcelable(CARD_INFO_PLANT_DATA_KEY)!!
         plantEvents = requireArguments().getParcelableArrayList(CARD_INFO_PLANT_EVENTS_KEY)!!
-
         initView()
     }
 
@@ -62,7 +58,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             plantCaver.setImageByGlide(plantData.coverPhoto, null)
             plantName.text = plantData.getPlantName("ru")
             plantInfo.initView(plantData.getPlantDescription("ru"))
-            eventsCalendar.initView(viewModel.predictEvents(plantData.mapToPlantData()!!, plantEvents))
+            eventsCalendar.initView(viewModel.predictEvents(plantData, plantEvents))
             careDifficult.initView(plantData.careComplexity, true)
             wheather.initView(plantData)
             careDescription.initView(plantData)
@@ -118,7 +114,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         }
     }
 
-    private fun initPlantNameView(data: PlantSearchData) = with(binding) {
+    private fun initPlantNameView(data: PlantData) = with(binding) {
         tvPlantName.text = plantData.getPlantName("ru")
 
         ivEditPlantName.setOnClickListener {
@@ -168,7 +164,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         }
     }
 
-    private fun initPlantPhotoView(data: PlantSearchData) = with(binding) {
+    private fun initPlantPhotoView(data: PlantData) = with(binding) {
 
         Glide.with(requireContext())
             .load(data.customPhoto ?: data.photo)

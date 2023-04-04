@@ -32,23 +32,21 @@
         android:id="@+id/et_input_plant_name"
         android:layout_width="0dp"
         android:layout_height="72dp"
-
         android:layout_marginHorizontal="10dp"
-        android:background="@color/transparent"
         android:alpha="0"
+        android:background="@color/transparent"
         android:fontFamily="@font/poppins_regular"
-        android:maxLines="2"
         android:hint="@string/enter_plant_name"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="2"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="15sp"
-        android:inputType="textMultiLine"
-        android:imeOptions="actionSearch"
         app:layout_constraintBottom_toBottomOf="@+id/expanded_btn_background"
         app:layout_constraintEnd_toStartOf="@+id/iv_plus"
         app:layout_constraintStart_toEndOf="@+id/iv_cam"
         app:layout_constraintTop_toTopOf="@+id/expanded_btn_background" />
-
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_plus"

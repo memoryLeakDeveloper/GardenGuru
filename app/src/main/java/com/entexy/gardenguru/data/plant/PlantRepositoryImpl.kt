@@ -8,9 +8,9 @@ import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
-import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.data.plant.search.mapToData
 import com.entexy.gardenguru.domain.repository.PlantRepository
+import com.entexy.gardenguru.utils.bugger
 import javax.inject.Inject
 
 class PlantRepositoryImpl @Inject constructor(
@@ -26,7 +26,6 @@ class PlantRepositoryImpl @Inject constructor(
 
     override suspend fun fetchUserPlants(): CloudResponse<ArrayList<PlantData>> {
         val plantDataCloud = plantSource.fetchPlants()
-
         val result = arrayListOf<PlantData>()
         return if (plantDataCloud is CloudResponse.Success) {
             plantDataCloud.result.forEach {
@@ -46,7 +45,6 @@ class PlantRepositoryImpl @Inject constructor(
     //returns a list of plants with empty benefits, pests
     override suspend fun fetchPlainUserPlants(): CloudResponse<List<PlantData>> {
         val plantDataCloud = plantSource.fetchPlants()
-
         return if (plantDataCloud is CloudResponse.Success) {
             val result = mutableListOf<PlantData>()
             plantDataCloud.result.forEach {
@@ -84,8 +82,8 @@ class PlantRepositoryImpl @Inject constructor(
         return result
     }
 
-    override suspend fun searchPlantByVarietyCode(plantSearchQuires: List<String>): CloudResponse<List<PlantSearchData>> {
-        val result = mutableListOf<PlantSearchData>()
+    override suspend fun searchPlantByVarietyCode(plantSearchQuires: List<String>): CloudResponse<List<PlantData>> {
+        val result = mutableListOf<PlantData>()
         plantSearchQuires.forEach {
             val plantResult = searchPlantDataSource.searchPlantByVarietyCode(it)
             if (plantResult is CloudResponse.Success) {
@@ -98,7 +96,7 @@ class PlantRepositoryImpl @Inject constructor(
         return CloudResponse.Success(result)
     }
 
-    override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchData>> {
+    override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>> {
         val plantResults = searchPlantDataSource.searchPlantByName(plantName)
         return if (plantResults is CloudResponse.Success) {
             val resultList = plantResults.result.map {

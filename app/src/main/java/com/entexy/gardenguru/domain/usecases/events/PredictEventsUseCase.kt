@@ -2,7 +2,6 @@ package com.entexy.gardenguru.domain.usecases.events
 
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.event.EventData
-import com.entexy.gardenguru.data.plant.search.PlantSearchData
 import com.entexy.gardenguru.utils.isDaysEquals
 import com.entexy.gardenguru.utils.isSummerSeason
 import java.lang.Integer.min
