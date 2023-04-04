@@ -10,6 +10,7 @@ import android.provider.OpenableColumns
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -66,6 +67,19 @@ fun Activity.checkAndVerifyCameraPermissions(): Boolean {
             ),
             Constance.GALLERY_PERMISSION_REQUEST_KODE
         )
+        return false
+    }
+    return true
+}
+
+fun Activity.checkAndVerifyCameraPermissions(requestPermissionLauncher: ActivityResultLauncher<String>): Boolean {
+    val permission = ActivityCompat.checkSelfPermission(
+        this,
+        Manifest.permission.CAMERA
+    )
+    if (permission != PackageManager.PERMISSION_GRANTED) {
+        // We don't have permission so prompt the user
+        requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         return false
     }
     return true

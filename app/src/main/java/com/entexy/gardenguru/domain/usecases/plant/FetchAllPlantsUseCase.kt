@@ -9,15 +9,9 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class FetchAllPlantsUseCase @Inject constructor(private val repository: PlantRepository) {
-    suspend fun perform(plantIds: List<String>): Flow<CloudResponse<ArrayList<PlantData>>> = flow {
+    suspend fun perform(): Flow<CloudResponse<ArrayList<PlantData>>> = flow {
         emit(CloudResponse.Loading())
-        val result = arrayListOf<PlantData>()
-        plantIds.forEach {
-            val plant = repository.fetchPlant(it)
-            if (plant is CloudResponse.Success)
-                result.add(plant.result)
-        }
-        emit(CloudResponse.Success(result))
+        emit(repository.fetchUserPlants())
     }.catch {
         emit(CloudResponse.Error(it))
     }

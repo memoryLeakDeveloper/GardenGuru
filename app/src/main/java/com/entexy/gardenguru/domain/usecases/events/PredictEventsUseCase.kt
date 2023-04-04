@@ -48,8 +48,8 @@ class PredictEventsUseCase @Inject constructor() {
             plantData.addingTime,
             EventData.EventType.Feeding,
             sortedEvents.filter { it.eventType == EventData.EventType.Feeding },
-            plantData.wateringSummer,
-            plantData.wateringWinter,
+            plantData.feedingSummer,
+            plantData.feedingWinter,
             plantData.id
         )
 
@@ -112,8 +112,8 @@ class PredictEventsUseCase @Inject constructor() {
                 add(Calendar.DAY_OF_YEAR, daysAfterEvent)
             }
 
-            val iNextEvent = eventPrediction.getOrNull(i + 1)
-            if ((predictedTime.timeInMillis < currentTime) && (iNextEvent == null || !predictedTime.isDaysEquals(iNextEvent.eventTime))) {
+            val iNextEvent = eventPrediction.find { it.eventTime.isDaysEquals(predictedTime) }
+            if ((predictedTime.timeInMillis < currentTime) && (iNextEvent == null)) {
                 eventPrediction.add(
                     min(i + 1, eventPrediction.size - 1),
                     EventData(

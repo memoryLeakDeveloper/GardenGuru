@@ -11,7 +11,7 @@ import com.entexy.gardenguru.databinding.RvEventItemBinding
 
 class EventsRecyclerAdapter(
     private val events: ArrayList<PlantEventData>,
-    private val isTodayEvents: Boolean,
+    private val eventsEditable: Boolean,
     private val eventSelectedCallback: (plantEventData: PlantEventData) -> Unit
 ) :
     RecyclerView.Adapter<EventsRecyclerAdapter.EventsViewHolder>() {
@@ -30,7 +30,6 @@ class EventsRecyclerAdapter(
         with(holder.binding) {
             val item = events[position]
 
-            cbEvent.setOnCheckedChangeListener(null)
             root.setOnClickListener(null)
 
             ivEventImage.setImageResource(item.event.imageRes)
@@ -43,7 +42,7 @@ class EventsRecyclerAdapter(
 
             cbEvent.isChecked = item.isComplete
 
-            if (isTodayEvents) {
+            if (eventsEditable) {
                 ivEventImage.setImageResource(item.event.imageRes)
                 tvEventName.setTextColor(root.resources.getColor(R.color.white, null))
                 tvPlantVarietyAndName.setTextColor(root.resources.getColor(R.color.white, null))
@@ -51,11 +50,7 @@ class EventsRecyclerAdapter(
                 cbEvent.buttonDrawable = ResourcesCompat.getDrawable(root.resources, R.drawable.check_box_selector, root.context.theme)
 
                 root.setOnClickListener {
-                    cbEvent.isChecked = !cbEvent.isChecked
-                }
-
-                cbEvent.setOnCheckedChangeListener { _, isChecked ->
-                    item.isComplete = isChecked
+//                    cbEvent.isChecked = !cbEvent.isChecked
                     eventSelectedCallback(item)
                 }
             } else {

@@ -38,7 +38,6 @@ class App : Application() {
 
         languagePreference = LanguagePreference(sharedPreferences)
 
-//        user = userDataPref.get()
         user = userDataPref.get()
 
     }

@@ -45,5 +45,5 @@ class EventsModule {
 
     @Provides
     @Singleton
-    fun provideCompleteEventsDataSource(): CompleteEventsDataSource = CompleteEventsDataSource.Base()
+    fun provideCompleteEventsDataSource(): CompleteEventsDataSource = CompleteEventsDataSource.Base(App.firestoreUserPlantRef!!)
 }
