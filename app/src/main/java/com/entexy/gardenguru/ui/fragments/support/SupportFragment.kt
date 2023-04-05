@@ -204,7 +204,8 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         } else if (!etEmail.text.toString().isEmailLengthIsValid()) {
             changeEmailEditTextStateWithException(R.string.max_email_count)
             return false
-        } else if (etDescription.text.isNullOrEmpty()) {
+        }
+        if (etDescription.text.isNullOrEmpty()) {
             etDescription.setBackgroundResource(R.drawable.edit_text_background_error)
             tvCount.setTextColor(requireContext().getColor(R.color.pink))
             descriptionError = true
@@ -213,11 +214,13 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
             return false
         } else if (descriptionError) {
             return false
-        } else if (attachmentsAdapter.mode != AdapterMode.Default) {
+        }
+        if (attachmentsAdapter.mode != AdapterMode.Default) {
             attachmentsAdapter.mode = AdapterMode.SelectException
             attachmentsAdapter.notifyDataSetChanged()
             return false
-        } else if (viewModel.filesSize.value > 100) {
+        }
+        if (viewModel.filesSize.value > 100) {
             return false
         }
         true

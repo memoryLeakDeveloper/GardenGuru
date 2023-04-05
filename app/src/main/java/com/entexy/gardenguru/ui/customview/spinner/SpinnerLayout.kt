@@ -78,9 +78,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     private fun setCustomAttributes(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
             getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
-            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let {
-                spinnerAdapter.textColor = it
-            }
+            getColorStateList(R.styleable.SpinnerLayout_text_color)?.let { spinnerAdapter.textColor = it }
             recycle()
         }
     }
