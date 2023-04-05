@@ -2,8 +2,10 @@ package com.entexy.gardenguru.data.plant.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.data.plant.PlantData
+import com.entexy.gardenguru.data.plant.mapToData
 import com.entexy.gardenguru.ui.PlantMockData
 import com.google.firebase.firestore.CollectionReference
+import kotlinx.coroutines.tasks.await
 
 interface SearchPlantDataSource {
 
@@ -14,23 +16,26 @@ interface SearchPlantDataSource {
     class Base(private val firestorePlantsRef: CollectionReference) : SearchPlantDataSource {
 
         override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantData>> {
-//            val task = firestorePlantsRef.whereEqualTo("name", plantName).get()
-//            val querySnapshot = task.await()
-//            val result = arrayListOf<PlantData>()
-//
-//            return if (task.exception == null) {
-//                querySnapshot.documents.forEach {
-//                    val plantCloud = it.toObject(PlantCloud::class.java)?.apply {
-//                        id = ""
-//                    }
-//
-//                    if (plantCloud != null)
-//                        result.add(plantCloud.mapToData())
-//                }
-//                CloudResponse.Success(result)
-//            } else CloudResponse.Error(task.exception)
+            val task = firestorePlantsRef.get()
+            task.await()
 
-            return CloudResponse.Success(PlantMockData.plantsData) //todo
+            val result = arrayListOf<PlantData>()
+
+            return if (task.exception == null) {
+                val plantDocuments = task.result.documents.filter {
+                    it["localizedVariety"].toString().contains(plantName, true)
+                }
+
+                plantDocuments.forEach {
+                    val plant = it.toObject(PlantCloud::class.java)?.apply {
+                        id = ""
+                    }?.mapToData()
+
+                    if (plant != null)
+                        result.add(plant)
+                }
+                CloudResponse.Success(result)
+            } else CloudResponse.Error(task.exception)
         }
 
         override suspend fun searchPlantByVarietyCode(varietyCode: String): CloudResponse<PlantData> {

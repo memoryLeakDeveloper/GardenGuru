@@ -20,6 +20,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
+import com.entexy.gardenguru.core.exception.getResult
+import com.entexy.gardenguru.data.support.FeedbackSubjects
 import com.entexy.gardenguru.databinding.DialogSupportSuccessBinding
 import com.entexy.gardenguru.databinding.FragmentSupportBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
@@ -76,8 +78,8 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
             requireActivity().onBackPressed()
         }
         header.title.setText(R.string.support)
-        val themes = resources.getStringArray(R.array.support_themes)
-        spinnerThemes.initView(resources.getString(R.string.request_subject), ArrayList(themes.toList()))
+        val themes = FeedbackSubjects.values().map { resources.getString(it.stringRes) }
+        spinnerThemes.initView(null, ArrayList(themes))
     }
 
     private fun setListeners() = binding.apply {
@@ -136,26 +138,36 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         btnSend.setOnClickListener {
             if (!checkValidInput()) return@setOnClickListener
             btnSend.isEnabled = false
-            progressDialog.showDialog(ProgressBar(requireContext()), false)
-            lifecycleScope.launch(Dispatchers.Main) {
-                viewModel.sendFeedback(
+            lifecycleScope.launch {
+                val cloudResponse = viewModel.sendFeedback(
                     etEmail.text.toString(),
-                    spinnerThemes.spinnerValue,
+                    FeedbackSubjects.values()[spinnerThemes.getSelectedValueIndex()],
                     etDescription.text.toString()
-                ) { isSuccess, error ->
-                    progressDialog.hideDialog()
-                    btnSend.isEnabled = true
-                    if (isSuccess) {
-                        val dialogBinding = DialogSupportSuccessBinding.inflate(LayoutInflater.from(requireContext())).apply {
-                            tvOk.setOnClickListener {
-                                successDialog.hideDialog()
-                                requireActivity().onBackPressed()
+                )
+
+                cloudResponse.collect {
+                    it.getResult(
+                        success = {
+                            progressDialog.hideDialog()
+                            btnSend.isEnabled = true
+
+                            val dialogBinding = DialogSupportSuccessBinding.inflate(LayoutInflater.from(requireContext())).apply {
+                                tvOk.setOnClickListener {
+                                    successDialog.hideDialog()
+                                    requireActivity().onBackPressed()
+                                }
                             }
+                            successDialog.showDialog(dialogBinding.root, cancelable = false)
+                        },
+                        failure = {
+                            progressDialog.hideDialog()
+                            btnSend.isEnabled = true
+                            requireView().showSnackBar(R.string.error_update_data)
+                        },
+                        loading = {
+                            progressDialog.showDialog(ProgressBar(requireContext()), false)
                         }
-                        successDialog.showDialog(dialogBinding.root, cancelable = false)
-                    } else {
-                        requireView().showSnackBar(if (error?.contains("java.net.UnknownHostException") == true) R.string.internet_connection_error else R.string.something_is_wrong)
-                    }
+                    )
                 }
             }
         }

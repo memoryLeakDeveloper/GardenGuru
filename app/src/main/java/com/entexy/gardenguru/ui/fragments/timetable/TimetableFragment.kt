@@ -51,7 +51,11 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
             }
 
             title.setOnClickListener {
-//                App.firestoreUserRef.document(App.user.userId).collection("plants").document().set(PlantMockData.plant.mapToPlantCloud())
+//                App.firestorePlantsRef.document("ztuiWSfJB4CmrQfx4Ilq").get().addOnSuccessListener {
+//                    for (i in 0..10) {
+//                        App.firestorePlantsRef.document().set(it.data)
+//                    }
+//                }
             }
         }
 
