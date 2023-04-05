@@ -271,6 +271,7 @@
     <string name="error_update_data">Не удалось обновить данные.\nПроверьте интернет соединение</string>
     <string name="error_deleting">Не удалось удалить данные.\nПроверьте интернет соединение</string>
     <string name="internet_connection_error">Ошибка интернет-соединения</string>
+    <string name="no_such_app">Нет приложения для данного действия</string>
 
     //sun relation
     <string name="direct_sunlight">Прямые солнечные лучи</string>
