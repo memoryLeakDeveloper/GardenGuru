@@ -93,5 +93,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun checkCurrentDestination() = findNavController().currentDestination?.id == R.id.loginFragment
-
 }

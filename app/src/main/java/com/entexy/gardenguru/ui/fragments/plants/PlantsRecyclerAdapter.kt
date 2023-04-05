@@ -12,9 +12,7 @@ import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.databinding.RvGardenPlantItemBinding
 import com.entexy.gardenguru.ui.fragments.plant_card.PlantCardFragment
 
-class PlantsRecyclerAdapter :
-    RecyclerView.Adapter<PlantsRecyclerAdapter.ViewHolder>() {
-
+class PlantsRecyclerAdapter : RecyclerView.Adapter<PlantsRecyclerAdapter.ViewHolder>() {
 
     private var plants: ArrayList<PlantData> = arrayListOf()
 

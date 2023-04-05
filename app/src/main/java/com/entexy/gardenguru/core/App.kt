@@ -44,10 +44,11 @@ class App : Application() {
         firebaseAuth = Firebase.auth
 
         languagePreference = LanguagePreference(sharedPreferences)
-        user = UserData("L7HK0VHcPaTteMoaHoWmAAM7ejy2")
+
+        user = userDataPref.get()
 
         NotificationWorker.startSingle(this)
-        //user = userDataPref.get()
+
     }
 
     companion object {

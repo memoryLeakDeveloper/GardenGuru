@@ -51,7 +51,6 @@
         app:layout_constraintStart_toEndOf="@+id/iv_cam"
         app:layout_constraintTop_toTopOf="@+id/expanded_btn_background" />
 
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_plus"
         android:layout_width="72dp"

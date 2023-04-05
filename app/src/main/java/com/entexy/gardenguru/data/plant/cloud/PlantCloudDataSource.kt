@@ -1,6 +1,7 @@
 package com.entexy.gardenguru.data.plant.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
+import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await
 
@@ -26,12 +27,10 @@ interface PlantCloudDataSource {
             val task = firestoreUserPlantRef.get()
             task.await()
             val result = arrayListOf<PlantCloud>()
-
             return if (task.exception == null) {
                 task.result.forEach {
                     result.add(it.toObject(PlantCloud::class.java).apply { id = it.id })
                 }
-
                 CloudResponse.Success(result)
             } else CloudResponse.Error(task.exception!!)
         }

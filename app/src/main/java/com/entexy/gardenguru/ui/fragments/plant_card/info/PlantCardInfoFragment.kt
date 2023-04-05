@@ -52,7 +52,6 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
         super.onViewCreated(view, savedInstanceState)
         plantData = requireArguments().getParcelable(CARD_INFO_PLANT_DATA_KEY)!!
         plantEvents = requireArguments().getParcelableArrayList(CARD_INFO_PLANT_EVENTS_KEY)!!
-
         initView()
     }
 

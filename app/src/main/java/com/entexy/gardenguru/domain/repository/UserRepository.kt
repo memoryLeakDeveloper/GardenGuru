@@ -12,4 +12,5 @@ interface UserRepository {
     suspend fun deleteUser(): CloudResponse<Unit>
 
     suspend fun signOutUser(): CloudResponse<Unit>
+
 }
