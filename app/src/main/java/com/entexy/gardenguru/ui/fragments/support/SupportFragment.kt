@@ -79,7 +79,7 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         }
         header.title.setText(R.string.support)
         val themes = FeedbackSubjects.values().map { resources.getString(it.stringRes) }
-        spinnerThemes.initView(null, ArrayList(themes))
+        spinnerThemes.initView(resources.getString(FeedbackSubjects.SuggestionForImproving.stringRes), ArrayList(themes))
     }
 
     private fun setListeners() = binding.apply {

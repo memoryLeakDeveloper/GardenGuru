@@ -58,24 +58,25 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         setCustomAttributes(attrs)
     }
 
-    fun initView(defValue: String?, list: List<String>) {
+    fun initView(defValue: String, list: List<String>) {
         spinnerAdapter = SpinnerAdapter((selectListener), if (list.contains(defValue)) list.indexOf(defValue) else -1)
         spinnerAdapter.setListAdapter(list.toMutableList())
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
         setBackgroundCompat(
             ContextCompat.getDrawable(
-                context, if (list.contains(defValue)) R.drawable.spinner_background else R.drawable.edit_text_background_unfocused
+                context,
+                if (list.contains(defValue) || defValue.isEmpty()) R.drawable.spinner_background else R.drawable.edit_text_background_unfocused
             )
         )
-        setSpinnerDefState(defValue, list)
         this.defValue = defValue
         this.list = list
+        setSpinnerDefState(list.contains(defValue), list)
+
     }
 
     private fun setCustomAttributes(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.SpinnerLayout, 0, 0).apply {
-            getColorStateList(R.styleable.SpinnerLayout_hint_color)?.let { binding.spinnerText.setTextColor(it) }
             getColorStateList(R.styleable.SpinnerLayout_text_color)?.let { spinnerAdapter.textColor = it }
             recycle()
         }
@@ -112,13 +113,15 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         }
     }
 
-    private fun setSpinnerDefState(defString: String?, list: List<String>) {
-        if (defString.isNullOrEmpty()) {
+    private fun setSpinnerDefState(isDefStringInList: Boolean, list: List<String>) {
+        if (isDefStringInList) {
             binding.spinnerText.text = list[0]
             spinnerValue = list[0]
+            binding.spinnerText.setTextColor(context.resources.getColor(R.color.white, null))
         } else {
-            binding.spinnerText.text = defString
-            spinnerValue = defString
+            binding.spinnerText.text = defValue
+            binding.spinnerText.setTextColor(context.resources.getColor(R.color.gray, null))
+            spinnerValue = defValue
         }
     }
 
