@@ -214,12 +214,12 @@
     <string name="support">Поддержка</string>
     <string name="your_request_send">Ваш запрос успешно отправлен</string>
     <string name="request_subject">Тема запроса</string>
-    <array name="support_themes">
-        <item>Предложения по улучшению</item>
-        <item>Ошибка в приложении</item>
-        <item>Жалоба</item>
-        <item>Другое</item>
-    </array>
+    
+    <string name="suggestion_for_improvement">Предложения по улучшению</string>
+    <string name="application_bug">Ошибка в приложении</string>
+    <string name="complaint">Жалоба</string>
+    <string name="other">Другое</string>
+
     <string name="delete_account">Удалить аккаунт</string>
     <string name="exit_account">Выйти из аккаунта</string>
     <string name="turn_on_notifications">Вкл. уведомления</string>

@@ -2,6 +2,7 @@ package com.entexy.gardenguru.ui.fragments.support
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.entexy.gardenguru.data.support.FeedbackSubjects
 import com.entexy.gardenguru.domain.usecases.support.SendFeedbackUseCase
 import com.entexy.gardenguru.ui.fragments.support.adapter.FileModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,9 +51,9 @@ class SupportViewModel @Inject constructor(private val sendFeedbackUseCase: Send
         }
     }
 
-    fun sendFeedback(email: String, subject: String?, body: String, onCompleteLambda: (success: Boolean, message: String?) -> Unit) {
-        sendFeedbackUseCase.send(email, subject, body, _files.value?.map { it.file }, onCompleteLambda)
-    }
+    fun sendFeedback(email: String, subject: FeedbackSubjects, body: String) =
+        sendFeedbackUseCase.send(email, subject.cloudValue, body, _files.value?.map { it.file } ?: listOf())
+
 
     override fun onCleared() {
         super.onCleared()

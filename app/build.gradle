@@ -43,10 +43,14 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField "String", "FEEDBACK_URL_SERVER", "\"https://feedback.entexy.com/\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
+            buildConfigField "String", "FEEDBACK_URL_SERVER", "\"https://feedback.entexy.com/\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -152,4 +156,9 @@ dependencies {
 
     //skeleton view
     implementation "com.ericktijerou.koleton:koleton:1.0.0-beta01"
+
+    //retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 }

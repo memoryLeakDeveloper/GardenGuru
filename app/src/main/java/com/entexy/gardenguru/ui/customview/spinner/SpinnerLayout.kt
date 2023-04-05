@@ -46,6 +46,9 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     var spinnerValue: String? = null
         private set
 
+    fun getSelectedValueIndex(): Int =
+        list.indexOf(spinnerValue)
+
     fun interface ValueCallback {
         fun value(position: Int, name: String)
     }
