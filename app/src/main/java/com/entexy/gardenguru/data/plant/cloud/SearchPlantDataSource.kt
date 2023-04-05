@@ -25,9 +25,7 @@ interface SearchPlantDataSource {
                 }
 
                 plantDocuments.forEach {
-                    val plant = it.toObject(PlantSearchCloud::class.java)?.apply {
-                        id = ""
-                    }
+                    val plant = it.toObject(PlantSearchCloud::class.java)
 
                     if (plant != null)
                         result.add(plant)

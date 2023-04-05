@@ -49,14 +49,6 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
             ivScrollUp.setOnClickListener {
                 rvEvents.smoothScrollToPosition(7)
             }
-
-            title.setOnClickListener {
-//                App.firestorePlantsRef.document("ztuiWSfJB4CmrQfx4Ilq").get().addOnSuccessListener {
-//                    for (i in 0..10) {
-//                        App.firestorePlantsRef.document().set(it.data)
-//                    }
-//                }
-            }
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
