@@ -58,7 +58,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERM_OF_USE_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
         }
         btDeveloperContact.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_supportFragment)
+            if (checkCurrentDestination())
+                findNavController().navigate(R.id.action_settingsFragment_to_supportFragment)
         }
         btnExit.setOnClickListener {
             handleExitFromAccountEvent()
@@ -123,7 +124,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                         },
                         success = {
                             signOutFromGoogle()
-                            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                            if (checkCurrentDestination())
+                                findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         },
                         failure = {
                             requireContext().showToastLong(R.string.something_is_wrong)
@@ -146,7 +148,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
                             progressDialog.showDialog(ProgressBar(requireContext()), false)
                         },
                         success = {
-                            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                            if (checkCurrentDestination())
+                                findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         },
                         failure = {
                             requireContext().showToastLong(R.string.something_is_wrong)
@@ -159,6 +162,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        dialog.hideDialog()
+        binding.spinnerLanguages.hidePopup()
+    }
+
     private fun signOutFromGoogle() {
         App.user = null
         viewModel.clearUserDataPref()
@@ -166,6 +175,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             .requestIdToken(GoogleAuthContract.client_id).requestEmail().build()
         GoogleSignIn.getClient(requireContext(), gso).signOut()
     }
+
+    private fun checkCurrentDestination() = findNavController().currentDestination?.id == R.id.settingsFragment
 
     companion object {
         private const val PRIVACY_POLICY_URL =

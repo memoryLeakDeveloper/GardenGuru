@@ -15,7 +15,7 @@ import com.entexy.gardenguru.data.auth.GoogleAuthContract
 import com.entexy.gardenguru.databinding.FragmentLoginBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.utils.bugger
-import com.entexy.gardenguru.utils.showToastLong
+import com.entexy.gardenguru.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             loadingDialog.showDialog(ProgressBar(requireContext()), false)
             loginUser(it)
         } ?: run {
-            requireContext().showToastLong(R.string.something_is_wrong)
+            requireView().showSnackBar(R.string.something_is_wrong)
         }
     }
 
@@ -47,7 +47,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun checkLogin() = lifecycleScope.launch {
         if (viewModel.isUserAuthorized() && App.user != null)
-            findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+            if (checkCurrentDestination())
+                findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
     }
 
     private fun setListener() = binding.apply {
@@ -55,29 +56,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             googleAuth.launch("")
         }
         textPrivacyPolicy.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_privacyPolicyFragment)
+            if (checkCurrentDestination())
+                findNavController().navigate(R.id.action_loginFragment_to_privacyPolicyFragment)
         }
         textTermOfUse.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_termOfUseFragment)
+            if (checkCurrentDestination())
+                findNavController().navigate(R.id.action_loginFragment_to_termOfUseFragment)
         }
     }
 
     private fun loginUser(id: String) = lifecycleScope.launch(Dispatchers.IO) {
         viewModel.loginUser(id)?.let { uid ->
             viewModel.createUser(uid).collect { response ->
-                handleCloudResponse(response, uid)
+                handleCloudResponse(response)
             }
         } ?: run {
             withContext(Dispatchers.Main) {
-                requireContext().showToastLong(R.string.something_is_wrong)
+                requireView().showSnackBar(R.string.something_is_wrong)
             }
         }
     }
 
-    private suspend fun handleCloudResponse(response: CloudResponse<Unit>, id: String) = withContext(Dispatchers.Main) {
+    private suspend fun handleCloudResponse(response: CloudResponse<Unit>) = withContext(Dispatchers.Main) {
         response.getResult(
             success = {
-                findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
+                if (checkCurrentDestination())
+                    findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)
             },
             failure = {
                 bugger(it.exception?.stackTraceToString())
@@ -87,5 +91,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         )
         loadingDialog.hideDialog()
     }
+
+    private fun checkCurrentDestination() = findNavController().currentDestination?.id == R.id.loginFragment
 
 }

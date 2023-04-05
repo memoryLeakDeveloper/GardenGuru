@@ -32,6 +32,8 @@ class SupportViewModel @Inject constructor(private val sendFeedbackUseCase: Send
             allFiles?.removeAll(it)
         }
         _files.postValue(allFiles ?: emptyList<FileModel>().toMutableList())
+        val deletedFilesSize = list?.sumOf { it.file.length() / (1024 * 1024) }
+        deletedFilesSize?.let { _filesSize.value -= it }
     }
 
     fun selectItem(position: Int, isSelected: Boolean) {
@@ -48,7 +50,7 @@ class SupportViewModel @Inject constructor(private val sendFeedbackUseCase: Send
         }
     }
 
-    fun sendFeedback(email: String, subject: String?, body: String, onCompleteLambda: (success: Boolean) -> Unit) {
+    fun sendFeedback(email: String, subject: String?, body: String, onCompleteLambda: (success: Boolean, message: String?) -> Unit) {
         sendFeedbackUseCase.send(email, subject, body, _files.value?.map { it.file }, onCompleteLambda)
     }
 

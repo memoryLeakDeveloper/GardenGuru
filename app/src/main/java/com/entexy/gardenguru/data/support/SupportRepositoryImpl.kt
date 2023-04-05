@@ -13,7 +13,7 @@ class SupportRepositoryImpl @Inject constructor() : SupportRepository {
         subject: String?,
         body: String,
         files: List<File>?,
-        onCompleteLambda: (success: Boolean) -> Unit
+        onCompleteLambda: (success: Boolean, message: String?) -> Unit
     ) {
         //todo change email
         var builder = MaildroidX.Builder()
@@ -30,11 +30,11 @@ class SupportRepositoryImpl @Inject constructor() : SupportRepository {
                 override val timeout: Long = 2000
 
                 override fun onFail(errorMessage: String) {
-                    onCompleteLambda(false)
+                    onCompleteLambda(false, errorMessage)
                 }
 
                 override fun onSuccess() {
-                    onCompleteLambda(true)
+                    onCompleteLambda(true, null)
                 }
             })
         if (files != null) {

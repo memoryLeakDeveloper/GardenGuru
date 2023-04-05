@@ -6,7 +6,13 @@ import javax.inject.Inject
 
 class SendFeedbackUseCase @Inject constructor(private val repository: SupportRepository) {
 
-    fun send(email: String, subject: String?, body: String, files: List<File>?, onCompleteLambda: (success: Boolean) -> Unit) {
+    fun send(
+        email: String,
+        subject: String?,
+        body: String,
+        files: List<File>?,
+        onCompleteLambda: (success: Boolean, message: String?) -> Unit
+    ) {
         repository.sendFeedback(email, subject, body, files, onCompleteLambda)
     }
 

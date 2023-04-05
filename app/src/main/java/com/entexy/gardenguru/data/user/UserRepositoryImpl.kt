@@ -14,7 +14,6 @@ class UserRepositoryImpl @Inject constructor(
     private val deleteUserDataSource: DeleteUserDataSource,
     private val signOutUserDataSource: SignOutUserDataSource,
     private val userPlantsDataSource: UserPlantsDataSource
-
 ) : UserRepository {
 
     override suspend fun loginUser(idToken: String) = loginUserDataSource.login(idToken)
