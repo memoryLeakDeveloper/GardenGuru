@@ -34,40 +34,74 @@ data class PlantSearchCloud(
     var sprayingWinter: Int? = null,
     var minTemp: Int? = null,
     var maxTemp: Int? = null,
-)
+) {
 
-fun PlantSearchCloud.mapToData(listBenefits: List<BenefitData>, listPests: List<PestData>) = PlantData(
-    id = "",
-    name = name!!,
-    variety = variety!!,
-    photo = photo!!,
-    coverPhoto = coverPhoto!!,
-    customPhoto = customPhoto!!,
-    careComplexity = CareComplexity.values().find {
-        it.cloudName == careComplexity
-    } ?: CareComplexity.Easy,
-    description = description!!,
-    localizeDescription = localizedDescription!!,
-    localizedVariety = localizedVariety!!,
-    sunRelation = SunRelation.values().find { it.cloudName == sunRelation }!!,
-    pests = listPests,
-    reproduction = reproduction!!.map { cloud ->
-        Reproduction.values().find {
-            it.cloudValue == cloud
-        }!!
-    },
-    benefits = listBenefits,
-    pruning = pruning!!,
-    plantingTime = plantingTime!!,
-    feedingSummer = feedingSummer!!,
-    feedingWinter = feedingWinter!!,
-    wateringSummer = wateringSummer!!,
-    wateringWinter = wateringWinter!!,
-    sprayingSummer = sprayingSummer!!,
-    sprayingWinter = sprayingWinter!!,
-    minTemp = minTemp!!,
-    maxTemp = maxTemp!!,
-    localizedPruning = localizedPruning!!,
-    localizedPlantingTime = localizedPlantingTime!!,
-    addingTime = Date()
-)
+    fun allRequiredFields(): Boolean {
+        variety ?: return false
+        localizedVariety ?: return false
+        photo ?: return false
+        coverPhoto ?: return false
+        customPhoto ?: return false
+        careComplexity ?: return false
+        description ?: return false
+        localizedPruning ?: return false
+        localizedDescription ?: return false
+        localizedPlantingTime ?: return false
+        sunRelation ?: return false
+        pests ?: return false
+        reproduction ?: return false
+        benefits ?: return false
+        pruning ?: return false
+        plantingTime ?: return false
+        feedingSummer ?: return false
+        feedingWinter ?: return false
+        wateringSummer ?: return false
+        wateringWinter ?: return false
+        sprayingSummer ?: return false
+        sprayingWinter ?: return false
+        minTemp ?: return false
+        maxTemp ?: return false
+
+        return true
+    }
+}
+
+fun PlantSearchCloud.mapToData(listBenefits: List<BenefitData>, listPests: List<PestData>): PlantData? {
+    return if (allRequiredFields())
+        PlantData(
+            id = "",
+            name = name,
+            variety = variety!!,
+            photo = photo!!,
+            coverPhoto = coverPhoto!!,
+            customPhoto = customPhoto!!,
+            careComplexity = CareComplexity.values().find {
+                it.cloudName == careComplexity
+            } ?: CareComplexity.Easy,
+            description = description!!,
+            localizeDescription = localizedDescription!!,
+            localizedVariety = localizedVariety!!,
+            sunRelation = SunRelation.values().find { it.cloudName == sunRelation }!!,
+            pests = listPests,
+            reproduction = reproduction!!.map { cloud ->
+                Reproduction.values().find {
+                    it.cloudValue == cloud
+                }!!
+            },
+            benefits = listBenefits,
+            pruning = pruning!!,
+            plantingTime = plantingTime!!,
+            feedingSummer = feedingSummer!!,
+            feedingWinter = feedingWinter!!,
+            wateringSummer = wateringSummer!!,
+            wateringWinter = wateringWinter!!,
+            sprayingSummer = sprayingSummer!!,
+            sprayingWinter = sprayingWinter!!,
+            minTemp = minTemp!!,
+            maxTemp = maxTemp!!,
+            localizedPruning = localizedPruning!!,
+            localizedPlantingTime = localizedPlantingTime!!,
+            addingTime = Date()
+        )
+    else null
+}

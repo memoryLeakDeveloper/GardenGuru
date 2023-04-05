@@ -2,7 +2,6 @@ package com.entexy.gardenguru.data.plant.cloud
 
 import com.entexy.gardenguru.core.exception.CloudResponse
 import com.entexy.gardenguru.data.plant.search.PlantSearchCloud
-import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FieldPath
 import kotlinx.coroutines.tasks.await
@@ -18,7 +17,6 @@ interface SearchPlantDataSource {
         override suspend fun searchPlantByName(plantName: String): CloudResponse<List<PlantSearchCloud>> {
             val task = firestorePlantsRef.whereGreaterThanOrEqualTo(FieldPath.of("localizedDescription", "ru"), plantName).get()
             val querySnapshot = task.await()
-            bugger("plantName = ${plantName}   querySnapshot ${querySnapshot.documents.size}")
             val result = arrayListOf<PlantSearchCloud>()
             return if (task.exception == null) {
                 querySnapshot.documents.forEach {

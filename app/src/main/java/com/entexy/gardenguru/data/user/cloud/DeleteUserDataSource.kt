@@ -16,7 +16,6 @@ interface DeleteUserDataSource {
             val currentUser = Firebase.auth.currentUser ?: return CloudResponse.Error(Exception())
             App.firestoreUsersRef.document(Firebase.auth.currentUser!!.uid).delete().await()
             val task = currentUser.delete()
-            task.await()
             return if (task.exception == null) {
                 CloudResponse.Success(Unit)
             } else CloudResponse.Error(task.exception)

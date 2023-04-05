@@ -16,7 +16,6 @@ interface AddPlantDataSource {
             val document = firestoreUserPlantRef.document()
             data.id = document.id
             val task = document.set(data.mapToPlantCloud())
-            task.await()
             return if (task.exception == null)
                 CloudResponse.Success(Unit)
             else CloudResponse.Error(task.exception)

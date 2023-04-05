@@ -66,7 +66,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun loginUser(id: String) = lifecycleScope.launch(Dispatchers.IO) {
         viewModel.loginUser(id)?.let { uid ->
             viewModel.createUser(uid).collect { response ->
-                handleCloudResponse(response, uid)
+                handleCloudResponse(response)
             }
         } ?: run {
             withContext(Dispatchers.Main) {
@@ -75,7 +75,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
     }
 
-    private suspend fun handleCloudResponse(response: CloudResponse<Unit>, id: String) = withContext(Dispatchers.Main) {
+    private suspend fun handleCloudResponse(response: CloudResponse<Unit>) = withContext(Dispatchers.Main) {
         response.getResult(
             success = {
                 findNavController().navigate(R.id.action_loginFragment_to_timetableFragment)

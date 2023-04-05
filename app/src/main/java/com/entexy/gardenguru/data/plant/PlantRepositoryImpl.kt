@@ -87,6 +87,7 @@ class PlantRepositoryImpl @Inject constructor(
             val plantResult = searchPlantDataSource.searchPlantByVarietyCode(it)
             if (plantResult is CloudResponse.Success) {
                 val plant = plantResult.result.mapToData(fetchBenefits(plantResult.result.benefits), fetchPests(plantResult.result.pests))
+                    ?: return CloudResponse.Error(null)
                 result.add(plant)
             } else {
                 return CloudResponse.Error((plantResult as? CloudResponse.Error)?.exception)
@@ -99,7 +100,7 @@ class PlantRepositoryImpl @Inject constructor(
         val plantResults = searchPlantDataSource.searchPlantByName(plantName)
         return if (plantResults is CloudResponse.Success) {
             val resultList = plantResults.result.map {
-                it.mapToData(fetchBenefits(it.benefits), fetchPests(it.pests))
+                it.mapToData(fetchBenefits(it.benefits), fetchPests(it.pests)) ?: return CloudResponse.Error(null)
             }
             CloudResponse.Success(resultList)
         } else {

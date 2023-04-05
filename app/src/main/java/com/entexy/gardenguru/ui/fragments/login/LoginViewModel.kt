@@ -26,14 +26,13 @@ class LoginViewModel @Inject constructor(
     suspend fun createUser(id: String) = createUserUseCase.createUser(id)
 
     suspend fun loginUser(id: String): String? {
-        val loginResponse = loginUserUseCase.login(id)
-        loginResponse?.let { user ->
+        loginUserUseCase.login(id)?.let { user ->
             App.user = UserData(user.uid)
             userDataPref.put(UserData(user.uid))
+            return user.uid
         } ?: run {
             return null
         }
-        return loginResponse.uid
     }
 
 }

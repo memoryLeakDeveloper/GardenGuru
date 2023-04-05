@@ -43,7 +43,7 @@ class UserModule {
         loginUserDataSource: LoginUserDataSource,
         createUserDataSource: CreateUserDataSource,
         deleteUserDataSource: DeleteUserDataSource,
-        signOutUserDataSource: SignOutUserDataSource): UserRepository =
-        UserRepositoryImpl(loginUserDataSource, createUserDataSource, deleteUserDataSource, signOutUserDataSource)
+        signOutUserDataSource: SignOutUserDataSource
+    ): UserRepository = UserRepositoryImpl(loginUserDataSource, createUserDataSource, deleteUserDataSource, signOutUserDataSource)
 
 }
