@@ -11,6 +11,7 @@ import android.util.Patterns
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -31,7 +32,9 @@ fun TextView.setString(stringRes: Int) {
 
 fun Calendar.toDmyString() = SimpleDateFormat(Constance.dmyDatePattern, Locale.ENGLISH).format(this.time) ?: ""
 
-fun Date.toDmyString() = SimpleDateFormat(Constance.dmyHmDatePattern, Locale.ENGLISH).format(this) ?: ""
+fun Calendar.toDmyHmString() = SimpleDateFormat(Constance.dmyHmDatePattern, Locale.ENGLISH).format(this.time) ?: ""
+
+fun Date.toDmyHmString() = SimpleDateFormat(Constance.dmyHmDatePattern, Locale.ENGLISH).format(this) ?: ""
 
 fun Activity.checkAndVerifyStoragePermissions(): Boolean {
     val permission = ActivityCompat.checkSelfPermission(
@@ -67,6 +70,19 @@ fun Activity.checkAndVerifyCameraPermissions(): Boolean {
             ),
             Constance.GALLERY_PERMISSION_REQUEST_KODE
         )
+        return false
+    }
+    return true
+}
+
+fun Activity.checkAndVerifyCameraPermissions(requestPermissionLauncher: ActivityResultLauncher<String>): Boolean {
+    val permission = ActivityCompat.checkSelfPermission(
+        this,
+        Manifest.permission.CAMERA
+    )
+    if (permission != PackageManager.PERMISSION_GRANTED) {
+        // We don't have permission so prompt the user
+        requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         return false
     }
     return true

@@ -36,16 +36,13 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
             viewModel.fetchEvents(plantData.id).collect { cloudResponse ->
                 cloudResponse.getResult(
                     success = {
-                        with(binding) {
-                            dialogHelper.hideDialog()
+                        dialogHelper.hideDialog()
 
-                            initView(plantData, ArrayList(it.result.sortedByDescending { it.eventTime.time }).apply {
-                                add(0, EventData("", true, Calendar.getInstance().apply {
-                                    time = plantData.addingTime
-                                }, EventData.EventType.Create, plantData.id))
-                            })
-
-                        }
+                        initView(plantData, ArrayList(it.result.sortedByDescending { it.eventTime.time }).apply {
+                            add(0, EventData("", true, Calendar.getInstance().apply {
+                                time = plantData.addingTime
+                            }, EventData.EventType.Create, plantData.id))
+                        })
                     },
                     failure = {
                         dialogHelper.hideDialog()
@@ -76,7 +73,9 @@ class PlantCardFragment : BaseFragment<FragmentPlantCardBinding>() {
 
     private fun initPager(plantData: PlantData, events: ArrayList<EventData>) {
         with(binding) {
-            val adapter = PlantCardPagerAdapter(requireActivity(), plantData, events)
+            val adapter = PlantCardPagerAdapter(requireActivity(), plantData, events) {
+                binding.title.text = it
+            }
             viewPager.adapter = adapter
 
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

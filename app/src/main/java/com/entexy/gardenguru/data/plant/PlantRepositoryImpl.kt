@@ -8,7 +8,6 @@ import com.entexy.gardenguru.data.plant.cloud.*
 import com.entexy.gardenguru.data.plant.pest.PestData
 import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
-import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
 import com.entexy.gardenguru.domain.repository.PlantRepository
 import javax.inject.Inject
 
@@ -23,26 +22,31 @@ class PlantRepositoryImpl @Inject constructor(
     private val addPlantDataSource: AddPlantDataSource
 ) : PlantRepository {
 
-    override suspend fun fetchPlant(idPlant: String): CloudResponse<PlantData> {
-        val plantDataCloud = plantSource.fetchPlant(idPlant)
+    override suspend fun fetchUserPlants(): CloudResponse<ArrayList<PlantData>> {
+        val plantDataCloud = plantSource.fetchPlants()
 
+        val result = arrayListOf<PlantData>()
         return if (plantDataCloud is CloudResponse.Success) {
-            val plantData = plantDataCloud.result.mapToData()
-            if (plantData != null)
-                CloudResponse.Success(plantData.apply {
-                    pests = fetchPests(plantDataCloud.result.pestsIds)
-                    benefits = fetchBenefits(plantDataCloud.result.benefitsIds)
-                })
-            else CloudResponse.Error(null)
+            plantDataCloud.result.forEach {
+                val plantData = it.mapToData()
+                if (plantData != null) {
+                    CloudResponse.Success(plantData.apply {
+                        pests = fetchPests(it.pestsIds)
+                        benefits = fetchBenefits(it.benefitsIds)
+                    })
+                    result.add(plantData)
+                }
+            }
+            CloudResponse.Success(result)
         } else CloudResponse.Error(null)
     }
 
     //returns a list of plants with empty benefits, pests
-    override suspend fun fetchPlainUserPlants(): CloudResponse<ArrayList<PlantData>> {
+    override suspend fun fetchPlainUserPlants(): CloudResponse<List<PlantData>> {
         val plantDataCloud = plantSource.fetchPlants()
 
         return if (plantDataCloud is CloudResponse.Success) {
-            val result = arrayListOf<PlantData>()
+            val result = mutableListOf<PlantData>()
             plantDataCloud.result.forEach {
                 val plantData = it.mapToData()
                 if (plantData != null)
@@ -105,7 +109,7 @@ class PlantRepositoryImpl @Inject constructor(
         renamePlantDataSource.renamePlant(plantId, plantName)
 
     override suspend fun updatePlantCustomPhoto(plantId: String, photoUrl: String?): CloudResponse<Unit> =
-        updatePlantCustomPhotoDataSource.renamePlant(plantId, photoUrl)
+        updatePlantCustomPhotoDataSource.updatePhoto(plantId, photoUrl)
 
     override suspend fun deletePlant(plantId: String): CloudResponse<Unit> {
         return deletePlantDataSource.deletePlant(plantId)

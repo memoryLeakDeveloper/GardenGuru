@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.databinding.RvItemHistoryBinding
+import com.entexy.gardenguru.utils.toDmyHmString
 import com.entexy.gardenguru.utils.toDmyString
 
 class HistoryRecyclerAdapter(private val events: ArrayList<EventData>) :
@@ -29,7 +30,8 @@ class HistoryRecyclerAdapter(private val events: ArrayList<EventData>) :
             val plantEvent = events[position]
 
             tvEventName.setText(plantEvent.eventType.nameRes)
-            tvEventTime.text = plantEvent.eventTime.toDmyString()
+            tvEventTime.text = if (plantEvent.isCompleted) plantEvent.eventTime.toDmyHmString()
+            else plantEvent.eventTime.toDmyString()
 
             if (plantEvent.isCompleted) {
                 ivDoneImage.setImageResource(R.drawable.ic_done)
