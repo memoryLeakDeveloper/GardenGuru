@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.core.widget.addTextChangedListener
@@ -38,7 +37,8 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
 
     private lateinit var attachmentsAdapter: AttachmentsRecyclerAdapter
     private val viewModel: SupportViewModel by viewModels()
-    private val dialogHelper = DialogHelper()
+    private val successDialog = DialogHelper()
+    private val progressDialog = DialogHelper()
     private var descriptionError = false
     private val startForFileResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -93,51 +93,69 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
                 } else {
                     if (etEmail.text.toString().isEmailValid()) {
                         changeEmailEditTextStateFocus()
-                    } else if (!etEmail.text.toString().contains("@")) {
+                    } else if (!etEmail.text.toString().isEmailValid()) {
+                        changeEmailEditTextStateWithException(R.string.wrong_email)
+                    } else if (!etEmail.text.toString().contains("@") || etEmail.text!!.filter { it == '@' }.length > 1) {
                         changeEmailEditTextStateWithException(R.string.wrong_email)
                     } else if (!etEmail.text.toString().isEmailLengthIsValid()) {
                         changeEmailEditTextStateWithException(R.string.max_email_count)
                     } else {
-                        changeEmailEditTextStateWithException(R.string.wrong_email)
+                        changeEmailEditTextStateFocus()
                     }
                 }
             }
         }
         etDescription.addTextChangedListener {
             tvCount.text = getString(R.string.count, it?.count() ?: 0)
-            if (it != null && it.count() > 2000) {
+            if (it != null && it.count() > 20) {
                 etDescription.setBackgroundResource(R.drawable.edit_text_background_error)
                 tvCount.setTextColor(requireContext().getColor(R.color.pink))
                 descriptionError = true
             } else {
                 etDescription.setBackgroundResource(R.drawable.edit_text_background_focus)
                 tvCount.setTextColor(requireContext().getColor(R.color.gray))
+                tvDescriptionHint.toGone()
                 descriptionError = false
             }
         }
         etDescription.setOnFocusChangeListener { editText, hasFocus ->
-            if (!hasFocus)
-                editText.setBackgroundResource(R.drawable.edit_text_background_unfocused)
-            else
+            if (!hasFocus) {
+                if (!etDescription.text?.trim().isNullOrBlank() && ((etDescription.text?.trim()?.count() ?: 0) <= 20)) {
+                    etDescription.setBackgroundResource(R.drawable.edit_text_background_unfocused)
+                    tvDescriptionHint.toGone()
+                } else {
+                    etDescription.setBackgroundResource(R.drawable.edit_text_background_error)
+                    if (etDescription.text?.trim().isNullOrBlank()) tvDescriptionHint.toVisible()
+                    descriptionError = true
+                }
+            } else {
+                tvDescriptionHint.toGone()
                 editText.setBackgroundResource(R.drawable.edit_text_background_focus)
+            }
         }
         btnSend.setOnClickListener {
             if (!checkValidInput()) return@setOnClickListener
             btnSend.isEnabled = false
-            dialogHelper.showDialog(ProgressBar(requireContext()), false)
-            viewModel.sendFeedback(etEmail.text.toString(), spinnerThemes.spinnerValue, etDescription.text.toString()) {
-                dialogHelper.hideDialog()
-                btnSend.isEnabled = true
-                if (it) {
-                    val dialogBinding = DialogSupportSuccessBinding.inflate(LayoutInflater.from(requireContext())).apply {
-                        tvOk.setOnClickListener {
-                            dialogHelper.hideDialog()
-                            requireActivity().onBackPressed()
+            progressDialog.showDialog(ProgressBar(requireContext()), false)
+            lifecycleScope.launch(Dispatchers.Main) {
+                viewModel.sendFeedback(
+                    etEmail.text.toString(),
+                    spinnerThemes.spinnerValue,
+                    etDescription.text.toString()
+                ) { isSuccess, error ->
+                    progressDialog.hideDialog()
+                    btnSend.isEnabled = true
+                    if (isSuccess) {
+                        val dialogBinding = DialogSupportSuccessBinding.inflate(LayoutInflater.from(requireContext())).apply {
+                            tvOk.setOnClickListener {
+                                successDialog.hideDialog()
+                                requireActivity().onBackPressed()
+                            }
                         }
+                        successDialog.showDialog(dialogBinding.root, cancelable = false)
+                    } else {
+                        requireView().showSnackBar(if (error?.contains("java.net.UnknownHostException") == true) R.string.internet_connection_error else R.string.something_is_wrong)
                     }
-                    dialogHelper.showDialog(dialogBinding.root, cancelable = false)
-                } else {
-                    Toast.makeText(requireContext(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -171,14 +189,23 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         } else if (!etEmail.text.toString().isEmailValid()) {
             changeEmailEditTextStateWithException(R.string.wrong_email)
             return false
+        } else if (!etEmail.text.toString().isEmailLengthIsValid()) {
+            changeEmailEditTextStateWithException(R.string.max_email_count)
+            return false
         } else if (etDescription.text.isNullOrEmpty()) {
             etDescription.setBackgroundResource(R.drawable.edit_text_background_error)
             tvCount.setTextColor(requireContext().getColor(R.color.pink))
             descriptionError = true
             return false
+        } else if (etDescription.text!!.trim().isEmpty()) {
+            return false
+        } else if (descriptionError) {
+            return false
         } else if (attachmentsAdapter.mode != AdapterMode.Default) {
             attachmentsAdapter.mode = AdapterMode.SelectException
             attachmentsAdapter.notifyDataSetChanged()
+            return false
+        } else if (viewModel.filesSize.value > 100) {
             return false
         }
         true
@@ -225,4 +252,9 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
         tvEmailHint.toGone()
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding.spinnerThemes.hidePopup()
+        progressDialog.hideDialog()
+    }
 }

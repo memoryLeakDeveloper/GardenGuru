@@ -20,7 +20,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
 
     private var binding = SpinnerLayoutBinding.inflate(LayoutInflater.from(context), this)
     private var popupBinding = SpinnerPopupBinding.inflate(LayoutInflater.from(context))
-    private var spinnerAdapter: SpinnerAdapter
+    private lateinit var spinnerAdapter: SpinnerAdapter
     private var popupWindow: PopupWindow? = null
     private var isListExpanded = false
     private var defValue: String? = null
@@ -51,12 +51,12 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
 
     init {
-        spinnerAdapter = SpinnerAdapter((selectListener))
         setRootClickListener()
         setCustomAttributes(attrs)
     }
 
     fun initView(defValue: String?, list: List<String>) {
+        spinnerAdapter = SpinnerAdapter((selectListener), if (defValue != null) list.indexOf(defValue) else -1)
         spinnerAdapter.setListAdapter(list.toMutableList())
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
@@ -94,7 +94,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
                     initPopupWindow(it)
                 }
                 if (!isListExpanded) {
-                    popupWindow!!.showAsDropDown(it, 0, 0)
+                    popupWindow!!.showAsDropDown(it, 0, 20)
                     arrowAnimation(false)
                     isListExpanded = true
                 }
@@ -109,6 +109,7 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
             isOutsideTouchable = true
             isFocusable = true
             contentView = popupBinding.root
+            showAsDropDown(this@SpinnerLayout, 0, 20)
         }
     }
 
@@ -130,5 +131,8 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
         }
     }
 
+    fun hidePopup() {
+        popupWindow?.dismiss()
+    }
 
 }

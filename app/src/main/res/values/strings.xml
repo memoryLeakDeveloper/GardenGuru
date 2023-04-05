@@ -3,14 +3,13 @@
 
     <string name="ok">Ок</string>
 
-
     //onboarding
     <string name="onboarding_skip">Пропустить</string>
     <string name="onboarding_next">Далее</string>
     <string name="onboarding1_head">Уход за растением</string>
     <string name="onboarding1_hint">Мы подскажем, как и когда правильно \nухаживать за Вашим растением</string>
     <string name="onboarding2_head">Распознавание по фото</string>
-    <string name="onboarding2_hint">Если Вы не знаете, обладателем какого растения Вы стали, то GardenGuru вам подскажет</string>
+    <string name="onboarding2_hint">Если Вы не знаете, обладателем какого растения Вы стали, то GardenGuru подскажет</string>
     <string name="onboarding3_head">Мой сад</string>
     <string name="onboarding3_hint">В Сад можно добавлять неограниченное количество растений</string>
 
@@ -143,6 +142,7 @@
     <string name="define_care_difficult">Определите сложность ухода</string>
     <string name="plant_info">Информация о растении</string>
     <string name="description...">Описание…</string>
+    <string name="description_with_star">Описание…*</string>
     <string name="description">Описание</string>
     <string name="pests_disease">Вредители (болезни)</string>
     <string name="choose_pests">Выберите вредителя(болезни)</string>
@@ -270,6 +270,7 @@
     <string name="error_loading_data">Не удалось загрузить данные.\nПроверьте интернет соединение</string>
     <string name="error_update_data">Не удалось обновить данные.\nПроверьте интернет соединение</string>
     <string name="error_deleting">Не удалось удалить данные.\nПроверьте интернет соединение</string>
+    <string name="internet_connection_error">Ошибка интернет-соединения</string>
 
     //sun relation
     <string name="direct_sunlight">Прямые солнечные лучи</string>

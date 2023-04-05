@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.OpenableColumns
+import android.util.Patterns
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -147,14 +148,7 @@ fun Calendar.isSummerSeason(): Boolean {
 }
 
 fun String.isEmailValid(): Boolean {
-    return Pattern.compile(
-        "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
-    ).matcher(this).matches()
+    return Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
 fun String.isEmailLengthIsValid(): Boolean {
