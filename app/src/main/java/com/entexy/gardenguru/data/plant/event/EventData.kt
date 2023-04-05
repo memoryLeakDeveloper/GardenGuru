@@ -20,7 +20,7 @@ data class EventData(
         Feeding("FEEDING", R.string.feeding, R.drawable.ic_feeding, R.drawable.ic_top_dressing_inactive),
         Transfer("TRANSFER", R.string.transfer, R.drawable.ic_transfer, R.drawable.ic_transfer_inactive),
         Spraying("SPRAYING", R.string.spraying, R.drawable.ic_spraying, R.drawable.ic_spraying_inactive),
-        Create("CREATE", R.string.create_plant, R.drawable.plant_placeholder, R.drawable.ic_top_dressing_inactive),
+        Create("CREATE", R.string.plant_added, R.drawable.plant_placeholder, R.drawable.ic_top_dressing_inactive),
     }
 
     override fun toString(): String =

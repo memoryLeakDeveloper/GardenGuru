@@ -1,6 +1,5 @@
 package com.entexy.gardenguru.data.user
 
-import com.entexy.gardenguru.data.plant.cloud.UserPlantsDataSource
 import com.entexy.gardenguru.data.user.cloud.CreateUserDataSource
 import com.entexy.gardenguru.data.user.cloud.DeleteUserDataSource
 import com.entexy.gardenguru.data.user.cloud.LoginUserDataSource
@@ -12,9 +11,7 @@ class UserRepositoryImpl @Inject constructor(
     private val loginUserDataSource: LoginUserDataSource,
     private val createUserDataSource: CreateUserDataSource,
     private val deleteUserDataSource: DeleteUserDataSource,
-    private val signOutUserDataSource: SignOutUserDataSource,
-    private val userPlantsDataSource: UserPlantsDataSource
-
+    private val signOutUserDataSource: SignOutUserDataSource
 ) : UserRepository {
 
     override suspend fun loginUser(idToken: String) = loginUserDataSource.login(idToken)
@@ -24,7 +21,5 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun deleteUser() = deleteUserDataSource.delete()
 
     override suspend fun signOutUser() = signOutUserDataSource.signOut()
-
-    override suspend fun fetchAllPlants(uid: String) = userPlantsDataSource.fetch(uid)
 
 }

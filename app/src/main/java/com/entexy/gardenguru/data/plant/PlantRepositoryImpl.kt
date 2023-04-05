@@ -10,7 +10,6 @@ import com.entexy.gardenguru.data.plant.pest.PestsCloudDataSource
 import com.entexy.gardenguru.data.plant.pest.mapToData
 import com.entexy.gardenguru.data.plant.search.mapToData
 import com.entexy.gardenguru.domain.repository.PlantRepository
-import com.entexy.gardenguru.utils.bugger
 import javax.inject.Inject
 
 class PlantRepositoryImpl @Inject constructor(
@@ -112,7 +111,7 @@ class PlantRepositoryImpl @Inject constructor(
         renamePlantDataSource.renamePlant(plantId, plantName)
 
     override suspend fun updatePlantCustomPhoto(plantId: String, photoUrl: String?): CloudResponse<Unit> =
-        updatePlantCustomPhotoDataSource.renamePlant(plantId, photoUrl)
+        updatePlantCustomPhotoDataSource.updatePhoto(plantId, photoUrl)
 
     override suspend fun deletePlant(plantId: String): CloudResponse<Unit> {
         return deletePlantDataSource.deletePlant(plantId)

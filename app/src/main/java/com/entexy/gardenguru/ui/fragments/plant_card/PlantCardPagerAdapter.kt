@@ -9,7 +9,7 @@ import com.entexy.gardenguru.data.plant.event.EventData
 import com.entexy.gardenguru.ui.fragments.plant_card.history.PlantCardHistoryFragment
 import com.entexy.gardenguru.ui.fragments.plant_card.info.PlantCardInfoFragment
 
-class PlantCardPagerAdapter(fa: FragmentActivity, private val plantData: PlantData, private val events: ArrayList<EventData>) :
+class PlantCardPagerAdapter(fa: FragmentActivity, private val plantData: PlantData, private val events: ArrayList<EventData>, private val nameUpdateCallback: (String) -> Unit) :
     FragmentStateAdapter(fa) {
 
     override fun getItemCount(): Int = 2
@@ -19,6 +19,7 @@ class PlantCardPagerAdapter(fa: FragmentActivity, private val plantData: PlantDa
             0 -> {
                 PlantCardInfoFragment().apply {
                     arguments = Bundle().apply {
+                        setUpdateNameCallback(nameUpdateCallback)
                         putParcelable(PlantCardInfoFragment.CARD_INFO_PLANT_DATA_KEY, plantData)
                         putParcelableArrayList(PlantCardInfoFragment.CARD_INFO_PLANT_EVENTS_KEY, events)
                     }

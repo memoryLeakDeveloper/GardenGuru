@@ -2,7 +2,6 @@ package com.entexy.gardenguru.data.user.cloud
 
 import com.entexy.gardenguru.core.App
 import com.entexy.gardenguru.core.exception.CloudResponse
-import com.entexy.gardenguru.utils.bugger
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_event_image"
@@ -41,8 +42,6 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/cb_event"
         android:layout_gravity="center"
@@ -50,7 +49,8 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:focusable="false"
+        android:checked="true"
 
-        android:button="@drawable/check_box_selector" />
+        app:buttonCompat="@drawable/check_box_selector" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

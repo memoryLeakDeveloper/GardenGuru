@@ -1,12 +1,9 @@
 package com.entexy.gardenguru.ui.fragments.timetable
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.entexy.gardenguru.R
 import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
-import com.entexy.gardenguru.databinding.DialogCameraPermissionBinding
 import com.entexy.gardenguru.databinding.FragmentTimetableBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
+import com.entexy.gardenguru.ui.dialogs.CameraPermissionDialog
 import com.entexy.gardenguru.ui.fragments.add_plant.AddingPlantFragment
 import com.entexy.gardenguru.utils.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +54,11 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
 //                App.firestoreUserRef.document(App.user.userId).collection("plants").document().set(PlantMockData.plant.mapToPlantCloud())
             }
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            pushNotificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+
 
         initCalendar()
         initAddButton()
@@ -166,19 +168,7 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
                 Log.d("qqqqq", "initAddButton addPlant camera permission granted just now")
                 findNavController().navigate(R.id.action_timetableFragment_to_cameraFragment)
             } else {
-                val dialogHelper = DialogHelper()
-                val dialogBinding = DialogCameraPermissionBinding.inflate(LayoutInflater.from(requireContext()))
-                with(dialogBinding){
-                    btSettings.setOnClickListener{
-                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri: Uri = Uri.fromParts("package", requireContext().packageName, null)
-                        intent.data = uri
-                        startActivity(intent)
-                        requireActivity().startActivity(intent)
-                        dialogHelper.hideDialog()
-                    }
-                }
-                dialogHelper.showDialog(dialogBinding.root)
+                CameraPermissionDialog().showDialog(requireContext())
             }
         }
 
@@ -197,4 +187,6 @@ class TimetableFragment : BaseFragment<FragmentTimetableBinding>() {
             })
         }
     }
+
+    private val pushNotificationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
 }

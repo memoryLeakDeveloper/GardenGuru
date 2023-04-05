@@ -14,9 +14,10 @@ class DeletePlantPhotoUseCase @Inject constructor(
     ) {
     suspend fun perform(plantId: String, imageUrl: String): Flow<CloudResponse<Unit>> = flow {
         emit(CloudResponse.Loading())
-        val result = plantRepository.updatePlantCustomPhoto(plantId, null)
+
+        val result = mediaRepository.deleteImage(imageUrl)
         if (result is CloudResponse.Success) {
-            emit(mediaRepository.deleteImage(imageUrl))
+            emit(plantRepository.updatePlantCustomPhoto(plantId, null))
         } else emit(CloudResponse.Error(null))
     }.catch {
         emit(CloudResponse.Error(it))

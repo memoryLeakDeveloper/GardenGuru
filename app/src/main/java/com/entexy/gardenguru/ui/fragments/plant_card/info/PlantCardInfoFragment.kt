@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -25,10 +24,11 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.event.EventData
-import com.entexy.gardenguru.databinding.DialogChangePhotoBinding
 import com.entexy.gardenguru.databinding.DialogRemovePlantBinding
 import com.entexy.gardenguru.databinding.FragmentPlantCardInfoBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
+import com.entexy.gardenguru.ui.dialogs.CameraPermissionDialog
+import com.entexy.gardenguru.ui.dialogs.ChangePlantPhotoDialog
 import com.entexy.gardenguru.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -42,6 +42,11 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
 
     private lateinit var plantData: PlantData
     private lateinit var plantEvents: ArrayList<EventData>
+    private lateinit var updateNameCallback: (String) -> Unit
+
+    fun setUpdateNameCallback(callback: (String) -> Unit) {
+        updateNameCallback = callback
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -123,7 +128,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             etPlantName.setText(data.name)
         }
 
-        etPlantName.setOnEditorActionListener { v, actionId, event ->
+        etPlantName.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (etPlantName.text?.isEmpty() == true) return@setOnEditorActionListener false
                 lifecycleScope.launch {
@@ -133,8 +138,12 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                             success = {
                                 dialogHelper.hideDialog()
 
+                                val newName = etPlantName.text.toString()
+                                updateNameCallback(newName)
+                                plantData.name = newName
                                 scrollRoot.hideKeyboard()
-                                tvPlantName.text = etPlantName.text.toString()
+                                tvPlantName.text = newName
+                                plantName.text = newName
                                 containerPlantName.toVisible()
                                 etPlantName.toGone()
                             },
@@ -173,45 +182,27 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             .into(plantIcon)
 
         plantIcon.setOnClickListener {
-            val dialogBinding = DialogChangePhotoBinding.inflate(LayoutInflater.from(requireContext()))
-            val dialogHelper = DialogHelper()
-            with(dialogBinding) {
-                if (data.customPhoto == null) {
-                    tvDeletePhoto.toGone()
-                    dividerDeletePhoto.toGone()
-                }
-
-                btCancel.setOnClickListener { dialogHelper.hideDialog() }
-                tvCamera.setOnClickListener {
-                    dialogHelper.hideDialog()
-
-                    val photoFile: File = File(requireContext().filesDir, "${Date().time}.jpg").apply {
-                        createNewFile()
+            ChangePlantPhotoDialog().showDialog(requireActivity(),
+                data.customPhoto != null,
+                cameraClickListener = {
+                    if (requireActivity().checkAndVerifyCameraPermissions(requestPermissionLauncher)) {
+                        startCamera()
                     }
-
-                    tempPhotoUri = FileProvider.getUriForFile(
-                        requireContext(), requireContext().packageName,
-                        photoFile
-                    )
-                    takePicture.launch(tempPhotoUri)
-                }
-                tvGallery.setOnClickListener {
-                    dialogHelper.hideDialog()
+                }, galleryClickListener = {
                     startForResultFromGallery.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
-                }
-                tvDeletePhoto.setOnClickListener {
-                    dialogHelper.hideDialog()
+                }, deletePhotoClickListener = {
+                    val dialogHelper = DialogHelper()
                     lifecycleScope.launch {
                         viewModel.deletePhoto(data.id, data.customPhoto ?: return@launch).collect {
                             it.getResult(
                                 success = {
+                                    dialogHelper.hideDialog()
                                     plantData.customPhoto = null
                                     plantIcon.setCircleImageByGlide(plantData.photo)
-                                    dialogHelper.hideDialog()
                                 },
                                 failure = {
                                     dialogHelper.hideDialog()
-                                    root.showSnackBar(R.string.error_deleting)
+                                    requireView().showSnackBar(R.string.error_deleting)
                                 },
                                 loading = {
                                     dialogHelper.showDialog(ProgressBar(requireContext()))
@@ -219,11 +210,31 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                             )
                         }
                     }
-                }
-            }
-            dialogHelper.showDialog(dialogBinding.root, gravity = Gravity.BOTTOM)
+                })
         }
     }
+
+    private fun startCamera() {
+        val photoFile: File = File(requireContext().filesDir, "${Date().time}.jpg").apply {
+            createNewFile()
+        }
+        tempPhotoUri = FileProvider.getUriForFile(
+            requireContext(), requireContext().packageName,
+            photoFile
+        )
+        takePicture.launch(tempPhotoUri)
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                startCamera()
+            } else {
+                CameraPermissionDialog().showDialog(requireContext())
+            }
+        }
 
     private val startForResultFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -264,6 +275,7 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             }
         }
     }
+
 
     companion object {
         const val CARD_INFO_PLANT_DATA_KEY = "plant-data-key"

@@ -47,6 +47,11 @@
             android:id="@+id/sw_notifications"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textOff=""
+            android:textOn=""
+
+            android:clickable="true"
+            android:focusable="true"
             android:thumb="@drawable/custom_thumb"
             app:track="@drawable/checkbox_selector"
             app:trackDecoration="@null" />

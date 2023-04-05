@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="5dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@drawable/spinner_background"
+    android:background="@drawable/bg_calendar_selected"
     android:padding="5dp">
 
     <androidx.appcompat.widget.AppCompatTextView
