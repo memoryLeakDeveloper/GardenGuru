@@ -57,11 +57,6 @@ class CameraResultFragment : BaseFragment<FragmentCameraResultBinding>() {
                         MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uriResult)
                     )
                     launch(Dispatchers.Main) {
-//                        val dialogCameraPerm = DialogCameraPermissionBinding.inflate(LayoutInflater.from(requireContext()))
-//                        with(dialogCameraPerm) {
-//                            tvDialogDescription.text = recognitionResult.toString()
-//                        }
-//                        dialogHelper.showDialog(dialogCameraPerm.root)
                         dialogHelper.hideDialog()
                         findNavController().navigate(
                             R.id.action_cameraResultFragment_to_addingPlantFragment,

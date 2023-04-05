@@ -22,7 +22,7 @@ class RecognitionRepositoryImpl : RecognitionRepository {
     }
 
     private fun recognize(context: Context, bitmap: Bitmap): IntArray? {
-        val module = LiteModuleLoader.load(assetFilePath(context, "garden440int.ptl"))
+        val module = LiteModuleLoader.load(assetFilePath(context, "garden440v7.ptl"))
         val NO_MEAN_RGB = floatArrayOf(0.485f, 0.456f, 0.406f)
         val NO_STD_RGB = floatArrayOf(0.229f, 0.224f, 0.225f)
 

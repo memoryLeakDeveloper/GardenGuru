@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -25,10 +24,11 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.plant.PlantData
 import com.entexy.gardenguru.data.plant.event.EventData
-import com.entexy.gardenguru.databinding.DialogChangePhotoBinding
 import com.entexy.gardenguru.databinding.DialogRemovePlantBinding
 import com.entexy.gardenguru.databinding.FragmentPlantCardInfoBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
+import com.entexy.gardenguru.ui.dialogs.CameraPermissionDialog
+import com.entexy.gardenguru.ui.dialogs.ChangePlantPhotoDialog
 import com.entexy.gardenguru.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -183,45 +183,27 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
             .into(plantIcon)
 
         plantIcon.setOnClickListener {
-            val dialogBinding = DialogChangePhotoBinding.inflate(LayoutInflater.from(requireContext()))
-            val dialogHelper = DialogHelper()
-            with(dialogBinding) {
-                if (data.customPhoto == null) {
-                    tvDeletePhoto.toGone()
-                    dividerDeletePhoto.toGone()
-                }
-
-                btCancel.setOnClickListener { dialogHelper.hideDialog() }
-                tvCamera.setOnClickListener {
-                    dialogHelper.hideDialog()
-
-                    val photoFile: File = File(requireContext().filesDir, "${Date().time}.jpg").apply {
-                        createNewFile()
+            ChangePlantPhotoDialog().showDialog(requireActivity(),
+                data.customPhoto != null,
+                cameraClickListener = {
+                    if (requireActivity().checkAndVerifyCameraPermissions(requestPermissionLauncher)) {
+                        startCamera()
                     }
-
-                    tempPhotoUri = FileProvider.getUriForFile(
-                        requireContext(), requireContext().packageName,
-                        photoFile
-                    )
-                    takePicture.launch(tempPhotoUri)
-                }
-                tvGallery.setOnClickListener {
-                    dialogHelper.hideDialog()
+                }, galleryClickListener = {
                     startForResultFromGallery.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
-                }
-                tvDeletePhoto.setOnClickListener {
-                    dialogHelper.hideDialog()
+                }, deletePhotoClickListener = {
+                    val dialogHelper = DialogHelper()
                     lifecycleScope.launch {
                         viewModel.deletePhoto(data.id, data.customPhoto ?: return@launch).collect {
                             it.getResult(
                                 success = {
+                                    dialogHelper.hideDialog()
                                     plantData.customPhoto = null
                                     plantIcon.setCircleImageByGlide(plantData.photo)
-                                    dialogHelper.hideDialog()
                                 },
                                 failure = {
-                                    requireView().showSnackBar(R.string.error_deleting)
                                     dialogHelper.hideDialog()
+                                    requireView().showSnackBar(R.string.error_deleting)
                                 },
                                 loading = {
                                     dialogHelper.showDialog(ProgressBar(requireContext()))
@@ -229,11 +211,31 @@ class PlantCardInfoFragment : BaseFragment<FragmentPlantCardInfoBinding>() {
                             )
                         }
                     }
-                }
-            }
-            dialogHelper.showDialog(dialogBinding.root, gravity = Gravity.BOTTOM)
+                })
         }
     }
+
+    private fun startCamera() {
+        val photoFile: File = File(requireContext().filesDir, "${Date().time}.jpg").apply {
+            createNewFile()
+        }
+        tempPhotoUri = FileProvider.getUriForFile(
+            requireContext(), requireContext().packageName,
+            photoFile
+        )
+        takePicture.launch(tempPhotoUri)
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                startCamera()
+            } else {
+                CameraPermissionDialog().showDialog(requireContext())
+            }
+        }
 
     private val startForResultFromGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {

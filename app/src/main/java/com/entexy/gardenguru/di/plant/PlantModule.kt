@@ -10,15 +10,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
 class PlantModule {
 
     @Provides
-    fun providePlantRepositoryImpl(
+    fun providePlantRepository(
         plantCloudDataSource: PlantCloudDataSource,
         pestsCloudDataSource: PestsCloudDataSource,
         benefitsCloudDataSource: BenefitsCloudDataSource,
@@ -37,10 +35,6 @@ class PlantModule {
         updatePlantCustomPhotoDataSource,
         addPlantDataSource
     )
-
-    @Provides
-    fun providePlantCloudDataSource(): PlantCloudDataSource = PlantCloudDataSource.Base(App.firestoreUserPlantRef!!)
-
 
     @Provides
     fun providePestsCloudDataSource(): PestsCloudDataSource = PestsCloudDataSource.Base(App.firestorePestsRef)

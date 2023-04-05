@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.entexy.gardenguru.data.language.LanguagePreference
 import com.entexy.gardenguru.data.prefs.UserDataPref
 import com.entexy.gardenguru.data.user.UserData
+import com.entexy.gardenguru.ui.workers.NotificationWorker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
@@ -25,8 +26,10 @@ class App : Application() {
     @Inject
     lateinit var userDataPref: UserDataPref
 
+
     override fun onCreate() {
         super.onCreate()
+
         storagePhotos = FirebaseStorage.getInstance().apply {
             maxUploadRetryTimeMillis = 5000
             maxOperationRetryTimeMillis = 5000
@@ -42,6 +45,8 @@ class App : Application() {
 
         languagePreference = LanguagePreference(sharedPreferences)
         user = UserData("L7HK0VHcPaTteMoaHoWmAAM7ejy2")
+
+        NotificationWorker.startSingle(this)
         //user = userDataPref.get()
     }
 

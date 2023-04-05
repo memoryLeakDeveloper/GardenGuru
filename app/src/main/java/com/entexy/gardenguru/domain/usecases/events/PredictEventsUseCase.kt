@@ -10,6 +10,16 @@ import javax.inject.Inject
 
 class PredictEventsUseCase @Inject constructor() {
 
+    fun isExistNotCompletedEventToday(plants: List<PlantData>, events: List<EventData>): Boolean {
+        val predictions = mutableListOf<EventData>()
+
+        plants.forEach { plantData ->
+            predictions.addAll(predictFutureEvents(plantData, events.filter { it.plantId == plantData.id }, 1 ))
+        }
+
+        return predictions.find { it.eventTime.isDaysEquals(Calendar.getInstance()) && !it.isCompleted } != null
+    }
+
     fun predictTimetableEvents(plants: List<PlantData>, events: List<EventData>): List<EventData> {
         val result = arrayListOf<EventData>()
 

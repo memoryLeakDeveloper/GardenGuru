@@ -1,12 +1,17 @@
 package com.entexy.gardenguru.ui.fragments.settings
 
+import android.Manifest
 import android.content.Intent
-import android.content.res.ColorStateList
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ProgressBar
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,6 +21,7 @@ import com.entexy.gardenguru.core.BaseFragment
 import com.entexy.gardenguru.core.exception.getResult
 import com.entexy.gardenguru.data.auth.GoogleAuthContract
 import com.entexy.gardenguru.data.language.Languages
+import com.entexy.gardenguru.databinding.DialogCameraPermissionBinding
 import com.entexy.gardenguru.databinding.DialogDeleteAccountBinding
 import com.entexy.gardenguru.databinding.FragmentSettingsBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
@@ -37,11 +43,32 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     private var dialog: DialogHelper = DialogHelper()
     private var progressDialog = DialogHelper()
 
+    private var isNotificationPermissionGranted = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initView()
         initNotificationSwitch()
         initSpinner()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        isNotificationPermissionGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
+
+        if (isNotificationPermissionGranted) {
+            binding.swNotifications.isChecked = viewModel.isNotificationsEnabled()
+        } else binding.swNotifications.isChecked = false
+
     }
 
     private fun initView() = binding.apply {
@@ -78,22 +105,36 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     private fun initNotificationSwitch() = binding.apply {
         tvNotifications.setText(if (viewModel.isNotificationsEnabled()) R.string.turn_off_notifications else R.string.turn_on_notifications)
-        swNotifications.isChecked = viewModel.isNotificationsEnabled()
-        swNotifications.trackTintList =
-            ColorStateList.valueOf(requireContext().getColor(if (viewModel.isNotificationsEnabled()) R.color.primary_green else R.color.gray4))
-        swNotifications.thumbTintList =
-            ColorStateList.valueOf(requireContext().getColor(if (viewModel.isNotificationsEnabled()) R.color.white else R.color.gray))
+
         swNotifications.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                swNotifications.trackTintList = ColorStateList.valueOf(requireContext().getColor(R.color.primary_green))
-                swNotifications.thumbTintList = ColorStateList.valueOf(requireContext().getColor(R.color.white))
+            if (isChecked && !isNotificationPermissionGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                swNotifications.isChecked = false
             } else {
-                swNotifications.trackTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray4))
-                swNotifications.thumbTintList = ColorStateList.valueOf(requireContext().getColor(R.color.gray))
+                viewModel.changeNotificationsPref(isChecked)
+                tvNotifications.setText(if (isChecked) R.string.turn_off_notifications else R.string.turn_on_notifications)
             }
-            viewModel.changeNotificationsPref(isChecked)
-            tvNotifications.setText(if (isChecked) R.string.turn_off_notifications else R.string.turn_on_notifications)
         }
+    }
+
+    private val pushNotificationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (!granted) {
+            val dialogHelper = DialogHelper()
+            val dialogBinding = DialogCameraPermissionBinding.inflate(LayoutInflater.from(requireContext()))
+            with(dialogBinding) {
+                dialogBinding.tvDialogDescription.setText(R.string.require_notification_permissions_desc)
+                btSettings.setOnClickListener {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    val uri: Uri = Uri.fromParts("package", requireContext().packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
+                    requireActivity().startActivity(intent)
+                    dialogHelper.hideDialog()
+                }
+            }
+            dialogHelper.showDialog(dialogBinding.root)
+        }
+        isNotificationPermissionGranted = granted
     }
 
     private fun initSpinner() = binding.apply {

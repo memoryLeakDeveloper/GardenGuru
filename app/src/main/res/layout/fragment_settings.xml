@@ -49,6 +49,7 @@
             android:layout_height="match_parent"
             android:textOff=""
             android:textOn=""
+
             android:clickable="true"
             android:focusable="true"
             android:thumb="@drawable/custom_thumb"
