@@ -26,6 +26,7 @@ import com.entexy.gardenguru.databinding.DialogDeleteAccountBinding
 import com.entexy.gardenguru.databinding.FragmentSettingsBinding
 import com.entexy.gardenguru.ui.customview.DialogHelper
 import com.entexy.gardenguru.utils.bugger
+import com.entexy.gardenguru.utils.showSnackBar
 import com.entexy.gardenguru.utils.showToastLong
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -47,7 +48,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
         initNotificationSwitch()
         initSpinner()
@@ -55,7 +55,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     override fun onResume() {
         super.onResume()
-
         isNotificationPermissionGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -64,7 +63,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
         } else {
             true
         }
-
         if (isNotificationPermissionGranted) {
             binding.swNotifications.isChecked = viewModel.isNotificationsEnabled()
         } else binding.swNotifications.isChecked = false
@@ -79,10 +77,18 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             title.setText(R.string.settings)
         }
         btPrivacyPolicy.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
+            }.getOrElse {
+                requireView().showSnackBar(R.string.no_such_app)
+            }
         }
         btTermOfUse.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERM_OF_USE_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERM_OF_USE_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
+            }.getOrElse {
+                requireView().showSnackBar(R.string.no_such_app)
+            }
         }
         btDeveloperContact.setOnClickListener {
             if (checkCurrentDestination())
@@ -106,7 +112,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     private fun initNotificationSwitch() = binding.apply {
         tvNotifications.setText(if (viewModel.isNotificationsEnabled()) R.string.turn_off_notifications else R.string.turn_on_notifications)
-
         swNotifications.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked && !isNotificationPermissionGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 pushNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)

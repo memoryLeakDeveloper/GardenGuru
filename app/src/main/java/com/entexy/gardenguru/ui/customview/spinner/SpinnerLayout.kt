@@ -56,15 +56,13 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
 
     fun initView(defValue: String?, list: List<String>) {
-        spinnerAdapter = SpinnerAdapter((selectListener), if (defValue != null) list.indexOf(defValue) else -1)
+        spinnerAdapter = SpinnerAdapter((selectListener), if (list.contains(defValue)) list.indexOf(defValue) else -1)
         spinnerAdapter.setListAdapter(list.toMutableList())
         popupBinding.spinnerRecycler.adapter = spinnerAdapter
         popupBinding.spinnerRecycler.layoutManager = LinearLayoutManager(context)
         setBackgroundCompat(
             ContextCompat.getDrawable(
-                context,
-                if (defValue != null && list.contains(defValue)
-                ) R.drawable.spinner_background else R.drawable.edit_text_background_unfocused
+                context, if (list.contains(defValue)) R.drawable.spinner_background else R.drawable.edit_text_background_unfocused
             )
         )
         setSpinnerDefState(defValue, list)
@@ -112,12 +110,12 @@ class SpinnerLayout(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     }
 
     private fun setSpinnerDefState(defString: String?, list: List<String>) {
-        val defPos = 0
         if (defString.isNullOrEmpty()) {
-            binding.spinnerText.text = list[defPos]
-            spinnerValue = list[defPos]
+            binding.spinnerText.text = list[0]
+            spinnerValue = list[0]
         } else {
             binding.spinnerText.text = defString
+            spinnerValue = defString
         }
     }
 
