@@ -27,6 +27,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     private fun setAdapter() = binding.apply {
         viewPager.adapter = PagerAdapter(this@OnboardingFragment)
+        viewPager.offscreenPageLimit = 2
         dotsIndicator.attachTo(viewPager)
     }
 

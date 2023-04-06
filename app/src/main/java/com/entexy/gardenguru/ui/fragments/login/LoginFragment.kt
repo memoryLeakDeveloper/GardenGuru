@@ -1,5 +1,7 @@
 package com.entexy.gardenguru.ui.fragments.login
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
@@ -56,12 +58,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             googleAuth.launch("")
         }
         textPrivacyPolicy.setOnClickListener {
-            if (checkCurrentDestination())
-                findNavController().navigate(R.id.action_loginFragment_to_privacyPolicyFragment)
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
+            }.getOrElse {
+                requireView().showSnackBar(R.string.no_such_app)
+            }
         }
         textTermOfUse.setOnClickListener {
-            if (checkCurrentDestination())
-                findNavController().navigate(R.id.action_loginFragment_to_termOfUseFragment)
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERM_OF_USE_URL)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
+            }.getOrElse {
+                requireView().showSnackBar(R.string.no_such_app)
+            }
         }
     }
 
@@ -93,5 +101,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun checkCurrentDestination() = findNavController().currentDestination?.id == R.id.loginFragment
+
+    companion object {
+        private const val PRIVACY_POLICY_URL =
+            "https://docs.google.com/document/d/1kGUnptN58bFXPeQTpFTe0YPgk1nxUdtS7h6OJ9ShWs4/edit"
+        private const val TERM_OF_USE_URL = "https://docs.google.com/document/d/1zaRDgrfNGsF_YOPKNs3UUoO8TyvIRsBcSf1pZQ6tDn0/edit"
+    }
 
 }
